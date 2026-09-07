@@ -79,8 +79,21 @@ class AboutDevelopersPage extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text('@R1CCARD0'),
-              subtitle: Text('Scrivimi velocemente via chat'),
+              leading: CircleAvatar(
+                radius: 30.0,
+                child: Text('LN'),
+              ),
+              title: Text('@lnlenost'),
+              subtitle: Text('Fork maintainer and developer'),
+              trailing: IconButton(
+                icon: Icon(Icons.send),
+                onPressed: () async {
+                  const url = 'https://t.me/lnlenost';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16.0, top: 8.0),
@@ -106,7 +119,7 @@ class AboutDevelopersPage extends StatelessWidget {
                 child: Text(trans.translate('view_source_code')),
                 onPressed: () async {
                   const url =
-                      'https://github.com/riccardocalligaro/registro_elettronico';
+                      'https://github.com/LNLenost/registro_elettronico';
                   if (await canLaunch(url)) {
                     await launch(url);
                   } else {

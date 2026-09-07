@@ -9,8 +9,18 @@ import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart'
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:registro_elettronico/utils/global_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReportManager {
+  static Future<void> openIssue() async {
+    const url = 'https://github.com/LNLenost/registro_elettronico/issues/new';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   static void sendEmail(
     BuildContext context, {
     Failure failure,

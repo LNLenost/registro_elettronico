@@ -194,7 +194,7 @@ Prossimo obiettivi:
 
 
 
-Se avete altri suggerimenti scrivetemi pure! @R1CCARD0
+Se avete altri suggerimenti scrivetemi pure! @lnlenost
 
 ---
 

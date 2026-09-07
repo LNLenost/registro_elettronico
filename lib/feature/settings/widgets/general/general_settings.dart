@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/infrastructure/localizations/bloc/localizations_bloc.dart';
+import 'package:registro_elettronico/core/infrastructure/localizations/bloc/localizations_event.dart';
 import 'package:registro_elettronico/feature/grades/presentation/watcher/grades_watcher_bloc.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +56,35 @@ class _GeneralSettingsState extends State<GeneralSettings> {
           child: HeaderText(
             text: AppLocalizations.of(context).translate('general'),
           ),
+        ),
+        ListTile(
+          title: Text(AppLocalizations.of(context).translate('language')),
+          subtitle: Text(AppLocalizations.of(context).translate('language_subtitle')),
+          onTap: () async {
+            final locale = await showDialog<Locale>(
+              context: context,
+              builder: (ctx) => SimpleDialog(
+                title: Text(AppLocalizations.of(context).translate('language')),
+                children: <Widget>[
+                  SimpleDialogOption(
+                    child: Text('Italiano'),
+                    onPressed: () => Navigator.pop(ctx, Locale('it', 'IT')),
+                  ),
+                  SimpleDialogOption(
+                    child: Text('English'),
+                    onPressed: () => Navigator.pop(ctx, Locale('en', 'EN')),
+                  ),
+                  SimpleDialogOption(
+                    child: Text('Русский'),
+                    onPressed: () => Navigator.pop(ctx, Locale('ru', 'RU')),
+                  ),
+                ],
+              ),
+            );
+            if (locale != null) {
+              LocalizationsBloc.instance.add(LocaleChanged(locale: locale));
+            }
+          },
         ),
         ListTile(
           title: Text(

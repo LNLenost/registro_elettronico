@@ -317,7 +317,7 @@ class _AppDrawerState extends State<AppDrawer>
                     trans.translate('share'),
                     trans.translate('share_message').replaceAll(
                         '{download_url}',
-                        'https://play.google.com/store/apps/details?id=com.riccardocalligaro.registro_elettronico'),
+                        'https://github.com/LNLenost/registro_elettronico/releases'),
                     'text/plain');
               },
             ),

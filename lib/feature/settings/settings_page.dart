@@ -106,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
           subtitle: Text(
               AppLocalizations.of(context).translate('report_bug_message')),
           onTap: () async {
-            await ReportManager.sendEmail(context);
+            await ReportManager.openIssue();
           },
         ),
         // DonateTile(),
