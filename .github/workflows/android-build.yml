@@ -1,0 +1,26 @@
+name: Android build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["fix/android-login-build"]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "11"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "1.22.6"
+          channel: stable
+      - run: flutter pub get
+      - run: flutter build apk --debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registro-elettronico-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
