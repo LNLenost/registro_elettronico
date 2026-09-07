@@ -104,7 +104,7 @@ class _StatsPageState extends State<StatsPage> {
       showUpdate: true,
       updateMessage: AppLocalizations.of(context).translate('send_report'),
       onTap: () {
-        ReportManager.sendEmail(context);
+        ReportManager.openIssue();
       },
     );
   }

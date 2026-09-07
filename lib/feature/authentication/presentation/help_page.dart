@@ -137,7 +137,7 @@ class HelpPage extends StatelessWidget {
                 subtitle: Text(AppLocalizations.of(context)
                     .translate('report_bug_message')),
                 onTap: () async {
-                  await ReportManager.sendEmail(context);
+                  await ReportManager.openIssue();
                 },
               ),
             if (!fromSettings)
