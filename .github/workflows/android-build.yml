@@ -19,11 +19,10 @@ jobs:
           flutter-version: "1.22.6"
           channel: stable
       - run: flutter pub get
-      - uses: android-actions/setup-android@v3
+      - name: Install compatible Android NDK
         env:
           SKIP_JDK_VERSION_CHECK: true
-      - name: Install compatible Android NDK
-        run: sdkmanager --install "ndk;21.4.7075529"
+        run: /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.4.7075529"
       - run: flutter build apk --debug
       - uses: actions/upload-artifact@v4
         with:
