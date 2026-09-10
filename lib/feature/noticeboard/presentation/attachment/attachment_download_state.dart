@@ -6,25 +6,36 @@ abstract class AttachmentDownloadState {}
 class AttachmentDownloadInitial extends AttachmentDownloadState {}
 
 class AttachmentDownloadInProgress extends AttachmentDownloadState {
-  final double percentage;
+  final double? percentage;
 
   AttachmentDownloadInProgress({
-    @required this.percentage,
+    required this.percentage,
   });
 }
 
 class AttachmentDownloadSuccess extends AttachmentDownloadState {
-  final AttachmentFile downloadedAttachment;
+  final GenericAttachment? downloadedAttachment;
 
   AttachmentDownloadSuccess({
-    @required this.downloadedAttachment,
+    required this.downloadedAttachment,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is AttachmentDownloadSuccess &&
+        other.downloadedAttachment == downloadedAttachment;
+  }
+
+  @override
+  int get hashCode => downloadedAttachment.hashCode;
 }
 
 class AttachmentDownloadFailure extends AttachmentDownloadState {
-  final Failure failure;
+  final Failure? failure;
 
   AttachmentDownloadFailure({
-    @required this.failure,
+    required this.failure,
   });
 }

@@ -1,12 +1,11 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
-import 'package:registro_elettronico/core/data/remote/api/sr_dio_client.dart';
 import 'package:registro_elettronico/core/data/remote/api/spaggiari_client.dart';
+import 'package:registro_elettronico/core/data/remote/api/sr_dio_client.dart';
 import 'package:registro_elettronico/core/data/remote/web/web_spaggiari_client.dart';
 import 'package:registro_elettronico/core/data/remote/web/web_spaggiari_client_impl.dart';
 import 'package:registro_elettronico/core/infrastructure/network/network_info.dart';
@@ -45,7 +44,7 @@ class CoreContainer {
     final sharedPreferences = await SharedPreferences.getInstance();
     _sl.registerLazySingleton(() => sharedPreferences);
 
-    _sl.registerLazySingleton(() => DataConnectionChecker());
+    _sl.registerLazySingleton(() => InternetConnectionChecker());
     _sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(_sl()));
     _sl.registerLazySingleton(() => FlutterSecureStorage());
 
@@ -64,14 +63,13 @@ class CoreContainer {
     _sl.registerLazySingleton(() => Dio(), instanceName: 'WebSpaggiariDio');
 
     _sl.registerLazySingleton(() => LegacySpaggiariClient(_sl()));
+
     _sl.registerLazySingleton<WebSpaggiariClient>(() =>
         WebSpaggiariClientImpl(_sl.get<Dio>(instanceName: 'WebSpaggiariDio')));
 
-    _sl.registerLazySingleton<FirebaseMessaging>(
-      () => FirebaseMessaging(),
+    _sl.registerLazySingleton(
+      () => PushNotificationService(),
     );
-
-    _sl.registerLazySingleton(() => PushNotificationService(_sl()));
 
     await ProfessorsContainer.init();
     await PeriodsContainer.init();

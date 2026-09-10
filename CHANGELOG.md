@@ -1,3 +1,10 @@
+3.0 Migration
+- [] Logs
+- [] Colors
+- [x] Timetable
+- [] Agenda
+- [] API Calls
+
 Versione 2.0.2+8
 
 * Aggiunto tema black

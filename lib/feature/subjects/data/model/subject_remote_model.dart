@@ -5,10 +5,10 @@ import 'package:registro_elettronico/utils/color_utils.dart';
 import 'package:registro_elettronico/utils/global_utils.dart';
 
 class SubjectRemoteModel {
-  int id;
-  String description;
-  int order;
-  List<ProfessorRemoteModel> professors;
+  int? id;
+  String? description;
+  int? order;
+  List<ProfessorRemoteModel>? professors;
 
   SubjectRemoteModel({
     this.id,
@@ -22,9 +22,9 @@ class SubjectRemoteModel {
     description = json['description'];
     order = json['order'];
     if (json['teachers'] != null) {
-      professors = List<ProfessorRemoteModel>();
+      professors = [];
       json['teachers'].forEach((v) {
-        professors.add(ProfessorRemoteModel.fromJson(v));
+        professors!.add(ProfessorRemoteModel.fromJson(v));
       });
     }
   }
@@ -35,7 +35,7 @@ class SubjectRemoteModel {
     data['description'] = this.description;
     data['order'] = this.order;
     if (this.professors != null) {
-      data['teachers'] = this.professors.map((v) => v.toJson()).toList();
+      data['teachers'] = this.professors!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -46,9 +46,8 @@ class SubjectRemoteModel {
       name: this.description ?? '',
       orderNumber: this.order ?? -1,
       color: GlobalUtils.getColorCode(
-            ColorUtils.getColorFromIndex(index) ?? Colors.red,
-          ) ??
-          Colors.red.value.toString(),
+        ColorUtils.getColorFromIndex(index) ?? Colors.red,
+      ),
     );
   }
 }

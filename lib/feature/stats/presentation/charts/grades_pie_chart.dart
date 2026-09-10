@@ -10,11 +10,11 @@ class GradesPieChart extends StatefulWidget {
   final int totalGrades;
 
   GradesPieChart({
-    Key key,
-    @required this.sufficientiCount,
-    @required this.insufficientiCount,
-    @required this.nearlySufficientiCount,
-    @required this.totalGrades,
+    Key? key,
+    required this.sufficientiCount,
+    required this.insufficientiCount,
+    required this.nearlySufficientiCount,
+    required this.totalGrades,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class GradesPieChart extends StatefulWidget {
 }
 
 class _GradesPieChartState extends State<GradesPieChart> {
-  int touchedIndex;
+  int? touchedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _GradesPieChartState extends State<GradesPieChart> {
                 children: <Widget>[
                   Indicator(
                     color: Colors.green,
-                    text: AppLocalizations.of(context)
+                    text: AppLocalizations.of(context)!
                         .translate('sufficient_grades'),
                     isSquare: false,
                     textColor:
@@ -47,7 +47,7 @@ class _GradesPieChartState extends State<GradesPieChart> {
                   ),
                   Indicator(
                     color: Colors.yellow[700],
-                    text: AppLocalizations.of(context)
+                    text: AppLocalizations.of(context)!
                         .translate('nearly_sufficient_grades'),
                     isSquare: false,
                     textColor:
@@ -55,7 +55,7 @@ class _GradesPieChartState extends State<GradesPieChart> {
                   ),
                   Indicator(
                     color: Colors.red,
-                    text: AppLocalizations.of(context)
+                    text: AppLocalizations.of(context)!
                         .translate('insufficient_grades'),
                     isSquare: false,
                     textColor:
@@ -71,14 +71,15 @@ class _GradesPieChartState extends State<GradesPieChart> {
                   aspectRatio: 1,
                   child: PieChart(
                     PieChartData(
-                      pieTouchData:
-                          PieTouchData(touchCallback: (pieTouchResponse) {
+                      pieTouchData: PieTouchData(
+                          touchCallback: (event, pieTouchResponse) {
                         setState(() {
-                          if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                              pieTouchResponse.touchInput is FlPanEnd) {
+                          if (event is FlLongPressEnd ||
+                              event is FlPanEndEvent) {
                             touchedIndex = -1;
-                          } else {
-                            touchedIndex = pieTouchResponse.touchedSectionIndex;
+                          } else if (event is FlTapDownEvent) {
+                            touchedIndex = pieTouchResponse!
+                                .touchedSection!.touchedSectionIndex;
                           }
                         });
                       }),
@@ -100,7 +101,7 @@ class _GradesPieChartState extends State<GradesPieChart> {
     );
   }
 
-  List<PieChartSectionData> showingSections() {
+  List<PieChartSectionData>? showingSections() {
     double insuffPercentage =
         ((widget.insufficientiCount / widget.totalGrades) * 100);
 
@@ -150,7 +151,7 @@ class _GradesPieChartState extends State<GradesPieChart> {
             );
 
           default:
-            return null;
+            return PieChartSectionData();
         }
       },
     );

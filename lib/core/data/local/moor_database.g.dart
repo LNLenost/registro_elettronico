@@ -9,61 +9,59 @@ part of 'moor_database.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class LessonLocalModel extends DataClass
     implements Insertable<LessonLocalModel> {
-  final int eventId;
-  final DateTime date;
-  final String code;
-  final int position;
-  final int duration;
-  final String classe;
-  final String author;
-  final int subjectId;
-  final String subjectCode;
-  final String subjectDescription;
-  final String lessonType;
-  final String lessonArg;
+  final int? eventId;
+  final DateTime? date;
+  final String? code;
+  final int? position;
+  final int? duration;
+  final String? classe;
+  final String? author;
+  final int? subjectId;
+  final String? subjectCode;
+  final String? subjectDescription;
+  final String? lessonType;
+  final String? lessonArg;
   LessonLocalModel(
-      {@required this.eventId,
-      @required this.date,
-      @required this.code,
-      @required this.position,
-      @required this.duration,
-      @required this.classe,
-      @required this.author,
-      @required this.subjectId,
-      @required this.subjectCode,
-      @required this.subjectDescription,
-      @required this.lessonType,
-      @required this.lessonArg});
+      {required this.eventId,
+      required this.date,
+      required this.code,
+      required this.position,
+      required this.duration,
+      required this.classe,
+      required this.author,
+      required this.subjectId,
+      required this.subjectCode,
+      required this.subjectDescription,
+      required this.lessonType,
+      required this.lessonArg});
   factory LessonLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final stringType = db.typeSystem.forDartType<String>();
     return LessonLocalModel(
-      eventId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}event_id']),
-      date:
-          dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
-      code: stringType.mapFromDatabaseResponse(data['${effectivePrefix}code']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      duration:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}duration']),
-      classe:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}classe']),
-      author:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}author']),
-      subjectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
-      subjectCode: stringType
+      eventId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}event_id']),
+      date: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}date']),
+      code: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}code']),
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      duration: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}duration']),
+      classe: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}classe']),
+      author: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}author']),
+      subjectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
+      subjectCode: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}subject_code']),
-      subjectDescription: stringType.mapFromDatabaseResponse(
+      subjectDescription: const StringType().mapFromDatabaseResponse(
           data['${effectivePrefix}subject_description']),
-      lessonType: stringType
+      lessonType: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}lesson_type']),
-      lessonArg: stringType
+      lessonArg: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}lesson_arg']),
     );
   }
@@ -71,40 +69,40 @@ class LessonLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || eventId != null) {
-      map['event_id'] = Variable<int>(eventId);
+      map['event_id'] = Variable<int?>(eventId);
     }
     if (!nullToAbsent || date != null) {
-      map['date'] = Variable<DateTime>(date);
+      map['date'] = Variable<DateTime?>(date);
     }
     if (!nullToAbsent || code != null) {
-      map['code'] = Variable<String>(code);
+      map['code'] = Variable<String?>(code);
     }
     if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
+      map['position'] = Variable<int?>(position);
     }
     if (!nullToAbsent || duration != null) {
-      map['duration'] = Variable<int>(duration);
+      map['duration'] = Variable<int?>(duration);
     }
     if (!nullToAbsent || classe != null) {
-      map['classe'] = Variable<String>(classe);
+      map['classe'] = Variable<String?>(classe);
     }
     if (!nullToAbsent || author != null) {
-      map['author'] = Variable<String>(author);
+      map['author'] = Variable<String?>(author);
     }
     if (!nullToAbsent || subjectId != null) {
-      map['subject_id'] = Variable<int>(subjectId);
+      map['subject_id'] = Variable<int?>(subjectId);
     }
     if (!nullToAbsent || subjectCode != null) {
-      map['subject_code'] = Variable<String>(subjectCode);
+      map['subject_code'] = Variable<String?>(subjectCode);
     }
     if (!nullToAbsent || subjectDescription != null) {
-      map['subject_description'] = Variable<String>(subjectDescription);
+      map['subject_description'] = Variable<String?>(subjectDescription);
     }
     if (!nullToAbsent || lessonType != null) {
-      map['lesson_type'] = Variable<String>(lessonType);
+      map['lesson_type'] = Variable<String?>(lessonType);
     }
     if (!nullToAbsent || lessonArg != null) {
-      map['lesson_arg'] = Variable<String>(lessonArg);
+      map['lesson_arg'] = Variable<String?>(lessonArg);
     }
     return map;
   }
@@ -145,7 +143,7 @@ class LessonLocalModel extends DataClass
   }
 
   factory LessonLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return LessonLocalModel(
       eventId: serializer.fromJson<int>(json['eventId']),
@@ -164,37 +162,37 @@ class LessonLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'eventId': serializer.toJson<int>(eventId),
-      'date': serializer.toJson<DateTime>(date),
-      'code': serializer.toJson<String>(code),
-      'position': serializer.toJson<int>(position),
-      'duration': serializer.toJson<int>(duration),
-      'classe': serializer.toJson<String>(classe),
-      'author': serializer.toJson<String>(author),
-      'subjectId': serializer.toJson<int>(subjectId),
-      'subjectCode': serializer.toJson<String>(subjectCode),
-      'subjectDescription': serializer.toJson<String>(subjectDescription),
-      'lessonType': serializer.toJson<String>(lessonType),
-      'lessonArg': serializer.toJson<String>(lessonArg),
+      'eventId': serializer.toJson<int?>(eventId),
+      'date': serializer.toJson<DateTime?>(date),
+      'code': serializer.toJson<String?>(code),
+      'position': serializer.toJson<int?>(position),
+      'duration': serializer.toJson<int?>(duration),
+      'classe': serializer.toJson<String?>(classe),
+      'author': serializer.toJson<String?>(author),
+      'subjectId': serializer.toJson<int?>(subjectId),
+      'subjectCode': serializer.toJson<String?>(subjectCode),
+      'subjectDescription': serializer.toJson<String?>(subjectDescription),
+      'lessonType': serializer.toJson<String?>(lessonType),
+      'lessonArg': serializer.toJson<String?>(lessonArg),
     };
   }
 
   LessonLocalModel copyWith(
-          {int eventId,
-          DateTime date,
-          String code,
-          int position,
-          int duration,
-          String classe,
-          String author,
-          int subjectId,
-          String subjectCode,
-          String subjectDescription,
-          String lessonType,
-          String lessonArg}) =>
+          {int? eventId,
+          DateTime? date,
+          String? code,
+          int? position,
+          int? duration,
+          String? classe,
+          String? author,
+          int? subjectId,
+          String? subjectCode,
+          String? subjectDescription,
+          String? lessonType,
+          String? lessonArg}) =>
       LessonLocalModel(
         eventId: eventId ?? this.eventId,
         date: date ?? this.date,
@@ -252,7 +250,7 @@ class LessonLocalModel extends DataClass
                                           $mrjc(lessonType.hashCode,
                                               lessonArg.hashCode))))))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is LessonLocalModel &&
           other.eventId == this.eventId &&
@@ -270,18 +268,18 @@ class LessonLocalModel extends DataClass
 }
 
 class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
-  final Value<int> eventId;
-  final Value<DateTime> date;
-  final Value<String> code;
-  final Value<int> position;
-  final Value<int> duration;
-  final Value<String> classe;
-  final Value<String> author;
-  final Value<int> subjectId;
-  final Value<String> subjectCode;
-  final Value<String> subjectDescription;
-  final Value<String> lessonType;
-  final Value<String> lessonArg;
+  final Value<int?> eventId;
+  final Value<DateTime?> date;
+  final Value<String?> code;
+  final Value<int?> position;
+  final Value<int?> duration;
+  final Value<String?> classe;
+  final Value<String?> author;
+  final Value<int?> subjectId;
+  final Value<String?> subjectCode;
+  final Value<String?> subjectDescription;
+  final Value<String?> lessonType;
+  final Value<String?> lessonArg;
   const LessonsCompanion({
     this.eventId = const Value.absent(),
     this.date = const Value.absent(),
@@ -298,17 +296,17 @@ class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
   });
   LessonsCompanion.insert({
     this.eventId = const Value.absent(),
-    @required DateTime date,
-    @required String code,
-    @required int position,
-    @required int duration,
-    @required String classe,
-    @required String author,
-    @required int subjectId,
-    @required String subjectCode,
-    @required String subjectDescription,
-    @required String lessonType,
-    @required String lessonArg,
+    required DateTime date,
+    required String code,
+    required int position,
+    required int duration,
+    required String classe,
+    required String author,
+    required int subjectId,
+    required String subjectCode,
+    required String subjectDescription,
+    required String lessonType,
+    required String lessonArg,
   })  : date = Value(date),
         code = Value(code),
         position = Value(position),
@@ -321,18 +319,18 @@ class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
         lessonType = Value(lessonType),
         lessonArg = Value(lessonArg);
   static Insertable<LessonLocalModel> custom({
-    Expression<int> eventId,
-    Expression<DateTime> date,
-    Expression<String> code,
-    Expression<int> position,
-    Expression<int> duration,
-    Expression<String> classe,
-    Expression<String> author,
-    Expression<int> subjectId,
-    Expression<String> subjectCode,
-    Expression<String> subjectDescription,
-    Expression<String> lessonType,
-    Expression<String> lessonArg,
+    Expression<int>? eventId,
+    Expression<DateTime>? date,
+    Expression<String>? code,
+    Expression<int>? position,
+    Expression<int>? duration,
+    Expression<String>? classe,
+    Expression<String>? author,
+    Expression<int>? subjectId,
+    Expression<String>? subjectCode,
+    Expression<String>? subjectDescription,
+    Expression<String>? lessonType,
+    Expression<String>? lessonArg,
   }) {
     return RawValuesInsertable({
       if (eventId != null) 'event_id': eventId,
@@ -351,18 +349,18 @@ class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
   }
 
   LessonsCompanion copyWith(
-      {Value<int> eventId,
-      Value<DateTime> date,
-      Value<String> code,
-      Value<int> position,
-      Value<int> duration,
-      Value<String> classe,
-      Value<String> author,
-      Value<int> subjectId,
-      Value<String> subjectCode,
-      Value<String> subjectDescription,
-      Value<String> lessonType,
-      Value<String> lessonArg}) {
+      {Value<int>? eventId,
+      Value<DateTime>? date,
+      Value<String>? code,
+      Value<int>? position,
+      Value<int>? duration,
+      Value<String>? classe,
+      Value<String>? author,
+      Value<int>? subjectId,
+      Value<String>? subjectCode,
+      Value<String>? subjectDescription,
+      Value<String>? lessonType,
+      Value<String>? lessonArg}) {
     return LessonsCompanion(
       eventId: eventId ?? this.eventId,
       date: date ?? this.date,
@@ -383,40 +381,40 @@ class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (eventId.present) {
-      map['event_id'] = Variable<int>(eventId.value);
+      map['event_id'] = Variable<int?>(eventId.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime?>(date.value);
     }
     if (code.present) {
-      map['code'] = Variable<String>(code.value);
+      map['code'] = Variable<String?>(code.value);
     }
     if (position.present) {
-      map['position'] = Variable<int>(position.value);
+      map['position'] = Variable<int?>(position.value);
     }
     if (duration.present) {
-      map['duration'] = Variable<int>(duration.value);
+      map['duration'] = Variable<int?>(duration.value);
     }
     if (classe.present) {
-      map['classe'] = Variable<String>(classe.value);
+      map['classe'] = Variable<String?>(classe.value);
     }
     if (author.present) {
-      map['author'] = Variable<String>(author.value);
+      map['author'] = Variable<String?>(author.value);
     }
     if (subjectId.present) {
-      map['subject_id'] = Variable<int>(subjectId.value);
+      map['subject_id'] = Variable<int?>(subjectId.value);
     }
     if (subjectCode.present) {
-      map['subject_code'] = Variable<String>(subjectCode.value);
+      map['subject_code'] = Variable<String?>(subjectCode.value);
     }
     if (subjectDescription.present) {
-      map['subject_description'] = Variable<String>(subjectDescription.value);
+      map['subject_description'] = Variable<String?>(subjectDescription.value);
     }
     if (lessonType.present) {
-      map['lesson_type'] = Variable<String>(lessonType.value);
+      map['lesson_type'] = Variable<String?>(lessonType.value);
     }
     if (lessonArg.present) {
-      map['lesson_arg'] = Variable<String>(lessonArg.value);
+      map['lesson_arg'] = Variable<String?>(lessonArg.value);
     }
     return map;
   }
@@ -444,156 +442,82 @@ class LessonsCompanion extends UpdateCompanion<LessonLocalModel> {
 class $LessonsTable extends Lessons
     with TableInfo<$LessonsTable, LessonLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $LessonsTable(this._db, [this._alias]);
   final VerificationMeta _eventIdMeta = const VerificationMeta('eventId');
-  GeneratedIntColumn _eventId;
+  GeneratedColumn<int>? _eventId;
   @override
-  GeneratedIntColumn get eventId => _eventId ??= _constructEventId();
-  GeneratedIntColumn _constructEventId() {
-    return GeneratedIntColumn(
-      'event_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get eventId =>
+      _eventId ??= GeneratedColumn<int>('event_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _dateMeta = const VerificationMeta('date');
-  GeneratedDateTimeColumn _date;
+  GeneratedColumn<DateTime>? _date;
   @override
-  GeneratedDateTimeColumn get date => _date ??= _constructDate();
-  GeneratedDateTimeColumn _constructDate() {
-    return GeneratedDateTimeColumn(
-      'date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get date =>
+      _date ??= GeneratedColumn<DateTime>('date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _codeMeta = const VerificationMeta('code');
-  GeneratedTextColumn _code;
+  GeneratedColumn<String>? _code;
   @override
-  GeneratedTextColumn get code => _code ??= _constructCode();
-  GeneratedTextColumn _constructCode() {
-    return GeneratedTextColumn(
-      'code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get code =>
+      _code ??= GeneratedColumn<String>('code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
+  GeneratedColumn<int>? _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn(
-      'position',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get position =>
+      _position ??= GeneratedColumn<int>('position', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _durationMeta = const VerificationMeta('duration');
-  GeneratedIntColumn _duration;
+  GeneratedColumn<int>? _duration;
   @override
-  GeneratedIntColumn get duration => _duration ??= _constructDuration();
-  GeneratedIntColumn _constructDuration() {
-    return GeneratedIntColumn(
-      'duration',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get duration =>
+      _duration ??= GeneratedColumn<int>('duration', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _classeMeta = const VerificationMeta('classe');
-  GeneratedTextColumn _classe;
+  GeneratedColumn<String>? _classe;
   @override
-  GeneratedTextColumn get classe => _classe ??= _constructClasse();
-  GeneratedTextColumn _constructClasse() {
-    return GeneratedTextColumn(
-      'classe',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get classe =>
+      _classe ??= GeneratedColumn<String>('classe', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _authorMeta = const VerificationMeta('author');
-  GeneratedTextColumn _author;
+  GeneratedColumn<String>? _author;
   @override
-  GeneratedTextColumn get author => _author ??= _constructAuthor();
-  GeneratedTextColumn _constructAuthor() {
-    return GeneratedTextColumn(
-      'author',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get author =>
+      _author ??= GeneratedColumn<String>('author', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _subjectIdMeta = const VerificationMeta('subjectId');
-  GeneratedIntColumn _subjectId;
+  GeneratedColumn<int>? _subjectId;
   @override
-  GeneratedIntColumn get subjectId => _subjectId ??= _constructSubjectId();
-  GeneratedIntColumn _constructSubjectId() {
-    return GeneratedIntColumn(
-      'subject_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get subjectId =>
+      _subjectId ??= GeneratedColumn<int>('subject_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _subjectCodeMeta =
       const VerificationMeta('subjectCode');
-  GeneratedTextColumn _subjectCode;
+  GeneratedColumn<String>? _subjectCode;
   @override
-  GeneratedTextColumn get subjectCode =>
-      _subjectCode ??= _constructSubjectCode();
-  GeneratedTextColumn _constructSubjectCode() {
-    return GeneratedTextColumn(
-      'subject_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get subjectCode => _subjectCode ??=
+      GeneratedColumn<String>('subject_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _subjectDescriptionMeta =
       const VerificationMeta('subjectDescription');
-  GeneratedTextColumn _subjectDescription;
+  GeneratedColumn<String>? _subjectDescription;
   @override
-  GeneratedTextColumn get subjectDescription =>
-      _subjectDescription ??= _constructSubjectDescription();
-  GeneratedTextColumn _constructSubjectDescription() {
-    return GeneratedTextColumn(
-      'subject_description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get subjectDescription => _subjectDescription ??=
+      GeneratedColumn<String>('subject_description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _lessonTypeMeta = const VerificationMeta('lessonType');
-  GeneratedTextColumn _lessonType;
+  GeneratedColumn<String>? _lessonType;
   @override
-  GeneratedTextColumn get lessonType => _lessonType ??= _constructLessonType();
-  GeneratedTextColumn _constructLessonType() {
-    return GeneratedTextColumn(
-      'lesson_type',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get lessonType =>
+      _lessonType ??= GeneratedColumn<String>('lesson_type', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _lessonArgMeta = const VerificationMeta('lessonArg');
-  GeneratedTextColumn _lessonArg;
+  GeneratedColumn<String>? _lessonArg;
   @override
-  GeneratedTextColumn get lessonArg => _lessonArg ??= _constructLessonArg();
-  GeneratedTextColumn _constructLessonArg() {
-    return GeneratedTextColumn(
-      'lesson_arg',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get lessonArg =>
+      _lessonArg ??= GeneratedColumn<String>('lesson_arg', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         eventId,
@@ -610,11 +534,9 @@ class $LessonsTable extends Lessons
         lessonArg
       ];
   @override
-  $LessonsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'lessons';
   @override
-  String get $tableName => _alias ?? 'lessons';
-  @override
-  final String actualTableName = 'lessons';
+  String get actualTableName => 'lessons';
   @override
   VerificationContext validateIntegrity(Insertable<LessonLocalModel> instance,
       {bool isInserting = false}) {
@@ -622,47 +544,47 @@ class $LessonsTable extends Lessons
     final data = instance.toColumns(true);
     if (data.containsKey('event_id')) {
       context.handle(_eventIdMeta,
-          eventId.isAcceptableOrUnknown(data['event_id'], _eventIdMeta));
+          eventId.isAcceptableOrUnknown(data['event_id']!, _eventIdMeta));
     }
     if (data.containsKey('date')) {
       context.handle(
-          _dateMeta, date.isAcceptableOrUnknown(data['date'], _dateMeta));
+          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
     } else if (isInserting) {
       context.missing(_dateMeta);
     }
     if (data.containsKey('code')) {
       context.handle(
-          _codeMeta, code.isAcceptableOrUnknown(data['code'], _codeMeta));
+          _codeMeta, code.isAcceptableOrUnknown(data['code']!, _codeMeta));
     } else if (isInserting) {
       context.missing(_codeMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('duration')) {
       context.handle(_durationMeta,
-          duration.isAcceptableOrUnknown(data['duration'], _durationMeta));
+          duration.isAcceptableOrUnknown(data['duration']!, _durationMeta));
     } else if (isInserting) {
       context.missing(_durationMeta);
     }
     if (data.containsKey('classe')) {
       context.handle(_classeMeta,
-          classe.isAcceptableOrUnknown(data['classe'], _classeMeta));
+          classe.isAcceptableOrUnknown(data['classe']!, _classeMeta));
     } else if (isInserting) {
       context.missing(_classeMeta);
     }
     if (data.containsKey('author')) {
       context.handle(_authorMeta,
-          author.isAcceptableOrUnknown(data['author'], _authorMeta));
+          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
     } else if (isInserting) {
       context.missing(_authorMeta);
     }
     if (data.containsKey('subject_id')) {
       context.handle(_subjectIdMeta,
-          subjectId.isAcceptableOrUnknown(data['subject_id'], _subjectIdMeta));
+          subjectId.isAcceptableOrUnknown(data['subject_id']!, _subjectIdMeta));
     } else if (isInserting) {
       context.missing(_subjectIdMeta);
     }
@@ -670,7 +592,7 @@ class $LessonsTable extends Lessons
       context.handle(
           _subjectCodeMeta,
           subjectCode.isAcceptableOrUnknown(
-              data['subject_code'], _subjectCodeMeta));
+              data['subject_code']!, _subjectCodeMeta));
     } else if (isInserting) {
       context.missing(_subjectCodeMeta);
     }
@@ -678,7 +600,7 @@ class $LessonsTable extends Lessons
       context.handle(
           _subjectDescriptionMeta,
           subjectDescription.isAcceptableOrUnknown(
-              data['subject_description'], _subjectDescriptionMeta));
+              data['subject_description']!, _subjectDescriptionMeta));
     } else if (isInserting) {
       context.missing(_subjectDescriptionMeta);
     }
@@ -686,13 +608,13 @@ class $LessonsTable extends Lessons
       context.handle(
           _lessonTypeMeta,
           lessonType.isAcceptableOrUnknown(
-              data['lesson_type'], _lessonTypeMeta));
+              data['lesson_type']!, _lessonTypeMeta));
     } else if (isInserting) {
       context.missing(_lessonTypeMeta);
     }
     if (data.containsKey('lesson_arg')) {
       context.handle(_lessonArgMeta,
-          lessonArg.isAcceptableOrUnknown(data['lesson_arg'], _lessonArgMeta));
+          lessonArg.isAcceptableOrUnknown(data['lesson_arg']!, _lessonArgMeta));
     } else if (isInserting) {
       context.missing(_lessonArgMeta);
     }
@@ -702,9 +624,9 @@ class $LessonsTable extends Lessons
   @override
   Set<GeneratedColumn> get $primaryKey => {eventId};
   @override
-  LessonLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return LessonLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  LessonLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return LessonLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -715,44 +637,43 @@ class $LessonsTable extends Lessons
 
 class SubjectLocalModel extends DataClass
     implements Insertable<SubjectLocalModel> {
-  final int id;
-  final String name;
-  final int orderNumber;
-  final String color;
+  final int? id;
+  final String? name;
+  final int? orderNumber;
+  final String? color;
   SubjectLocalModel(
-      {@required this.id,
-      @required this.name,
-      @required this.orderNumber,
-      @required this.color});
+      {required this.id,
+      required this.name,
+      required this.orderNumber,
+      required this.color});
   factory SubjectLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return SubjectLocalModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      orderNumber: intType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      orderNumber: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}order_number']),
-      color:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}color']),
+      color: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}color']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     if (!nullToAbsent || orderNumber != null) {
-      map['order_number'] = Variable<int>(orderNumber);
+      map['order_number'] = Variable<int?>(orderNumber);
     }
     if (!nullToAbsent || color != null) {
-      map['color'] = Variable<String>(color);
+      map['color'] = Variable<String?>(color);
     }
     return map;
   }
@@ -770,7 +691,7 @@ class SubjectLocalModel extends DataClass
   }
 
   factory SubjectLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return SubjectLocalModel(
       id: serializer.fromJson<int>(json['id']),
@@ -780,18 +701,18 @@ class SubjectLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'orderNumber': serializer.toJson<int>(orderNumber),
-      'color': serializer.toJson<String>(color),
+      'id': serializer.toJson<int?>(id),
+      'name': serializer.toJson<String?>(name),
+      'orderNumber': serializer.toJson<int?>(orderNumber),
+      'color': serializer.toJson<String?>(color),
     };
   }
 
   SubjectLocalModel copyWith(
-          {int id, String name, int orderNumber, String color}) =>
+          {int? id, String? name, int? orderNumber, String? color}) =>
       SubjectLocalModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -813,7 +734,7 @@ class SubjectLocalModel extends DataClass
   int get hashCode => $mrjf($mrjc(id.hashCode,
       $mrjc(name.hashCode, $mrjc(orderNumber.hashCode, color.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is SubjectLocalModel &&
           other.id == this.id &&
@@ -823,10 +744,10 @@ class SubjectLocalModel extends DataClass
 }
 
 class SubjectsCompanion extends UpdateCompanion<SubjectLocalModel> {
-  final Value<int> id;
-  final Value<String> name;
-  final Value<int> orderNumber;
-  final Value<String> color;
+  final Value<int?> id;
+  final Value<String?> name;
+  final Value<int?> orderNumber;
+  final Value<String?> color;
   const SubjectsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -835,17 +756,17 @@ class SubjectsCompanion extends UpdateCompanion<SubjectLocalModel> {
   });
   SubjectsCompanion.insert({
     this.id = const Value.absent(),
-    @required String name,
-    @required int orderNumber,
-    @required String color,
+    required String name,
+    required int orderNumber,
+    required String color,
   })  : name = Value(name),
         orderNumber = Value(orderNumber),
         color = Value(color);
   static Insertable<SubjectLocalModel> custom({
-    Expression<int> id,
-    Expression<String> name,
-    Expression<int> orderNumber,
-    Expression<String> color,
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<int>? orderNumber,
+    Expression<String>? color,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -856,10 +777,10 @@ class SubjectsCompanion extends UpdateCompanion<SubjectLocalModel> {
   }
 
   SubjectsCompanion copyWith(
-      {Value<int> id,
-      Value<String> name,
-      Value<int> orderNumber,
-      Value<String> color}) {
+      {Value<int>? id,
+      Value<String>? name,
+      Value<int>? orderNumber,
+      Value<String>? color}) {
     return SubjectsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -872,16 +793,16 @@ class SubjectsCompanion extends UpdateCompanion<SubjectLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     if (orderNumber.present) {
-      map['order_number'] = Variable<int>(orderNumber.value);
+      map['order_number'] = Variable<int?>(orderNumber.value);
     }
     if (color.present) {
-      map['color'] = Variable<String>(color.value);
+      map['color'] = Variable<String?>(color.value);
     }
     return map;
   }
@@ -901,77 +822,50 @@ class SubjectsCompanion extends UpdateCompanion<SubjectLocalModel> {
 class $SubjectsTable extends Subjects
     with TableInfo<$SubjectsTable, SubjectLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $SubjectsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _orderNumberMeta =
       const VerificationMeta('orderNumber');
-  GeneratedIntColumn _orderNumber;
+  GeneratedColumn<int>? _orderNumber;
   @override
-  GeneratedIntColumn get orderNumber =>
-      _orderNumber ??= _constructOrderNumber();
-  GeneratedIntColumn _constructOrderNumber() {
-    return GeneratedIntColumn(
-      'order_number',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get orderNumber =>
+      _orderNumber ??= GeneratedColumn<int>('order_number', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _colorMeta = const VerificationMeta('color');
-  GeneratedTextColumn _color;
+  GeneratedColumn<String>? _color;
   @override
-  GeneratedTextColumn get color => _color ??= _constructColor();
-  GeneratedTextColumn _constructColor() {
-    return GeneratedTextColumn(
-      'color',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get color =>
+      _color ??= GeneratedColumn<String>('color', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, name, orderNumber, color];
   @override
-  $SubjectsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'subjects';
   @override
-  String get $tableName => _alias ?? 'subjects';
-  @override
-  final String actualTableName = 'subjects';
+  String get actualTableName => 'subjects';
   @override
   VerificationContext validateIntegrity(Insertable<SubjectLocalModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -979,13 +873,13 @@ class $SubjectsTable extends Subjects
       context.handle(
           _orderNumberMeta,
           orderNumber.isAcceptableOrUnknown(
-              data['order_number'], _orderNumberMeta));
+              data['order_number']!, _orderNumberMeta));
     } else if (isInserting) {
       context.missing(_orderNumberMeta);
     }
     if (data.containsKey('color')) {
       context.handle(
-          _colorMeta, color.isAcceptableOrUnknown(data['color'], _colorMeta));
+          _colorMeta, color.isAcceptableOrUnknown(data['color']!, _colorMeta));
     } else if (isInserting) {
       context.missing(_colorMeta);
     }
@@ -995,9 +889,9 @@ class $SubjectsTable extends Subjects
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  SubjectLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return SubjectLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  SubjectLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SubjectLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1008,35 +902,35 @@ class $SubjectsTable extends Subjects
 
 class ProfessorLocalModel extends DataClass
     implements Insertable<ProfessorLocalModel> {
-  final String id;
-  final int subjectId;
-  final String name;
+  final String? id;
+  final int? subjectId;
+  final String? name;
   ProfessorLocalModel(
-      {@required this.id, @required this.subjectId, @required this.name});
+      {required this.id, required this.subjectId, required this.name});
   factory ProfessorLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
-    final intType = db.typeSystem.forDartType<int>();
     return ProfessorLocalModel(
-      id: stringType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      subjectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      id: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      subjectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<String>(id);
+      map['id'] = Variable<String?>(id);
     }
     if (!nullToAbsent || subjectId != null) {
-      map['subject_id'] = Variable<int>(subjectId);
+      map['subject_id'] = Variable<int?>(subjectId);
     }
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     return map;
   }
@@ -1052,7 +946,7 @@ class ProfessorLocalModel extends DataClass
   }
 
   factory ProfessorLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return ProfessorLocalModel(
       id: serializer.fromJson<String>(json['id']),
@@ -1061,16 +955,16 @@ class ProfessorLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'subjectId': serializer.toJson<int>(subjectId),
-      'name': serializer.toJson<String>(name),
+      'id': serializer.toJson<String?>(id),
+      'subjectId': serializer.toJson<int?>(subjectId),
+      'name': serializer.toJson<String?>(name),
     };
   }
 
-  ProfessorLocalModel copyWith({String id, int subjectId, String name}) =>
+  ProfessorLocalModel copyWith({String? id, int? subjectId, String? name}) =>
       ProfessorLocalModel(
         id: id ?? this.id,
         subjectId: subjectId ?? this.subjectId,
@@ -1090,7 +984,7 @@ class ProfessorLocalModel extends DataClass
   int get hashCode =>
       $mrjf($mrjc(id.hashCode, $mrjc(subjectId.hashCode, name.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ProfessorLocalModel &&
           other.id == this.id &&
@@ -1099,25 +993,25 @@ class ProfessorLocalModel extends DataClass
 }
 
 class ProfessorsCompanion extends UpdateCompanion<ProfessorLocalModel> {
-  final Value<String> id;
-  final Value<int> subjectId;
-  final Value<String> name;
+  final Value<String?> id;
+  final Value<int?> subjectId;
+  final Value<String?> name;
   const ProfessorsCompanion({
     this.id = const Value.absent(),
     this.subjectId = const Value.absent(),
     this.name = const Value.absent(),
   });
   ProfessorsCompanion.insert({
-    @required String id,
-    @required int subjectId,
-    @required String name,
+    required String id,
+    required int subjectId,
+    required String name,
   })  : id = Value(id),
         subjectId = Value(subjectId),
         name = Value(name);
   static Insertable<ProfessorLocalModel> custom({
-    Expression<String> id,
-    Expression<int> subjectId,
-    Expression<String> name,
+    Expression<String>? id,
+    Expression<int>? subjectId,
+    Expression<String>? name,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1127,7 +1021,7 @@ class ProfessorsCompanion extends UpdateCompanion<ProfessorLocalModel> {
   }
 
   ProfessorsCompanion copyWith(
-      {Value<String> id, Value<int> subjectId, Value<String> name}) {
+      {Value<String>? id, Value<int>? subjectId, Value<String>? name}) {
     return ProfessorsCompanion(
       id: id ?? this.id,
       subjectId: subjectId ?? this.subjectId,
@@ -1139,13 +1033,13 @@ class ProfessorsCompanion extends UpdateCompanion<ProfessorLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<String?>(id.value);
     }
     if (subjectId.present) {
-      map['subject_id'] = Variable<int>(subjectId.value);
+      map['subject_id'] = Variable<int?>(subjectId.value);
     }
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     return map;
   }
@@ -1164,52 +1058,32 @@ class ProfessorsCompanion extends UpdateCompanion<ProfessorLocalModel> {
 class $ProfessorsTable extends Professors
     with TableInfo<$ProfessorsTable, ProfessorLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $ProfessorsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedTextColumn _id;
+  GeneratedColumn<String>? _id;
   @override
-  GeneratedTextColumn get id => _id ??= _constructId();
-  GeneratedTextColumn _constructId() {
-    return GeneratedTextColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get id =>
+      _id ??= GeneratedColumn<String>('id', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _subjectIdMeta = const VerificationMeta('subjectId');
-  GeneratedIntColumn _subjectId;
+  GeneratedColumn<int?>? _subjectId;
   @override
-  GeneratedIntColumn get subjectId => _subjectId ??= _constructSubjectId();
-  GeneratedIntColumn _constructSubjectId() {
-    return GeneratedIntColumn(
-      'subject_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int?> get subjectId =>
+      _subjectId ??= GeneratedColumn<int?>('subject_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, subjectId, name];
   @override
-  $ProfessorsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'professors';
   @override
-  String get $tableName => _alias ?? 'professors';
-  @override
-  final String actualTableName = 'professors';
+  String get actualTableName => 'professors';
   @override
   VerificationContext validateIntegrity(
       Insertable<ProfessorLocalModel> instance,
@@ -1217,19 +1091,19 @@ class $ProfessorsTable extends Professors
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     } else if (isInserting) {
       context.missing(_idMeta);
     }
     if (data.containsKey('subject_id')) {
       context.handle(_subjectIdMeta,
-          subjectId.isAcceptableOrUnknown(data['subject_id'], _subjectIdMeta));
+          subjectId.isAcceptableOrUnknown(data['subject_id']!, _subjectIdMeta));
     } else if (isInserting) {
       context.missing(_subjectIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -1239,9 +1113,9 @@ class $ProfessorsTable extends Professors
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ProfessorLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ProfessorLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  ProfessorLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return ProfessorLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -1251,95 +1125,91 @@ class $ProfessorsTable extends Professors
 }
 
 class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
-  final int subjectId;
-  final String subjectDesc;
-  final int evtId;
-  final String evtCode;
-  final DateTime eventDate;
-  final double decimalValue;
-  final String displayValue;
-  final int displayPos;
-  final String notesForFamily;
-  final bool cancelled;
-  final bool underlined;
-  final int periodPos;
-  final String periodDesc;
-  final int componentPos;
-  final String componentDesc;
-  final int weightFactor;
-  final int skillId;
-  final int gradeMasterId;
-  final bool localllyCancelled;
-  final bool hasSeenIt;
+  final int? subjectId;
+  final String? subjectDesc;
+  final int? evtId;
+  final String? evtCode;
+  final DateTime? eventDate;
+  final double? decimalValue;
+  final String? displayValue;
+  final int? displayPos;
+  final String? notesForFamily;
+  final bool? cancelled;
+  final bool? underlined;
+  final int? periodPos;
+  final String? periodDesc;
+  final int? componentPos;
+  final String? componentDesc;
+  final int? weightFactor;
+  final int? skillId;
+  final int? gradeMasterId;
+  final bool? localllyCancelled;
+  final bool? hasSeenIt;
   GradeLocalModel(
-      {@required this.subjectId,
-      @required this.subjectDesc,
-      @required this.evtId,
-      @required this.evtCode,
-      @required this.eventDate,
-      @required this.decimalValue,
-      @required this.displayValue,
-      @required this.displayPos,
-      @required this.notesForFamily,
-      @required this.cancelled,
-      @required this.underlined,
-      @required this.periodPos,
-      @required this.periodDesc,
-      @required this.componentPos,
-      @required this.componentDesc,
-      @required this.weightFactor,
-      @required this.skillId,
-      @required this.gradeMasterId,
-      @required this.localllyCancelled,
-      @required this.hasSeenIt});
+      {required this.subjectId,
+      required this.subjectDesc,
+      required this.evtId,
+      required this.evtCode,
+      required this.eventDate,
+      required this.decimalValue,
+      required this.displayValue,
+      required this.displayPos,
+      required this.notesForFamily,
+      required this.cancelled,
+      required this.underlined,
+      required this.periodPos,
+      required this.periodDesc,
+      required this.componentPos,
+      required this.componentDesc,
+      required this.weightFactor,
+      required this.skillId,
+      required this.gradeMasterId,
+      required this.localllyCancelled,
+      required this.hasSeenIt});
   factory GradeLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final doubleType = db.typeSystem.forDartType<double>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return GradeLocalModel(
-      subjectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
-      subjectDesc: stringType
+      subjectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
+      subjectDesc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}subject_desc']),
-      evtId: intType.mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
-      evtCode: stringType
+      evtId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
+      evtCode: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}evt_code']),
-      eventDate: dateTimeType
+      eventDate: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_date']),
-      decimalValue: doubleType
+      decimalValue: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}decimal_value']),
-      displayValue: stringType
+      displayValue: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}display_value']),
-      displayPos: intType
+      displayPos: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}display_pos']),
-      notesForFamily: stringType
+      notesForFamily: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}notes_for_family']),
-      cancelled:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}cancelled']),
-      underlined: boolType
+      cancelled: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}cancelled']),
+      underlined: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}underlined']),
-      periodPos:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}period_pos']),
-      periodDesc: stringType
+      periodPos: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}period_pos']),
+      periodDesc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}period_desc']),
-      componentPos: intType
+      componentPos: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}component_pos']),
-      componentDesc: stringType
+      componentDesc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}component_desc']),
-      weightFactor: intType
+      weightFactor: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}weight_factor']),
-      skillId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}skill_id']),
-      gradeMasterId: intType
+      skillId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}skill_id']),
+      gradeMasterId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}grade_master_id']),
-      localllyCancelled: boolType.mapFromDatabaseResponse(
+      localllyCancelled: const BoolType().mapFromDatabaseResponse(
           data['${effectivePrefix}locallly_cancelled']),
-      hasSeenIt: boolType
+      hasSeenIt: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}has_seen_it']),
     );
   }
@@ -1347,64 +1217,64 @@ class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || subjectId != null) {
-      map['subject_id'] = Variable<int>(subjectId);
+      map['subject_id'] = Variable<int?>(subjectId);
     }
     if (!nullToAbsent || subjectDesc != null) {
-      map['subject_desc'] = Variable<String>(subjectDesc);
+      map['subject_desc'] = Variable<String?>(subjectDesc);
     }
     if (!nullToAbsent || evtId != null) {
-      map['evt_id'] = Variable<int>(evtId);
+      map['evt_id'] = Variable<int?>(evtId);
     }
     if (!nullToAbsent || evtCode != null) {
-      map['evt_code'] = Variable<String>(evtCode);
+      map['evt_code'] = Variable<String?>(evtCode);
     }
     if (!nullToAbsent || eventDate != null) {
-      map['event_date'] = Variable<DateTime>(eventDate);
+      map['event_date'] = Variable<DateTime?>(eventDate);
     }
     if (!nullToAbsent || decimalValue != null) {
-      map['decimal_value'] = Variable<double>(decimalValue);
+      map['decimal_value'] = Variable<double?>(decimalValue);
     }
     if (!nullToAbsent || displayValue != null) {
-      map['display_value'] = Variable<String>(displayValue);
+      map['display_value'] = Variable<String?>(displayValue);
     }
     if (!nullToAbsent || displayPos != null) {
-      map['display_pos'] = Variable<int>(displayPos);
+      map['display_pos'] = Variable<int?>(displayPos);
     }
     if (!nullToAbsent || notesForFamily != null) {
-      map['notes_for_family'] = Variable<String>(notesForFamily);
+      map['notes_for_family'] = Variable<String?>(notesForFamily);
     }
     if (!nullToAbsent || cancelled != null) {
-      map['cancelled'] = Variable<bool>(cancelled);
+      map['cancelled'] = Variable<bool?>(cancelled);
     }
     if (!nullToAbsent || underlined != null) {
-      map['underlined'] = Variable<bool>(underlined);
+      map['underlined'] = Variable<bool?>(underlined);
     }
     if (!nullToAbsent || periodPos != null) {
-      map['period_pos'] = Variable<int>(periodPos);
+      map['period_pos'] = Variable<int?>(periodPos);
     }
     if (!nullToAbsent || periodDesc != null) {
-      map['period_desc'] = Variable<String>(periodDesc);
+      map['period_desc'] = Variable<String?>(periodDesc);
     }
     if (!nullToAbsent || componentPos != null) {
-      map['component_pos'] = Variable<int>(componentPos);
+      map['component_pos'] = Variable<int?>(componentPos);
     }
     if (!nullToAbsent || componentDesc != null) {
-      map['component_desc'] = Variable<String>(componentDesc);
+      map['component_desc'] = Variable<String?>(componentDesc);
     }
     if (!nullToAbsent || weightFactor != null) {
-      map['weight_factor'] = Variable<int>(weightFactor);
+      map['weight_factor'] = Variable<int?>(weightFactor);
     }
     if (!nullToAbsent || skillId != null) {
-      map['skill_id'] = Variable<int>(skillId);
+      map['skill_id'] = Variable<int?>(skillId);
     }
     if (!nullToAbsent || gradeMasterId != null) {
-      map['grade_master_id'] = Variable<int>(gradeMasterId);
+      map['grade_master_id'] = Variable<int?>(gradeMasterId);
     }
     if (!nullToAbsent || localllyCancelled != null) {
-      map['locallly_cancelled'] = Variable<bool>(localllyCancelled);
+      map['locallly_cancelled'] = Variable<bool?>(localllyCancelled);
     }
     if (!nullToAbsent || hasSeenIt != null) {
-      map['has_seen_it'] = Variable<bool>(hasSeenIt);
+      map['has_seen_it'] = Variable<bool?>(hasSeenIt);
     }
     return map;
   }
@@ -1474,7 +1344,7 @@ class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
   }
 
   factory GradeLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return GradeLocalModel(
       subjectId: serializer.fromJson<int>(json['subjectId']),
@@ -1500,53 +1370,53 @@ class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'subjectId': serializer.toJson<int>(subjectId),
-      'subjectDesc': serializer.toJson<String>(subjectDesc),
-      'evtId': serializer.toJson<int>(evtId),
-      'evtCode': serializer.toJson<String>(evtCode),
-      'eventDate': serializer.toJson<DateTime>(eventDate),
-      'decimalValue': serializer.toJson<double>(decimalValue),
-      'displayValue': serializer.toJson<String>(displayValue),
-      'displayPos': serializer.toJson<int>(displayPos),
-      'notesForFamily': serializer.toJson<String>(notesForFamily),
-      'cancelled': serializer.toJson<bool>(cancelled),
-      'underlined': serializer.toJson<bool>(underlined),
-      'periodPos': serializer.toJson<int>(periodPos),
-      'periodDesc': serializer.toJson<String>(periodDesc),
-      'componentPos': serializer.toJson<int>(componentPos),
-      'componentDesc': serializer.toJson<String>(componentDesc),
-      'weightFactor': serializer.toJson<int>(weightFactor),
-      'skillId': serializer.toJson<int>(skillId),
-      'gradeMasterId': serializer.toJson<int>(gradeMasterId),
-      'localllyCancelled': serializer.toJson<bool>(localllyCancelled),
-      'hasSeenIt': serializer.toJson<bool>(hasSeenIt),
+      'subjectId': serializer.toJson<int?>(subjectId),
+      'subjectDesc': serializer.toJson<String?>(subjectDesc),
+      'evtId': serializer.toJson<int?>(evtId),
+      'evtCode': serializer.toJson<String?>(evtCode),
+      'eventDate': serializer.toJson<DateTime?>(eventDate),
+      'decimalValue': serializer.toJson<double?>(decimalValue),
+      'displayValue': serializer.toJson<String?>(displayValue),
+      'displayPos': serializer.toJson<int?>(displayPos),
+      'notesForFamily': serializer.toJson<String?>(notesForFamily),
+      'cancelled': serializer.toJson<bool?>(cancelled),
+      'underlined': serializer.toJson<bool?>(underlined),
+      'periodPos': serializer.toJson<int?>(periodPos),
+      'periodDesc': serializer.toJson<String?>(periodDesc),
+      'componentPos': serializer.toJson<int?>(componentPos),
+      'componentDesc': serializer.toJson<String?>(componentDesc),
+      'weightFactor': serializer.toJson<int?>(weightFactor),
+      'skillId': serializer.toJson<int?>(skillId),
+      'gradeMasterId': serializer.toJson<int?>(gradeMasterId),
+      'localllyCancelled': serializer.toJson<bool?>(localllyCancelled),
+      'hasSeenIt': serializer.toJson<bool?>(hasSeenIt),
     };
   }
 
   GradeLocalModel copyWith(
-          {int subjectId,
-          String subjectDesc,
-          int evtId,
-          String evtCode,
-          DateTime eventDate,
-          double decimalValue,
-          String displayValue,
-          int displayPos,
-          String notesForFamily,
-          bool cancelled,
-          bool underlined,
-          int periodPos,
-          String periodDesc,
-          int componentPos,
-          String componentDesc,
-          int weightFactor,
-          int skillId,
-          int gradeMasterId,
-          bool localllyCancelled,
-          bool hasSeenIt}) =>
+          {int? subjectId,
+          String? subjectDesc,
+          int? evtId,
+          String? evtCode,
+          DateTime? eventDate,
+          double? decimalValue,
+          String? displayValue,
+          int? displayPos,
+          String? notesForFamily,
+          bool? cancelled,
+          bool? underlined,
+          int? periodPos,
+          String? periodDesc,
+          int? componentPos,
+          String? componentDesc,
+          int? weightFactor,
+          int? skillId,
+          int? gradeMasterId,
+          bool? localllyCancelled,
+          bool? hasSeenIt}) =>
       GradeLocalModel(
         subjectId: subjectId ?? this.subjectId,
         subjectDesc: subjectDesc ?? this.subjectDesc,
@@ -1641,7 +1511,7 @@ class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
                                                                               localllyCancelled.hashCode,
                                                                               hasSeenIt.hashCode))))))))))))))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is GradeLocalModel &&
           other.subjectId == this.subjectId &&
@@ -1667,26 +1537,26 @@ class GradeLocalModel extends DataClass implements Insertable<GradeLocalModel> {
 }
 
 class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
-  final Value<int> subjectId;
-  final Value<String> subjectDesc;
-  final Value<int> evtId;
-  final Value<String> evtCode;
-  final Value<DateTime> eventDate;
-  final Value<double> decimalValue;
-  final Value<String> displayValue;
-  final Value<int> displayPos;
-  final Value<String> notesForFamily;
-  final Value<bool> cancelled;
-  final Value<bool> underlined;
-  final Value<int> periodPos;
-  final Value<String> periodDesc;
-  final Value<int> componentPos;
-  final Value<String> componentDesc;
-  final Value<int> weightFactor;
-  final Value<int> skillId;
-  final Value<int> gradeMasterId;
-  final Value<bool> localllyCancelled;
-  final Value<bool> hasSeenIt;
+  final Value<int?> subjectId;
+  final Value<String?> subjectDesc;
+  final Value<int?> evtId;
+  final Value<String?> evtCode;
+  final Value<DateTime?> eventDate;
+  final Value<double?> decimalValue;
+  final Value<String?> displayValue;
+  final Value<int?> displayPos;
+  final Value<String?> notesForFamily;
+  final Value<bool?> cancelled;
+  final Value<bool?> underlined;
+  final Value<int?> periodPos;
+  final Value<String?> periodDesc;
+  final Value<int?> componentPos;
+  final Value<String?> componentDesc;
+  final Value<int?> weightFactor;
+  final Value<int?> skillId;
+  final Value<int?> gradeMasterId;
+  final Value<bool?> localllyCancelled;
+  final Value<bool?> hasSeenIt;
   const GradesCompanion({
     this.subjectId = const Value.absent(),
     this.subjectDesc = const Value.absent(),
@@ -1710,25 +1580,25 @@ class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
     this.hasSeenIt = const Value.absent(),
   });
   GradesCompanion.insert({
-    @required int subjectId,
-    @required String subjectDesc,
+    required int subjectId,
+    required String subjectDesc,
     this.evtId = const Value.absent(),
-    @required String evtCode,
-    @required DateTime eventDate,
-    @required double decimalValue,
-    @required String displayValue,
-    @required int displayPos,
-    @required String notesForFamily,
-    @required bool cancelled,
-    @required bool underlined,
-    @required int periodPos,
-    @required String periodDesc,
-    @required int componentPos,
-    @required String componentDesc,
-    @required int weightFactor,
-    @required int skillId,
-    @required int gradeMasterId,
-    @required bool localllyCancelled,
+    required String evtCode,
+    required DateTime eventDate,
+    required double decimalValue,
+    required String displayValue,
+    required int displayPos,
+    required String notesForFamily,
+    required bool cancelled,
+    required bool underlined,
+    required int periodPos,
+    required String periodDesc,
+    required int componentPos,
+    required String componentDesc,
+    required int weightFactor,
+    required int skillId,
+    required int gradeMasterId,
+    required bool localllyCancelled,
     this.hasSeenIt = const Value.absent(),
   })  : subjectId = Value(subjectId),
         subjectDesc = Value(subjectDesc),
@@ -1749,26 +1619,26 @@ class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
         gradeMasterId = Value(gradeMasterId),
         localllyCancelled = Value(localllyCancelled);
   static Insertable<GradeLocalModel> custom({
-    Expression<int> subjectId,
-    Expression<String> subjectDesc,
-    Expression<int> evtId,
-    Expression<String> evtCode,
-    Expression<DateTime> eventDate,
-    Expression<double> decimalValue,
-    Expression<String> displayValue,
-    Expression<int> displayPos,
-    Expression<String> notesForFamily,
-    Expression<bool> cancelled,
-    Expression<bool> underlined,
-    Expression<int> periodPos,
-    Expression<String> periodDesc,
-    Expression<int> componentPos,
-    Expression<String> componentDesc,
-    Expression<int> weightFactor,
-    Expression<int> skillId,
-    Expression<int> gradeMasterId,
-    Expression<bool> localllyCancelled,
-    Expression<bool> hasSeenIt,
+    Expression<int>? subjectId,
+    Expression<String>? subjectDesc,
+    Expression<int>? evtId,
+    Expression<String>? evtCode,
+    Expression<DateTime>? eventDate,
+    Expression<double>? decimalValue,
+    Expression<String>? displayValue,
+    Expression<int>? displayPos,
+    Expression<String>? notesForFamily,
+    Expression<bool>? cancelled,
+    Expression<bool>? underlined,
+    Expression<int>? periodPos,
+    Expression<String>? periodDesc,
+    Expression<int>? componentPos,
+    Expression<String>? componentDesc,
+    Expression<int>? weightFactor,
+    Expression<int>? skillId,
+    Expression<int>? gradeMasterId,
+    Expression<bool>? localllyCancelled,
+    Expression<bool>? hasSeenIt,
   }) {
     return RawValuesInsertable({
       if (subjectId != null) 'subject_id': subjectId,
@@ -1795,26 +1665,26 @@ class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
   }
 
   GradesCompanion copyWith(
-      {Value<int> subjectId,
-      Value<String> subjectDesc,
-      Value<int> evtId,
-      Value<String> evtCode,
-      Value<DateTime> eventDate,
-      Value<double> decimalValue,
-      Value<String> displayValue,
-      Value<int> displayPos,
-      Value<String> notesForFamily,
-      Value<bool> cancelled,
-      Value<bool> underlined,
-      Value<int> periodPos,
-      Value<String> periodDesc,
-      Value<int> componentPos,
-      Value<String> componentDesc,
-      Value<int> weightFactor,
-      Value<int> skillId,
-      Value<int> gradeMasterId,
-      Value<bool> localllyCancelled,
-      Value<bool> hasSeenIt}) {
+      {Value<int>? subjectId,
+      Value<String>? subjectDesc,
+      Value<int>? evtId,
+      Value<String>? evtCode,
+      Value<DateTime>? eventDate,
+      Value<double>? decimalValue,
+      Value<String>? displayValue,
+      Value<int>? displayPos,
+      Value<String>? notesForFamily,
+      Value<bool>? cancelled,
+      Value<bool>? underlined,
+      Value<int>? periodPos,
+      Value<String>? periodDesc,
+      Value<int>? componentPos,
+      Value<String>? componentDesc,
+      Value<int>? weightFactor,
+      Value<int>? skillId,
+      Value<int>? gradeMasterId,
+      Value<bool>? localllyCancelled,
+      Value<bool>? hasSeenIt}) {
     return GradesCompanion(
       subjectId: subjectId ?? this.subjectId,
       subjectDesc: subjectDesc ?? this.subjectDesc,
@@ -1843,64 +1713,64 @@ class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (subjectId.present) {
-      map['subject_id'] = Variable<int>(subjectId.value);
+      map['subject_id'] = Variable<int?>(subjectId.value);
     }
     if (subjectDesc.present) {
-      map['subject_desc'] = Variable<String>(subjectDesc.value);
+      map['subject_desc'] = Variable<String?>(subjectDesc.value);
     }
     if (evtId.present) {
-      map['evt_id'] = Variable<int>(evtId.value);
+      map['evt_id'] = Variable<int?>(evtId.value);
     }
     if (evtCode.present) {
-      map['evt_code'] = Variable<String>(evtCode.value);
+      map['evt_code'] = Variable<String?>(evtCode.value);
     }
     if (eventDate.present) {
-      map['event_date'] = Variable<DateTime>(eventDate.value);
+      map['event_date'] = Variable<DateTime?>(eventDate.value);
     }
     if (decimalValue.present) {
-      map['decimal_value'] = Variable<double>(decimalValue.value);
+      map['decimal_value'] = Variable<double?>(decimalValue.value);
     }
     if (displayValue.present) {
-      map['display_value'] = Variable<String>(displayValue.value);
+      map['display_value'] = Variable<String?>(displayValue.value);
     }
     if (displayPos.present) {
-      map['display_pos'] = Variable<int>(displayPos.value);
+      map['display_pos'] = Variable<int?>(displayPos.value);
     }
     if (notesForFamily.present) {
-      map['notes_for_family'] = Variable<String>(notesForFamily.value);
+      map['notes_for_family'] = Variable<String?>(notesForFamily.value);
     }
     if (cancelled.present) {
-      map['cancelled'] = Variable<bool>(cancelled.value);
+      map['cancelled'] = Variable<bool?>(cancelled.value);
     }
     if (underlined.present) {
-      map['underlined'] = Variable<bool>(underlined.value);
+      map['underlined'] = Variable<bool?>(underlined.value);
     }
     if (periodPos.present) {
-      map['period_pos'] = Variable<int>(periodPos.value);
+      map['period_pos'] = Variable<int?>(periodPos.value);
     }
     if (periodDesc.present) {
-      map['period_desc'] = Variable<String>(periodDesc.value);
+      map['period_desc'] = Variable<String?>(periodDesc.value);
     }
     if (componentPos.present) {
-      map['component_pos'] = Variable<int>(componentPos.value);
+      map['component_pos'] = Variable<int?>(componentPos.value);
     }
     if (componentDesc.present) {
-      map['component_desc'] = Variable<String>(componentDesc.value);
+      map['component_desc'] = Variable<String?>(componentDesc.value);
     }
     if (weightFactor.present) {
-      map['weight_factor'] = Variable<int>(weightFactor.value);
+      map['weight_factor'] = Variable<int?>(weightFactor.value);
     }
     if (skillId.present) {
-      map['skill_id'] = Variable<int>(skillId.value);
+      map['skill_id'] = Variable<int?>(skillId.value);
     }
     if (gradeMasterId.present) {
-      map['grade_master_id'] = Variable<int>(gradeMasterId.value);
+      map['grade_master_id'] = Variable<int?>(gradeMasterId.value);
     }
     if (localllyCancelled.present) {
-      map['locallly_cancelled'] = Variable<bool>(localllyCancelled.value);
+      map['locallly_cancelled'] = Variable<bool?>(localllyCancelled.value);
     }
     if (hasSeenIt.present) {
-      map['has_seen_it'] = Variable<bool>(hasSeenIt.value);
+      map['has_seen_it'] = Variable<bool?>(hasSeenIt.value);
     }
     return map;
   }
@@ -1936,263 +1806,146 @@ class GradesCompanion extends UpdateCompanion<GradeLocalModel> {
 class $GradesTable extends Grades
     with TableInfo<$GradesTable, GradeLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $GradesTable(this._db, [this._alias]);
   final VerificationMeta _subjectIdMeta = const VerificationMeta('subjectId');
-  GeneratedIntColumn _subjectId;
+  GeneratedColumn<int>? _subjectId;
   @override
-  GeneratedIntColumn get subjectId => _subjectId ??= _constructSubjectId();
-  GeneratedIntColumn _constructSubjectId() {
-    return GeneratedIntColumn(
-      'subject_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get subjectId =>
+      _subjectId ??= GeneratedColumn<int>('subject_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _subjectDescMeta =
       const VerificationMeta('subjectDesc');
-  GeneratedTextColumn _subjectDesc;
+  GeneratedColumn<String>? _subjectDesc;
   @override
-  GeneratedTextColumn get subjectDesc =>
-      _subjectDesc ??= _constructSubjectDesc();
-  GeneratedTextColumn _constructSubjectDesc() {
-    return GeneratedTextColumn(
-      'subject_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get subjectDesc => _subjectDesc ??=
+      GeneratedColumn<String>('subject_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _evtIdMeta = const VerificationMeta('evtId');
-  GeneratedIntColumn _evtId;
+  GeneratedColumn<int>? _evtId;
   @override
-  GeneratedIntColumn get evtId => _evtId ??= _constructEvtId();
-  GeneratedIntColumn _constructEvtId() {
-    return GeneratedIntColumn(
-      'evt_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get evtId =>
+      _evtId ??= GeneratedColumn<int>('evt_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _evtCodeMeta = const VerificationMeta('evtCode');
-  GeneratedTextColumn _evtCode;
+  GeneratedColumn<String>? _evtCode;
   @override
-  GeneratedTextColumn get evtCode => _evtCode ??= _constructEvtCode();
-  GeneratedTextColumn _constructEvtCode() {
-    return GeneratedTextColumn(
-      'evt_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get evtCode =>
+      _evtCode ??= GeneratedColumn<String>('evt_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _eventDateMeta = const VerificationMeta('eventDate');
-  GeneratedDateTimeColumn _eventDate;
+  GeneratedColumn<DateTime>? _eventDate;
   @override
-  GeneratedDateTimeColumn get eventDate => _eventDate ??= _constructEventDate();
-  GeneratedDateTimeColumn _constructEventDate() {
-    return GeneratedDateTimeColumn(
-      'event_date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get eventDate =>
+      _eventDate ??= GeneratedColumn<DateTime>('event_date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _decimalValueMeta =
       const VerificationMeta('decimalValue');
-  GeneratedRealColumn _decimalValue;
+  GeneratedColumn<double>? _decimalValue;
   @override
-  GeneratedRealColumn get decimalValue =>
-      _decimalValue ??= _constructDecimalValue();
-  GeneratedRealColumn _constructDecimalValue() {
-    return GeneratedRealColumn(
-      'decimal_value',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<double> get decimalValue => _decimalValue ??=
+      GeneratedColumn<double>('decimal_value', aliasedName, false,
+          typeName: 'REAL', requiredDuringInsert: true);
   final VerificationMeta _displayValueMeta =
       const VerificationMeta('displayValue');
-  GeneratedTextColumn _displayValue;
+  GeneratedColumn<String>? _displayValue;
   @override
-  GeneratedTextColumn get displayValue =>
-      _displayValue ??= _constructDisplayValue();
-  GeneratedTextColumn _constructDisplayValue() {
-    return GeneratedTextColumn(
-      'display_value',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get displayValue => _displayValue ??=
+      GeneratedColumn<String>('display_value', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _displayPosMeta = const VerificationMeta('displayPos');
-  GeneratedIntColumn _displayPos;
+  GeneratedColumn<int>? _displayPos;
   @override
-  GeneratedIntColumn get displayPos => _displayPos ??= _constructDisplayPos();
-  GeneratedIntColumn _constructDisplayPos() {
-    return GeneratedIntColumn(
-      'display_pos',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get displayPos =>
+      _displayPos ??= GeneratedColumn<int>('display_pos', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _notesForFamilyMeta =
       const VerificationMeta('notesForFamily');
-  GeneratedTextColumn _notesForFamily;
+  GeneratedColumn<String>? _notesForFamily;
   @override
-  GeneratedTextColumn get notesForFamily =>
-      _notesForFamily ??= _constructNotesForFamily();
-  GeneratedTextColumn _constructNotesForFamily() {
-    return GeneratedTextColumn(
-      'notes_for_family',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get notesForFamily => _notesForFamily ??=
+      GeneratedColumn<String>('notes_for_family', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _cancelledMeta = const VerificationMeta('cancelled');
-  GeneratedBoolColumn _cancelled;
+  GeneratedColumn<bool>? _cancelled;
   @override
-  GeneratedBoolColumn get cancelled => _cancelled ??= _constructCancelled();
-  GeneratedBoolColumn _constructCancelled() {
-    return GeneratedBoolColumn(
-      'cancelled',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get cancelled =>
+      _cancelled ??= GeneratedColumn<bool>('cancelled', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (cancelled IN (0, 1))');
   final VerificationMeta _underlinedMeta = const VerificationMeta('underlined');
-  GeneratedBoolColumn _underlined;
+  GeneratedColumn<bool>? _underlined;
   @override
-  GeneratedBoolColumn get underlined => _underlined ??= _constructUnderlined();
-  GeneratedBoolColumn _constructUnderlined() {
-    return GeneratedBoolColumn(
-      'underlined',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get underlined =>
+      _underlined ??= GeneratedColumn<bool>('underlined', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (underlined IN (0, 1))');
   final VerificationMeta _periodPosMeta = const VerificationMeta('periodPos');
-  GeneratedIntColumn _periodPos;
+  GeneratedColumn<int>? _periodPos;
   @override
-  GeneratedIntColumn get periodPos => _periodPos ??= _constructPeriodPos();
-  GeneratedIntColumn _constructPeriodPos() {
-    return GeneratedIntColumn(
-      'period_pos',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get periodPos =>
+      _periodPos ??= GeneratedColumn<int>('period_pos', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _periodDescMeta = const VerificationMeta('periodDesc');
-  GeneratedTextColumn _periodDesc;
+  GeneratedColumn<String>? _periodDesc;
   @override
-  GeneratedTextColumn get periodDesc => _periodDesc ??= _constructPeriodDesc();
-  GeneratedTextColumn _constructPeriodDesc() {
-    return GeneratedTextColumn(
-      'period_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get periodDesc =>
+      _periodDesc ??= GeneratedColumn<String>('period_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _componentPosMeta =
       const VerificationMeta('componentPos');
-  GeneratedIntColumn _componentPos;
+  GeneratedColumn<int>? _componentPos;
   @override
-  GeneratedIntColumn get componentPos =>
-      _componentPos ??= _constructComponentPos();
-  GeneratedIntColumn _constructComponentPos() {
-    return GeneratedIntColumn(
-      'component_pos',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get componentPos => _componentPos ??=
+      GeneratedColumn<int>('component_pos', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _componentDescMeta =
       const VerificationMeta('componentDesc');
-  GeneratedTextColumn _componentDesc;
+  GeneratedColumn<String>? _componentDesc;
   @override
-  GeneratedTextColumn get componentDesc =>
-      _componentDesc ??= _constructComponentDesc();
-  GeneratedTextColumn _constructComponentDesc() {
-    return GeneratedTextColumn(
-      'component_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get componentDesc => _componentDesc ??=
+      GeneratedColumn<String>('component_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _weightFactorMeta =
       const VerificationMeta('weightFactor');
-  GeneratedIntColumn _weightFactor;
+  GeneratedColumn<int>? _weightFactor;
   @override
-  GeneratedIntColumn get weightFactor =>
-      _weightFactor ??= _constructWeightFactor();
-  GeneratedIntColumn _constructWeightFactor() {
-    return GeneratedIntColumn(
-      'weight_factor',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get weightFactor => _weightFactor ??=
+      GeneratedColumn<int>('weight_factor', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _skillIdMeta = const VerificationMeta('skillId');
-  GeneratedIntColumn _skillId;
+  GeneratedColumn<int>? _skillId;
   @override
-  GeneratedIntColumn get skillId => _skillId ??= _constructSkillId();
-  GeneratedIntColumn _constructSkillId() {
-    return GeneratedIntColumn(
-      'skill_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get skillId =>
+      _skillId ??= GeneratedColumn<int>('skill_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _gradeMasterIdMeta =
       const VerificationMeta('gradeMasterId');
-  GeneratedIntColumn _gradeMasterId;
+  GeneratedColumn<int>? _gradeMasterId;
   @override
-  GeneratedIntColumn get gradeMasterId =>
-      _gradeMasterId ??= _constructGradeMasterId();
-  GeneratedIntColumn _constructGradeMasterId() {
-    return GeneratedIntColumn(
-      'grade_master_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get gradeMasterId => _gradeMasterId ??=
+      GeneratedColumn<int>('grade_master_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _localllyCancelledMeta =
       const VerificationMeta('localllyCancelled');
-  GeneratedBoolColumn _localllyCancelled;
+  GeneratedColumn<bool>? _localllyCancelled;
   @override
-  GeneratedBoolColumn get localllyCancelled =>
-      _localllyCancelled ??= _constructLocalllyCancelled();
-  GeneratedBoolColumn _constructLocalllyCancelled() {
-    return GeneratedBoolColumn(
-      'locallly_cancelled',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get localllyCancelled => _localllyCancelled ??=
+      GeneratedColumn<bool>('locallly_cancelled', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (locallly_cancelled IN (0, 1))');
   final VerificationMeta _hasSeenItMeta = const VerificationMeta('hasSeenIt');
-  GeneratedBoolColumn _hasSeenIt;
+  GeneratedColumn<bool>? _hasSeenIt;
   @override
-  GeneratedBoolColumn get hasSeenIt => _hasSeenIt ??= _constructHasSeenIt();
-  GeneratedBoolColumn _constructHasSeenIt() {
-    return GeneratedBoolColumn('has_seen_it', $tableName, false,
-        defaultValue: const Constant(true));
-  }
-
+  GeneratedColumn<bool> get hasSeenIt =>
+      _hasSeenIt ??= GeneratedColumn<bool>('has_seen_it', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          defaultConstraints: 'CHECK (has_seen_it IN (0, 1))',
+          defaultValue: const Constant(true));
   @override
   List<GeneratedColumn> get $columns => [
         subjectId,
@@ -2217,11 +1970,9 @@ class $GradesTable extends Grades
         hasSeenIt
       ];
   @override
-  $GradesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'grades';
   @override
-  String get $tableName => _alias ?? 'grades';
-  @override
-  final String actualTableName = 'grades';
+  String get actualTableName => 'grades';
   @override
   VerificationContext validateIntegrity(Insertable<GradeLocalModel> instance,
       {bool isInserting = false}) {
@@ -2229,7 +1980,7 @@ class $GradesTable extends Grades
     final data = instance.toColumns(true);
     if (data.containsKey('subject_id')) {
       context.handle(_subjectIdMeta,
-          subjectId.isAcceptableOrUnknown(data['subject_id'], _subjectIdMeta));
+          subjectId.isAcceptableOrUnknown(data['subject_id']!, _subjectIdMeta));
     } else if (isInserting) {
       context.missing(_subjectIdMeta);
     }
@@ -2237,23 +1988,23 @@ class $GradesTable extends Grades
       context.handle(
           _subjectDescMeta,
           subjectDesc.isAcceptableOrUnknown(
-              data['subject_desc'], _subjectDescMeta));
+              data['subject_desc']!, _subjectDescMeta));
     } else if (isInserting) {
       context.missing(_subjectDescMeta);
     }
     if (data.containsKey('evt_id')) {
       context.handle(
-          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id'], _evtIdMeta));
+          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id']!, _evtIdMeta));
     }
     if (data.containsKey('evt_code')) {
       context.handle(_evtCodeMeta,
-          evtCode.isAcceptableOrUnknown(data['evt_code'], _evtCodeMeta));
+          evtCode.isAcceptableOrUnknown(data['evt_code']!, _evtCodeMeta));
     } else if (isInserting) {
       context.missing(_evtCodeMeta);
     }
     if (data.containsKey('event_date')) {
       context.handle(_eventDateMeta,
-          eventDate.isAcceptableOrUnknown(data['event_date'], _eventDateMeta));
+          eventDate.isAcceptableOrUnknown(data['event_date']!, _eventDateMeta));
     } else if (isInserting) {
       context.missing(_eventDateMeta);
     }
@@ -2261,7 +2012,7 @@ class $GradesTable extends Grades
       context.handle(
           _decimalValueMeta,
           decimalValue.isAcceptableOrUnknown(
-              data['decimal_value'], _decimalValueMeta));
+              data['decimal_value']!, _decimalValueMeta));
     } else if (isInserting) {
       context.missing(_decimalValueMeta);
     }
@@ -2269,7 +2020,7 @@ class $GradesTable extends Grades
       context.handle(
           _displayValueMeta,
           displayValue.isAcceptableOrUnknown(
-              data['display_value'], _displayValueMeta));
+              data['display_value']!, _displayValueMeta));
     } else if (isInserting) {
       context.missing(_displayValueMeta);
     }
@@ -2277,7 +2028,7 @@ class $GradesTable extends Grades
       context.handle(
           _displayPosMeta,
           displayPos.isAcceptableOrUnknown(
-              data['display_pos'], _displayPosMeta));
+              data['display_pos']!, _displayPosMeta));
     } else if (isInserting) {
       context.missing(_displayPosMeta);
     }
@@ -2285,13 +2036,13 @@ class $GradesTable extends Grades
       context.handle(
           _notesForFamilyMeta,
           notesForFamily.isAcceptableOrUnknown(
-              data['notes_for_family'], _notesForFamilyMeta));
+              data['notes_for_family']!, _notesForFamilyMeta));
     } else if (isInserting) {
       context.missing(_notesForFamilyMeta);
     }
     if (data.containsKey('cancelled')) {
       context.handle(_cancelledMeta,
-          cancelled.isAcceptableOrUnknown(data['cancelled'], _cancelledMeta));
+          cancelled.isAcceptableOrUnknown(data['cancelled']!, _cancelledMeta));
     } else if (isInserting) {
       context.missing(_cancelledMeta);
     }
@@ -2299,13 +2050,13 @@ class $GradesTable extends Grades
       context.handle(
           _underlinedMeta,
           underlined.isAcceptableOrUnknown(
-              data['underlined'], _underlinedMeta));
+              data['underlined']!, _underlinedMeta));
     } else if (isInserting) {
       context.missing(_underlinedMeta);
     }
     if (data.containsKey('period_pos')) {
       context.handle(_periodPosMeta,
-          periodPos.isAcceptableOrUnknown(data['period_pos'], _periodPosMeta));
+          periodPos.isAcceptableOrUnknown(data['period_pos']!, _periodPosMeta));
     } else if (isInserting) {
       context.missing(_periodPosMeta);
     }
@@ -2313,7 +2064,7 @@ class $GradesTable extends Grades
       context.handle(
           _periodDescMeta,
           periodDesc.isAcceptableOrUnknown(
-              data['period_desc'], _periodDescMeta));
+              data['period_desc']!, _periodDescMeta));
     } else if (isInserting) {
       context.missing(_periodDescMeta);
     }
@@ -2321,7 +2072,7 @@ class $GradesTable extends Grades
       context.handle(
           _componentPosMeta,
           componentPos.isAcceptableOrUnknown(
-              data['component_pos'], _componentPosMeta));
+              data['component_pos']!, _componentPosMeta));
     } else if (isInserting) {
       context.missing(_componentPosMeta);
     }
@@ -2329,7 +2080,7 @@ class $GradesTable extends Grades
       context.handle(
           _componentDescMeta,
           componentDesc.isAcceptableOrUnknown(
-              data['component_desc'], _componentDescMeta));
+              data['component_desc']!, _componentDescMeta));
     } else if (isInserting) {
       context.missing(_componentDescMeta);
     }
@@ -2337,13 +2088,13 @@ class $GradesTable extends Grades
       context.handle(
           _weightFactorMeta,
           weightFactor.isAcceptableOrUnknown(
-              data['weight_factor'], _weightFactorMeta));
+              data['weight_factor']!, _weightFactorMeta));
     } else if (isInserting) {
       context.missing(_weightFactorMeta);
     }
     if (data.containsKey('skill_id')) {
       context.handle(_skillIdMeta,
-          skillId.isAcceptableOrUnknown(data['skill_id'], _skillIdMeta));
+          skillId.isAcceptableOrUnknown(data['skill_id']!, _skillIdMeta));
     } else if (isInserting) {
       context.missing(_skillIdMeta);
     }
@@ -2351,7 +2102,7 @@ class $GradesTable extends Grades
       context.handle(
           _gradeMasterIdMeta,
           gradeMasterId.isAcceptableOrUnknown(
-              data['grade_master_id'], _gradeMasterIdMeta));
+              data['grade_master_id']!, _gradeMasterIdMeta));
     } else if (isInserting) {
       context.missing(_gradeMasterIdMeta);
     }
@@ -2359,13 +2110,15 @@ class $GradesTable extends Grades
       context.handle(
           _localllyCancelledMeta,
           localllyCancelled.isAcceptableOrUnknown(
-              data['locallly_cancelled'], _localllyCancelledMeta));
+              data['locallly_cancelled']!, _localllyCancelledMeta));
     } else if (isInserting) {
       context.missing(_localllyCancelledMeta);
     }
     if (data.containsKey('has_seen_it')) {
-      context.handle(_hasSeenItMeta,
-          hasSeenIt.isAcceptableOrUnknown(data['has_seen_it'], _hasSeenItMeta));
+      context.handle(
+          _hasSeenItMeta,
+          hasSeenIt.isAcceptableOrUnknown(
+              data['has_seen_it']!, _hasSeenItMeta));
     }
     return context;
   }
@@ -2373,9 +2126,9 @@ class $GradesTable extends Grades
   @override
   Set<GeneratedColumn> get $primaryKey => {evtId};
   @override
-  GradeLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return GradeLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  GradeLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return GradeLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -2386,109 +2139,107 @@ class $GradesTable extends Grades
 
 class AgendaEventLocalModel extends DataClass
     implements Insertable<AgendaEventLocalModel> {
-  final int evtId;
-  final String evtCode;
-  final DateTime begin;
-  final DateTime end;
-  final bool isFullDay;
-  final String notes;
-  final String authorName;
-  final String classDesc;
-  final int subjectId;
-  final String subjectDesc;
-  final bool isLocal;
-  final String labelColor;
-  final String title;
+  final int? evtId;
+  final String? evtCode;
+  final DateTime? begin;
+  final DateTime? end;
+  final bool? isFullDay;
+  final String? notes;
+  final String? authorName;
+  final String? classDesc;
+  final int? subjectId;
+  final String? subjectDesc;
+  final bool? isLocal;
+  final String? labelColor;
+  final String? title;
   AgendaEventLocalModel(
-      {@required this.evtId,
-      @required this.evtCode,
-      @required this.begin,
-      @required this.end,
-      @required this.isFullDay,
-      @required this.notes,
-      @required this.authorName,
-      @required this.classDesc,
-      @required this.subjectId,
-      @required this.subjectDesc,
-      @required this.isLocal,
-      @required this.labelColor,
-      @required this.title});
+      {required this.evtId,
+      required this.evtCode,
+      required this.begin,
+      required this.end,
+      required this.isFullDay,
+      required this.notes,
+      required this.authorName,
+      required this.classDesc,
+      required this.subjectId,
+      required this.subjectDesc,
+      required this.isLocal,
+      required this.labelColor,
+      required this.title});
   factory AgendaEventLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return AgendaEventLocalModel(
-      evtId: intType.mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
-      evtCode: stringType
+      evtId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
+      evtCode: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}evt_code']),
-      begin:
-          dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}begin']),
-      end: dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}end']),
-      isFullDay: boolType
+      begin: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}begin']),
+      end: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}end']),
+      isFullDay: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_full_day']),
-      notes:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}notes']),
-      authorName: stringType
+      notes: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}notes']),
+      authorName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}author_name']),
-      classDesc: stringType
+      classDesc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}class_desc']),
-      subjectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
-      subjectDesc: stringType
+      subjectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
+      subjectDesc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}subject_desc']),
-      isLocal:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}is_local']),
-      labelColor: stringType
+      isLocal: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_local']),
+      labelColor: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}label_color']),
-      title:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}title']),
+      title: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}title']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || evtId != null) {
-      map['evt_id'] = Variable<int>(evtId);
+      map['evt_id'] = Variable<int?>(evtId);
     }
     if (!nullToAbsent || evtCode != null) {
-      map['evt_code'] = Variable<String>(evtCode);
+      map['evt_code'] = Variable<String?>(evtCode);
     }
     if (!nullToAbsent || begin != null) {
-      map['begin'] = Variable<DateTime>(begin);
+      map['begin'] = Variable<DateTime?>(begin);
     }
     if (!nullToAbsent || end != null) {
-      map['end'] = Variable<DateTime>(end);
+      map['end'] = Variable<DateTime?>(end);
     }
     if (!nullToAbsent || isFullDay != null) {
-      map['is_full_day'] = Variable<bool>(isFullDay);
+      map['is_full_day'] = Variable<bool?>(isFullDay);
     }
     if (!nullToAbsent || notes != null) {
-      map['notes'] = Variable<String>(notes);
+      map['notes'] = Variable<String?>(notes);
     }
     if (!nullToAbsent || authorName != null) {
-      map['author_name'] = Variable<String>(authorName);
+      map['author_name'] = Variable<String?>(authorName);
     }
     if (!nullToAbsent || classDesc != null) {
-      map['class_desc'] = Variable<String>(classDesc);
+      map['class_desc'] = Variable<String?>(classDesc);
     }
     if (!nullToAbsent || subjectId != null) {
-      map['subject_id'] = Variable<int>(subjectId);
+      map['subject_id'] = Variable<int?>(subjectId);
     }
     if (!nullToAbsent || subjectDesc != null) {
-      map['subject_desc'] = Variable<String>(subjectDesc);
+      map['subject_desc'] = Variable<String?>(subjectDesc);
     }
     if (!nullToAbsent || isLocal != null) {
-      map['is_local'] = Variable<bool>(isLocal);
+      map['is_local'] = Variable<bool?>(isLocal);
     }
     if (!nullToAbsent || labelColor != null) {
-      map['label_color'] = Variable<String>(labelColor);
+      map['label_color'] = Variable<String?>(labelColor);
     }
     if (!nullToAbsent || title != null) {
-      map['title'] = Variable<String>(title);
+      map['title'] = Variable<String?>(title);
     }
     return map;
   }
@@ -2532,7 +2283,7 @@ class AgendaEventLocalModel extends DataClass
   }
 
   factory AgendaEventLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return AgendaEventLocalModel(
       evtId: serializer.fromJson<int>(json['evtId']),
@@ -2551,39 +2302,39 @@ class AgendaEventLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'evtId': serializer.toJson<int>(evtId),
-      'evtCode': serializer.toJson<String>(evtCode),
-      'begin': serializer.toJson<DateTime>(begin),
-      'end': serializer.toJson<DateTime>(end),
-      'isFullDay': serializer.toJson<bool>(isFullDay),
-      'notes': serializer.toJson<String>(notes),
-      'authorName': serializer.toJson<String>(authorName),
-      'classDesc': serializer.toJson<String>(classDesc),
-      'subjectId': serializer.toJson<int>(subjectId),
-      'subjectDesc': serializer.toJson<String>(subjectDesc),
-      'isLocal': serializer.toJson<bool>(isLocal),
-      'labelColor': serializer.toJson<String>(labelColor),
-      'title': serializer.toJson<String>(title),
+      'evtId': serializer.toJson<int?>(evtId),
+      'evtCode': serializer.toJson<String?>(evtCode),
+      'begin': serializer.toJson<DateTime?>(begin),
+      'end': serializer.toJson<DateTime?>(end),
+      'isFullDay': serializer.toJson<bool?>(isFullDay),
+      'notes': serializer.toJson<String?>(notes),
+      'authorName': serializer.toJson<String?>(authorName),
+      'classDesc': serializer.toJson<String?>(classDesc),
+      'subjectId': serializer.toJson<int?>(subjectId),
+      'subjectDesc': serializer.toJson<String?>(subjectDesc),
+      'isLocal': serializer.toJson<bool?>(isLocal),
+      'labelColor': serializer.toJson<String?>(labelColor),
+      'title': serializer.toJson<String?>(title),
     };
   }
 
   AgendaEventLocalModel copyWith(
-          {int evtId,
-          String evtCode,
-          DateTime begin,
-          DateTime end,
-          bool isFullDay,
-          String notes,
-          String authorName,
-          String classDesc,
-          int subjectId,
-          String subjectDesc,
-          bool isLocal,
-          String labelColor,
-          String title}) =>
+          {int? evtId,
+          String? evtCode,
+          DateTime? begin,
+          DateTime? end,
+          bool? isFullDay,
+          String? notes,
+          String? authorName,
+          String? classDesc,
+          int? subjectId,
+          String? subjectDesc,
+          bool? isLocal,
+          String? labelColor,
+          String? title}) =>
       AgendaEventLocalModel(
         evtId: evtId ?? this.evtId,
         evtCode: evtCode ?? this.evtCode,
@@ -2645,7 +2396,7 @@ class AgendaEventLocalModel extends DataClass
                                               $mrjc(labelColor.hashCode,
                                                   title.hashCode)))))))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AgendaEventLocalModel &&
           other.evtId == this.evtId &&
@@ -2665,19 +2416,19 @@ class AgendaEventLocalModel extends DataClass
 
 class AgendaEventsTableCompanion
     extends UpdateCompanion<AgendaEventLocalModel> {
-  final Value<int> evtId;
-  final Value<String> evtCode;
-  final Value<DateTime> begin;
-  final Value<DateTime> end;
-  final Value<bool> isFullDay;
-  final Value<String> notes;
-  final Value<String> authorName;
-  final Value<String> classDesc;
-  final Value<int> subjectId;
-  final Value<String> subjectDesc;
-  final Value<bool> isLocal;
-  final Value<String> labelColor;
-  final Value<String> title;
+  final Value<int?> evtId;
+  final Value<String?> evtCode;
+  final Value<DateTime?> begin;
+  final Value<DateTime?> end;
+  final Value<bool?> isFullDay;
+  final Value<String?> notes;
+  final Value<String?> authorName;
+  final Value<String?> classDesc;
+  final Value<int?> subjectId;
+  final Value<String?> subjectDesc;
+  final Value<bool?> isLocal;
+  final Value<String?> labelColor;
+  final Value<String?> title;
   const AgendaEventsTableCompanion({
     this.evtId = const Value.absent(),
     this.evtCode = const Value.absent(),
@@ -2695,18 +2446,18 @@ class AgendaEventsTableCompanion
   });
   AgendaEventsTableCompanion.insert({
     this.evtId = const Value.absent(),
-    @required String evtCode,
-    @required DateTime begin,
-    @required DateTime end,
-    @required bool isFullDay,
-    @required String notes,
-    @required String authorName,
-    @required String classDesc,
-    @required int subjectId,
-    @required String subjectDesc,
-    @required bool isLocal,
-    @required String labelColor,
-    @required String title,
+    required String evtCode,
+    required DateTime begin,
+    required DateTime end,
+    required bool isFullDay,
+    required String notes,
+    required String authorName,
+    required String classDesc,
+    required int subjectId,
+    required String subjectDesc,
+    required bool isLocal,
+    required String labelColor,
+    required String title,
   })  : evtCode = Value(evtCode),
         begin = Value(begin),
         end = Value(end),
@@ -2720,19 +2471,19 @@ class AgendaEventsTableCompanion
         labelColor = Value(labelColor),
         title = Value(title);
   static Insertable<AgendaEventLocalModel> custom({
-    Expression<int> evtId,
-    Expression<String> evtCode,
-    Expression<DateTime> begin,
-    Expression<DateTime> end,
-    Expression<bool> isFullDay,
-    Expression<String> notes,
-    Expression<String> authorName,
-    Expression<String> classDesc,
-    Expression<int> subjectId,
-    Expression<String> subjectDesc,
-    Expression<bool> isLocal,
-    Expression<String> labelColor,
-    Expression<String> title,
+    Expression<int>? evtId,
+    Expression<String>? evtCode,
+    Expression<DateTime>? begin,
+    Expression<DateTime>? end,
+    Expression<bool>? isFullDay,
+    Expression<String>? notes,
+    Expression<String>? authorName,
+    Expression<String>? classDesc,
+    Expression<int>? subjectId,
+    Expression<String>? subjectDesc,
+    Expression<bool>? isLocal,
+    Expression<String>? labelColor,
+    Expression<String>? title,
   }) {
     return RawValuesInsertable({
       if (evtId != null) 'evt_id': evtId,
@@ -2752,19 +2503,19 @@ class AgendaEventsTableCompanion
   }
 
   AgendaEventsTableCompanion copyWith(
-      {Value<int> evtId,
-      Value<String> evtCode,
-      Value<DateTime> begin,
-      Value<DateTime> end,
-      Value<bool> isFullDay,
-      Value<String> notes,
-      Value<String> authorName,
-      Value<String> classDesc,
-      Value<int> subjectId,
-      Value<String> subjectDesc,
-      Value<bool> isLocal,
-      Value<String> labelColor,
-      Value<String> title}) {
+      {Value<int>? evtId,
+      Value<String>? evtCode,
+      Value<DateTime>? begin,
+      Value<DateTime>? end,
+      Value<bool>? isFullDay,
+      Value<String>? notes,
+      Value<String>? authorName,
+      Value<String>? classDesc,
+      Value<int>? subjectId,
+      Value<String>? subjectDesc,
+      Value<bool>? isLocal,
+      Value<String>? labelColor,
+      Value<String>? title}) {
     return AgendaEventsTableCompanion(
       evtId: evtId ?? this.evtId,
       evtCode: evtCode ?? this.evtCode,
@@ -2786,43 +2537,43 @@ class AgendaEventsTableCompanion
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (evtId.present) {
-      map['evt_id'] = Variable<int>(evtId.value);
+      map['evt_id'] = Variable<int?>(evtId.value);
     }
     if (evtCode.present) {
-      map['evt_code'] = Variable<String>(evtCode.value);
+      map['evt_code'] = Variable<String?>(evtCode.value);
     }
     if (begin.present) {
-      map['begin'] = Variable<DateTime>(begin.value);
+      map['begin'] = Variable<DateTime?>(begin.value);
     }
     if (end.present) {
-      map['end'] = Variable<DateTime>(end.value);
+      map['end'] = Variable<DateTime?>(end.value);
     }
     if (isFullDay.present) {
-      map['is_full_day'] = Variable<bool>(isFullDay.value);
+      map['is_full_day'] = Variable<bool?>(isFullDay.value);
     }
     if (notes.present) {
-      map['notes'] = Variable<String>(notes.value);
+      map['notes'] = Variable<String?>(notes.value);
     }
     if (authorName.present) {
-      map['author_name'] = Variable<String>(authorName.value);
+      map['author_name'] = Variable<String?>(authorName.value);
     }
     if (classDesc.present) {
-      map['class_desc'] = Variable<String>(classDesc.value);
+      map['class_desc'] = Variable<String?>(classDesc.value);
     }
     if (subjectId.present) {
-      map['subject_id'] = Variable<int>(subjectId.value);
+      map['subject_id'] = Variable<int?>(subjectId.value);
     }
     if (subjectDesc.present) {
-      map['subject_desc'] = Variable<String>(subjectDesc.value);
+      map['subject_desc'] = Variable<String?>(subjectDesc.value);
     }
     if (isLocal.present) {
-      map['is_local'] = Variable<bool>(isLocal.value);
+      map['is_local'] = Variable<bool?>(isLocal.value);
     }
     if (labelColor.present) {
-      map['label_color'] = Variable<String>(labelColor.value);
+      map['label_color'] = Variable<String?>(labelColor.value);
     }
     if (title.present) {
-      map['title'] = Variable<String>(title.value);
+      map['title'] = Variable<String?>(title.value);
     }
     return map;
   }
@@ -2851,166 +2602,91 @@ class AgendaEventsTableCompanion
 class $AgendaEventsTableTable extends AgendaEventsTable
     with TableInfo<$AgendaEventsTableTable, AgendaEventLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $AgendaEventsTableTable(this._db, [this._alias]);
   final VerificationMeta _evtIdMeta = const VerificationMeta('evtId');
-  GeneratedIntColumn _evtId;
+  GeneratedColumn<int?>? _evtId;
   @override
-  GeneratedIntColumn get evtId => _evtId ??= _constructEvtId();
-  GeneratedIntColumn _constructEvtId() {
-    return GeneratedIntColumn(
-      'evt_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int?> get evtId =>
+      _evtId ??= GeneratedColumn<int?>('evt_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _evtCodeMeta = const VerificationMeta('evtCode');
-  GeneratedTextColumn _evtCode;
+  GeneratedColumn<String>? _evtCode;
   @override
-  GeneratedTextColumn get evtCode => _evtCode ??= _constructEvtCode();
-  GeneratedTextColumn _constructEvtCode() {
-    return GeneratedTextColumn(
-      'evt_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get evtCode =>
+      _evtCode ??= GeneratedColumn<String>('evt_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _beginMeta = const VerificationMeta('begin');
-  GeneratedDateTimeColumn _begin;
+  GeneratedColumn<DateTime>? _begin;
   @override
-  GeneratedDateTimeColumn get begin => _begin ??= _constructBegin();
-  GeneratedDateTimeColumn _constructBegin() {
-    return GeneratedDateTimeColumn(
-      'begin',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get begin =>
+      _begin ??= GeneratedColumn<DateTime>('begin', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _endMeta = const VerificationMeta('end');
-  GeneratedDateTimeColumn _end;
+  GeneratedColumn<DateTime>? _end;
   @override
-  GeneratedDateTimeColumn get end => _end ??= _constructEnd();
-  GeneratedDateTimeColumn _constructEnd() {
-    return GeneratedDateTimeColumn(
-      'end',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get end =>
+      _end ??= GeneratedColumn<DateTime>('end', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _isFullDayMeta = const VerificationMeta('isFullDay');
-  GeneratedBoolColumn _isFullDay;
+  GeneratedColumn<bool>? _isFullDay;
   @override
-  GeneratedBoolColumn get isFullDay => _isFullDay ??= _constructIsFullDay();
-  GeneratedBoolColumn _constructIsFullDay() {
-    return GeneratedBoolColumn(
-      'is_full_day',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get isFullDay =>
+      _isFullDay ??= GeneratedColumn<bool>('is_full_day', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (is_full_day IN (0, 1))');
   final VerificationMeta _notesMeta = const VerificationMeta('notes');
-  GeneratedTextColumn _notes;
+  GeneratedColumn<String>? _notes;
   @override
-  GeneratedTextColumn get notes => _notes ??= _constructNotes();
-  GeneratedTextColumn _constructNotes() {
-    return GeneratedTextColumn(
-      'notes',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get notes =>
+      _notes ??= GeneratedColumn<String>('notes', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _authorNameMeta = const VerificationMeta('authorName');
-  GeneratedTextColumn _authorName;
+  GeneratedColumn<String>? _authorName;
   @override
-  GeneratedTextColumn get authorName => _authorName ??= _constructAuthorName();
-  GeneratedTextColumn _constructAuthorName() {
-    return GeneratedTextColumn(
-      'author_name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get authorName =>
+      _authorName ??= GeneratedColumn<String>('author_name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _classDescMeta = const VerificationMeta('classDesc');
-  GeneratedTextColumn _classDesc;
+  GeneratedColumn<String>? _classDesc;
   @override
-  GeneratedTextColumn get classDesc => _classDesc ??= _constructClassDesc();
-  GeneratedTextColumn _constructClassDesc() {
-    return GeneratedTextColumn(
-      'class_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get classDesc =>
+      _classDesc ??= GeneratedColumn<String>('class_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _subjectIdMeta = const VerificationMeta('subjectId');
-  GeneratedIntColumn _subjectId;
+  GeneratedColumn<int>? _subjectId;
   @override
-  GeneratedIntColumn get subjectId => _subjectId ??= _constructSubjectId();
-  GeneratedIntColumn _constructSubjectId() {
-    return GeneratedIntColumn(
-      'subject_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get subjectId =>
+      _subjectId ??= GeneratedColumn<int>('subject_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _subjectDescMeta =
       const VerificationMeta('subjectDesc');
-  GeneratedTextColumn _subjectDesc;
+  GeneratedColumn<String>? _subjectDesc;
   @override
-  GeneratedTextColumn get subjectDesc =>
-      _subjectDesc ??= _constructSubjectDesc();
-  GeneratedTextColumn _constructSubjectDesc() {
-    return GeneratedTextColumn(
-      'subject_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get subjectDesc => _subjectDesc ??=
+      GeneratedColumn<String>('subject_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _isLocalMeta = const VerificationMeta('isLocal');
-  GeneratedBoolColumn _isLocal;
+  GeneratedColumn<bool>? _isLocal;
   @override
-  GeneratedBoolColumn get isLocal => _isLocal ??= _constructIsLocal();
-  GeneratedBoolColumn _constructIsLocal() {
-    return GeneratedBoolColumn(
-      'is_local',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get isLocal =>
+      _isLocal ??= GeneratedColumn<bool>('is_local', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (is_local IN (0, 1))');
   final VerificationMeta _labelColorMeta = const VerificationMeta('labelColor');
-  GeneratedTextColumn _labelColor;
+  GeneratedColumn<String>? _labelColor;
   @override
-  GeneratedTextColumn get labelColor => _labelColor ??= _constructLabelColor();
-  GeneratedTextColumn _constructLabelColor() {
-    return GeneratedTextColumn(
-      'label_color',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get labelColor =>
+      _labelColor ??= GeneratedColumn<String>('label_color', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _titleMeta = const VerificationMeta('title');
-  GeneratedTextColumn _title;
+  GeneratedColumn<String>? _title;
   @override
-  GeneratedTextColumn get title => _title ??= _constructTitle();
-  GeneratedTextColumn _constructTitle() {
-    return GeneratedTextColumn(
-      'title',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get title =>
+      _title ??= GeneratedColumn<String>('title', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         evtId,
@@ -3028,11 +2704,9 @@ class $AgendaEventsTableTable extends AgendaEventsTable
         title
       ];
   @override
-  $AgendaEventsTableTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'agenda_events';
   @override
-  String get $tableName => _alias ?? 'agenda_events';
-  @override
-  final String actualTableName = 'agenda_events';
+  String get actualTableName => 'agenda_events';
   @override
   VerificationContext validateIntegrity(
       Insertable<AgendaEventLocalModel> instance,
@@ -3041,35 +2715,37 @@ class $AgendaEventsTableTable extends AgendaEventsTable
     final data = instance.toColumns(true);
     if (data.containsKey('evt_id')) {
       context.handle(
-          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id'], _evtIdMeta));
+          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id']!, _evtIdMeta));
     }
     if (data.containsKey('evt_code')) {
       context.handle(_evtCodeMeta,
-          evtCode.isAcceptableOrUnknown(data['evt_code'], _evtCodeMeta));
+          evtCode.isAcceptableOrUnknown(data['evt_code']!, _evtCodeMeta));
     } else if (isInserting) {
       context.missing(_evtCodeMeta);
     }
     if (data.containsKey('begin')) {
       context.handle(
-          _beginMeta, begin.isAcceptableOrUnknown(data['begin'], _beginMeta));
+          _beginMeta, begin.isAcceptableOrUnknown(data['begin']!, _beginMeta));
     } else if (isInserting) {
       context.missing(_beginMeta);
     }
     if (data.containsKey('end')) {
       context.handle(
-          _endMeta, end.isAcceptableOrUnknown(data['end'], _endMeta));
+          _endMeta, end.isAcceptableOrUnknown(data['end']!, _endMeta));
     } else if (isInserting) {
       context.missing(_endMeta);
     }
     if (data.containsKey('is_full_day')) {
-      context.handle(_isFullDayMeta,
-          isFullDay.isAcceptableOrUnknown(data['is_full_day'], _isFullDayMeta));
+      context.handle(
+          _isFullDayMeta,
+          isFullDay.isAcceptableOrUnknown(
+              data['is_full_day']!, _isFullDayMeta));
     } else if (isInserting) {
       context.missing(_isFullDayMeta);
     }
     if (data.containsKey('notes')) {
       context.handle(
-          _notesMeta, notes.isAcceptableOrUnknown(data['notes'], _notesMeta));
+          _notesMeta, notes.isAcceptableOrUnknown(data['notes']!, _notesMeta));
     } else if (isInserting) {
       context.missing(_notesMeta);
     }
@@ -3077,19 +2753,19 @@ class $AgendaEventsTableTable extends AgendaEventsTable
       context.handle(
           _authorNameMeta,
           authorName.isAcceptableOrUnknown(
-              data['author_name'], _authorNameMeta));
+              data['author_name']!, _authorNameMeta));
     } else if (isInserting) {
       context.missing(_authorNameMeta);
     }
     if (data.containsKey('class_desc')) {
       context.handle(_classDescMeta,
-          classDesc.isAcceptableOrUnknown(data['class_desc'], _classDescMeta));
+          classDesc.isAcceptableOrUnknown(data['class_desc']!, _classDescMeta));
     } else if (isInserting) {
       context.missing(_classDescMeta);
     }
     if (data.containsKey('subject_id')) {
       context.handle(_subjectIdMeta,
-          subjectId.isAcceptableOrUnknown(data['subject_id'], _subjectIdMeta));
+          subjectId.isAcceptableOrUnknown(data['subject_id']!, _subjectIdMeta));
     } else if (isInserting) {
       context.missing(_subjectIdMeta);
     }
@@ -3097,13 +2773,13 @@ class $AgendaEventsTableTable extends AgendaEventsTable
       context.handle(
           _subjectDescMeta,
           subjectDesc.isAcceptableOrUnknown(
-              data['subject_desc'], _subjectDescMeta));
+              data['subject_desc']!, _subjectDescMeta));
     } else if (isInserting) {
       context.missing(_subjectDescMeta);
     }
     if (data.containsKey('is_local')) {
       context.handle(_isLocalMeta,
-          isLocal.isAcceptableOrUnknown(data['is_local'], _isLocalMeta));
+          isLocal.isAcceptableOrUnknown(data['is_local']!, _isLocalMeta));
     } else if (isInserting) {
       context.missing(_isLocalMeta);
     }
@@ -3111,13 +2787,13 @@ class $AgendaEventsTableTable extends AgendaEventsTable
       context.handle(
           _labelColorMeta,
           labelColor.isAcceptableOrUnknown(
-              data['label_color'], _labelColorMeta));
+              data['label_color']!, _labelColorMeta));
     } else if (isInserting) {
       context.missing(_labelColorMeta);
     }
     if (data.containsKey('title')) {
       context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title'], _titleMeta));
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
@@ -3127,9 +2803,9 @@ class $AgendaEventsTableTable extends AgendaEventsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {evtId};
   @override
-  AgendaEventLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return AgendaEventLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  AgendaEventLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return AgendaEventLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3139,45 +2815,42 @@ class $AgendaEventsTableTable extends AgendaEventsTable
 }
 
 class Absence extends DataClass implements Insertable<Absence> {
-  final int evtId;
-  final String evtCode;
-  final DateTime evtDate;
-  final int evtHPos;
-  final int evtValue;
-  final bool isJustified;
-  final String justifiedReasonCode;
-  final String justifReasonDesc;
+  final int? evtId;
+  final String? evtCode;
+  final DateTime? evtDate;
+  final int? evtHPos;
+  final int? evtValue;
+  final bool? isJustified;
+  final String? justifiedReasonCode;
+  final String? justifReasonDesc;
   Absence(
-      {@required this.evtId,
-      @required this.evtCode,
-      @required this.evtDate,
-      @required this.evtHPos,
-      @required this.evtValue,
-      @required this.isJustified,
-      @required this.justifiedReasonCode,
-      @required this.justifReasonDesc});
+      {required this.evtId,
+      required this.evtCode,
+      required this.evtDate,
+      required this.evtHPos,
+      required this.evtValue,
+      required this.isJustified,
+      required this.justifiedReasonCode,
+      required this.justifReasonDesc});
   factory Absence.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return Absence(
-      evtId: intType.mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
-      evtCode: stringType
+      evtId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}evt_id']),
+      evtCode: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}evt_code']),
-      evtDate: dateTimeType
+      evtDate: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}evt_date']),
-      evtHPos:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}evt_h_pos']),
-      evtValue:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}evt_value']),
-      isJustified: boolType
+      evtHPos: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}evt_h_pos']),
+      evtValue: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}evt_value']),
+      isJustified: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_justified']),
-      justifiedReasonCode: stringType.mapFromDatabaseResponse(
+      justifiedReasonCode: const StringType().mapFromDatabaseResponse(
           data['${effectivePrefix}justified_reason_code']),
-      justifReasonDesc: stringType.mapFromDatabaseResponse(
+      justifReasonDesc: const StringType().mapFromDatabaseResponse(
           data['${effectivePrefix}justif_reason_desc']),
     );
   }
@@ -3185,28 +2858,28 @@ class Absence extends DataClass implements Insertable<Absence> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || evtId != null) {
-      map['evt_id'] = Variable<int>(evtId);
+      map['evt_id'] = Variable<int?>(evtId);
     }
     if (!nullToAbsent || evtCode != null) {
-      map['evt_code'] = Variable<String>(evtCode);
+      map['evt_code'] = Variable<String?>(evtCode);
     }
     if (!nullToAbsent || evtDate != null) {
-      map['evt_date'] = Variable<DateTime>(evtDate);
+      map['evt_date'] = Variable<DateTime?>(evtDate);
     }
     if (!nullToAbsent || evtHPos != null) {
-      map['evt_h_pos'] = Variable<int>(evtHPos);
+      map['evt_h_pos'] = Variable<int?>(evtHPos);
     }
     if (!nullToAbsent || evtValue != null) {
-      map['evt_value'] = Variable<int>(evtValue);
+      map['evt_value'] = Variable<int?>(evtValue);
     }
     if (!nullToAbsent || isJustified != null) {
-      map['is_justified'] = Variable<bool>(isJustified);
+      map['is_justified'] = Variable<bool?>(isJustified);
     }
     if (!nullToAbsent || justifiedReasonCode != null) {
-      map['justified_reason_code'] = Variable<String>(justifiedReasonCode);
+      map['justified_reason_code'] = Variable<String?>(justifiedReasonCode);
     }
     if (!nullToAbsent || justifReasonDesc != null) {
-      map['justif_reason_desc'] = Variable<String>(justifReasonDesc);
+      map['justif_reason_desc'] = Variable<String?>(justifReasonDesc);
     }
     return map;
   }
@@ -3240,7 +2913,7 @@ class Absence extends DataClass implements Insertable<Absence> {
   }
 
   factory Absence.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Absence(
       evtId: serializer.fromJson<int>(json['evtId']),
@@ -3255,29 +2928,29 @@ class Absence extends DataClass implements Insertable<Absence> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'evtId': serializer.toJson<int>(evtId),
-      'evtCode': serializer.toJson<String>(evtCode),
-      'evtDate': serializer.toJson<DateTime>(evtDate),
-      'evtHPos': serializer.toJson<int>(evtHPos),
-      'evtValue': serializer.toJson<int>(evtValue),
-      'isJustified': serializer.toJson<bool>(isJustified),
-      'justifiedReasonCode': serializer.toJson<String>(justifiedReasonCode),
-      'justifReasonDesc': serializer.toJson<String>(justifReasonDesc),
+      'evtId': serializer.toJson<int?>(evtId),
+      'evtCode': serializer.toJson<String?>(evtCode),
+      'evtDate': serializer.toJson<DateTime?>(evtDate),
+      'evtHPos': serializer.toJson<int?>(evtHPos),
+      'evtValue': serializer.toJson<int?>(evtValue),
+      'isJustified': serializer.toJson<bool?>(isJustified),
+      'justifiedReasonCode': serializer.toJson<String?>(justifiedReasonCode),
+      'justifReasonDesc': serializer.toJson<String?>(justifReasonDesc),
     };
   }
 
   Absence copyWith(
-          {int evtId,
-          String evtCode,
-          DateTime evtDate,
-          int evtHPos,
-          int evtValue,
-          bool isJustified,
-          String justifiedReasonCode,
-          String justifReasonDesc}) =>
+          {int? evtId,
+          String? evtCode,
+          DateTime? evtDate,
+          int? evtHPos,
+          int? evtValue,
+          bool? isJustified,
+          String? justifiedReasonCode,
+          String? justifReasonDesc}) =>
       Absence(
         evtId: evtId ?? this.evtId,
         evtCode: evtCode ?? this.evtCode,
@@ -3319,7 +2992,7 @@ class Absence extends DataClass implements Insertable<Absence> {
                           $mrjc(justifiedReasonCode.hashCode,
                               justifReasonDesc.hashCode))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Absence &&
           other.evtId == this.evtId &&
@@ -3333,14 +3006,14 @@ class Absence extends DataClass implements Insertable<Absence> {
 }
 
 class AbsencesCompanion extends UpdateCompanion<Absence> {
-  final Value<int> evtId;
-  final Value<String> evtCode;
-  final Value<DateTime> evtDate;
-  final Value<int> evtHPos;
-  final Value<int> evtValue;
-  final Value<bool> isJustified;
-  final Value<String> justifiedReasonCode;
-  final Value<String> justifReasonDesc;
+  final Value<int?> evtId;
+  final Value<String?> evtCode;
+  final Value<DateTime?> evtDate;
+  final Value<int?> evtHPos;
+  final Value<int?> evtValue;
+  final Value<bool?> isJustified;
+  final Value<String?> justifiedReasonCode;
+  final Value<String?> justifReasonDesc;
   const AbsencesCompanion({
     this.evtId = const Value.absent(),
     this.evtCode = const Value.absent(),
@@ -3353,13 +3026,13 @@ class AbsencesCompanion extends UpdateCompanion<Absence> {
   });
   AbsencesCompanion.insert({
     this.evtId = const Value.absent(),
-    @required String evtCode,
-    @required DateTime evtDate,
-    @required int evtHPos,
-    @required int evtValue,
-    @required bool isJustified,
-    @required String justifiedReasonCode,
-    @required String justifReasonDesc,
+    required String evtCode,
+    required DateTime evtDate,
+    required int evtHPos,
+    required int evtValue,
+    required bool isJustified,
+    required String justifiedReasonCode,
+    required String justifReasonDesc,
   })  : evtCode = Value(evtCode),
         evtDate = Value(evtDate),
         evtHPos = Value(evtHPos),
@@ -3368,14 +3041,14 @@ class AbsencesCompanion extends UpdateCompanion<Absence> {
         justifiedReasonCode = Value(justifiedReasonCode),
         justifReasonDesc = Value(justifReasonDesc);
   static Insertable<Absence> custom({
-    Expression<int> evtId,
-    Expression<String> evtCode,
-    Expression<DateTime> evtDate,
-    Expression<int> evtHPos,
-    Expression<int> evtValue,
-    Expression<bool> isJustified,
-    Expression<String> justifiedReasonCode,
-    Expression<String> justifReasonDesc,
+    Expression<int>? evtId,
+    Expression<String>? evtCode,
+    Expression<DateTime>? evtDate,
+    Expression<int>? evtHPos,
+    Expression<int>? evtValue,
+    Expression<bool>? isJustified,
+    Expression<String>? justifiedReasonCode,
+    Expression<String>? justifReasonDesc,
   }) {
     return RawValuesInsertable({
       if (evtId != null) 'evt_id': evtId,
@@ -3391,14 +3064,14 @@ class AbsencesCompanion extends UpdateCompanion<Absence> {
   }
 
   AbsencesCompanion copyWith(
-      {Value<int> evtId,
-      Value<String> evtCode,
-      Value<DateTime> evtDate,
-      Value<int> evtHPos,
-      Value<int> evtValue,
-      Value<bool> isJustified,
-      Value<String> justifiedReasonCode,
-      Value<String> justifReasonDesc}) {
+      {Value<int>? evtId,
+      Value<String>? evtCode,
+      Value<DateTime>? evtDate,
+      Value<int>? evtHPos,
+      Value<int>? evtValue,
+      Value<bool>? isJustified,
+      Value<String>? justifiedReasonCode,
+      Value<String>? justifReasonDesc}) {
     return AbsencesCompanion(
       evtId: evtId ?? this.evtId,
       evtCode: evtCode ?? this.evtCode,
@@ -3415,29 +3088,29 @@ class AbsencesCompanion extends UpdateCompanion<Absence> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (evtId.present) {
-      map['evt_id'] = Variable<int>(evtId.value);
+      map['evt_id'] = Variable<int?>(evtId.value);
     }
     if (evtCode.present) {
-      map['evt_code'] = Variable<String>(evtCode.value);
+      map['evt_code'] = Variable<String?>(evtCode.value);
     }
     if (evtDate.present) {
-      map['evt_date'] = Variable<DateTime>(evtDate.value);
+      map['evt_date'] = Variable<DateTime?>(evtDate.value);
     }
     if (evtHPos.present) {
-      map['evt_h_pos'] = Variable<int>(evtHPos.value);
+      map['evt_h_pos'] = Variable<int?>(evtHPos.value);
     }
     if (evtValue.present) {
-      map['evt_value'] = Variable<int>(evtValue.value);
+      map['evt_value'] = Variable<int?>(evtValue.value);
     }
     if (isJustified.present) {
-      map['is_justified'] = Variable<bool>(isJustified.value);
+      map['is_justified'] = Variable<bool?>(isJustified.value);
     }
     if (justifiedReasonCode.present) {
       map['justified_reason_code'] =
-          Variable<String>(justifiedReasonCode.value);
+          Variable<String?>(justifiedReasonCode.value);
     }
     if (justifReasonDesc.present) {
-      map['justif_reason_desc'] = Variable<String>(justifReasonDesc.value);
+      map['justif_reason_desc'] = Variable<String?>(justifReasonDesc.value);
     }
     return map;
   }
@@ -3460,110 +3133,61 @@ class AbsencesCompanion extends UpdateCompanion<Absence> {
 
 class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $AbsencesTable(this._db, [this._alias]);
   final VerificationMeta _evtIdMeta = const VerificationMeta('evtId');
-  GeneratedIntColumn _evtId;
+  GeneratedColumn<int>? _evtId;
   @override
-  GeneratedIntColumn get evtId => _evtId ??= _constructEvtId();
-  GeneratedIntColumn _constructEvtId() {
-    return GeneratedIntColumn(
-      'evt_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get evtId =>
+      _evtId ??= GeneratedColumn<int>('evt_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _evtCodeMeta = const VerificationMeta('evtCode');
-  GeneratedTextColumn _evtCode;
+  GeneratedColumn<String>? _evtCode;
   @override
-  GeneratedTextColumn get evtCode => _evtCode ??= _constructEvtCode();
-  GeneratedTextColumn _constructEvtCode() {
-    return GeneratedTextColumn(
-      'evt_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get evtCode =>
+      _evtCode ??= GeneratedColumn<String>('evt_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _evtDateMeta = const VerificationMeta('evtDate');
-  GeneratedDateTimeColumn _evtDate;
+  GeneratedColumn<DateTime>? _evtDate;
   @override
-  GeneratedDateTimeColumn get evtDate => _evtDate ??= _constructEvtDate();
-  GeneratedDateTimeColumn _constructEvtDate() {
-    return GeneratedDateTimeColumn(
-      'evt_date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get evtDate =>
+      _evtDate ??= GeneratedColumn<DateTime>('evt_date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _evtHPosMeta = const VerificationMeta('evtHPos');
-  GeneratedIntColumn _evtHPos;
+  GeneratedColumn<int>? _evtHPos;
   @override
-  GeneratedIntColumn get evtHPos => _evtHPos ??= _constructEvtHPos();
-  GeneratedIntColumn _constructEvtHPos() {
-    return GeneratedIntColumn(
-      'evt_h_pos',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get evtHPos =>
+      _evtHPos ??= GeneratedColumn<int>('evt_h_pos', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _evtValueMeta = const VerificationMeta('evtValue');
-  GeneratedIntColumn _evtValue;
+  GeneratedColumn<int>? _evtValue;
   @override
-  GeneratedIntColumn get evtValue => _evtValue ??= _constructEvtValue();
-  GeneratedIntColumn _constructEvtValue() {
-    return GeneratedIntColumn(
-      'evt_value',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get evtValue =>
+      _evtValue ??= GeneratedColumn<int>('evt_value', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _isJustifiedMeta =
       const VerificationMeta('isJustified');
-  GeneratedBoolColumn _isJustified;
+  GeneratedColumn<bool>? _isJustified;
   @override
-  GeneratedBoolColumn get isJustified =>
-      _isJustified ??= _constructIsJustified();
-  GeneratedBoolColumn _constructIsJustified() {
-    return GeneratedBoolColumn(
-      'is_justified',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get isJustified =>
+      _isJustified ??= GeneratedColumn<bool>('is_justified', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (is_justified IN (0, 1))');
   final VerificationMeta _justifiedReasonCodeMeta =
       const VerificationMeta('justifiedReasonCode');
-  GeneratedTextColumn _justifiedReasonCode;
+  GeneratedColumn<String>? _justifiedReasonCode;
   @override
-  GeneratedTextColumn get justifiedReasonCode =>
-      _justifiedReasonCode ??= _constructJustifiedReasonCode();
-  GeneratedTextColumn _constructJustifiedReasonCode() {
-    return GeneratedTextColumn(
-      'justified_reason_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get justifiedReasonCode => _justifiedReasonCode ??=
+      GeneratedColumn<String>('justified_reason_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _justifReasonDescMeta =
       const VerificationMeta('justifReasonDesc');
-  GeneratedTextColumn _justifReasonDesc;
+  GeneratedColumn<String>? _justifReasonDesc;
   @override
-  GeneratedTextColumn get justifReasonDesc =>
-      _justifReasonDesc ??= _constructJustifReasonDesc();
-  GeneratedTextColumn _constructJustifReasonDesc() {
-    return GeneratedTextColumn(
-      'justif_reason_desc',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get justifReasonDesc => _justifReasonDesc ??=
+      GeneratedColumn<String>('justif_reason_desc', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         evtId,
@@ -3576,11 +3200,9 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
         justifReasonDesc
       ];
   @override
-  $AbsencesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'absences';
   @override
-  String get $tableName => _alias ?? 'absences';
-  @override
-  final String actualTableName = 'absences';
+  String get actualTableName => 'absences';
   @override
   VerificationContext validateIntegrity(Insertable<Absence> instance,
       {bool isInserting = false}) {
@@ -3588,29 +3210,29 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
     final data = instance.toColumns(true);
     if (data.containsKey('evt_id')) {
       context.handle(
-          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id'], _evtIdMeta));
+          _evtIdMeta, evtId.isAcceptableOrUnknown(data['evt_id']!, _evtIdMeta));
     }
     if (data.containsKey('evt_code')) {
       context.handle(_evtCodeMeta,
-          evtCode.isAcceptableOrUnknown(data['evt_code'], _evtCodeMeta));
+          evtCode.isAcceptableOrUnknown(data['evt_code']!, _evtCodeMeta));
     } else if (isInserting) {
       context.missing(_evtCodeMeta);
     }
     if (data.containsKey('evt_date')) {
       context.handle(_evtDateMeta,
-          evtDate.isAcceptableOrUnknown(data['evt_date'], _evtDateMeta));
+          evtDate.isAcceptableOrUnknown(data['evt_date']!, _evtDateMeta));
     } else if (isInserting) {
       context.missing(_evtDateMeta);
     }
     if (data.containsKey('evt_h_pos')) {
       context.handle(_evtHPosMeta,
-          evtHPos.isAcceptableOrUnknown(data['evt_h_pos'], _evtHPosMeta));
+          evtHPos.isAcceptableOrUnknown(data['evt_h_pos']!, _evtHPosMeta));
     } else if (isInserting) {
       context.missing(_evtHPosMeta);
     }
     if (data.containsKey('evt_value')) {
       context.handle(_evtValueMeta,
-          evtValue.isAcceptableOrUnknown(data['evt_value'], _evtValueMeta));
+          evtValue.isAcceptableOrUnknown(data['evt_value']!, _evtValueMeta));
     } else if (isInserting) {
       context.missing(_evtValueMeta);
     }
@@ -3618,7 +3240,7 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
       context.handle(
           _isJustifiedMeta,
           isJustified.isAcceptableOrUnknown(
-              data['is_justified'], _isJustifiedMeta));
+              data['is_justified']!, _isJustifiedMeta));
     } else if (isInserting) {
       context.missing(_isJustifiedMeta);
     }
@@ -3626,7 +3248,7 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
       context.handle(
           _justifiedReasonCodeMeta,
           justifiedReasonCode.isAcceptableOrUnknown(
-              data['justified_reason_code'], _justifiedReasonCodeMeta));
+              data['justified_reason_code']!, _justifiedReasonCodeMeta));
     } else if (isInserting) {
       context.missing(_justifiedReasonCodeMeta);
     }
@@ -3634,7 +3256,7 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
       context.handle(
           _justifReasonDescMeta,
           justifReasonDesc.isAcceptableOrUnknown(
-              data['justif_reason_desc'], _justifReasonDescMeta));
+              data['justif_reason_desc']!, _justifReasonDescMeta));
     } else if (isInserting) {
       context.missing(_justifReasonDescMeta);
     }
@@ -3644,9 +3266,9 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
   @override
   Set<GeneratedColumn> get $primaryKey => {evtId};
   @override
-  Absence map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Absence.fromData(data, _db, prefix: effectivePrefix);
+  Absence map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Absence.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -3657,45 +3279,43 @@ class $AbsencesTable extends Absences with TableInfo<$AbsencesTable, Absence> {
 
 class PeriodLocalModel extends DataClass
     implements Insertable<PeriodLocalModel> {
-  final String code;
-  final int position;
-  final String description;
-  final bool isFinal;
-  final DateTime start;
-  final DateTime end;
-  final String miurDivisionCode;
-  final int periodIndex;
+  final String? code;
+  final int? position;
+  final String? description;
+  final bool? isFinal;
+  final DateTime? start;
+  final DateTime? end;
+  final String? miurDivisionCode;
+  final int? periodIndex;
   PeriodLocalModel(
-      {@required this.code,
-      @required this.position,
-      @required this.description,
-      @required this.isFinal,
-      @required this.start,
-      @required this.end,
-      @required this.miurDivisionCode,
-      @required this.periodIndex});
+      {required this.code,
+      required this.position,
+      required this.description,
+      required this.isFinal,
+      required this.start,
+      required this.end,
+      required this.miurDivisionCode,
+      required this.periodIndex});
   factory PeriodLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
-    final intType = db.typeSystem.forDartType<int>();
-    final boolType = db.typeSystem.forDartType<bool>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
     return PeriodLocalModel(
-      code: stringType.mapFromDatabaseResponse(data['${effectivePrefix}code']),
-      position:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}position']),
-      description: stringType
+      code: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}code']),
+      position: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}position']),
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
-      isFinal:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}is_final']),
-      start:
-          dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}start']),
-      end: dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}end']),
-      miurDivisionCode: stringType.mapFromDatabaseResponse(
+      isFinal: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_final']),
+      start: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}start']),
+      end: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}end']),
+      miurDivisionCode: const StringType().mapFromDatabaseResponse(
           data['${effectivePrefix}miur_division_code']),
-      periodIndex: intType
+      periodIndex: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}period_index']),
     );
   }
@@ -3703,28 +3323,28 @@ class PeriodLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || code != null) {
-      map['code'] = Variable<String>(code);
+      map['code'] = Variable<String?>(code);
     }
     if (!nullToAbsent || position != null) {
-      map['position'] = Variable<int>(position);
+      map['position'] = Variable<int?>(position);
     }
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     if (!nullToAbsent || isFinal != null) {
-      map['is_final'] = Variable<bool>(isFinal);
+      map['is_final'] = Variable<bool?>(isFinal);
     }
     if (!nullToAbsent || start != null) {
-      map['start'] = Variable<DateTime>(start);
+      map['start'] = Variable<DateTime?>(start);
     }
     if (!nullToAbsent || end != null) {
-      map['end'] = Variable<DateTime>(end);
+      map['end'] = Variable<DateTime?>(end);
     }
     if (!nullToAbsent || miurDivisionCode != null) {
-      map['miur_division_code'] = Variable<String>(miurDivisionCode);
+      map['miur_division_code'] = Variable<String?>(miurDivisionCode);
     }
     if (!nullToAbsent || periodIndex != null) {
-      map['period_index'] = Variable<int>(periodIndex);
+      map['period_index'] = Variable<int?>(periodIndex);
     }
     return map;
   }
@@ -3754,7 +3374,7 @@ class PeriodLocalModel extends DataClass
   }
 
   factory PeriodLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return PeriodLocalModel(
       code: serializer.fromJson<String>(json['code']),
@@ -3768,29 +3388,29 @@ class PeriodLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'code': serializer.toJson<String>(code),
-      'position': serializer.toJson<int>(position),
-      'description': serializer.toJson<String>(description),
-      'isFinal': serializer.toJson<bool>(isFinal),
-      'start': serializer.toJson<DateTime>(start),
-      'end': serializer.toJson<DateTime>(end),
-      'miurDivisionCode': serializer.toJson<String>(miurDivisionCode),
-      'periodIndex': serializer.toJson<int>(periodIndex),
+      'code': serializer.toJson<String?>(code),
+      'position': serializer.toJson<int?>(position),
+      'description': serializer.toJson<String?>(description),
+      'isFinal': serializer.toJson<bool?>(isFinal),
+      'start': serializer.toJson<DateTime?>(start),
+      'end': serializer.toJson<DateTime?>(end),
+      'miurDivisionCode': serializer.toJson<String?>(miurDivisionCode),
+      'periodIndex': serializer.toJson<int?>(periodIndex),
     };
   }
 
   PeriodLocalModel copyWith(
-          {String code,
-          int position,
-          String description,
-          bool isFinal,
-          DateTime start,
-          DateTime end,
-          String miurDivisionCode,
-          int periodIndex}) =>
+          {String? code,
+          int? position,
+          String? description,
+          bool? isFinal,
+          DateTime? start,
+          DateTime? end,
+          String? miurDivisionCode,
+          int? periodIndex}) =>
       PeriodLocalModel(
         code: code ?? this.code,
         position: position ?? this.position,
@@ -3832,7 +3452,7 @@ class PeriodLocalModel extends DataClass
                           $mrjc(miurDivisionCode.hashCode,
                               periodIndex.hashCode))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is PeriodLocalModel &&
           other.code == this.code &&
@@ -3846,14 +3466,14 @@ class PeriodLocalModel extends DataClass
 }
 
 class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
-  final Value<String> code;
-  final Value<int> position;
-  final Value<String> description;
-  final Value<bool> isFinal;
-  final Value<DateTime> start;
-  final Value<DateTime> end;
-  final Value<String> miurDivisionCode;
-  final Value<int> periodIndex;
+  final Value<String?> code;
+  final Value<int?> position;
+  final Value<String?> description;
+  final Value<bool?> isFinal;
+  final Value<DateTime?> start;
+  final Value<DateTime?> end;
+  final Value<String?> miurDivisionCode;
+  final Value<int?> periodIndex;
   const PeriodsCompanion({
     this.code = const Value.absent(),
     this.position = const Value.absent(),
@@ -3865,14 +3485,14 @@ class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
     this.periodIndex = const Value.absent(),
   });
   PeriodsCompanion.insert({
-    @required String code,
-    @required int position,
-    @required String description,
-    @required bool isFinal,
-    @required DateTime start,
-    @required DateTime end,
-    @required String miurDivisionCode,
-    @required int periodIndex,
+    required String code,
+    required int position,
+    required String description,
+    required bool isFinal,
+    required DateTime start,
+    required DateTime end,
+    required String miurDivisionCode,
+    required int periodIndex,
   })  : code = Value(code),
         position = Value(position),
         description = Value(description),
@@ -3882,14 +3502,14 @@ class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
         miurDivisionCode = Value(miurDivisionCode),
         periodIndex = Value(periodIndex);
   static Insertable<PeriodLocalModel> custom({
-    Expression<String> code,
-    Expression<int> position,
-    Expression<String> description,
-    Expression<bool> isFinal,
-    Expression<DateTime> start,
-    Expression<DateTime> end,
-    Expression<String> miurDivisionCode,
-    Expression<int> periodIndex,
+    Expression<String>? code,
+    Expression<int>? position,
+    Expression<String>? description,
+    Expression<bool>? isFinal,
+    Expression<DateTime>? start,
+    Expression<DateTime>? end,
+    Expression<String>? miurDivisionCode,
+    Expression<int>? periodIndex,
   }) {
     return RawValuesInsertable({
       if (code != null) 'code': code,
@@ -3904,14 +3524,14 @@ class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
   }
 
   PeriodsCompanion copyWith(
-      {Value<String> code,
-      Value<int> position,
-      Value<String> description,
-      Value<bool> isFinal,
-      Value<DateTime> start,
-      Value<DateTime> end,
-      Value<String> miurDivisionCode,
-      Value<int> periodIndex}) {
+      {Value<String>? code,
+      Value<int>? position,
+      Value<String>? description,
+      Value<bool>? isFinal,
+      Value<DateTime>? start,
+      Value<DateTime>? end,
+      Value<String>? miurDivisionCode,
+      Value<int>? periodIndex}) {
     return PeriodsCompanion(
       code: code ?? this.code,
       position: position ?? this.position,
@@ -3928,28 +3548,28 @@ class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (code.present) {
-      map['code'] = Variable<String>(code.value);
+      map['code'] = Variable<String?>(code.value);
     }
     if (position.present) {
-      map['position'] = Variable<int>(position.value);
+      map['position'] = Variable<int?>(position.value);
     }
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     if (isFinal.present) {
-      map['is_final'] = Variable<bool>(isFinal.value);
+      map['is_final'] = Variable<bool?>(isFinal.value);
     }
     if (start.present) {
-      map['start'] = Variable<DateTime>(start.value);
+      map['start'] = Variable<DateTime?>(start.value);
     }
     if (end.present) {
-      map['end'] = Variable<DateTime>(end.value);
+      map['end'] = Variable<DateTime?>(end.value);
     }
     if (miurDivisionCode.present) {
-      map['miur_division_code'] = Variable<String>(miurDivisionCode.value);
+      map['miur_division_code'] = Variable<String?>(miurDivisionCode.value);
     }
     if (periodIndex.present) {
-      map['period_index'] = Variable<int>(periodIndex.value);
+      map['period_index'] = Variable<int?>(periodIndex.value);
     }
     return map;
   }
@@ -3973,110 +3593,61 @@ class PeriodsCompanion extends UpdateCompanion<PeriodLocalModel> {
 class $PeriodsTable extends Periods
     with TableInfo<$PeriodsTable, PeriodLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $PeriodsTable(this._db, [this._alias]);
   final VerificationMeta _codeMeta = const VerificationMeta('code');
-  GeneratedTextColumn _code;
+  GeneratedColumn<String>? _code;
   @override
-  GeneratedTextColumn get code => _code ??= _constructCode();
-  GeneratedTextColumn _constructCode() {
-    return GeneratedTextColumn(
-      'code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get code =>
+      _code ??= GeneratedColumn<String>('code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _positionMeta = const VerificationMeta('position');
-  GeneratedIntColumn _position;
+  GeneratedColumn<int>? _position;
   @override
-  GeneratedIntColumn get position => _position ??= _constructPosition();
-  GeneratedIntColumn _constructPosition() {
-    return GeneratedIntColumn(
-      'position',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get position =>
+      _position ??= GeneratedColumn<int>('position', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  GeneratedColumn<String>? _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get description => _description ??=
+      GeneratedColumn<String>('description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _isFinalMeta = const VerificationMeta('isFinal');
-  GeneratedBoolColumn _isFinal;
+  GeneratedColumn<bool>? _isFinal;
   @override
-  GeneratedBoolColumn get isFinal => _isFinal ??= _constructIsFinal();
-  GeneratedBoolColumn _constructIsFinal() {
-    return GeneratedBoolColumn(
-      'is_final',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get isFinal =>
+      _isFinal ??= GeneratedColumn<bool>('is_final', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (is_final IN (0, 1))');
   final VerificationMeta _startMeta = const VerificationMeta('start');
-  GeneratedDateTimeColumn _start;
+  GeneratedColumn<DateTime>? _start;
   @override
-  GeneratedDateTimeColumn get start => _start ??= _constructStart();
-  GeneratedDateTimeColumn _constructStart() {
-    return GeneratedDateTimeColumn(
-      'start',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get start =>
+      _start ??= GeneratedColumn<DateTime>('start', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _endMeta = const VerificationMeta('end');
-  GeneratedDateTimeColumn _end;
+  GeneratedColumn<DateTime>? _end;
   @override
-  GeneratedDateTimeColumn get end => _end ??= _constructEnd();
-  GeneratedDateTimeColumn _constructEnd() {
-    return GeneratedDateTimeColumn(
-      'end',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get end =>
+      _end ??= GeneratedColumn<DateTime>('end', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _miurDivisionCodeMeta =
       const VerificationMeta('miurDivisionCode');
-  GeneratedTextColumn _miurDivisionCode;
+  GeneratedColumn<String>? _miurDivisionCode;
   @override
-  GeneratedTextColumn get miurDivisionCode =>
-      _miurDivisionCode ??= _constructMiurDivisionCode();
-  GeneratedTextColumn _constructMiurDivisionCode() {
-    return GeneratedTextColumn(
-      'miur_division_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get miurDivisionCode => _miurDivisionCode ??=
+      GeneratedColumn<String>('miur_division_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _periodIndexMeta =
       const VerificationMeta('periodIndex');
-  GeneratedIntColumn _periodIndex;
+  GeneratedColumn<int>? _periodIndex;
   @override
-  GeneratedIntColumn get periodIndex =>
-      _periodIndex ??= _constructPeriodIndex();
-  GeneratedIntColumn _constructPeriodIndex() {
-    return GeneratedIntColumn(
-      'period_index',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get periodIndex =>
+      _periodIndex ??= GeneratedColumn<int>('period_index', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         code,
@@ -4089,11 +3660,9 @@ class $PeriodsTable extends Periods
         periodIndex
       ];
   @override
-  $PeriodsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'periods';
   @override
-  String get $tableName => _alias ?? 'periods';
-  @override
-  final String actualTableName = 'periods';
+  String get actualTableName => 'periods';
   @override
   VerificationContext validateIntegrity(Insertable<PeriodLocalModel> instance,
       {bool isInserting = false}) {
@@ -4101,13 +3670,13 @@ class $PeriodsTable extends Periods
     final data = instance.toColumns(true);
     if (data.containsKey('code')) {
       context.handle(
-          _codeMeta, code.isAcceptableOrUnknown(data['code'], _codeMeta));
+          _codeMeta, code.isAcceptableOrUnknown(data['code']!, _codeMeta));
     } else if (isInserting) {
       context.missing(_codeMeta);
     }
     if (data.containsKey('position')) {
       context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position'], _positionMeta));
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
@@ -4115,25 +3684,25 @@ class $PeriodsTable extends Periods
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
     if (data.containsKey('is_final')) {
       context.handle(_isFinalMeta,
-          isFinal.isAcceptableOrUnknown(data['is_final'], _isFinalMeta));
+          isFinal.isAcceptableOrUnknown(data['is_final']!, _isFinalMeta));
     } else if (isInserting) {
       context.missing(_isFinalMeta);
     }
     if (data.containsKey('start')) {
       context.handle(
-          _startMeta, start.isAcceptableOrUnknown(data['start'], _startMeta));
+          _startMeta, start.isAcceptableOrUnknown(data['start']!, _startMeta));
     } else if (isInserting) {
       context.missing(_startMeta);
     }
     if (data.containsKey('end')) {
       context.handle(
-          _endMeta, end.isAcceptableOrUnknown(data['end'], _endMeta));
+          _endMeta, end.isAcceptableOrUnknown(data['end']!, _endMeta));
     } else if (isInserting) {
       context.missing(_endMeta);
     }
@@ -4141,7 +3710,7 @@ class $PeriodsTable extends Periods
       context.handle(
           _miurDivisionCodeMeta,
           miurDivisionCode.isAcceptableOrUnknown(
-              data['miur_division_code'], _miurDivisionCodeMeta));
+              data['miur_division_code']!, _miurDivisionCodeMeta));
     } else if (isInserting) {
       context.missing(_miurDivisionCodeMeta);
     }
@@ -4149,7 +3718,7 @@ class $PeriodsTable extends Periods
       context.handle(
           _periodIndexMeta,
           periodIndex.isAcceptableOrUnknown(
-              data['period_index'], _periodIndexMeta));
+              data['period_index']!, _periodIndexMeta));
     } else if (isInserting) {
       context.missing(_periodIndexMeta);
     }
@@ -4159,9 +3728,9 @@ class $PeriodsTable extends Periods
   @override
   Set<GeneratedColumn> get $primaryKey => {start, end};
   @override
-  PeriodLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return PeriodLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  PeriodLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return PeriodLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -4172,131 +3741,128 @@ class $PeriodsTable extends Periods
 
 class NoticeLocalModel extends DataClass
     implements Insertable<NoticeLocalModel> {
-  final int pubId;
-  final DateTime pubDate;
-  final bool readStatus;
-  final String eventCode;
-  final int contentId;
-  final DateTime contentValidFrom;
-  final DateTime contentValidTo;
-  final bool contentValidInRange;
-  final String contentStatus;
-  final String contentTitle;
-  final String contentCategory;
-  final bool contentHasChanged;
-  final bool contentHasAttach;
-  final bool needJoin;
-  final bool needReply;
-  final bool needFile;
+  final int? pubId;
+  final DateTime? pubDate;
+  final bool? readStatus;
+  final String? eventCode;
+  final int? contentId;
+  final DateTime? contentValidFrom;
+  final DateTime? contentValidTo;
+  final bool? contentValidInRange;
+  final String? contentStatus;
+  final String? contentTitle;
+  final String? contentCategory;
+  final bool? contentHasChanged;
+  final bool? contentHasAttach;
+  final bool? needJoin;
+  final bool? needReply;
+  final bool? needFile;
   NoticeLocalModel(
-      {@required this.pubId,
-      @required this.pubDate,
-      @required this.readStatus,
-      @required this.eventCode,
-      @required this.contentId,
-      @required this.contentValidFrom,
-      @required this.contentValidTo,
-      @required this.contentValidInRange,
-      @required this.contentStatus,
-      @required this.contentTitle,
-      @required this.contentCategory,
-      @required this.contentHasChanged,
-      @required this.contentHasAttach,
-      @required this.needJoin,
-      @required this.needReply,
-      @required this.needFile});
+      {required this.pubId,
+      required this.pubDate,
+      required this.readStatus,
+      required this.eventCode,
+      required this.contentId,
+      required this.contentValidFrom,
+      required this.contentValidTo,
+      required this.contentValidInRange,
+      required this.contentStatus,
+      required this.contentTitle,
+      required this.contentCategory,
+      required this.contentHasChanged,
+      required this.contentHasAttach,
+      required this.needJoin,
+      required this.needReply,
+      required this.needFile});
   factory NoticeLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final boolType = db.typeSystem.forDartType<bool>();
-    final stringType = db.typeSystem.forDartType<String>();
     return NoticeLocalModel(
-      pubId: intType.mapFromDatabaseResponse(data['${effectivePrefix}pub_id']),
-      pubDate: dateTimeType
+      pubId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}pub_id']),
+      pubDate: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}pub_date']),
-      readStatus: boolType
+      readStatus: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}read_status']),
-      eventCode: stringType
+      eventCode: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_code']),
-      contentId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}content_id']),
-      contentValidFrom: dateTimeType.mapFromDatabaseResponse(
+      contentId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}content_id']),
+      contentValidFrom: const DateTimeType().mapFromDatabaseResponse(
           data['${effectivePrefix}content_valid_from']),
-      contentValidTo: dateTimeType
+      contentValidTo: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}content_valid_to']),
-      contentValidInRange: boolType.mapFromDatabaseResponse(
+      contentValidInRange: const BoolType().mapFromDatabaseResponse(
           data['${effectivePrefix}content_valid_in_range']),
-      contentStatus: stringType
+      contentStatus: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}content_status']),
-      contentTitle: stringType
+      contentTitle: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}content_title']),
-      contentCategory: stringType
+      contentCategory: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}content_category']),
-      contentHasChanged: boolType.mapFromDatabaseResponse(
+      contentHasChanged: const BoolType().mapFromDatabaseResponse(
           data['${effectivePrefix}content_has_changed']),
-      contentHasAttach: boolType.mapFromDatabaseResponse(
+      contentHasAttach: const BoolType().mapFromDatabaseResponse(
           data['${effectivePrefix}content_has_attach']),
-      needJoin:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}need_join']),
-      needReply: boolType
+      needJoin: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}need_join']),
+      needReply: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}need_reply']),
-      needFile:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}need_file']),
+      needFile: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}need_file']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || pubId != null) {
-      map['pub_id'] = Variable<int>(pubId);
+      map['pub_id'] = Variable<int?>(pubId);
     }
     if (!nullToAbsent || pubDate != null) {
-      map['pub_date'] = Variable<DateTime>(pubDate);
+      map['pub_date'] = Variable<DateTime?>(pubDate);
     }
     if (!nullToAbsent || readStatus != null) {
-      map['read_status'] = Variable<bool>(readStatus);
+      map['read_status'] = Variable<bool?>(readStatus);
     }
     if (!nullToAbsent || eventCode != null) {
-      map['event_code'] = Variable<String>(eventCode);
+      map['event_code'] = Variable<String?>(eventCode);
     }
     if (!nullToAbsent || contentId != null) {
-      map['content_id'] = Variable<int>(contentId);
+      map['content_id'] = Variable<int?>(contentId);
     }
     if (!nullToAbsent || contentValidFrom != null) {
-      map['content_valid_from'] = Variable<DateTime>(contentValidFrom);
+      map['content_valid_from'] = Variable<DateTime?>(contentValidFrom);
     }
     if (!nullToAbsent || contentValidTo != null) {
-      map['content_valid_to'] = Variable<DateTime>(contentValidTo);
+      map['content_valid_to'] = Variable<DateTime?>(contentValidTo);
     }
     if (!nullToAbsent || contentValidInRange != null) {
-      map['content_valid_in_range'] = Variable<bool>(contentValidInRange);
+      map['content_valid_in_range'] = Variable<bool?>(contentValidInRange);
     }
     if (!nullToAbsent || contentStatus != null) {
-      map['content_status'] = Variable<String>(contentStatus);
+      map['content_status'] = Variable<String?>(contentStatus);
     }
     if (!nullToAbsent || contentTitle != null) {
-      map['content_title'] = Variable<String>(contentTitle);
+      map['content_title'] = Variable<String?>(contentTitle);
     }
     if (!nullToAbsent || contentCategory != null) {
-      map['content_category'] = Variable<String>(contentCategory);
+      map['content_category'] = Variable<String?>(contentCategory);
     }
     if (!nullToAbsent || contentHasChanged != null) {
-      map['content_has_changed'] = Variable<bool>(contentHasChanged);
+      map['content_has_changed'] = Variable<bool?>(contentHasChanged);
     }
     if (!nullToAbsent || contentHasAttach != null) {
-      map['content_has_attach'] = Variable<bool>(contentHasAttach);
+      map['content_has_attach'] = Variable<bool?>(contentHasAttach);
     }
     if (!nullToAbsent || needJoin != null) {
-      map['need_join'] = Variable<bool>(needJoin);
+      map['need_join'] = Variable<bool?>(needJoin);
     }
     if (!nullToAbsent || needReply != null) {
-      map['need_reply'] = Variable<bool>(needReply);
+      map['need_reply'] = Variable<bool?>(needReply);
     }
     if (!nullToAbsent || needFile != null) {
-      map['need_file'] = Variable<bool>(needFile);
+      map['need_file'] = Variable<bool?>(needFile);
     }
     return map;
   }
@@ -4354,7 +3920,7 @@ class NoticeLocalModel extends DataClass
   }
 
   factory NoticeLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return NoticeLocalModel(
       pubId: serializer.fromJson<int>(json['pubId']),
@@ -4377,45 +3943,45 @@ class NoticeLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'pubId': serializer.toJson<int>(pubId),
-      'pubDate': serializer.toJson<DateTime>(pubDate),
-      'readStatus': serializer.toJson<bool>(readStatus),
-      'eventCode': serializer.toJson<String>(eventCode),
-      'contentId': serializer.toJson<int>(contentId),
-      'contentValidFrom': serializer.toJson<DateTime>(contentValidFrom),
-      'contentValidTo': serializer.toJson<DateTime>(contentValidTo),
-      'contentValidInRange': serializer.toJson<bool>(contentValidInRange),
-      'contentStatus': serializer.toJson<String>(contentStatus),
-      'contentTitle': serializer.toJson<String>(contentTitle),
-      'contentCategory': serializer.toJson<String>(contentCategory),
-      'contentHasChanged': serializer.toJson<bool>(contentHasChanged),
-      'contentHasAttach': serializer.toJson<bool>(contentHasAttach),
-      'needJoin': serializer.toJson<bool>(needJoin),
-      'needReply': serializer.toJson<bool>(needReply),
-      'needFile': serializer.toJson<bool>(needFile),
+      'pubId': serializer.toJson<int?>(pubId),
+      'pubDate': serializer.toJson<DateTime?>(pubDate),
+      'readStatus': serializer.toJson<bool?>(readStatus),
+      'eventCode': serializer.toJson<String?>(eventCode),
+      'contentId': serializer.toJson<int?>(contentId),
+      'contentValidFrom': serializer.toJson<DateTime?>(contentValidFrom),
+      'contentValidTo': serializer.toJson<DateTime?>(contentValidTo),
+      'contentValidInRange': serializer.toJson<bool?>(contentValidInRange),
+      'contentStatus': serializer.toJson<String?>(contentStatus),
+      'contentTitle': serializer.toJson<String?>(contentTitle),
+      'contentCategory': serializer.toJson<String?>(contentCategory),
+      'contentHasChanged': serializer.toJson<bool?>(contentHasChanged),
+      'contentHasAttach': serializer.toJson<bool?>(contentHasAttach),
+      'needJoin': serializer.toJson<bool?>(needJoin),
+      'needReply': serializer.toJson<bool?>(needReply),
+      'needFile': serializer.toJson<bool?>(needFile),
     };
   }
 
   NoticeLocalModel copyWith(
-          {int pubId,
-          DateTime pubDate,
-          bool readStatus,
-          String eventCode,
-          int contentId,
-          DateTime contentValidFrom,
-          DateTime contentValidTo,
-          bool contentValidInRange,
-          String contentStatus,
-          String contentTitle,
-          String contentCategory,
-          bool contentHasChanged,
-          bool contentHasAttach,
-          bool needJoin,
-          bool needReply,
-          bool needFile}) =>
+          {int? pubId,
+          DateTime? pubDate,
+          bool? readStatus,
+          String? eventCode,
+          int? contentId,
+          DateTime? contentValidFrom,
+          DateTime? contentValidTo,
+          bool? contentValidInRange,
+          String? contentStatus,
+          String? contentTitle,
+          String? contentCategory,
+          bool? contentHasChanged,
+          bool? contentHasAttach,
+          bool? needJoin,
+          bool? needReply,
+          bool? needFile}) =>
       NoticeLocalModel(
         pubId: pubId ?? this.pubId,
         pubDate: pubDate ?? this.pubDate,
@@ -4492,7 +4058,7 @@ class NoticeLocalModel extends DataClass
                                                               needFile
                                                                   .hashCode))))))))))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is NoticeLocalModel &&
           other.pubId == this.pubId &&
@@ -4514,22 +4080,22 @@ class NoticeLocalModel extends DataClass
 }
 
 class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
-  final Value<int> pubId;
-  final Value<DateTime> pubDate;
-  final Value<bool> readStatus;
-  final Value<String> eventCode;
-  final Value<int> contentId;
-  final Value<DateTime> contentValidFrom;
-  final Value<DateTime> contentValidTo;
-  final Value<bool> contentValidInRange;
-  final Value<String> contentStatus;
-  final Value<String> contentTitle;
-  final Value<String> contentCategory;
-  final Value<bool> contentHasChanged;
-  final Value<bool> contentHasAttach;
-  final Value<bool> needJoin;
-  final Value<bool> needReply;
-  final Value<bool> needFile;
+  final Value<int?> pubId;
+  final Value<DateTime?> pubDate;
+  final Value<bool?> readStatus;
+  final Value<String?> eventCode;
+  final Value<int?> contentId;
+  final Value<DateTime?> contentValidFrom;
+  final Value<DateTime?> contentValidTo;
+  final Value<bool?> contentValidInRange;
+  final Value<String?> contentStatus;
+  final Value<String?> contentTitle;
+  final Value<String?> contentCategory;
+  final Value<bool?> contentHasChanged;
+  final Value<bool?> contentHasAttach;
+  final Value<bool?> needJoin;
+  final Value<bool?> needReply;
+  final Value<bool?> needFile;
   const NoticesCompanion({
     this.pubId = const Value.absent(),
     this.pubDate = const Value.absent(),
@@ -4550,21 +4116,21 @@ class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
   });
   NoticesCompanion.insert({
     this.pubId = const Value.absent(),
-    @required DateTime pubDate,
-    @required bool readStatus,
-    @required String eventCode,
-    @required int contentId,
-    @required DateTime contentValidFrom,
-    @required DateTime contentValidTo,
-    @required bool contentValidInRange,
-    @required String contentStatus,
-    @required String contentTitle,
-    @required String contentCategory,
-    @required bool contentHasChanged,
-    @required bool contentHasAttach,
-    @required bool needJoin,
-    @required bool needReply,
-    @required bool needFile,
+    required DateTime pubDate,
+    required bool readStatus,
+    required String eventCode,
+    required int contentId,
+    required DateTime contentValidFrom,
+    required DateTime contentValidTo,
+    required bool contentValidInRange,
+    required String contentStatus,
+    required String contentTitle,
+    required String contentCategory,
+    required bool contentHasChanged,
+    required bool contentHasAttach,
+    required bool needJoin,
+    required bool needReply,
+    required bool needFile,
   })  : pubDate = Value(pubDate),
         readStatus = Value(readStatus),
         eventCode = Value(eventCode),
@@ -4581,22 +4147,22 @@ class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
         needReply = Value(needReply),
         needFile = Value(needFile);
   static Insertable<NoticeLocalModel> custom({
-    Expression<int> pubId,
-    Expression<DateTime> pubDate,
-    Expression<bool> readStatus,
-    Expression<String> eventCode,
-    Expression<int> contentId,
-    Expression<DateTime> contentValidFrom,
-    Expression<DateTime> contentValidTo,
-    Expression<bool> contentValidInRange,
-    Expression<String> contentStatus,
-    Expression<String> contentTitle,
-    Expression<String> contentCategory,
-    Expression<bool> contentHasChanged,
-    Expression<bool> contentHasAttach,
-    Expression<bool> needJoin,
-    Expression<bool> needReply,
-    Expression<bool> needFile,
+    Expression<int>? pubId,
+    Expression<DateTime>? pubDate,
+    Expression<bool>? readStatus,
+    Expression<String>? eventCode,
+    Expression<int>? contentId,
+    Expression<DateTime>? contentValidFrom,
+    Expression<DateTime>? contentValidTo,
+    Expression<bool>? contentValidInRange,
+    Expression<String>? contentStatus,
+    Expression<String>? contentTitle,
+    Expression<String>? contentCategory,
+    Expression<bool>? contentHasChanged,
+    Expression<bool>? contentHasAttach,
+    Expression<bool>? needJoin,
+    Expression<bool>? needReply,
+    Expression<bool>? needFile,
   }) {
     return RawValuesInsertable({
       if (pubId != null) 'pub_id': pubId,
@@ -4620,22 +4186,22 @@ class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
   }
 
   NoticesCompanion copyWith(
-      {Value<int> pubId,
-      Value<DateTime> pubDate,
-      Value<bool> readStatus,
-      Value<String> eventCode,
-      Value<int> contentId,
-      Value<DateTime> contentValidFrom,
-      Value<DateTime> contentValidTo,
-      Value<bool> contentValidInRange,
-      Value<String> contentStatus,
-      Value<String> contentTitle,
-      Value<String> contentCategory,
-      Value<bool> contentHasChanged,
-      Value<bool> contentHasAttach,
-      Value<bool> needJoin,
-      Value<bool> needReply,
-      Value<bool> needFile}) {
+      {Value<int>? pubId,
+      Value<DateTime>? pubDate,
+      Value<bool>? readStatus,
+      Value<String>? eventCode,
+      Value<int>? contentId,
+      Value<DateTime>? contentValidFrom,
+      Value<DateTime>? contentValidTo,
+      Value<bool>? contentValidInRange,
+      Value<String>? contentStatus,
+      Value<String>? contentTitle,
+      Value<String>? contentCategory,
+      Value<bool>? contentHasChanged,
+      Value<bool>? contentHasAttach,
+      Value<bool>? needJoin,
+      Value<bool>? needReply,
+      Value<bool>? needFile}) {
     return NoticesCompanion(
       pubId: pubId ?? this.pubId,
       pubDate: pubDate ?? this.pubDate,
@@ -4660,52 +4226,53 @@ class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (pubId.present) {
-      map['pub_id'] = Variable<int>(pubId.value);
+      map['pub_id'] = Variable<int?>(pubId.value);
     }
     if (pubDate.present) {
-      map['pub_date'] = Variable<DateTime>(pubDate.value);
+      map['pub_date'] = Variable<DateTime?>(pubDate.value);
     }
     if (readStatus.present) {
-      map['read_status'] = Variable<bool>(readStatus.value);
+      map['read_status'] = Variable<bool?>(readStatus.value);
     }
     if (eventCode.present) {
-      map['event_code'] = Variable<String>(eventCode.value);
+      map['event_code'] = Variable<String?>(eventCode.value);
     }
     if (contentId.present) {
-      map['content_id'] = Variable<int>(contentId.value);
+      map['content_id'] = Variable<int?>(contentId.value);
     }
     if (contentValidFrom.present) {
-      map['content_valid_from'] = Variable<DateTime>(contentValidFrom.value);
+      map['content_valid_from'] = Variable<DateTime?>(contentValidFrom.value);
     }
     if (contentValidTo.present) {
-      map['content_valid_to'] = Variable<DateTime>(contentValidTo.value);
+      map['content_valid_to'] = Variable<DateTime?>(contentValidTo.value);
     }
     if (contentValidInRange.present) {
-      map['content_valid_in_range'] = Variable<bool>(contentValidInRange.value);
+      map['content_valid_in_range'] =
+          Variable<bool?>(contentValidInRange.value);
     }
     if (contentStatus.present) {
-      map['content_status'] = Variable<String>(contentStatus.value);
+      map['content_status'] = Variable<String?>(contentStatus.value);
     }
     if (contentTitle.present) {
-      map['content_title'] = Variable<String>(contentTitle.value);
+      map['content_title'] = Variable<String?>(contentTitle.value);
     }
     if (contentCategory.present) {
-      map['content_category'] = Variable<String>(contentCategory.value);
+      map['content_category'] = Variable<String?>(contentCategory.value);
     }
     if (contentHasChanged.present) {
-      map['content_has_changed'] = Variable<bool>(contentHasChanged.value);
+      map['content_has_changed'] = Variable<bool?>(contentHasChanged.value);
     }
     if (contentHasAttach.present) {
-      map['content_has_attach'] = Variable<bool>(contentHasAttach.value);
+      map['content_has_attach'] = Variable<bool?>(contentHasAttach.value);
     }
     if (needJoin.present) {
-      map['need_join'] = Variable<bool>(needJoin.value);
+      map['need_join'] = Variable<bool?>(needJoin.value);
     }
     if (needReply.present) {
-      map['need_reply'] = Variable<bool>(needReply.value);
+      map['need_reply'] = Variable<bool?>(needReply.value);
     }
     if (needFile.present) {
-      map['need_file'] = Variable<bool>(needFile.value);
+      map['need_file'] = Variable<bool?>(needFile.value);
     }
     return map;
   }
@@ -4737,216 +4304,126 @@ class NoticesCompanion extends UpdateCompanion<NoticeLocalModel> {
 class $NoticesTable extends Notices
     with TableInfo<$NoticesTable, NoticeLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $NoticesTable(this._db, [this._alias]);
   final VerificationMeta _pubIdMeta = const VerificationMeta('pubId');
-  GeneratedIntColumn _pubId;
+  GeneratedColumn<int>? _pubId;
   @override
-  GeneratedIntColumn get pubId => _pubId ??= _constructPubId();
-  GeneratedIntColumn _constructPubId() {
-    return GeneratedIntColumn(
-      'pub_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get pubId =>
+      _pubId ??= GeneratedColumn<int>('pub_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _pubDateMeta = const VerificationMeta('pubDate');
-  GeneratedDateTimeColumn _pubDate;
+  GeneratedColumn<DateTime>? _pubDate;
   @override
-  GeneratedDateTimeColumn get pubDate => _pubDate ??= _constructPubDate();
-  GeneratedDateTimeColumn _constructPubDate() {
-    return GeneratedDateTimeColumn(
-      'pub_date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get pubDate =>
+      _pubDate ??= GeneratedColumn<DateTime>('pub_date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _readStatusMeta = const VerificationMeta('readStatus');
-  GeneratedBoolColumn _readStatus;
+  GeneratedColumn<bool>? _readStatus;
   @override
-  GeneratedBoolColumn get readStatus => _readStatus ??= _constructReadStatus();
-  GeneratedBoolColumn _constructReadStatus() {
-    return GeneratedBoolColumn(
-      'read_status',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get readStatus =>
+      _readStatus ??= GeneratedColumn<bool>('read_status', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (read_status IN (0, 1))');
   final VerificationMeta _eventCodeMeta = const VerificationMeta('eventCode');
-  GeneratedTextColumn _eventCode;
+  GeneratedColumn<String>? _eventCode;
   @override
-  GeneratedTextColumn get eventCode => _eventCode ??= _constructEventCode();
-  GeneratedTextColumn _constructEventCode() {
-    return GeneratedTextColumn(
-      'event_code',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get eventCode =>
+      _eventCode ??= GeneratedColumn<String>('event_code', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _contentIdMeta = const VerificationMeta('contentId');
-  GeneratedIntColumn _contentId;
+  GeneratedColumn<int>? _contentId;
   @override
-  GeneratedIntColumn get contentId => _contentId ??= _constructContentId();
-  GeneratedIntColumn _constructContentId() {
-    return GeneratedIntColumn(
-      'content_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get contentId =>
+      _contentId ??= GeneratedColumn<int>('content_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _contentValidFromMeta =
       const VerificationMeta('contentValidFrom');
-  GeneratedDateTimeColumn _contentValidFrom;
+  GeneratedColumn<DateTime>? _contentValidFrom;
   @override
-  GeneratedDateTimeColumn get contentValidFrom =>
-      _contentValidFrom ??= _constructContentValidFrom();
-  GeneratedDateTimeColumn _constructContentValidFrom() {
-    return GeneratedDateTimeColumn(
-      'content_valid_from',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get contentValidFrom => _contentValidFrom ??=
+      GeneratedColumn<DateTime>('content_valid_from', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _contentValidToMeta =
       const VerificationMeta('contentValidTo');
-  GeneratedDateTimeColumn _contentValidTo;
+  GeneratedColumn<DateTime>? _contentValidTo;
   @override
-  GeneratedDateTimeColumn get contentValidTo =>
-      _contentValidTo ??= _constructContentValidTo();
-  GeneratedDateTimeColumn _constructContentValidTo() {
-    return GeneratedDateTimeColumn(
-      'content_valid_to',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get contentValidTo => _contentValidTo ??=
+      GeneratedColumn<DateTime>('content_valid_to', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _contentValidInRangeMeta =
       const VerificationMeta('contentValidInRange');
-  GeneratedBoolColumn _contentValidInRange;
+  GeneratedColumn<bool>? _contentValidInRange;
   @override
-  GeneratedBoolColumn get contentValidInRange =>
-      _contentValidInRange ??= _constructContentValidInRange();
-  GeneratedBoolColumn _constructContentValidInRange() {
-    return GeneratedBoolColumn(
-      'content_valid_in_range',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get contentValidInRange => _contentValidInRange ??=
+      GeneratedColumn<bool>('content_valid_in_range', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (content_valid_in_range IN (0, 1))');
   final VerificationMeta _contentStatusMeta =
       const VerificationMeta('contentStatus');
-  GeneratedTextColumn _contentStatus;
+  GeneratedColumn<String>? _contentStatus;
   @override
-  GeneratedTextColumn get contentStatus =>
-      _contentStatus ??= _constructContentStatus();
-  GeneratedTextColumn _constructContentStatus() {
-    return GeneratedTextColumn(
-      'content_status',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get contentStatus => _contentStatus ??=
+      GeneratedColumn<String>('content_status', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _contentTitleMeta =
       const VerificationMeta('contentTitle');
-  GeneratedTextColumn _contentTitle;
+  GeneratedColumn<String>? _contentTitle;
   @override
-  GeneratedTextColumn get contentTitle =>
-      _contentTitle ??= _constructContentTitle();
-  GeneratedTextColumn _constructContentTitle() {
-    return GeneratedTextColumn(
-      'content_title',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get contentTitle => _contentTitle ??=
+      GeneratedColumn<String>('content_title', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _contentCategoryMeta =
       const VerificationMeta('contentCategory');
-  GeneratedTextColumn _contentCategory;
+  GeneratedColumn<String>? _contentCategory;
   @override
-  GeneratedTextColumn get contentCategory =>
-      _contentCategory ??= _constructContentCategory();
-  GeneratedTextColumn _constructContentCategory() {
-    return GeneratedTextColumn(
-      'content_category',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get contentCategory => _contentCategory ??=
+      GeneratedColumn<String>('content_category', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _contentHasChangedMeta =
       const VerificationMeta('contentHasChanged');
-  GeneratedBoolColumn _contentHasChanged;
+  GeneratedColumn<bool>? _contentHasChanged;
   @override
-  GeneratedBoolColumn get contentHasChanged =>
-      _contentHasChanged ??= _constructContentHasChanged();
-  GeneratedBoolColumn _constructContentHasChanged() {
-    return GeneratedBoolColumn(
-      'content_has_changed',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get contentHasChanged => _contentHasChanged ??=
+      GeneratedColumn<bool>('content_has_changed', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (content_has_changed IN (0, 1))');
   final VerificationMeta _contentHasAttachMeta =
       const VerificationMeta('contentHasAttach');
-  GeneratedBoolColumn _contentHasAttach;
+  GeneratedColumn<bool>? _contentHasAttach;
   @override
-  GeneratedBoolColumn get contentHasAttach =>
-      _contentHasAttach ??= _constructContentHasAttach();
-  GeneratedBoolColumn _constructContentHasAttach() {
-    return GeneratedBoolColumn(
-      'content_has_attach',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get contentHasAttach => _contentHasAttach ??=
+      GeneratedColumn<bool>('content_has_attach', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (content_has_attach IN (0, 1))');
   final VerificationMeta _needJoinMeta = const VerificationMeta('needJoin');
-  GeneratedBoolColumn _needJoin;
+  GeneratedColumn<bool>? _needJoin;
   @override
-  GeneratedBoolColumn get needJoin => _needJoin ??= _constructNeedJoin();
-  GeneratedBoolColumn _constructNeedJoin() {
-    return GeneratedBoolColumn(
-      'need_join',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get needJoin =>
+      _needJoin ??= GeneratedColumn<bool>('need_join', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (need_join IN (0, 1))');
   final VerificationMeta _needReplyMeta = const VerificationMeta('needReply');
-  GeneratedBoolColumn _needReply;
+  GeneratedColumn<bool>? _needReply;
   @override
-  GeneratedBoolColumn get needReply => _needReply ??= _constructNeedReply();
-  GeneratedBoolColumn _constructNeedReply() {
-    return GeneratedBoolColumn(
-      'need_reply',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get needReply =>
+      _needReply ??= GeneratedColumn<bool>('need_reply', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (need_reply IN (0, 1))');
   final VerificationMeta _needFileMeta = const VerificationMeta('needFile');
-  GeneratedBoolColumn _needFile;
+  GeneratedColumn<bool>? _needFile;
   @override
-  GeneratedBoolColumn get needFile => _needFile ??= _constructNeedFile();
-  GeneratedBoolColumn _constructNeedFile() {
-    return GeneratedBoolColumn(
-      'need_file',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get needFile =>
+      _needFile ??= GeneratedColumn<bool>('need_file', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (need_file IN (0, 1))');
   @override
   List<GeneratedColumn> get $columns => [
         pubId,
@@ -4967,11 +4444,9 @@ class $NoticesTable extends Notices
         needFile
       ];
   @override
-  $NoticesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'notices';
   @override
-  String get $tableName => _alias ?? 'notices';
-  @override
-  final String actualTableName = 'notices';
+  String get actualTableName => 'notices';
   @override
   VerificationContext validateIntegrity(Insertable<NoticeLocalModel> instance,
       {bool isInserting = false}) {
@@ -4979,11 +4454,11 @@ class $NoticesTable extends Notices
     final data = instance.toColumns(true);
     if (data.containsKey('pub_id')) {
       context.handle(
-          _pubIdMeta, pubId.isAcceptableOrUnknown(data['pub_id'], _pubIdMeta));
+          _pubIdMeta, pubId.isAcceptableOrUnknown(data['pub_id']!, _pubIdMeta));
     }
     if (data.containsKey('pub_date')) {
       context.handle(_pubDateMeta,
-          pubDate.isAcceptableOrUnknown(data['pub_date'], _pubDateMeta));
+          pubDate.isAcceptableOrUnknown(data['pub_date']!, _pubDateMeta));
     } else if (isInserting) {
       context.missing(_pubDateMeta);
     }
@@ -4991,19 +4466,19 @@ class $NoticesTable extends Notices
       context.handle(
           _readStatusMeta,
           readStatus.isAcceptableOrUnknown(
-              data['read_status'], _readStatusMeta));
+              data['read_status']!, _readStatusMeta));
     } else if (isInserting) {
       context.missing(_readStatusMeta);
     }
     if (data.containsKey('event_code')) {
       context.handle(_eventCodeMeta,
-          eventCode.isAcceptableOrUnknown(data['event_code'], _eventCodeMeta));
+          eventCode.isAcceptableOrUnknown(data['event_code']!, _eventCodeMeta));
     } else if (isInserting) {
       context.missing(_eventCodeMeta);
     }
     if (data.containsKey('content_id')) {
       context.handle(_contentIdMeta,
-          contentId.isAcceptableOrUnknown(data['content_id'], _contentIdMeta));
+          contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta));
     } else if (isInserting) {
       context.missing(_contentIdMeta);
     }
@@ -5011,7 +4486,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentValidFromMeta,
           contentValidFrom.isAcceptableOrUnknown(
-              data['content_valid_from'], _contentValidFromMeta));
+              data['content_valid_from']!, _contentValidFromMeta));
     } else if (isInserting) {
       context.missing(_contentValidFromMeta);
     }
@@ -5019,7 +4494,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentValidToMeta,
           contentValidTo.isAcceptableOrUnknown(
-              data['content_valid_to'], _contentValidToMeta));
+              data['content_valid_to']!, _contentValidToMeta));
     } else if (isInserting) {
       context.missing(_contentValidToMeta);
     }
@@ -5027,7 +4502,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentValidInRangeMeta,
           contentValidInRange.isAcceptableOrUnknown(
-              data['content_valid_in_range'], _contentValidInRangeMeta));
+              data['content_valid_in_range']!, _contentValidInRangeMeta));
     } else if (isInserting) {
       context.missing(_contentValidInRangeMeta);
     }
@@ -5035,7 +4510,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentStatusMeta,
           contentStatus.isAcceptableOrUnknown(
-              data['content_status'], _contentStatusMeta));
+              data['content_status']!, _contentStatusMeta));
     } else if (isInserting) {
       context.missing(_contentStatusMeta);
     }
@@ -5043,7 +4518,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentTitleMeta,
           contentTitle.isAcceptableOrUnknown(
-              data['content_title'], _contentTitleMeta));
+              data['content_title']!, _contentTitleMeta));
     } else if (isInserting) {
       context.missing(_contentTitleMeta);
     }
@@ -5051,7 +4526,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentCategoryMeta,
           contentCategory.isAcceptableOrUnknown(
-              data['content_category'], _contentCategoryMeta));
+              data['content_category']!, _contentCategoryMeta));
     } else if (isInserting) {
       context.missing(_contentCategoryMeta);
     }
@@ -5059,7 +4534,7 @@ class $NoticesTable extends Notices
       context.handle(
           _contentHasChangedMeta,
           contentHasChanged.isAcceptableOrUnknown(
-              data['content_has_changed'], _contentHasChangedMeta));
+              data['content_has_changed']!, _contentHasChangedMeta));
     } else if (isInserting) {
       context.missing(_contentHasChangedMeta);
     }
@@ -5067,25 +4542,25 @@ class $NoticesTable extends Notices
       context.handle(
           _contentHasAttachMeta,
           contentHasAttach.isAcceptableOrUnknown(
-              data['content_has_attach'], _contentHasAttachMeta));
+              data['content_has_attach']!, _contentHasAttachMeta));
     } else if (isInserting) {
       context.missing(_contentHasAttachMeta);
     }
     if (data.containsKey('need_join')) {
       context.handle(_needJoinMeta,
-          needJoin.isAcceptableOrUnknown(data['need_join'], _needJoinMeta));
+          needJoin.isAcceptableOrUnknown(data['need_join']!, _needJoinMeta));
     } else if (isInserting) {
       context.missing(_needJoinMeta);
     }
     if (data.containsKey('need_reply')) {
       context.handle(_needReplyMeta,
-          needReply.isAcceptableOrUnknown(data['need_reply'], _needReplyMeta));
+          needReply.isAcceptableOrUnknown(data['need_reply']!, _needReplyMeta));
     } else if (isInserting) {
       context.missing(_needReplyMeta);
     }
     if (data.containsKey('need_file')) {
       context.handle(_needFileMeta,
-          needFile.isAcceptableOrUnknown(data['need_file'], _needFileMeta));
+          needFile.isAcceptableOrUnknown(data['need_file']!, _needFileMeta));
     } else if (isInserting) {
       context.missing(_needFileMeta);
     }
@@ -5095,9 +4570,9 @@ class $NoticesTable extends Notices
   @override
   Set<GeneratedColumn> get $primaryKey => {pubId};
   @override
-  NoticeLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return NoticeLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  NoticeLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return NoticeLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -5108,27 +4583,26 @@ class $NoticesTable extends Notices
 
 class NoticeAttachmentLocalModel extends DataClass
     implements Insertable<NoticeAttachmentLocalModel> {
-  final int id;
-  final int pubId;
-  final String fileName;
-  final int attachNumber;
+  final int? id;
+  final int? pubId;
+  final String? fileName;
+  final int? attachNumber;
   NoticeAttachmentLocalModel(
-      {@required this.id,
-      @required this.pubId,
-      @required this.fileName,
-      @required this.attachNumber});
+      {required this.id,
+      required this.pubId,
+      required this.fileName,
+      required this.attachNumber});
   factory NoticeAttachmentLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return NoticeAttachmentLocalModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      pubId: intType.mapFromDatabaseResponse(data['${effectivePrefix}pub_id']),
-      fileName: stringType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      pubId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}pub_id']),
+      fileName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}file_name']),
-      attachNumber: intType
+      attachNumber: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}attach_number']),
     );
   }
@@ -5136,16 +4610,16 @@ class NoticeAttachmentLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || pubId != null) {
-      map['pub_id'] = Variable<int>(pubId);
+      map['pub_id'] = Variable<int?>(pubId);
     }
     if (!nullToAbsent || fileName != null) {
-      map['file_name'] = Variable<String>(fileName);
+      map['file_name'] = Variable<String?>(fileName);
     }
     if (!nullToAbsent || attachNumber != null) {
-      map['attach_number'] = Variable<int>(attachNumber);
+      map['attach_number'] = Variable<int?>(attachNumber);
     }
     return map;
   }
@@ -5165,7 +4639,7 @@ class NoticeAttachmentLocalModel extends DataClass
   }
 
   factory NoticeAttachmentLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return NoticeAttachmentLocalModel(
       id: serializer.fromJson<int>(json['id']),
@@ -5175,18 +4649,18 @@ class NoticeAttachmentLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'pubId': serializer.toJson<int>(pubId),
-      'fileName': serializer.toJson<String>(fileName),
-      'attachNumber': serializer.toJson<int>(attachNumber),
+      'id': serializer.toJson<int?>(id),
+      'pubId': serializer.toJson<int?>(pubId),
+      'fileName': serializer.toJson<String?>(fileName),
+      'attachNumber': serializer.toJson<int?>(attachNumber),
     };
   }
 
   NoticeAttachmentLocalModel copyWith(
-          {int id, int pubId, String fileName, int attachNumber}) =>
+          {int? id, int? pubId, String? fileName, int? attachNumber}) =>
       NoticeAttachmentLocalModel(
         id: id ?? this.id,
         pubId: pubId ?? this.pubId,
@@ -5208,7 +4682,7 @@ class NoticeAttachmentLocalModel extends DataClass
   int get hashCode => $mrjf($mrjc(id.hashCode,
       $mrjc(pubId.hashCode, $mrjc(fileName.hashCode, attachNumber.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is NoticeAttachmentLocalModel &&
           other.id == this.id &&
@@ -5218,10 +4692,10 @@ class NoticeAttachmentLocalModel extends DataClass
 }
 
 class AttachmentsCompanion extends UpdateCompanion<NoticeAttachmentLocalModel> {
-  final Value<int> id;
-  final Value<int> pubId;
-  final Value<String> fileName;
-  final Value<int> attachNumber;
+  final Value<int?> id;
+  final Value<int?> pubId;
+  final Value<String?> fileName;
+  final Value<int?> attachNumber;
   const AttachmentsCompanion({
     this.id = const Value.absent(),
     this.pubId = const Value.absent(),
@@ -5230,17 +4704,17 @@ class AttachmentsCompanion extends UpdateCompanion<NoticeAttachmentLocalModel> {
   });
   AttachmentsCompanion.insert({
     this.id = const Value.absent(),
-    @required int pubId,
-    @required String fileName,
-    @required int attachNumber,
+    required int pubId,
+    required String fileName,
+    required int attachNumber,
   })  : pubId = Value(pubId),
         fileName = Value(fileName),
         attachNumber = Value(attachNumber);
   static Insertable<NoticeAttachmentLocalModel> custom({
-    Expression<int> id,
-    Expression<int> pubId,
-    Expression<String> fileName,
-    Expression<int> attachNumber,
+    Expression<int>? id,
+    Expression<int>? pubId,
+    Expression<String>? fileName,
+    Expression<int>? attachNumber,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -5251,10 +4725,10 @@ class AttachmentsCompanion extends UpdateCompanion<NoticeAttachmentLocalModel> {
   }
 
   AttachmentsCompanion copyWith(
-      {Value<int> id,
-      Value<int> pubId,
-      Value<String> fileName,
-      Value<int> attachNumber}) {
+      {Value<int>? id,
+      Value<int>? pubId,
+      Value<String>? fileName,
+      Value<int>? attachNumber}) {
     return AttachmentsCompanion(
       id: id ?? this.id,
       pubId: pubId ?? this.pubId,
@@ -5267,16 +4741,16 @@ class AttachmentsCompanion extends UpdateCompanion<NoticeAttachmentLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (pubId.present) {
-      map['pub_id'] = Variable<int>(pubId.value);
+      map['pub_id'] = Variable<int?>(pubId.value);
     }
     if (fileName.present) {
-      map['file_name'] = Variable<String>(fileName.value);
+      map['file_name'] = Variable<String?>(fileName.value);
     }
     if (attachNumber.present) {
-      map['attach_number'] = Variable<int>(attachNumber.value);
+      map['attach_number'] = Variable<int?>(attachNumber.value);
     }
     return map;
   }
@@ -5296,63 +4770,41 @@ class AttachmentsCompanion extends UpdateCompanion<NoticeAttachmentLocalModel> {
 class $AttachmentsTable extends Attachments
     with TableInfo<$AttachmentsTable, NoticeAttachmentLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $AttachmentsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _pubIdMeta = const VerificationMeta('pubId');
-  GeneratedIntColumn _pubId;
+  GeneratedColumn<int>? _pubId;
   @override
-  GeneratedIntColumn get pubId => _pubId ??= _constructPubId();
-  GeneratedIntColumn _constructPubId() {
-    return GeneratedIntColumn(
-      'pub_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get pubId =>
+      _pubId ??= GeneratedColumn<int>('pub_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _fileNameMeta = const VerificationMeta('fileName');
-  GeneratedTextColumn _fileName;
+  GeneratedColumn<String>? _fileName;
   @override
-  GeneratedTextColumn get fileName => _fileName ??= _constructFileName();
-  GeneratedTextColumn _constructFileName() {
-    return GeneratedTextColumn(
-      'file_name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get fileName =>
+      _fileName ??= GeneratedColumn<String>('file_name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _attachNumberMeta =
       const VerificationMeta('attachNumber');
-  GeneratedIntColumn _attachNumber;
+  GeneratedColumn<int>? _attachNumber;
   @override
-  GeneratedIntColumn get attachNumber =>
-      _attachNumber ??= _constructAttachNumber();
-  GeneratedIntColumn _constructAttachNumber() {
-    return GeneratedIntColumn(
-      'attach_number',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get attachNumber => _attachNumber ??=
+      GeneratedColumn<int>('attach_number', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, pubId, fileName, attachNumber];
   @override
-  $AttachmentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'attachments';
   @override
-  String get $tableName => _alias ?? 'attachments';
-  @override
-  final String actualTableName = 'attachments';
+  String get actualTableName => 'attachments';
   @override
   VerificationContext validateIntegrity(
       Insertable<NoticeAttachmentLocalModel> instance,
@@ -5360,17 +4812,17 @@ class $AttachmentsTable extends Attachments
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('pub_id')) {
       context.handle(
-          _pubIdMeta, pubId.isAcceptableOrUnknown(data['pub_id'], _pubIdMeta));
+          _pubIdMeta, pubId.isAcceptableOrUnknown(data['pub_id']!, _pubIdMeta));
     } else if (isInserting) {
       context.missing(_pubIdMeta);
     }
     if (data.containsKey('file_name')) {
       context.handle(_fileNameMeta,
-          fileName.isAcceptableOrUnknown(data['file_name'], _fileNameMeta));
+          fileName.isAcceptableOrUnknown(data['file_name']!, _fileNameMeta));
     } else if (isInserting) {
       context.missing(_fileNameMeta);
     }
@@ -5378,7 +4830,7 @@ class $AttachmentsTable extends Attachments
       context.handle(
           _attachNumberMeta,
           attachNumber.isAcceptableOrUnknown(
-              data['attach_number'], _attachNumberMeta));
+              data['attach_number']!, _attachNumberMeta));
     } else if (isInserting) {
       context.missing(_attachNumberMeta);
     }
@@ -5389,10 +4841,9 @@ class $AttachmentsTable extends Attachments
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   NoticeAttachmentLocalModel map(Map<String, dynamic> data,
-      {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+      {String? tablePrefix}) {
     return NoticeAttachmentLocalModel.fromData(data, _db,
-        prefix: effectivePrefix);
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -5402,66 +4853,63 @@ class $AttachmentsTable extends Attachments
 }
 
 class Note extends DataClass implements Insertable<Note> {
-  final String author;
-  final DateTime date;
-  final int id;
-  final bool status;
-  final String description;
-  final String warning;
-  final String type;
+  final String? author;
+  final DateTime? date;
+  final int? id;
+  final bool? status;
+  final String? description;
+  final String? warning;
+  final String? type;
   Note(
-      {@required this.author,
-      @required this.date,
-      @required this.id,
-      @required this.status,
-      @required this.description,
-      @required this.warning,
-      @required this.type});
+      {required this.author,
+      required this.date,
+      required this.id,
+      required this.status,
+      required this.description,
+      required this.warning,
+      required this.type});
   factory Note.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final intType = db.typeSystem.forDartType<int>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return Note(
-      author:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}author']),
-      date:
-          dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      status:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}status']),
-      description: stringType
+      author: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}author']),
+      date: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}date']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      status: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}status']),
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
-      warning:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}warning']),
-      type: stringType.mapFromDatabaseResponse(data['${effectivePrefix}type']),
+      warning: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}warning']),
+      type: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}type']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || author != null) {
-      map['author'] = Variable<String>(author);
+      map['author'] = Variable<String?>(author);
     }
     if (!nullToAbsent || date != null) {
-      map['date'] = Variable<DateTime>(date);
+      map['date'] = Variable<DateTime?>(date);
     }
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || status != null) {
-      map['status'] = Variable<bool>(status);
+      map['status'] = Variable<bool?>(status);
     }
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     if (!nullToAbsent || warning != null) {
-      map['warning'] = Variable<String>(warning);
+      map['warning'] = Variable<String?>(warning);
     }
     if (!nullToAbsent || type != null) {
-      map['type'] = Variable<String>(type);
+      map['type'] = Variable<String?>(type);
     }
     return map;
   }
@@ -5485,7 +4933,7 @@ class Note extends DataClass implements Insertable<Note> {
   }
 
   factory Note.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Note(
       author: serializer.fromJson<String>(json['author']),
@@ -5498,27 +4946,27 @@ class Note extends DataClass implements Insertable<Note> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'author': serializer.toJson<String>(author),
-      'date': serializer.toJson<DateTime>(date),
-      'id': serializer.toJson<int>(id),
-      'status': serializer.toJson<bool>(status),
-      'description': serializer.toJson<String>(description),
-      'warning': serializer.toJson<String>(warning),
-      'type': serializer.toJson<String>(type),
+      'author': serializer.toJson<String?>(author),
+      'date': serializer.toJson<DateTime?>(date),
+      'id': serializer.toJson<int?>(id),
+      'status': serializer.toJson<bool?>(status),
+      'description': serializer.toJson<String?>(description),
+      'warning': serializer.toJson<String?>(warning),
+      'type': serializer.toJson<String?>(type),
     };
   }
 
   Note copyWith(
-          {String author,
-          DateTime date,
-          int id,
-          bool status,
-          String description,
-          String warning,
-          String type}) =>
+          {String? author,
+          DateTime? date,
+          int? id,
+          bool? status,
+          String? description,
+          String? warning,
+          String? type}) =>
       Note(
         author: author ?? this.author,
         date: date ?? this.date,
@@ -5554,7 +5002,7 @@ class Note extends DataClass implements Insertable<Note> {
                   $mrjc(description.hashCode,
                       $mrjc(warning.hashCode, type.hashCode)))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Note &&
           other.author == this.author &&
@@ -5567,13 +5015,13 @@ class Note extends DataClass implements Insertable<Note> {
 }
 
 class NotesCompanion extends UpdateCompanion<Note> {
-  final Value<String> author;
-  final Value<DateTime> date;
-  final Value<int> id;
-  final Value<bool> status;
-  final Value<String> description;
-  final Value<String> warning;
-  final Value<String> type;
+  final Value<String?> author;
+  final Value<DateTime?> date;
+  final Value<int?> id;
+  final Value<bool?> status;
+  final Value<String?> description;
+  final Value<String?> warning;
+  final Value<String?> type;
   const NotesCompanion({
     this.author = const Value.absent(),
     this.date = const Value.absent(),
@@ -5584,13 +5032,13 @@ class NotesCompanion extends UpdateCompanion<Note> {
     this.type = const Value.absent(),
   });
   NotesCompanion.insert({
-    @required String author,
-    @required DateTime date,
+    required String author,
+    required DateTime date,
     this.id = const Value.absent(),
-    @required bool status,
-    @required String description,
-    @required String warning,
-    @required String type,
+    required bool status,
+    required String description,
+    required String warning,
+    required String type,
   })  : author = Value(author),
         date = Value(date),
         status = Value(status),
@@ -5598,13 +5046,13 @@ class NotesCompanion extends UpdateCompanion<Note> {
         warning = Value(warning),
         type = Value(type);
   static Insertable<Note> custom({
-    Expression<String> author,
-    Expression<DateTime> date,
-    Expression<int> id,
-    Expression<bool> status,
-    Expression<String> description,
-    Expression<String> warning,
-    Expression<String> type,
+    Expression<String>? author,
+    Expression<DateTime>? date,
+    Expression<int>? id,
+    Expression<bool>? status,
+    Expression<String>? description,
+    Expression<String>? warning,
+    Expression<String>? type,
   }) {
     return RawValuesInsertable({
       if (author != null) 'author': author,
@@ -5618,13 +5066,13 @@ class NotesCompanion extends UpdateCompanion<Note> {
   }
 
   NotesCompanion copyWith(
-      {Value<String> author,
-      Value<DateTime> date,
-      Value<int> id,
-      Value<bool> status,
-      Value<String> description,
-      Value<String> warning,
-      Value<String> type}) {
+      {Value<String>? author,
+      Value<DateTime>? date,
+      Value<int>? id,
+      Value<bool>? status,
+      Value<String>? description,
+      Value<String>? warning,
+      Value<String>? type}) {
     return NotesCompanion(
       author: author ?? this.author,
       date: date ?? this.date,
@@ -5640,25 +5088,25 @@ class NotesCompanion extends UpdateCompanion<Note> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (author.present) {
-      map['author'] = Variable<String>(author.value);
+      map['author'] = Variable<String?>(author.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime?>(date.value);
     }
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (status.present) {
-      map['status'] = Variable<bool>(status.value);
+      map['status'] = Variable<bool?>(status.value);
     }
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     if (warning.present) {
-      map['warning'] = Variable<String>(warning.value);
+      map['warning'] = Variable<String?>(warning.value);
     }
     if (type.present) {
-      map['type'] = Variable<String>(type.value);
+      map['type'] = Variable<String?>(type.value);
     }
     return map;
   }
@@ -5680,103 +5128,60 @@ class NotesCompanion extends UpdateCompanion<Note> {
 
 class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $NotesTable(this._db, [this._alias]);
   final VerificationMeta _authorMeta = const VerificationMeta('author');
-  GeneratedTextColumn _author;
+  GeneratedColumn<String>? _author;
   @override
-  GeneratedTextColumn get author => _author ??= _constructAuthor();
-  GeneratedTextColumn _constructAuthor() {
-    return GeneratedTextColumn(
-      'author',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get author =>
+      _author ??= GeneratedColumn<String>('author', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _dateMeta = const VerificationMeta('date');
-  GeneratedDateTimeColumn _date;
+  GeneratedColumn<DateTime>? _date;
   @override
-  GeneratedDateTimeColumn get date => _date ??= _constructDate();
-  GeneratedDateTimeColumn _constructDate() {
-    return GeneratedDateTimeColumn(
-      'date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get date =>
+      _date ??= GeneratedColumn<DateTime>('date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _statusMeta = const VerificationMeta('status');
-  GeneratedBoolColumn _status;
+  GeneratedColumn<bool>? _status;
   @override
-  GeneratedBoolColumn get status => _status ??= _constructStatus();
-  GeneratedBoolColumn _constructStatus() {
-    return GeneratedBoolColumn(
-      'status',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get status =>
+      _status ??= GeneratedColumn<bool>('status', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (status IN (0, 1))');
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  GeneratedColumn<String>? _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get description => _description ??=
+      GeneratedColumn<String>('description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _warningMeta = const VerificationMeta('warning');
-  GeneratedTextColumn _warning;
+  GeneratedColumn<String>? _warning;
   @override
-  GeneratedTextColumn get warning => _warning ??= _constructWarning();
-  GeneratedTextColumn _constructWarning() {
-    return GeneratedTextColumn(
-      'warning',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get warning =>
+      _warning ??= GeneratedColumn<String>('warning', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _typeMeta = const VerificationMeta('type');
-  GeneratedTextColumn _type;
+  GeneratedColumn<String>? _type;
   @override
-  GeneratedTextColumn get type => _type ??= _constructType();
-  GeneratedTextColumn _constructType() {
-    return GeneratedTextColumn(
-      'type',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get type =>
+      _type ??= GeneratedColumn<String>('type', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [author, date, id, status, description, warning, type];
   @override
-  $NotesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'notes';
   @override
-  String get $tableName => _alias ?? 'notes';
-  @override
-  final String actualTableName = 'notes';
+  String get actualTableName => 'notes';
   @override
   VerificationContext validateIntegrity(Insertable<Note> instance,
       {bool isInserting = false}) {
@@ -5784,22 +5189,22 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
     final data = instance.toColumns(true);
     if (data.containsKey('author')) {
       context.handle(_authorMeta,
-          author.isAcceptableOrUnknown(data['author'], _authorMeta));
+          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
     } else if (isInserting) {
       context.missing(_authorMeta);
     }
     if (data.containsKey('date')) {
       context.handle(
-          _dateMeta, date.isAcceptableOrUnknown(data['date'], _dateMeta));
+          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
     } else if (isInserting) {
       context.missing(_dateMeta);
     }
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('status')) {
       context.handle(_statusMeta,
-          status.isAcceptableOrUnknown(data['status'], _statusMeta));
+          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
     } else if (isInserting) {
       context.missing(_statusMeta);
     }
@@ -5807,19 +5212,19 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
     if (data.containsKey('warning')) {
       context.handle(_warningMeta,
-          warning.isAcceptableOrUnknown(data['warning'], _warningMeta));
+          warning.isAcceptableOrUnknown(data['warning']!, _warningMeta));
     } else if (isInserting) {
       context.missing(_warningMeta);
     }
     if (data.containsKey('type')) {
       context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type'], _typeMeta));
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
     } else if (isInserting) {
       context.missing(_typeMeta);
     }
@@ -5829,9 +5234,9 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Note map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Note.fromData(data, _db, prefix: effectivePrefix);
+  Note map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Note.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -5841,21 +5246,20 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
 }
 
 class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
-  final int id;
-  final String type;
-  final String description;
+  final int? id;
+  final String? type;
+  final String? description;
   NotesAttachment(
-      {@required this.id, @required this.type, @required this.description});
+      {required this.id, required this.type, required this.description});
   factory NotesAttachment.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return NotesAttachment(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      type: stringType.mapFromDatabaseResponse(data['${effectivePrefix}type']),
-      description: stringType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      type: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}type']),
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
     );
   }
@@ -5863,13 +5267,13 @@ class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || type != null) {
-      map['type'] = Variable<String>(type);
+      map['type'] = Variable<String?>(type);
     }
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     return map;
   }
@@ -5885,7 +5289,7 @@ class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
   }
 
   factory NotesAttachment.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return NotesAttachment(
       id: serializer.fromJson<int>(json['id']),
@@ -5894,16 +5298,16 @@ class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'type': serializer.toJson<String>(type),
-      'description': serializer.toJson<String>(description),
+      'id': serializer.toJson<int?>(id),
+      'type': serializer.toJson<String?>(type),
+      'description': serializer.toJson<String?>(description),
     };
   }
 
-  NotesAttachment copyWith({int id, String type, String description}) =>
+  NotesAttachment copyWith({int? id, String? type, String? description}) =>
       NotesAttachment(
         id: id ?? this.id,
         type: type ?? this.type,
@@ -5923,7 +5327,7 @@ class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
   int get hashCode =>
       $mrjf($mrjc(id.hashCode, $mrjc(type.hashCode, description.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is NotesAttachment &&
           other.id == this.id &&
@@ -5932,9 +5336,9 @@ class NotesAttachment extends DataClass implements Insertable<NotesAttachment> {
 }
 
 class NotesAttachmentsCompanion extends UpdateCompanion<NotesAttachment> {
-  final Value<int> id;
-  final Value<String> type;
-  final Value<String> description;
+  final Value<int?> id;
+  final Value<String?> type;
+  final Value<String?> description;
   const NotesAttachmentsCompanion({
     this.id = const Value.absent(),
     this.type = const Value.absent(),
@@ -5942,14 +5346,14 @@ class NotesAttachmentsCompanion extends UpdateCompanion<NotesAttachment> {
   });
   NotesAttachmentsCompanion.insert({
     this.id = const Value.absent(),
-    @required String type,
-    @required String description,
+    required String type,
+    required String description,
   })  : type = Value(type),
         description = Value(description);
   static Insertable<NotesAttachment> custom({
-    Expression<int> id,
-    Expression<String> type,
-    Expression<String> description,
+    Expression<int>? id,
+    Expression<String>? type,
+    Expression<String>? description,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -5959,7 +5363,7 @@ class NotesAttachmentsCompanion extends UpdateCompanion<NotesAttachment> {
   }
 
   NotesAttachmentsCompanion copyWith(
-      {Value<int> id, Value<String> type, Value<String> description}) {
+      {Value<int>? id, Value<String>? type, Value<String>? description}) {
     return NotesAttachmentsCompanion(
       id: id ?? this.id,
       type: type ?? this.type,
@@ -5971,13 +5375,13 @@ class NotesAttachmentsCompanion extends UpdateCompanion<NotesAttachment> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (type.present) {
-      map['type'] = Variable<String>(type.value);
+      map['type'] = Variable<String?>(type.value);
     }
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     return map;
   }
@@ -5996,65 +5400,44 @@ class NotesAttachmentsCompanion extends UpdateCompanion<NotesAttachment> {
 class $NotesAttachmentsTable extends NotesAttachments
     with TableInfo<$NotesAttachmentsTable, NotesAttachment> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $NotesAttachmentsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _typeMeta = const VerificationMeta('type');
-  GeneratedTextColumn _type;
+  GeneratedColumn<String>? _type;
   @override
-  GeneratedTextColumn get type => _type ??= _constructType();
-  GeneratedTextColumn _constructType() {
-    return GeneratedTextColumn(
-      'type',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get type =>
+      _type ??= GeneratedColumn<String>('type', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  GeneratedColumn<String>? _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get description => _description ??=
+      GeneratedColumn<String>('description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, type, description];
   @override
-  $NotesAttachmentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'notes_attachments';
   @override
-  String get $tableName => _alias ?? 'notes_attachments';
-  @override
-  final String actualTableName = 'notes_attachments';
+  String get actualTableName => 'notes_attachments';
   @override
   VerificationContext validateIntegrity(Insertable<NotesAttachment> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('type')) {
       context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type'], _typeMeta));
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
     } else if (isInserting) {
       context.missing(_typeMeta);
     }
@@ -6062,7 +5445,7 @@ class $NotesAttachmentsTable extends NotesAttachments
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
@@ -6072,9 +5455,9 @@ class $NotesAttachmentsTable extends NotesAttachments
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  NotesAttachment map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return NotesAttachment.fromData(data, _db, prefix: effectivePrefix);
+  NotesAttachment map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return NotesAttachment.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -6085,26 +5468,27 @@ class $NotesAttachmentsTable extends NotesAttachments
 
 class TeacherLocalModel extends DataClass
     implements Insertable<TeacherLocalModel> {
-  final String id;
-  final String name;
-  final String firstName;
-  final String lastName;
+  final String? id;
+  final String? name;
+  final String? firstName;
+  final String? lastName;
   TeacherLocalModel(
-      {@required this.id,
-      @required this.name,
-      @required this.firstName,
-      @required this.lastName});
+      {required this.id,
+      required this.name,
+      required this.firstName,
+      required this.lastName});
   factory TeacherLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
     return TeacherLocalModel(
-      id: stringType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      firstName: stringType
+      id: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      firstName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}first_name']),
-      lastName: stringType
+      lastName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}last_name']),
     );
   }
@@ -6112,16 +5496,16 @@ class TeacherLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<String>(id);
+      map['id'] = Variable<String?>(id);
     }
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     if (!nullToAbsent || firstName != null) {
-      map['first_name'] = Variable<String>(firstName);
+      map['first_name'] = Variable<String?>(firstName);
     }
     if (!nullToAbsent || lastName != null) {
-      map['last_name'] = Variable<String>(lastName);
+      map['last_name'] = Variable<String?>(lastName);
     }
     return map;
   }
@@ -6140,7 +5524,7 @@ class TeacherLocalModel extends DataClass
   }
 
   factory TeacherLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return TeacherLocalModel(
       id: serializer.fromJson<String>(json['id']),
@@ -6150,18 +5534,18 @@ class TeacherLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'name': serializer.toJson<String>(name),
-      'firstName': serializer.toJson<String>(firstName),
-      'lastName': serializer.toJson<String>(lastName),
+      'id': serializer.toJson<String?>(id),
+      'name': serializer.toJson<String?>(name),
+      'firstName': serializer.toJson<String?>(firstName),
+      'lastName': serializer.toJson<String?>(lastName),
     };
   }
 
   TeacherLocalModel copyWith(
-          {String id, String name, String firstName, String lastName}) =>
+          {String? id, String? name, String? firstName, String? lastName}) =>
       TeacherLocalModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -6183,7 +5567,7 @@ class TeacherLocalModel extends DataClass
   int get hashCode => $mrjf($mrjc(id.hashCode,
       $mrjc(name.hashCode, $mrjc(firstName.hashCode, lastName.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is TeacherLocalModel &&
           other.id == this.id &&
@@ -6193,10 +5577,10 @@ class TeacherLocalModel extends DataClass
 }
 
 class DidacticsTeachersCompanion extends UpdateCompanion<TeacherLocalModel> {
-  final Value<String> id;
-  final Value<String> name;
-  final Value<String> firstName;
-  final Value<String> lastName;
+  final Value<String?> id;
+  final Value<String?> name;
+  final Value<String?> firstName;
+  final Value<String?> lastName;
   const DidacticsTeachersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -6204,19 +5588,19 @@ class DidacticsTeachersCompanion extends UpdateCompanion<TeacherLocalModel> {
     this.lastName = const Value.absent(),
   });
   DidacticsTeachersCompanion.insert({
-    @required String id,
-    @required String name,
-    @required String firstName,
-    @required String lastName,
+    required String id,
+    required String name,
+    required String firstName,
+    required String lastName,
   })  : id = Value(id),
         name = Value(name),
         firstName = Value(firstName),
         lastName = Value(lastName);
   static Insertable<TeacherLocalModel> custom({
-    Expression<String> id,
-    Expression<String> name,
-    Expression<String> firstName,
-    Expression<String> lastName,
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<String>? firstName,
+    Expression<String>? lastName,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -6227,10 +5611,10 @@ class DidacticsTeachersCompanion extends UpdateCompanion<TeacherLocalModel> {
   }
 
   DidacticsTeachersCompanion copyWith(
-      {Value<String> id,
-      Value<String> name,
-      Value<String> firstName,
-      Value<String> lastName}) {
+      {Value<String>? id,
+      Value<String>? name,
+      Value<String>? firstName,
+      Value<String>? lastName}) {
     return DidacticsTeachersCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -6243,16 +5627,16 @@ class DidacticsTeachersCompanion extends UpdateCompanion<TeacherLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<String?>(id.value);
     }
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     if (firstName.present) {
-      map['first_name'] = Variable<String>(firstName.value);
+      map['first_name'] = Variable<String?>(firstName.value);
     }
     if (lastName.present) {
-      map['last_name'] = Variable<String>(lastName.value);
+      map['last_name'] = Variable<String?>(lastName.value);
     }
     return map;
   }
@@ -6272,89 +5656,63 @@ class DidacticsTeachersCompanion extends UpdateCompanion<TeacherLocalModel> {
 class $DidacticsTeachersTable extends DidacticsTeachers
     with TableInfo<$DidacticsTeachersTable, TeacherLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DidacticsTeachersTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedTextColumn _id;
+  GeneratedColumn<String>? _id;
   @override
-  GeneratedTextColumn get id => _id ??= _constructId();
-  GeneratedTextColumn _constructId() {
-    return GeneratedTextColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get id =>
+      _id ??= GeneratedColumn<String>('id', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _firstNameMeta = const VerificationMeta('firstName');
-  GeneratedTextColumn _firstName;
+  GeneratedColumn<String>? _firstName;
   @override
-  GeneratedTextColumn get firstName => _firstName ??= _constructFirstName();
-  GeneratedTextColumn _constructFirstName() {
-    return GeneratedTextColumn(
-      'first_name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get firstName =>
+      _firstName ??= GeneratedColumn<String>('first_name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _lastNameMeta = const VerificationMeta('lastName');
-  GeneratedTextColumn _lastName;
+  GeneratedColumn<String>? _lastName;
   @override
-  GeneratedTextColumn get lastName => _lastName ??= _constructLastName();
-  GeneratedTextColumn _constructLastName() {
-    return GeneratedTextColumn(
-      'last_name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get lastName =>
+      _lastName ??= GeneratedColumn<String>('last_name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, name, firstName, lastName];
   @override
-  $DidacticsTeachersTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'didactics_teachers';
   @override
-  String get $tableName => _alias ?? 'didactics_teachers';
-  @override
-  final String actualTableName = 'didactics_teachers';
+  String get actualTableName => 'didactics_teachers';
   @override
   VerificationContext validateIntegrity(Insertable<TeacherLocalModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     } else if (isInserting) {
       context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('first_name')) {
       context.handle(_firstNameMeta,
-          firstName.isAcceptableOrUnknown(data['first_name'], _firstNameMeta));
+          firstName.isAcceptableOrUnknown(data['first_name']!, _firstNameMeta));
     } else if (isInserting) {
       context.missing(_firstNameMeta);
     }
     if (data.containsKey('last_name')) {
       context.handle(_lastNameMeta,
-          lastName.isAcceptableOrUnknown(data['last_name'], _lastNameMeta));
+          lastName.isAcceptableOrUnknown(data['last_name']!, _lastNameMeta));
     } else if (isInserting) {
       context.missing(_lastNameMeta);
     }
@@ -6364,9 +5722,9 @@ class $DidacticsTeachersTable extends DidacticsTeachers
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  TeacherLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return TeacherLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  TeacherLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return TeacherLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -6377,28 +5735,26 @@ class $DidacticsTeachersTable extends DidacticsTeachers
 
 class FolderLocalModel extends DataClass
     implements Insertable<FolderLocalModel> {
-  final String teacherId;
-  final int id;
-  final String name;
-  final DateTime lastShare;
+  final String? teacherId;
+  final int? id;
+  final String? name;
+  final DateTime? lastShare;
   FolderLocalModel(
-      {@required this.teacherId,
-      @required this.id,
-      @required this.name,
-      @required this.lastShare});
+      {required this.teacherId,
+      required this.id,
+      required this.name,
+      required this.lastShare});
   factory FolderLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
-    final intType = db.typeSystem.forDartType<int>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
     return FolderLocalModel(
-      teacherId: stringType
+      teacherId: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}teacher_id']),
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      lastShare: dateTimeType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      lastShare: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}last_share']),
     );
   }
@@ -6406,16 +5762,16 @@ class FolderLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || teacherId != null) {
-      map['teacher_id'] = Variable<String>(teacherId);
+      map['teacher_id'] = Variable<String?>(teacherId);
     }
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     if (!nullToAbsent || lastShare != null) {
-      map['last_share'] = Variable<DateTime>(lastShare);
+      map['last_share'] = Variable<DateTime?>(lastShare);
     }
     return map;
   }
@@ -6434,7 +5790,7 @@ class FolderLocalModel extends DataClass
   }
 
   factory FolderLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return FolderLocalModel(
       teacherId: serializer.fromJson<String>(json['teacherId']),
@@ -6444,18 +5800,18 @@ class FolderLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'teacherId': serializer.toJson<String>(teacherId),
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'lastShare': serializer.toJson<DateTime>(lastShare),
+      'teacherId': serializer.toJson<String?>(teacherId),
+      'id': serializer.toJson<int?>(id),
+      'name': serializer.toJson<String?>(name),
+      'lastShare': serializer.toJson<DateTime?>(lastShare),
     };
   }
 
   FolderLocalModel copyWith(
-          {String teacherId, int id, String name, DateTime lastShare}) =>
+          {String? teacherId, int? id, String? name, DateTime? lastShare}) =>
       FolderLocalModel(
         teacherId: teacherId ?? this.teacherId,
         id: id ?? this.id,
@@ -6477,7 +5833,7 @@ class FolderLocalModel extends DataClass
   int get hashCode => $mrjf($mrjc(teacherId.hashCode,
       $mrjc(id.hashCode, $mrjc(name.hashCode, lastShare.hashCode))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FolderLocalModel &&
           other.teacherId == this.teacherId &&
@@ -6487,10 +5843,10 @@ class FolderLocalModel extends DataClass
 }
 
 class DidacticsFoldersCompanion extends UpdateCompanion<FolderLocalModel> {
-  final Value<String> teacherId;
-  final Value<int> id;
-  final Value<String> name;
-  final Value<DateTime> lastShare;
+  final Value<String?> teacherId;
+  final Value<int?> id;
+  final Value<String?> name;
+  final Value<DateTime?> lastShare;
   const DidacticsFoldersCompanion({
     this.teacherId = const Value.absent(),
     this.id = const Value.absent(),
@@ -6498,18 +5854,18 @@ class DidacticsFoldersCompanion extends UpdateCompanion<FolderLocalModel> {
     this.lastShare = const Value.absent(),
   });
   DidacticsFoldersCompanion.insert({
-    @required String teacherId,
+    required String teacherId,
     this.id = const Value.absent(),
-    @required String name,
-    @required DateTime lastShare,
+    required String name,
+    required DateTime lastShare,
   })  : teacherId = Value(teacherId),
         name = Value(name),
         lastShare = Value(lastShare);
   static Insertable<FolderLocalModel> custom({
-    Expression<String> teacherId,
-    Expression<int> id,
-    Expression<String> name,
-    Expression<DateTime> lastShare,
+    Expression<String>? teacherId,
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<DateTime>? lastShare,
   }) {
     return RawValuesInsertable({
       if (teacherId != null) 'teacher_id': teacherId,
@@ -6520,10 +5876,10 @@ class DidacticsFoldersCompanion extends UpdateCompanion<FolderLocalModel> {
   }
 
   DidacticsFoldersCompanion copyWith(
-      {Value<String> teacherId,
-      Value<int> id,
-      Value<String> name,
-      Value<DateTime> lastShare}) {
+      {Value<String>? teacherId,
+      Value<int>? id,
+      Value<String>? name,
+      Value<DateTime>? lastShare}) {
     return DidacticsFoldersCompanion(
       teacherId: teacherId ?? this.teacherId,
       id: id ?? this.id,
@@ -6536,16 +5892,16 @@ class DidacticsFoldersCompanion extends UpdateCompanion<FolderLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (teacherId.present) {
-      map['teacher_id'] = Variable<String>(teacherId.value);
+      map['teacher_id'] = Variable<String?>(teacherId.value);
     }
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     if (lastShare.present) {
-      map['last_share'] = Variable<DateTime>(lastShare.value);
+      map['last_share'] = Variable<DateTime?>(lastShare.value);
     }
     return map;
   }
@@ -6565,64 +5921,38 @@ class DidacticsFoldersCompanion extends UpdateCompanion<FolderLocalModel> {
 class $DidacticsFoldersTable extends DidacticsFolders
     with TableInfo<$DidacticsFoldersTable, FolderLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DidacticsFoldersTable(this._db, [this._alias]);
   final VerificationMeta _teacherIdMeta = const VerificationMeta('teacherId');
-  GeneratedTextColumn _teacherId;
+  GeneratedColumn<String>? _teacherId;
   @override
-  GeneratedTextColumn get teacherId => _teacherId ??= _constructTeacherId();
-  GeneratedTextColumn _constructTeacherId() {
-    return GeneratedTextColumn(
-      'teacher_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get teacherId =>
+      _teacherId ??= GeneratedColumn<String>('teacher_id', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _lastShareMeta = const VerificationMeta('lastShare');
-  GeneratedDateTimeColumn _lastShare;
+  GeneratedColumn<DateTime>? _lastShare;
   @override
-  GeneratedDateTimeColumn get lastShare => _lastShare ??= _constructLastShare();
-  GeneratedDateTimeColumn _constructLastShare() {
-    return GeneratedDateTimeColumn(
-      'last_share',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get lastShare =>
+      _lastShare ??= GeneratedColumn<DateTime>('last_share', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [teacherId, id, name, lastShare];
   @override
-  $DidacticsFoldersTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'didactics_folders';
   @override
-  String get $tableName => _alias ?? 'didactics_folders';
-  @override
-  final String actualTableName = 'didactics_folders';
+  String get actualTableName => 'didactics_folders';
   @override
   VerificationContext validateIntegrity(Insertable<FolderLocalModel> instance,
       {bool isInserting = false}) {
@@ -6630,22 +5960,22 @@ class $DidacticsFoldersTable extends DidacticsFolders
     final data = instance.toColumns(true);
     if (data.containsKey('teacher_id')) {
       context.handle(_teacherIdMeta,
-          teacherId.isAcceptableOrUnknown(data['teacher_id'], _teacherIdMeta));
+          teacherId.isAcceptableOrUnknown(data['teacher_id']!, _teacherIdMeta));
     } else if (isInserting) {
       context.missing(_teacherIdMeta);
     }
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('last_share')) {
       context.handle(_lastShareMeta,
-          lastShare.isAcceptableOrUnknown(data['last_share'], _lastShareMeta));
+          lastShare.isAcceptableOrUnknown(data['last_share']!, _lastShareMeta));
     } else if (isInserting) {
       context.missing(_lastShareMeta);
     }
@@ -6655,9 +5985,9 @@ class $DidacticsFoldersTable extends DidacticsFolders
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FolderLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return FolderLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  FolderLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return FolderLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -6668,58 +5998,57 @@ class $DidacticsFoldersTable extends DidacticsFolders
 
 class ContentLocalModel extends DataClass
     implements Insertable<ContentLocalModel> {
-  final int folderId;
-  final int id;
-  final String name;
-  final int objectId;
-  final String type;
-  final DateTime date;
+  final int? folderId;
+  final int? id;
+  final String? name;
+  final int? objectId;
+  final String? type;
+  final DateTime? date;
   ContentLocalModel(
-      {@required this.folderId,
-      @required this.id,
-      @required this.name,
-      @required this.objectId,
-      @required this.type,
-      @required this.date});
+      {required this.folderId,
+      required this.id,
+      required this.name,
+      required this.objectId,
+      required this.type,
+      required this.date});
   factory ContentLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
     return ContentLocalModel(
-      folderId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}folder_id']),
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      objectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}object_id']),
-      type: stringType.mapFromDatabaseResponse(data['${effectivePrefix}type']),
-      date:
-          dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
+      folderId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}folder_id']),
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      objectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}object_id']),
+      type: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}type']),
+      date: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}date']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || folderId != null) {
-      map['folder_id'] = Variable<int>(folderId);
+      map['folder_id'] = Variable<int?>(folderId);
     }
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     if (!nullToAbsent || objectId != null) {
-      map['object_id'] = Variable<int>(objectId);
+      map['object_id'] = Variable<int?>(objectId);
     }
     if (!nullToAbsent || type != null) {
-      map['type'] = Variable<String>(type);
+      map['type'] = Variable<String?>(type);
     }
     if (!nullToAbsent || date != null) {
-      map['date'] = Variable<DateTime>(date);
+      map['date'] = Variable<DateTime?>(date);
     }
     return map;
   }
@@ -6740,7 +6069,7 @@ class ContentLocalModel extends DataClass
   }
 
   factory ContentLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return ContentLocalModel(
       folderId: serializer.fromJson<int>(json['folderId']),
@@ -6752,25 +6081,25 @@ class ContentLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'folderId': serializer.toJson<int>(folderId),
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'objectId': serializer.toJson<int>(objectId),
-      'type': serializer.toJson<String>(type),
-      'date': serializer.toJson<DateTime>(date),
+      'folderId': serializer.toJson<int?>(folderId),
+      'id': serializer.toJson<int?>(id),
+      'name': serializer.toJson<String?>(name),
+      'objectId': serializer.toJson<int?>(objectId),
+      'type': serializer.toJson<String?>(type),
+      'date': serializer.toJson<DateTime?>(date),
     };
   }
 
   ContentLocalModel copyWith(
-          {int folderId,
-          int id,
-          String name,
-          int objectId,
-          String type,
-          DateTime date}) =>
+          {int? folderId,
+          int? id,
+          String? name,
+          int? objectId,
+          String? type,
+          DateTime? date}) =>
       ContentLocalModel(
         folderId: folderId ?? this.folderId,
         id: id ?? this.id,
@@ -6800,7 +6129,7 @@ class ContentLocalModel extends DataClass
           $mrjc(name.hashCode,
               $mrjc(objectId.hashCode, $mrjc(type.hashCode, date.hashCode))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ContentLocalModel &&
           other.folderId == this.folderId &&
@@ -6812,12 +6141,12 @@ class ContentLocalModel extends DataClass
 }
 
 class DidacticsContentsCompanion extends UpdateCompanion<ContentLocalModel> {
-  final Value<int> folderId;
-  final Value<int> id;
-  final Value<String> name;
-  final Value<int> objectId;
-  final Value<String> type;
-  final Value<DateTime> date;
+  final Value<int?> folderId;
+  final Value<int?> id;
+  final Value<String?> name;
+  final Value<int?> objectId;
+  final Value<String?> type;
+  final Value<DateTime?> date;
   const DidacticsContentsCompanion({
     this.folderId = const Value.absent(),
     this.id = const Value.absent(),
@@ -6827,24 +6156,24 @@ class DidacticsContentsCompanion extends UpdateCompanion<ContentLocalModel> {
     this.date = const Value.absent(),
   });
   DidacticsContentsCompanion.insert({
-    @required int folderId,
+    required int folderId,
     this.id = const Value.absent(),
-    @required String name,
-    @required int objectId,
-    @required String type,
-    @required DateTime date,
+    required String name,
+    required int objectId,
+    required String type,
+    required DateTime date,
   })  : folderId = Value(folderId),
         name = Value(name),
         objectId = Value(objectId),
         type = Value(type),
         date = Value(date);
   static Insertable<ContentLocalModel> custom({
-    Expression<int> folderId,
-    Expression<int> id,
-    Expression<String> name,
-    Expression<int> objectId,
-    Expression<String> type,
-    Expression<DateTime> date,
+    Expression<int>? folderId,
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<int>? objectId,
+    Expression<String>? type,
+    Expression<DateTime>? date,
   }) {
     return RawValuesInsertable({
       if (folderId != null) 'folder_id': folderId,
@@ -6857,12 +6186,12 @@ class DidacticsContentsCompanion extends UpdateCompanion<ContentLocalModel> {
   }
 
   DidacticsContentsCompanion copyWith(
-      {Value<int> folderId,
-      Value<int> id,
-      Value<String> name,
-      Value<int> objectId,
-      Value<String> type,
-      Value<DateTime> date}) {
+      {Value<int>? folderId,
+      Value<int>? id,
+      Value<String>? name,
+      Value<int>? objectId,
+      Value<String>? type,
+      Value<DateTime>? date}) {
     return DidacticsContentsCompanion(
       folderId: folderId ?? this.folderId,
       id: id ?? this.id,
@@ -6877,22 +6206,22 @@ class DidacticsContentsCompanion extends UpdateCompanion<ContentLocalModel> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (folderId.present) {
-      map['folder_id'] = Variable<int>(folderId.value);
+      map['folder_id'] = Variable<int?>(folderId.value);
     }
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     if (objectId.present) {
-      map['object_id'] = Variable<int>(objectId.value);
+      map['object_id'] = Variable<int?>(objectId.value);
     }
     if (type.present) {
-      map['type'] = Variable<String>(type.value);
+      map['type'] = Variable<String?>(type.value);
     }
     if (date.present) {
-      map['date'] = Variable<DateTime>(date.value);
+      map['date'] = Variable<DateTime?>(date.value);
     }
     return map;
   }
@@ -6914,89 +6243,51 @@ class DidacticsContentsCompanion extends UpdateCompanion<ContentLocalModel> {
 class $DidacticsContentsTable extends DidacticsContents
     with TableInfo<$DidacticsContentsTable, ContentLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DidacticsContentsTable(this._db, [this._alias]);
   final VerificationMeta _folderIdMeta = const VerificationMeta('folderId');
-  GeneratedIntColumn _folderId;
+  GeneratedColumn<int>? _folderId;
   @override
-  GeneratedIntColumn get folderId => _folderId ??= _constructFolderId();
-  GeneratedIntColumn _constructFolderId() {
-    return GeneratedIntColumn(
-      'folder_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get folderId =>
+      _folderId ??= GeneratedColumn<int>('folder_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get id =>
+      _id ??= GeneratedColumn<int>('id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _objectIdMeta = const VerificationMeta('objectId');
-  GeneratedIntColumn _objectId;
+  GeneratedColumn<int>? _objectId;
   @override
-  GeneratedIntColumn get objectId => _objectId ??= _constructObjectId();
-  GeneratedIntColumn _constructObjectId() {
-    return GeneratedIntColumn(
-      'object_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get objectId =>
+      _objectId ??= GeneratedColumn<int>('object_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _typeMeta = const VerificationMeta('type');
-  GeneratedTextColumn _type;
+  GeneratedColumn<String>? _type;
   @override
-  GeneratedTextColumn get type => _type ??= _constructType();
-  GeneratedTextColumn _constructType() {
-    return GeneratedTextColumn(
-      'type',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get type =>
+      _type ??= GeneratedColumn<String>('type', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _dateMeta = const VerificationMeta('date');
-  GeneratedDateTimeColumn _date;
+  GeneratedColumn<DateTime>? _date;
   @override
-  GeneratedDateTimeColumn get date => _date ??= _constructDate();
-  GeneratedDateTimeColumn _constructDate() {
-    return GeneratedDateTimeColumn(
-      'date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get date =>
+      _date ??= GeneratedColumn<DateTime>('date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [folderId, id, name, objectId, type, date];
   @override
-  $DidacticsContentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'didactics_contents';
   @override
-  String get $tableName => _alias ?? 'didactics_contents';
-  @override
-  final String actualTableName = 'didactics_contents';
+  String get actualTableName => 'didactics_contents';
   @override
   VerificationContext validateIntegrity(Insertable<ContentLocalModel> instance,
       {bool isInserting = false}) {
@@ -7004,34 +6295,34 @@ class $DidacticsContentsTable extends DidacticsContents
     final data = instance.toColumns(true);
     if (data.containsKey('folder_id')) {
       context.handle(_folderIdMeta,
-          folderId.isAcceptableOrUnknown(data['folder_id'], _folderIdMeta));
+          folderId.isAcceptableOrUnknown(data['folder_id']!, _folderIdMeta));
     } else if (isInserting) {
       context.missing(_folderIdMeta);
     }
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('object_id')) {
       context.handle(_objectIdMeta,
-          objectId.isAcceptableOrUnknown(data['object_id'], _objectIdMeta));
+          objectId.isAcceptableOrUnknown(data['object_id']!, _objectIdMeta));
     } else if (isInserting) {
       context.missing(_objectIdMeta);
     }
     if (data.containsKey('type')) {
       context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type'], _typeMeta));
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
     } else if (isInserting) {
       context.missing(_typeMeta);
     }
     if (data.containsKey('date')) {
       context.handle(
-          _dateMeta, date.isAcceptableOrUnknown(data['date'], _dateMeta));
+          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
     } else if (isInserting) {
       context.missing(_dateMeta);
     }
@@ -7041,9 +6332,9 @@ class $DidacticsContentsTable extends DidacticsContents
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ContentLocalModel map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ContentLocalModel.fromData(data, _db, prefix: effectivePrefix);
+  ContentLocalModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return ContentLocalModel.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -7054,35 +6345,35 @@ class $DidacticsContentsTable extends DidacticsContents
 
 class DidacticsDownloadedFileLocalModel extends DataClass
     implements Insertable<DidacticsDownloadedFileLocalModel> {
-  final String name;
-  final String path;
-  final int contentId;
+  final String? name;
+  final String? path;
+  final int? contentId;
   DidacticsDownloadedFileLocalModel(
-      {@required this.name, @required this.path, @required this.contentId});
+      {required this.name, required this.path, required this.contentId});
   factory DidacticsDownloadedFileLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
-    final intType = db.typeSystem.forDartType<int>();
     return DidacticsDownloadedFileLocalModel(
-      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      path: stringType.mapFromDatabaseResponse(data['${effectivePrefix}path']),
-      contentId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}content_id']),
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      path: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}path']),
+      contentId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}content_id']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String>(name);
+      map['name'] = Variable<String?>(name);
     }
     if (!nullToAbsent || path != null) {
-      map['path'] = Variable<String>(path);
+      map['path'] = Variable<String?>(path);
     }
     if (!nullToAbsent || contentId != null) {
-      map['content_id'] = Variable<int>(contentId);
+      map['content_id'] = Variable<int?>(contentId);
     }
     return map;
   }
@@ -7098,7 +6389,7 @@ class DidacticsDownloadedFileLocalModel extends DataClass
   }
 
   factory DidacticsDownloadedFileLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return DidacticsDownloadedFileLocalModel(
       name: serializer.fromJson<String>(json['name']),
@@ -7107,17 +6398,17 @@ class DidacticsDownloadedFileLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'name': serializer.toJson<String>(name),
-      'path': serializer.toJson<String>(path),
-      'contentId': serializer.toJson<int>(contentId),
+      'name': serializer.toJson<String?>(name),
+      'path': serializer.toJson<String?>(path),
+      'contentId': serializer.toJson<int?>(contentId),
     };
   }
 
   DidacticsDownloadedFileLocalModel copyWith(
-          {String name, String path, int contentId}) =>
+          {String? name, String? path, int? contentId}) =>
       DidacticsDownloadedFileLocalModel(
         name: name ?? this.name,
         path: path ?? this.path,
@@ -7137,7 +6428,7 @@ class DidacticsDownloadedFileLocalModel extends DataClass
   int get hashCode =>
       $mrjf($mrjc(name.hashCode, $mrjc(path.hashCode, contentId.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is DidacticsDownloadedFileLocalModel &&
           other.name == this.name &&
@@ -7147,24 +6438,24 @@ class DidacticsDownloadedFileLocalModel extends DataClass
 
 class DidacticsDownloadedFilesCompanion
     extends UpdateCompanion<DidacticsDownloadedFileLocalModel> {
-  final Value<String> name;
-  final Value<String> path;
-  final Value<int> contentId;
+  final Value<String?> name;
+  final Value<String?> path;
+  final Value<int?> contentId;
   const DidacticsDownloadedFilesCompanion({
     this.name = const Value.absent(),
     this.path = const Value.absent(),
     this.contentId = const Value.absent(),
   });
   DidacticsDownloadedFilesCompanion.insert({
-    @required String name,
-    @required String path,
+    required String name,
+    required String path,
     this.contentId = const Value.absent(),
   })  : name = Value(name),
         path = Value(path);
   static Insertable<DidacticsDownloadedFileLocalModel> custom({
-    Expression<String> name,
-    Expression<String> path,
-    Expression<int> contentId,
+    Expression<String>? name,
+    Expression<String>? path,
+    Expression<int>? contentId,
   }) {
     return RawValuesInsertable({
       if (name != null) 'name': name,
@@ -7174,7 +6465,7 @@ class DidacticsDownloadedFilesCompanion
   }
 
   DidacticsDownloadedFilesCompanion copyWith(
-      {Value<String> name, Value<String> path, Value<int> contentId}) {
+      {Value<String>? name, Value<String>? path, Value<int>? contentId}) {
     return DidacticsDownloadedFilesCompanion(
       name: name ?? this.name,
       path: path ?? this.path,
@@ -7186,13 +6477,13 @@ class DidacticsDownloadedFilesCompanion
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (name.present) {
-      map['name'] = Variable<String>(name.value);
+      map['name'] = Variable<String?>(name.value);
     }
     if (path.present) {
-      map['path'] = Variable<String>(path.value);
+      map['path'] = Variable<String?>(path.value);
     }
     if (contentId.present) {
-      map['content_id'] = Variable<int>(contentId.value);
+      map['content_id'] = Variable<int?>(contentId.value);
     }
     return map;
   }
@@ -7213,52 +6504,32 @@ class $DidacticsDownloadedFilesTable extends DidacticsDownloadedFiles
         TableInfo<$DidacticsDownloadedFilesTable,
             DidacticsDownloadedFileLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DidacticsDownloadedFilesTable(this._db, [this._alias]);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  GeneratedTextColumn _name;
+  GeneratedColumn<String>? _name;
   @override
-  GeneratedTextColumn get name => _name ??= _constructName();
-  GeneratedTextColumn _constructName() {
-    return GeneratedTextColumn(
-      'name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get name =>
+      _name ??= GeneratedColumn<String>('name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _pathMeta = const VerificationMeta('path');
-  GeneratedTextColumn _path;
+  GeneratedColumn<String>? _path;
   @override
-  GeneratedTextColumn get path => _path ??= _constructPath();
-  GeneratedTextColumn _constructPath() {
-    return GeneratedTextColumn(
-      'path',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get path =>
+      _path ??= GeneratedColumn<String>('path', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _contentIdMeta = const VerificationMeta('contentId');
-  GeneratedIntColumn _contentId;
+  GeneratedColumn<int>? _contentId;
   @override
-  GeneratedIntColumn get contentId => _contentId ??= _constructContentId();
-  GeneratedIntColumn _constructContentId() {
-    return GeneratedIntColumn(
-      'content_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get contentId =>
+      _contentId ??= GeneratedColumn<int>('content_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [name, path, contentId];
   @override
-  $DidacticsDownloadedFilesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'didactics_downloaded_files';
   @override
-  String get $tableName => _alias ?? 'didactics_downloaded_files';
-  @override
-  final String actualTableName = 'didactics_downloaded_files';
+  String get actualTableName => 'didactics_downloaded_files';
   @override
   VerificationContext validateIntegrity(
       Insertable<DidacticsDownloadedFileLocalModel> instance,
@@ -7267,19 +6538,19 @@ class $DidacticsDownloadedFilesTable extends DidacticsDownloadedFiles
     final data = instance.toColumns(true);
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('path')) {
       context.handle(
-          _pathMeta, path.isAcceptableOrUnknown(data['path'], _pathMeta));
+          _pathMeta, path.isAcceptableOrUnknown(data['path']!, _pathMeta));
     } else if (isInserting) {
       context.missing(_pathMeta);
     }
     if (data.containsKey('content_id')) {
       context.handle(_contentIdMeta,
-          contentId.isAcceptableOrUnknown(data['content_id'], _contentIdMeta));
+          contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta));
     }
     return context;
   }
@@ -7288,10 +6559,9 @@ class $DidacticsDownloadedFilesTable extends DidacticsDownloadedFiles
   Set<GeneratedColumn> get $primaryKey => {contentId};
   @override
   DidacticsDownloadedFileLocalModel map(Map<String, dynamic> data,
-      {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+      {String? tablePrefix}) {
     return DidacticsDownloadedFileLocalModel.fromData(data, _db,
-        prefix: effectivePrefix);
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -7301,75 +6571,70 @@ class $DidacticsDownloadedFilesTable extends DidacticsDownloadedFiles
 }
 
 class LocalGrade extends DataClass implements Insertable<LocalGrade> {
-  final int id;
-  final int subjectId;
-  final DateTime eventDate;
-  final double decimalValue;
-  final String displayValue;
-  final bool cancelled;
-  final bool underlined;
-  final int periodPos;
+  final int? id;
+  final int? subjectId;
+  final DateTime? eventDate;
+  final double? decimalValue;
+  final String? displayValue;
+  final bool? cancelled;
+  final bool? underlined;
+  final int? periodPos;
   LocalGrade(
-      {@required this.id,
-      @required this.subjectId,
-      @required this.eventDate,
-      @required this.decimalValue,
-      @required this.displayValue,
-      @required this.cancelled,
-      @required this.underlined,
-      @required this.periodPos});
+      {required this.id,
+      required this.subjectId,
+      required this.eventDate,
+      required this.decimalValue,
+      required this.displayValue,
+      required this.cancelled,
+      required this.underlined,
+      required this.periodPos});
   factory LocalGrade.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final doubleType = db.typeSystem.forDartType<double>();
-    final stringType = db.typeSystem.forDartType<String>();
-    final boolType = db.typeSystem.forDartType<bool>();
     return LocalGrade(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      subjectId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
-      eventDate: dateTimeType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      subjectId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject_id']),
+      eventDate: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_date']),
-      decimalValue: doubleType
+      decimalValue: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}decimal_value']),
-      displayValue: stringType
+      displayValue: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}display_value']),
-      cancelled:
-          boolType.mapFromDatabaseResponse(data['${effectivePrefix}cancelled']),
-      underlined: boolType
+      cancelled: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}cancelled']),
+      underlined: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}underlined']),
-      periodPos:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}period_pos']),
+      periodPos: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}period_pos']),
     );
   }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || subjectId != null) {
-      map['subject_id'] = Variable<int>(subjectId);
+      map['subject_id'] = Variable<int?>(subjectId);
     }
     if (!nullToAbsent || eventDate != null) {
-      map['event_date'] = Variable<DateTime>(eventDate);
+      map['event_date'] = Variable<DateTime?>(eventDate);
     }
     if (!nullToAbsent || decimalValue != null) {
-      map['decimal_value'] = Variable<double>(decimalValue);
+      map['decimal_value'] = Variable<double?>(decimalValue);
     }
     if (!nullToAbsent || displayValue != null) {
-      map['display_value'] = Variable<String>(displayValue);
+      map['display_value'] = Variable<String?>(displayValue);
     }
     if (!nullToAbsent || cancelled != null) {
-      map['cancelled'] = Variable<bool>(cancelled);
+      map['cancelled'] = Variable<bool?>(cancelled);
     }
     if (!nullToAbsent || underlined != null) {
-      map['underlined'] = Variable<bool>(underlined);
+      map['underlined'] = Variable<bool?>(underlined);
     }
     if (!nullToAbsent || periodPos != null) {
-      map['period_pos'] = Variable<int>(periodPos);
+      map['period_pos'] = Variable<int?>(periodPos);
     }
     return map;
   }
@@ -7402,7 +6667,7 @@ class LocalGrade extends DataClass implements Insertable<LocalGrade> {
   }
 
   factory LocalGrade.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return LocalGrade(
       id: serializer.fromJson<int>(json['id']),
@@ -7416,29 +6681,29 @@ class LocalGrade extends DataClass implements Insertable<LocalGrade> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'subjectId': serializer.toJson<int>(subjectId),
-      'eventDate': serializer.toJson<DateTime>(eventDate),
-      'decimalValue': serializer.toJson<double>(decimalValue),
-      'displayValue': serializer.toJson<String>(displayValue),
-      'cancelled': serializer.toJson<bool>(cancelled),
-      'underlined': serializer.toJson<bool>(underlined),
-      'periodPos': serializer.toJson<int>(periodPos),
+      'id': serializer.toJson<int?>(id),
+      'subjectId': serializer.toJson<int?>(subjectId),
+      'eventDate': serializer.toJson<DateTime?>(eventDate),
+      'decimalValue': serializer.toJson<double?>(decimalValue),
+      'displayValue': serializer.toJson<String?>(displayValue),
+      'cancelled': serializer.toJson<bool?>(cancelled),
+      'underlined': serializer.toJson<bool?>(underlined),
+      'periodPos': serializer.toJson<int?>(periodPos),
     };
   }
 
   LocalGrade copyWith(
-          {int id,
-          int subjectId,
-          DateTime eventDate,
-          double decimalValue,
-          String displayValue,
-          bool cancelled,
-          bool underlined,
-          int periodPos}) =>
+          {int? id,
+          int? subjectId,
+          DateTime? eventDate,
+          double? decimalValue,
+          String? displayValue,
+          bool? cancelled,
+          bool? underlined,
+          int? periodPos}) =>
       LocalGrade(
         id: id ?? this.id,
         subjectId: subjectId ?? this.subjectId,
@@ -7478,7 +6743,7 @@ class LocalGrade extends DataClass implements Insertable<LocalGrade> {
                       $mrjc(cancelled.hashCode,
                           $mrjc(underlined.hashCode, periodPos.hashCode))))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is LocalGrade &&
           other.id == this.id &&
@@ -7492,14 +6757,14 @@ class LocalGrade extends DataClass implements Insertable<LocalGrade> {
 }
 
 class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
-  final Value<int> id;
-  final Value<int> subjectId;
-  final Value<DateTime> eventDate;
-  final Value<double> decimalValue;
-  final Value<String> displayValue;
-  final Value<bool> cancelled;
-  final Value<bool> underlined;
-  final Value<int> periodPos;
+  final Value<int?> id;
+  final Value<int?> subjectId;
+  final Value<DateTime?> eventDate;
+  final Value<double?> decimalValue;
+  final Value<String?> displayValue;
+  final Value<bool?> cancelled;
+  final Value<bool?> underlined;
+  final Value<int?> periodPos;
   const LocalGradesCompanion({
     this.id = const Value.absent(),
     this.subjectId = const Value.absent(),
@@ -7512,13 +6777,13 @@ class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
   });
   LocalGradesCompanion.insert({
     this.id = const Value.absent(),
-    @required int subjectId,
-    @required DateTime eventDate,
-    @required double decimalValue,
-    @required String displayValue,
-    @required bool cancelled,
-    @required bool underlined,
-    @required int periodPos,
+    required int subjectId,
+    required DateTime eventDate,
+    required double decimalValue,
+    required String displayValue,
+    required bool cancelled,
+    required bool underlined,
+    required int periodPos,
   })  : subjectId = Value(subjectId),
         eventDate = Value(eventDate),
         decimalValue = Value(decimalValue),
@@ -7527,14 +6792,14 @@ class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
         underlined = Value(underlined),
         periodPos = Value(periodPos);
   static Insertable<LocalGrade> custom({
-    Expression<int> id,
-    Expression<int> subjectId,
-    Expression<DateTime> eventDate,
-    Expression<double> decimalValue,
-    Expression<String> displayValue,
-    Expression<bool> cancelled,
-    Expression<bool> underlined,
-    Expression<int> periodPos,
+    Expression<int>? id,
+    Expression<int>? subjectId,
+    Expression<DateTime>? eventDate,
+    Expression<double>? decimalValue,
+    Expression<String>? displayValue,
+    Expression<bool>? cancelled,
+    Expression<bool>? underlined,
+    Expression<int>? periodPos,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -7549,14 +6814,14 @@ class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
   }
 
   LocalGradesCompanion copyWith(
-      {Value<int> id,
-      Value<int> subjectId,
-      Value<DateTime> eventDate,
-      Value<double> decimalValue,
-      Value<String> displayValue,
-      Value<bool> cancelled,
-      Value<bool> underlined,
-      Value<int> periodPos}) {
+      {Value<int>? id,
+      Value<int>? subjectId,
+      Value<DateTime>? eventDate,
+      Value<double>? decimalValue,
+      Value<String>? displayValue,
+      Value<bool>? cancelled,
+      Value<bool>? underlined,
+      Value<int>? periodPos}) {
     return LocalGradesCompanion(
       id: id ?? this.id,
       subjectId: subjectId ?? this.subjectId,
@@ -7573,28 +6838,28 @@ class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (subjectId.present) {
-      map['subject_id'] = Variable<int>(subjectId.value);
+      map['subject_id'] = Variable<int?>(subjectId.value);
     }
     if (eventDate.present) {
-      map['event_date'] = Variable<DateTime>(eventDate.value);
+      map['event_date'] = Variable<DateTime?>(eventDate.value);
     }
     if (decimalValue.present) {
-      map['decimal_value'] = Variable<double>(decimalValue.value);
+      map['decimal_value'] = Variable<double?>(decimalValue.value);
     }
     if (displayValue.present) {
-      map['display_value'] = Variable<String>(displayValue.value);
+      map['display_value'] = Variable<String?>(displayValue.value);
     }
     if (cancelled.present) {
-      map['cancelled'] = Variable<bool>(cancelled.value);
+      map['cancelled'] = Variable<bool?>(cancelled.value);
     }
     if (underlined.present) {
-      map['underlined'] = Variable<bool>(underlined.value);
+      map['underlined'] = Variable<bool?>(underlined.value);
     }
     if (periodPos.present) {
-      map['period_pos'] = Variable<int>(periodPos.value);
+      map['period_pos'] = Variable<int?>(periodPos.value);
     }
     return map;
   }
@@ -7618,105 +6883,64 @@ class LocalGradesCompanion extends UpdateCompanion<LocalGrade> {
 class $LocalGradesTable extends LocalGrades
     with TableInfo<$LocalGradesTable, LocalGrade> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $LocalGradesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int?>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  GeneratedColumn<int?> get id =>
+      _id ??= GeneratedColumn<int?>('id', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _subjectIdMeta = const VerificationMeta('subjectId');
-  GeneratedIntColumn _subjectId;
+  GeneratedColumn<int?>? _subjectId;
   @override
-  GeneratedIntColumn get subjectId => _subjectId ??= _constructSubjectId();
-  GeneratedIntColumn _constructSubjectId() {
-    return GeneratedIntColumn(
-      'subject_id',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int?> get subjectId =>
+      _subjectId ??= GeneratedColumn<int?>('subject_id', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _eventDateMeta = const VerificationMeta('eventDate');
-  GeneratedDateTimeColumn _eventDate;
+  GeneratedColumn<DateTime>? _eventDate;
   @override
-  GeneratedDateTimeColumn get eventDate => _eventDate ??= _constructEventDate();
-  GeneratedDateTimeColumn _constructEventDate() {
-    return GeneratedDateTimeColumn(
-      'event_date',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<DateTime> get eventDate =>
+      _eventDate ??= GeneratedColumn<DateTime>('event_date', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _decimalValueMeta =
       const VerificationMeta('decimalValue');
-  GeneratedRealColumn _decimalValue;
+  GeneratedColumn<double>? _decimalValue;
   @override
-  GeneratedRealColumn get decimalValue =>
-      _decimalValue ??= _constructDecimalValue();
-  GeneratedRealColumn _constructDecimalValue() {
-    return GeneratedRealColumn(
-      'decimal_value',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<double> get decimalValue => _decimalValue ??=
+      GeneratedColumn<double>('decimal_value', aliasedName, false,
+          typeName: 'REAL', requiredDuringInsert: true);
   final VerificationMeta _displayValueMeta =
       const VerificationMeta('displayValue');
-  GeneratedTextColumn _displayValue;
+  GeneratedColumn<String>? _displayValue;
   @override
-  GeneratedTextColumn get displayValue =>
-      _displayValue ??= _constructDisplayValue();
-  GeneratedTextColumn _constructDisplayValue() {
-    return GeneratedTextColumn(
-      'display_value',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get displayValue => _displayValue ??=
+      GeneratedColumn<String>('display_value', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _cancelledMeta = const VerificationMeta('cancelled');
-  GeneratedBoolColumn _cancelled;
+  GeneratedColumn<bool>? _cancelled;
   @override
-  GeneratedBoolColumn get cancelled => _cancelled ??= _constructCancelled();
-  GeneratedBoolColumn _constructCancelled() {
-    return GeneratedBoolColumn(
-      'cancelled',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get cancelled =>
+      _cancelled ??= GeneratedColumn<bool>('cancelled', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (cancelled IN (0, 1))');
   final VerificationMeta _underlinedMeta = const VerificationMeta('underlined');
-  GeneratedBoolColumn _underlined;
+  GeneratedColumn<bool>? _underlined;
   @override
-  GeneratedBoolColumn get underlined => _underlined ??= _constructUnderlined();
-  GeneratedBoolColumn _constructUnderlined() {
-    return GeneratedBoolColumn(
-      'underlined',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<bool> get underlined =>
+      _underlined ??= GeneratedColumn<bool>('underlined', aliasedName, false,
+          typeName: 'INTEGER',
+          requiredDuringInsert: true,
+          defaultConstraints: 'CHECK (underlined IN (0, 1))');
   final VerificationMeta _periodPosMeta = const VerificationMeta('periodPos');
-  GeneratedIntColumn _periodPos;
+  GeneratedColumn<int?>? _periodPos;
   @override
-  GeneratedIntColumn get periodPos => _periodPos ??= _constructPeriodPos();
-  GeneratedIntColumn _constructPeriodPos() {
-    return GeneratedIntColumn(
-      'period_pos',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int?> get periodPos =>
+      _periodPos ??= GeneratedColumn<int?>('period_pos', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -7729,28 +6953,26 @@ class $LocalGradesTable extends LocalGrades
         periodPos
       ];
   @override
-  $LocalGradesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'local_grades';
   @override
-  String get $tableName => _alias ?? 'local_grades';
-  @override
-  final String actualTableName = 'local_grades';
+  String get actualTableName => 'local_grades';
   @override
   VerificationContext validateIntegrity(Insertable<LocalGrade> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('subject_id')) {
       context.handle(_subjectIdMeta,
-          subjectId.isAcceptableOrUnknown(data['subject_id'], _subjectIdMeta));
+          subjectId.isAcceptableOrUnknown(data['subject_id']!, _subjectIdMeta));
     } else if (isInserting) {
       context.missing(_subjectIdMeta);
     }
     if (data.containsKey('event_date')) {
       context.handle(_eventDateMeta,
-          eventDate.isAcceptableOrUnknown(data['event_date'], _eventDateMeta));
+          eventDate.isAcceptableOrUnknown(data['event_date']!, _eventDateMeta));
     } else if (isInserting) {
       context.missing(_eventDateMeta);
     }
@@ -7758,7 +6980,7 @@ class $LocalGradesTable extends LocalGrades
       context.handle(
           _decimalValueMeta,
           decimalValue.isAcceptableOrUnknown(
-              data['decimal_value'], _decimalValueMeta));
+              data['decimal_value']!, _decimalValueMeta));
     } else if (isInserting) {
       context.missing(_decimalValueMeta);
     }
@@ -7766,13 +6988,13 @@ class $LocalGradesTable extends LocalGrades
       context.handle(
           _displayValueMeta,
           displayValue.isAcceptableOrUnknown(
-              data['display_value'], _displayValueMeta));
+              data['display_value']!, _displayValueMeta));
     } else if (isInserting) {
       context.missing(_displayValueMeta);
     }
     if (data.containsKey('cancelled')) {
       context.handle(_cancelledMeta,
-          cancelled.isAcceptableOrUnknown(data['cancelled'], _cancelledMeta));
+          cancelled.isAcceptableOrUnknown(data['cancelled']!, _cancelledMeta));
     } else if (isInserting) {
       context.missing(_cancelledMeta);
     }
@@ -7780,13 +7002,13 @@ class $LocalGradesTable extends LocalGrades
       context.handle(
           _underlinedMeta,
           underlined.isAcceptableOrUnknown(
-              data['underlined'], _underlinedMeta));
+              data['underlined']!, _underlinedMeta));
     } else if (isInserting) {
       context.missing(_underlinedMeta);
     }
     if (data.containsKey('period_pos')) {
       context.handle(_periodPosMeta,
-          periodPos.isAcceptableOrUnknown(data['period_pos'], _periodPosMeta));
+          periodPos.isAcceptableOrUnknown(data['period_pos']!, _periodPosMeta));
     } else if (isInserting) {
       context.missing(_periodPosMeta);
     }
@@ -7796,9 +7018,9 @@ class $LocalGradesTable extends LocalGrades
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  LocalGrade map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return LocalGrade.fromData(data, _db, prefix: effectivePrefix);
+  LocalGrade map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return LocalGrade.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -7809,34 +7031,34 @@ class $LocalGradesTable extends LocalGrades
 
 class TimetableEntryLocalModel extends DataClass
     implements Insertable<TimetableEntryLocalModel> {
-  final int id;
-  final int start;
-  final int end;
-  final int dayOfWeek;
-  final int subject;
-  final String subjectName;
+  final int? id;
+  final int? start;
+  final int? end;
+  final int? dayOfWeek;
+  final int? subject;
+  final String? subjectName;
   TimetableEntryLocalModel(
       {this.id,
-      @required this.start,
-      @required this.end,
-      @required this.dayOfWeek,
-      @required this.subject,
-      @required this.subjectName});
+      required this.start,
+      required this.end,
+      required this.dayOfWeek,
+      required this.subject,
+      required this.subjectName});
   factory TimetableEntryLocalModel.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
     return TimetableEntryLocalModel(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      start: intType.mapFromDatabaseResponse(data['${effectivePrefix}start']),
-      end: intType.mapFromDatabaseResponse(data['${effectivePrefix}end']),
-      dayOfWeek: intType
+      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      start: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}start']),
+      end: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}end']),
+      dayOfWeek: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}day_of_week']),
-      subject:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}subject']),
-      subjectName: stringType
+      subject: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}subject']),
+      subjectName: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}subject_name']),
     );
   }
@@ -7844,22 +7066,22 @@ class TimetableEntryLocalModel extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+      map['id'] = Variable<int?>(id);
     }
     if (!nullToAbsent || start != null) {
-      map['start'] = Variable<int>(start);
+      map['start'] = Variable<int?>(start);
     }
     if (!nullToAbsent || end != null) {
-      map['end'] = Variable<int>(end);
+      map['end'] = Variable<int?>(end);
     }
     if (!nullToAbsent || dayOfWeek != null) {
-      map['day_of_week'] = Variable<int>(dayOfWeek);
+      map['day_of_week'] = Variable<int?>(dayOfWeek);
     }
     if (!nullToAbsent || subject != null) {
-      map['subject'] = Variable<int>(subject);
+      map['subject'] = Variable<int?>(subject);
     }
     if (!nullToAbsent || subjectName != null) {
-      map['subject_name'] = Variable<String>(subjectName);
+      map['subject_name'] = Variable<String?>(subjectName);
     }
     return map;
   }
@@ -7883,7 +7105,7 @@ class TimetableEntryLocalModel extends DataClass
   }
 
   factory TimetableEntryLocalModel.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return TimetableEntryLocalModel(
       id: serializer.fromJson<int>(json['id']),
@@ -7895,25 +7117,25 @@ class TimetableEntryLocalModel extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'start': serializer.toJson<int>(start),
-      'end': serializer.toJson<int>(end),
-      'dayOfWeek': serializer.toJson<int>(dayOfWeek),
-      'subject': serializer.toJson<int>(subject),
-      'subjectName': serializer.toJson<String>(subjectName),
+      'id': serializer.toJson<int?>(id),
+      'start': serializer.toJson<int?>(start),
+      'end': serializer.toJson<int?>(end),
+      'dayOfWeek': serializer.toJson<int?>(dayOfWeek),
+      'subject': serializer.toJson<int?>(subject),
+      'subjectName': serializer.toJson<String?>(subjectName),
     };
   }
 
   TimetableEntryLocalModel copyWith(
-          {int id,
-          int start,
-          int end,
-          int dayOfWeek,
-          int subject,
-          String subjectName}) =>
+          {int? id,
+          int? start,
+          int? end,
+          int? dayOfWeek,
+          int? subject,
+          String? subjectName}) =>
       TimetableEntryLocalModel(
         id: id ?? this.id,
         start: start ?? this.start,
@@ -7945,7 +7167,7 @@ class TimetableEntryLocalModel extends DataClass
               $mrjc(dayOfWeek.hashCode,
                   $mrjc(subject.hashCode, subjectName.hashCode))))));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is TimetableEntryLocalModel &&
           other.id == this.id &&
@@ -7958,12 +7180,12 @@ class TimetableEntryLocalModel extends DataClass
 
 class TimetableEntriesCompanion
     extends UpdateCompanion<TimetableEntryLocalModel> {
-  final Value<int> id;
-  final Value<int> start;
-  final Value<int> end;
-  final Value<int> dayOfWeek;
-  final Value<int> subject;
-  final Value<String> subjectName;
+  final Value<int?> id;
+  final Value<int?> start;
+  final Value<int?> end;
+  final Value<int?> dayOfWeek;
+  final Value<int?> subject;
+  final Value<String?> subjectName;
   const TimetableEntriesCompanion({
     this.id = const Value.absent(),
     this.start = const Value.absent(),
@@ -7974,23 +7196,23 @@ class TimetableEntriesCompanion
   });
   TimetableEntriesCompanion.insert({
     this.id = const Value.absent(),
-    @required int start,
-    @required int end,
-    @required int dayOfWeek,
-    @required int subject,
-    @required String subjectName,
+    required int start,
+    required int end,
+    required int dayOfWeek,
+    required int subject,
+    required String subjectName,
   })  : start = Value(start),
         end = Value(end),
         dayOfWeek = Value(dayOfWeek),
         subject = Value(subject),
         subjectName = Value(subjectName);
   static Insertable<TimetableEntryLocalModel> custom({
-    Expression<int> id,
-    Expression<int> start,
-    Expression<int> end,
-    Expression<int> dayOfWeek,
-    Expression<int> subject,
-    Expression<String> subjectName,
+    Expression<int>? id,
+    Expression<int>? start,
+    Expression<int>? end,
+    Expression<int>? dayOfWeek,
+    Expression<int>? subject,
+    Expression<String>? subjectName,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -8003,12 +7225,12 @@ class TimetableEntriesCompanion
   }
 
   TimetableEntriesCompanion copyWith(
-      {Value<int> id,
-      Value<int> start,
-      Value<int> end,
-      Value<int> dayOfWeek,
-      Value<int> subject,
-      Value<String> subjectName}) {
+      {Value<int>? id,
+      Value<int>? start,
+      Value<int>? end,
+      Value<int>? dayOfWeek,
+      Value<int>? subject,
+      Value<String>? subjectName}) {
     return TimetableEntriesCompanion(
       id: id ?? this.id,
       start: start ?? this.start,
@@ -8023,22 +7245,22 @@ class TimetableEntriesCompanion
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<int?>(id.value);
     }
     if (start.present) {
-      map['start'] = Variable<int>(start.value);
+      map['start'] = Variable<int?>(start.value);
     }
     if (end.present) {
-      map['end'] = Variable<int>(end.value);
+      map['end'] = Variable<int?>(end.value);
     }
     if (dayOfWeek.present) {
-      map['day_of_week'] = Variable<int>(dayOfWeek.value);
+      map['day_of_week'] = Variable<int?>(dayOfWeek.value);
     }
     if (subject.present) {
-      map['subject'] = Variable<int>(subject.value);
+      map['subject'] = Variable<int?>(subject.value);
     }
     if (subjectName.present) {
-      map['subject_name'] = Variable<String>(subjectName.value);
+      map['subject_name'] = Variable<String?>(subjectName.value);
     }
     return map;
   }
@@ -8060,88 +7282,54 @@ class TimetableEntriesCompanion
 class $TimetableEntriesTable extends TimetableEntries
     with TableInfo<$TimetableEntriesTable, TimetableEntryLocalModel> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $TimetableEntriesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedColumn<int?>? _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, true,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
+  GeneratedColumn<int?> get id =>
+      _id ??= GeneratedColumn<int?>('id', aliasedName, true,
+          typeName: 'INTEGER',
+          requiredDuringInsert: false,
+          defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _startMeta = const VerificationMeta('start');
-  GeneratedIntColumn _start;
+  GeneratedColumn<int>? _start;
   @override
-  GeneratedIntColumn get start => _start ??= _constructStart();
-  GeneratedIntColumn _constructStart() {
-    return GeneratedIntColumn(
-      'start',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get start =>
+      _start ??= GeneratedColumn<int>('start', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _endMeta = const VerificationMeta('end');
-  GeneratedIntColumn _end;
+  GeneratedColumn<int>? _end;
   @override
-  GeneratedIntColumn get end => _end ??= _constructEnd();
-  GeneratedIntColumn _constructEnd() {
-    return GeneratedIntColumn(
-      'end',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get end =>
+      _end ??= GeneratedColumn<int>('end', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _dayOfWeekMeta = const VerificationMeta('dayOfWeek');
-  GeneratedIntColumn _dayOfWeek;
+  GeneratedColumn<int>? _dayOfWeek;
   @override
-  GeneratedIntColumn get dayOfWeek => _dayOfWeek ??= _constructDayOfWeek();
-  GeneratedIntColumn _constructDayOfWeek() {
-    return GeneratedIntColumn(
-      'day_of_week',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get dayOfWeek =>
+      _dayOfWeek ??= GeneratedColumn<int>('day_of_week', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _subjectMeta = const VerificationMeta('subject');
-  GeneratedIntColumn _subject;
+  GeneratedColumn<int>? _subject;
   @override
-  GeneratedIntColumn get subject => _subject ??= _constructSubject();
-  GeneratedIntColumn _constructSubject() {
-    return GeneratedIntColumn(
-      'subject',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<int> get subject =>
+      _subject ??= GeneratedColumn<int>('subject', aliasedName, false,
+          typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _subjectNameMeta =
       const VerificationMeta('subjectName');
-  GeneratedTextColumn _subjectName;
+  GeneratedColumn<String>? _subjectName;
   @override
-  GeneratedTextColumn get subjectName =>
-      _subjectName ??= _constructSubjectName();
-  GeneratedTextColumn _constructSubjectName() {
-    return GeneratedTextColumn(
-      'subject_name',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get subjectName => _subjectName ??=
+      GeneratedColumn<String>('subject_name', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [id, start, end, dayOfWeek, subject, subjectName];
   @override
-  $TimetableEntriesTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'timetable_entries';
   @override
-  String get $tableName => _alias ?? 'timetable_entries';
-  @override
-  final String actualTableName = 'timetable_entries';
+  String get actualTableName => 'timetable_entries';
   @override
   VerificationContext validateIntegrity(
       Insertable<TimetableEntryLocalModel> instance,
@@ -8149,29 +7337,31 @@ class $TimetableEntriesTable extends TimetableEntries
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('start')) {
       context.handle(
-          _startMeta, start.isAcceptableOrUnknown(data['start'], _startMeta));
+          _startMeta, start.isAcceptableOrUnknown(data['start']!, _startMeta));
     } else if (isInserting) {
       context.missing(_startMeta);
     }
     if (data.containsKey('end')) {
       context.handle(
-          _endMeta, end.isAcceptableOrUnknown(data['end'], _endMeta));
+          _endMeta, end.isAcceptableOrUnknown(data['end']!, _endMeta));
     } else if (isInserting) {
       context.missing(_endMeta);
     }
     if (data.containsKey('day_of_week')) {
-      context.handle(_dayOfWeekMeta,
-          dayOfWeek.isAcceptableOrUnknown(data['day_of_week'], _dayOfWeekMeta));
+      context.handle(
+          _dayOfWeekMeta,
+          dayOfWeek.isAcceptableOrUnknown(
+              data['day_of_week']!, _dayOfWeekMeta));
     } else if (isInserting) {
       context.missing(_dayOfWeekMeta);
     }
     if (data.containsKey('subject')) {
       context.handle(_subjectMeta,
-          subject.isAcceptableOrUnknown(data['subject'], _subjectMeta));
+          subject.isAcceptableOrUnknown(data['subject']!, _subjectMeta));
     } else if (isInserting) {
       context.missing(_subjectMeta);
     }
@@ -8179,7 +7369,7 @@ class $TimetableEntriesTable extends TimetableEntries
       context.handle(
           _subjectNameMeta,
           subjectName.isAcceptableOrUnknown(
-              data['subject_name'], _subjectNameMeta));
+              data['subject_name']!, _subjectNameMeta));
     } else if (isInserting) {
       context.missing(_subjectNameMeta);
     }
@@ -8190,10 +7380,9 @@ class $TimetableEntriesTable extends TimetableEntries
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   TimetableEntryLocalModel map(Map<String, dynamic> data,
-      {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+      {String? tablePrefix}) {
     return TimetableEntryLocalModel.fromData(data, _db,
-        prefix: effectivePrefix);
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -8203,16 +7392,16 @@ class $TimetableEntriesTable extends TimetableEntries
 }
 
 class Document extends DataClass implements Insertable<Document> {
-  final String hash;
-  final String description;
-  Document({@required this.hash, @required this.description});
+  final String? hash;
+  final String? description;
+  Document({required this.hash, required this.description});
   factory Document.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
     return Document(
-      hash: stringType.mapFromDatabaseResponse(data['${effectivePrefix}hash']),
-      description: stringType
+      hash: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}hash']),
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
     );
   }
@@ -8220,10 +7409,10 @@ class Document extends DataClass implements Insertable<Document> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || hash != null) {
-      map['hash'] = Variable<String>(hash);
+      map['hash'] = Variable<String?>(hash);
     }
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     return map;
   }
@@ -8238,7 +7427,7 @@ class Document extends DataClass implements Insertable<Document> {
   }
 
   factory Document.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Document(
       hash: serializer.fromJson<String>(json['hash']),
@@ -8246,15 +7435,15 @@ class Document extends DataClass implements Insertable<Document> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'hash': serializer.toJson<String>(hash),
-      'description': serializer.toJson<String>(description),
+      'hash': serializer.toJson<String?>(hash),
+      'description': serializer.toJson<String?>(description),
     };
   }
 
-  Document copyWith({String hash, String description}) => Document(
+  Document copyWith({String? hash, String? description}) => Document(
         hash: hash ?? this.hash,
         description: description ?? this.description,
       );
@@ -8270,7 +7459,7 @@ class Document extends DataClass implements Insertable<Document> {
   @override
   int get hashCode => $mrjf($mrjc(hash.hashCode, description.hashCode));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Document &&
           other.hash == this.hash &&
@@ -8278,20 +7467,21 @@ class Document extends DataClass implements Insertable<Document> {
 }
 
 class DocumentsCompanion extends UpdateCompanion<Document> {
-  final Value<String> hash;
-  final Value<String> description;
+  final Value<String?> hash;
+  final Value<String?> description;
   const DocumentsCompanion({
     this.hash = const Value.absent(),
     this.description = const Value.absent(),
   });
   DocumentsCompanion.insert({
-    @required String hash,
-    @required String description,
+    required String hash,
+    required String description,
   })  : hash = Value(hash),
         description = Value(description);
+
   static Insertable<Document> custom({
-    Expression<String> hash,
-    Expression<String> description,
+    Expression<String>? hash,
+    Expression<String>? description,
   }) {
     return RawValuesInsertable({
       if (hash != null) 'hash': hash,
@@ -8299,7 +7489,8 @@ class DocumentsCompanion extends UpdateCompanion<Document> {
     });
   }
 
-  DocumentsCompanion copyWith({Value<String> hash, Value<String> description}) {
+  DocumentsCompanion copyWith(
+      {Value<String>? hash, Value<String>? description}) {
     return DocumentsCompanion(
       hash: hash ?? this.hash,
       description: description ?? this.description,
@@ -8310,10 +7501,10 @@ class DocumentsCompanion extends UpdateCompanion<Document> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (hash.present) {
-      map['hash'] = Variable<String>(hash.value);
+      map['hash'] = Variable<String?>(hash.value);
     }
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     return map;
   }
@@ -8331,42 +7522,27 @@ class DocumentsCompanion extends UpdateCompanion<Document> {
 class $DocumentsTable extends Documents
     with TableInfo<$DocumentsTable, Document> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DocumentsTable(this._db, [this._alias]);
   final VerificationMeta _hashMeta = const VerificationMeta('hash');
-  GeneratedTextColumn _hash;
+  GeneratedColumn<String>? _hash;
   @override
-  GeneratedTextColumn get hash => _hash ??= _constructHash();
-  GeneratedTextColumn _constructHash() {
-    return GeneratedTextColumn(
-      'hash',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get hash =>
+      _hash ??= GeneratedColumn<String>('hash', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  GeneratedColumn<String>? _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get description => _description ??=
+      GeneratedColumn<String>('description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [hash, description];
   @override
-  $DocumentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'documents';
   @override
-  String get $tableName => _alias ?? 'documents';
-  @override
-  final String actualTableName = 'documents';
+  String get actualTableName => 'documents';
   @override
   VerificationContext validateIntegrity(Insertable<Document> instance,
       {bool isInserting = false}) {
@@ -8374,7 +7550,7 @@ class $DocumentsTable extends Documents
     final data = instance.toColumns(true);
     if (data.containsKey('hash')) {
       context.handle(
-          _hashMeta, hash.isAcceptableOrUnknown(data['hash'], _hashMeta));
+          _hashMeta, hash.isAcceptableOrUnknown(data['hash']!, _hashMeta));
     } else if (isInserting) {
       context.missing(_hashMeta);
     }
@@ -8382,7 +7558,7 @@ class $DocumentsTable extends Documents
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
@@ -8392,9 +7568,9 @@ class $DocumentsTable extends Documents
   @override
   Set<GeneratedColumn> get $primaryKey => {hash};
   @override
-  Document map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Document.fromData(data, _db, prefix: effectivePrefix);
+  Document map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Document.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -8404,23 +7580,22 @@ class $DocumentsTable extends Documents
 }
 
 class SchoolReport extends DataClass implements Insertable<SchoolReport> {
-  final String description;
-  final String confirmLink;
-  final String viewLink;
+  final String? description;
+  final String? confirmLink;
+  final String? viewLink;
   SchoolReport(
-      {@required this.description,
-      @required this.confirmLink,
-      @required this.viewLink});
+      {required this.description,
+      required this.confirmLink,
+      required this.viewLink});
   factory SchoolReport.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
     return SchoolReport(
-      description: stringType
+      description: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
-      confirmLink: stringType
+      confirmLink: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}confirm_link']),
-      viewLink: stringType
+      viewLink: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}view_link']),
     );
   }
@@ -8428,13 +7603,13 @@ class SchoolReport extends DataClass implements Insertable<SchoolReport> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+      map['description'] = Variable<String?>(description);
     }
     if (!nullToAbsent || confirmLink != null) {
-      map['confirm_link'] = Variable<String>(confirmLink);
+      map['confirm_link'] = Variable<String?>(confirmLink);
     }
     if (!nullToAbsent || viewLink != null) {
-      map['view_link'] = Variable<String>(viewLink);
+      map['view_link'] = Variable<String?>(viewLink);
     }
     return map;
   }
@@ -8454,7 +7629,7 @@ class SchoolReport extends DataClass implements Insertable<SchoolReport> {
   }
 
   factory SchoolReport.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return SchoolReport(
       description: serializer.fromJson<String>(json['description']),
@@ -8463,17 +7638,17 @@ class SchoolReport extends DataClass implements Insertable<SchoolReport> {
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'description': serializer.toJson<String>(description),
-      'confirmLink': serializer.toJson<String>(confirmLink),
-      'viewLink': serializer.toJson<String>(viewLink),
+      'description': serializer.toJson<String?>(description),
+      'confirmLink': serializer.toJson<String?>(confirmLink),
+      'viewLink': serializer.toJson<String?>(viewLink),
     };
   }
 
   SchoolReport copyWith(
-          {String description, String confirmLink, String viewLink}) =>
+          {String? description, String? confirmLink, String? viewLink}) =>
       SchoolReport(
         description: description ?? this.description,
         confirmLink: confirmLink ?? this.confirmLink,
@@ -8493,7 +7668,7 @@ class SchoolReport extends DataClass implements Insertable<SchoolReport> {
   int get hashCode => $mrjf($mrjc(
       description.hashCode, $mrjc(confirmLink.hashCode, viewLink.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is SchoolReport &&
           other.description == this.description &&
@@ -8502,25 +7677,25 @@ class SchoolReport extends DataClass implements Insertable<SchoolReport> {
 }
 
 class SchoolReportsCompanion extends UpdateCompanion<SchoolReport> {
-  final Value<String> description;
-  final Value<String> confirmLink;
-  final Value<String> viewLink;
+  final Value<String?> description;
+  final Value<String?> confirmLink;
+  final Value<String?> viewLink;
   const SchoolReportsCompanion({
     this.description = const Value.absent(),
     this.confirmLink = const Value.absent(),
     this.viewLink = const Value.absent(),
   });
   SchoolReportsCompanion.insert({
-    @required String description,
-    @required String confirmLink,
-    @required String viewLink,
+    required String description,
+    required String confirmLink,
+    required String viewLink,
   })  : description = Value(description),
         confirmLink = Value(confirmLink),
         viewLink = Value(viewLink);
   static Insertable<SchoolReport> custom({
-    Expression<String> description,
-    Expression<String> confirmLink,
-    Expression<String> viewLink,
+    Expression<String>? description,
+    Expression<String>? confirmLink,
+    Expression<String>? viewLink,
   }) {
     return RawValuesInsertable({
       if (description != null) 'description': description,
@@ -8530,9 +7705,9 @@ class SchoolReportsCompanion extends UpdateCompanion<SchoolReport> {
   }
 
   SchoolReportsCompanion copyWith(
-      {Value<String> description,
-      Value<String> confirmLink,
-      Value<String> viewLink}) {
+      {Value<String>? description,
+      Value<String>? confirmLink,
+      Value<String>? viewLink}) {
     return SchoolReportsCompanion(
       description: description ?? this.description,
       confirmLink: confirmLink ?? this.confirmLink,
@@ -8544,13 +7719,13 @@ class SchoolReportsCompanion extends UpdateCompanion<SchoolReport> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (description.present) {
-      map['description'] = Variable<String>(description.value);
+      map['description'] = Variable<String?>(description.value);
     }
     if (confirmLink.present) {
-      map['confirm_link'] = Variable<String>(confirmLink.value);
+      map['confirm_link'] = Variable<String?>(confirmLink.value);
     }
     if (viewLink.present) {
-      map['view_link'] = Variable<String>(viewLink.value);
+      map['view_link'] = Variable<String?>(viewLink.value);
     }
     return map;
   }
@@ -8569,56 +7744,34 @@ class SchoolReportsCompanion extends UpdateCompanion<SchoolReport> {
 class $SchoolReportsTable extends SchoolReports
     with TableInfo<$SchoolReportsTable, SchoolReport> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $SchoolReportsTable(this._db, [this._alias]);
   final VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  GeneratedColumn<String>? _description;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get description => _description ??=
+      GeneratedColumn<String>('description', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _confirmLinkMeta =
       const VerificationMeta('confirmLink');
-  GeneratedTextColumn _confirmLink;
+  GeneratedColumn<String>? _confirmLink;
   @override
-  GeneratedTextColumn get confirmLink =>
-      _confirmLink ??= _constructConfirmLink();
-  GeneratedTextColumn _constructConfirmLink() {
-    return GeneratedTextColumn(
-      'confirm_link',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get confirmLink => _confirmLink ??=
+      GeneratedColumn<String>('confirm_link', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _viewLinkMeta = const VerificationMeta('viewLink');
-  GeneratedTextColumn _viewLink;
+  GeneratedColumn<String>? _viewLink;
   @override
-  GeneratedTextColumn get viewLink => _viewLink ??= _constructViewLink();
-  GeneratedTextColumn _constructViewLink() {
-    return GeneratedTextColumn(
-      'view_link',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get viewLink =>
+      _viewLink ??= GeneratedColumn<String>('view_link', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [description, confirmLink, viewLink];
   @override
-  $SchoolReportsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'school_reports';
   @override
-  String get $tableName => _alias ?? 'school_reports';
-  @override
-  final String actualTableName = 'school_reports';
+  String get actualTableName => 'school_reports';
   @override
   VerificationContext validateIntegrity(Insertable<SchoolReport> instance,
       {bool isInserting = false}) {
@@ -8628,7 +7781,7 @@ class $SchoolReportsTable extends SchoolReports
       context.handle(
           _descriptionMeta,
           description.isAcceptableOrUnknown(
-              data['description'], _descriptionMeta));
+              data['description']!, _descriptionMeta));
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
@@ -8636,13 +7789,13 @@ class $SchoolReportsTable extends SchoolReports
       context.handle(
           _confirmLinkMeta,
           confirmLink.isAcceptableOrUnknown(
-              data['confirm_link'], _confirmLinkMeta));
+              data['confirm_link']!, _confirmLinkMeta));
     } else if (isInserting) {
       context.missing(_confirmLinkMeta);
     }
     if (data.containsKey('view_link')) {
       context.handle(_viewLinkMeta,
-          viewLink.isAcceptableOrUnknown(data['view_link'], _viewLinkMeta));
+          viewLink.isAcceptableOrUnknown(data['view_link']!, _viewLinkMeta));
     } else if (isInserting) {
       context.missing(_viewLinkMeta);
     }
@@ -8652,9 +7805,9 @@ class $SchoolReportsTable extends SchoolReports
   @override
   Set<GeneratedColumn> get $primaryKey => {viewLink};
   @override
-  SchoolReport map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return SchoolReport.fromData(data, _db, prefix: effectivePrefix);
+  SchoolReport map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SchoolReport.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -8665,20 +7818,21 @@ class $SchoolReportsTable extends SchoolReports
 
 class DownloadedDocument extends DataClass
     implements Insertable<DownloadedDocument> {
-  final String hash;
-  final String path;
-  final String filename;
+  final String? hash;
+  final String? path;
+  final String? filename;
   DownloadedDocument(
-      {@required this.hash, @required this.path, @required this.filename});
+      {required this.hash, required this.path, required this.filename});
   factory DownloadedDocument.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+      {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    final stringType = db.typeSystem.forDartType<String>();
     return DownloadedDocument(
-      hash: stringType.mapFromDatabaseResponse(data['${effectivePrefix}hash']),
-      path: stringType.mapFromDatabaseResponse(data['${effectivePrefix}path']),
-      filename: stringType
+      hash: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}hash']),
+      path: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}path']),
+      filename: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}filename']),
     );
   }
@@ -8686,13 +7840,13 @@ class DownloadedDocument extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || hash != null) {
-      map['hash'] = Variable<String>(hash);
+      map['hash'] = Variable<String?>(hash);
     }
     if (!nullToAbsent || path != null) {
-      map['path'] = Variable<String>(path);
+      map['path'] = Variable<String?>(path);
     }
     if (!nullToAbsent || filename != null) {
-      map['filename'] = Variable<String>(filename);
+      map['filename'] = Variable<String?>(filename);
     }
     return map;
   }
@@ -8708,7 +7862,7 @@ class DownloadedDocument extends DataClass
   }
 
   factory DownloadedDocument.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+      {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return DownloadedDocument(
       hash: serializer.fromJson<String>(json['hash']),
@@ -8717,16 +7871,16 @@ class DownloadedDocument extends DataClass
     );
   }
   @override
-  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'hash': serializer.toJson<String>(hash),
-      'path': serializer.toJson<String>(path),
-      'filename': serializer.toJson<String>(filename),
+      'hash': serializer.toJson<String?>(hash),
+      'path': serializer.toJson<String?>(path),
+      'filename': serializer.toJson<String?>(filename),
     };
   }
 
-  DownloadedDocument copyWith({String hash, String path, String filename}) =>
+  DownloadedDocument copyWith({String? hash, String? path, String? filename}) =>
       DownloadedDocument(
         hash: hash ?? this.hash,
         path: path ?? this.path,
@@ -8746,7 +7900,7 @@ class DownloadedDocument extends DataClass
   int get hashCode =>
       $mrjf($mrjc(hash.hashCode, $mrjc(path.hashCode, filename.hashCode)));
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       (other is DownloadedDocument &&
           other.hash == this.hash &&
@@ -8755,25 +7909,25 @@ class DownloadedDocument extends DataClass
 }
 
 class DownloadedDocumentsCompanion extends UpdateCompanion<DownloadedDocument> {
-  final Value<String> hash;
-  final Value<String> path;
-  final Value<String> filename;
+  final Value<String?> hash;
+  final Value<String?> path;
+  final Value<String?> filename;
   const DownloadedDocumentsCompanion({
     this.hash = const Value.absent(),
     this.path = const Value.absent(),
     this.filename = const Value.absent(),
   });
   DownloadedDocumentsCompanion.insert({
-    @required String hash,
-    @required String path,
-    @required String filename,
+    required String hash,
+    required String path,
+    required String filename,
   })  : hash = Value(hash),
         path = Value(path),
         filename = Value(filename);
   static Insertable<DownloadedDocument> custom({
-    Expression<String> hash,
-    Expression<String> path,
-    Expression<String> filename,
+    Expression<String>? hash,
+    Expression<String>? path,
+    Expression<String>? filename,
   }) {
     return RawValuesInsertable({
       if (hash != null) 'hash': hash,
@@ -8783,7 +7937,7 @@ class DownloadedDocumentsCompanion extends UpdateCompanion<DownloadedDocument> {
   }
 
   DownloadedDocumentsCompanion copyWith(
-      {Value<String> hash, Value<String> path, Value<String> filename}) {
+      {Value<String>? hash, Value<String>? path, Value<String>? filename}) {
     return DownloadedDocumentsCompanion(
       hash: hash ?? this.hash,
       path: path ?? this.path,
@@ -8795,13 +7949,13 @@ class DownloadedDocumentsCompanion extends UpdateCompanion<DownloadedDocument> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (hash.present) {
-      map['hash'] = Variable<String>(hash.value);
+      map['hash'] = Variable<String?>(hash.value);
     }
     if (path.present) {
-      map['path'] = Variable<String>(path.value);
+      map['path'] = Variable<String?>(path.value);
     }
     if (filename.present) {
-      map['filename'] = Variable<String>(filename.value);
+      map['filename'] = Variable<String?>(filename.value);
     }
     return map;
   }
@@ -8820,52 +7974,32 @@ class DownloadedDocumentsCompanion extends UpdateCompanion<DownloadedDocument> {
 class $DownloadedDocumentsTable extends DownloadedDocuments
     with TableInfo<$DownloadedDocumentsTable, DownloadedDocument> {
   final GeneratedDatabase _db;
-  final String _alias;
+  final String? _alias;
   $DownloadedDocumentsTable(this._db, [this._alias]);
   final VerificationMeta _hashMeta = const VerificationMeta('hash');
-  GeneratedTextColumn _hash;
+  GeneratedColumn<String?>? _hash;
   @override
-  GeneratedTextColumn get hash => _hash ??= _constructHash();
-  GeneratedTextColumn _constructHash() {
-    return GeneratedTextColumn(
-      'hash',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String?> get hash =>
+      _hash ??= GeneratedColumn<String?>('hash', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _pathMeta = const VerificationMeta('path');
-  GeneratedTextColumn _path;
+  GeneratedColumn<String>? _path;
   @override
-  GeneratedTextColumn get path => _path ??= _constructPath();
-  GeneratedTextColumn _constructPath() {
-    return GeneratedTextColumn(
-      'path',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get path =>
+      _path ??= GeneratedColumn<String>('path', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _filenameMeta = const VerificationMeta('filename');
-  GeneratedTextColumn _filename;
+  GeneratedColumn<String>? _filename;
   @override
-  GeneratedTextColumn get filename => _filename ??= _constructFilename();
-  GeneratedTextColumn _constructFilename() {
-    return GeneratedTextColumn(
-      'filename',
-      $tableName,
-      false,
-    );
-  }
-
+  GeneratedColumn<String> get filename =>
+      _filename ??= GeneratedColumn<String>('filename', aliasedName, false,
+          typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [hash, path, filename];
   @override
-  $DownloadedDocumentsTable get asDslTable => this;
+  String get aliasedName => _alias ?? 'downloaded_documents';
   @override
-  String get $tableName => _alias ?? 'downloaded_documents';
-  @override
-  final String actualTableName = 'downloaded_documents';
+  String get actualTableName => 'downloaded_documents';
   @override
   VerificationContext validateIntegrity(Insertable<DownloadedDocument> instance,
       {bool isInserting = false}) {
@@ -8873,19 +8007,19 @@ class $DownloadedDocumentsTable extends DownloadedDocuments
     final data = instance.toColumns(true);
     if (data.containsKey('hash')) {
       context.handle(
-          _hashMeta, hash.isAcceptableOrUnknown(data['hash'], _hashMeta));
+          _hashMeta, hash.isAcceptableOrUnknown(data['hash']!, _hashMeta));
     } else if (isInserting) {
       context.missing(_hashMeta);
     }
     if (data.containsKey('path')) {
       context.handle(
-          _pathMeta, path.isAcceptableOrUnknown(data['path'], _pathMeta));
+          _pathMeta, path.isAcceptableOrUnknown(data['path']!, _pathMeta));
     } else if (isInserting) {
       context.missing(_pathMeta);
     }
     if (data.containsKey('filename')) {
       context.handle(_filenameMeta,
-          filename.isAcceptableOrUnknown(data['filename'], _filenameMeta));
+          filename.isAcceptableOrUnknown(data['filename']!, _filenameMeta));
     } else if (isInserting) {
       context.missing(_filenameMeta);
     }
@@ -8895,9 +8029,9 @@ class $DownloadedDocumentsTable extends DownloadedDocuments
   @override
   Set<GeneratedColumn> get $primaryKey => {hash};
   @override
-  DownloadedDocument map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return DownloadedDocument.fromData(data, _db, prefix: effectivePrefix);
+  DownloadedDocument map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DownloadedDocument.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
@@ -8908,90 +8042,90 @@ class $DownloadedDocumentsTable extends DownloadedDocuments
 
 abstract class _$SRDatabase extends GeneratedDatabase {
   _$SRDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  $LessonsTable _lessons;
+  $LessonsTable? _lessons;
   $LessonsTable get lessons => _lessons ??= $LessonsTable(this);
-  $SubjectsTable _subjects;
+  $SubjectsTable? _subjects;
   $SubjectsTable get subjects => _subjects ??= $SubjectsTable(this);
-  $ProfessorsTable _professors;
+  $ProfessorsTable? _professors;
   $ProfessorsTable get professors => _professors ??= $ProfessorsTable(this);
-  $GradesTable _grades;
+  $GradesTable? _grades;
   $GradesTable get grades => _grades ??= $GradesTable(this);
-  $AgendaEventsTableTable _agendaEventsTable;
+  $AgendaEventsTableTable? _agendaEventsTable;
   $AgendaEventsTableTable get agendaEventsTable =>
       _agendaEventsTable ??= $AgendaEventsTableTable(this);
-  $AbsencesTable _absences;
+  $AbsencesTable? _absences;
   $AbsencesTable get absences => _absences ??= $AbsencesTable(this);
-  $PeriodsTable _periods;
+  $PeriodsTable? _periods;
   $PeriodsTable get periods => _periods ??= $PeriodsTable(this);
-  $NoticesTable _notices;
+  $NoticesTable? _notices;
   $NoticesTable get notices => _notices ??= $NoticesTable(this);
-  $AttachmentsTable _attachments;
+  $AttachmentsTable? _attachments;
   $AttachmentsTable get attachments => _attachments ??= $AttachmentsTable(this);
-  $NotesTable _notes;
+  $NotesTable? _notes;
   $NotesTable get notes => _notes ??= $NotesTable(this);
-  $NotesAttachmentsTable _notesAttachments;
+  $NotesAttachmentsTable? _notesAttachments;
   $NotesAttachmentsTable get notesAttachments =>
       _notesAttachments ??= $NotesAttachmentsTable(this);
-  $DidacticsTeachersTable _didacticsTeachers;
+  $DidacticsTeachersTable? _didacticsTeachers;
   $DidacticsTeachersTable get didacticsTeachers =>
       _didacticsTeachers ??= $DidacticsTeachersTable(this);
-  $DidacticsFoldersTable _didacticsFolders;
+  $DidacticsFoldersTable? _didacticsFolders;
   $DidacticsFoldersTable get didacticsFolders =>
       _didacticsFolders ??= $DidacticsFoldersTable(this);
-  $DidacticsContentsTable _didacticsContents;
+  $DidacticsContentsTable? _didacticsContents;
   $DidacticsContentsTable get didacticsContents =>
       _didacticsContents ??= $DidacticsContentsTable(this);
-  $DidacticsDownloadedFilesTable _didacticsDownloadedFiles;
+  $DidacticsDownloadedFilesTable? _didacticsDownloadedFiles;
   $DidacticsDownloadedFilesTable get didacticsDownloadedFiles =>
       _didacticsDownloadedFiles ??= $DidacticsDownloadedFilesTable(this);
-  $LocalGradesTable _localGrades;
+  $LocalGradesTable? _localGrades;
   $LocalGradesTable get localGrades => _localGrades ??= $LocalGradesTable(this);
-  $TimetableEntriesTable _timetableEntries;
+  $TimetableEntriesTable? _timetableEntries;
   $TimetableEntriesTable get timetableEntries =>
       _timetableEntries ??= $TimetableEntriesTable(this);
-  $DocumentsTable _documents;
+  $DocumentsTable? _documents;
   $DocumentsTable get documents => _documents ??= $DocumentsTable(this);
-  $SchoolReportsTable _schoolReports;
+  $SchoolReportsTable? _schoolReports;
   $SchoolReportsTable get schoolReports =>
       _schoolReports ??= $SchoolReportsTable(this);
-  $DownloadedDocumentsTable _downloadedDocuments;
+  $DownloadedDocumentsTable? _downloadedDocuments;
   $DownloadedDocumentsTable get downloadedDocuments =>
       _downloadedDocuments ??= $DownloadedDocumentsTable(this);
-  AbsenceDao _absenceDao;
+  AbsenceDao? _absenceDao;
   AbsenceDao get absenceDao => _absenceDao ??= AbsenceDao(this as SRDatabase);
-  NoteDao _noteDao;
+  NoteDao? _noteDao;
   NoteDao get noteDao => _noteDao ??= NoteDao(this as SRDatabase);
-  DocumentsDao _documentsDao;
+  DocumentsDao? _documentsDao;
   DocumentsDao get documentsDao =>
       _documentsDao ??= DocumentsDao(this as SRDatabase);
-  GradesLocalDatasource _gradesLocalDatasource;
+  GradesLocalDatasource? _gradesLocalDatasource;
   GradesLocalDatasource get gradesLocalDatasource =>
       _gradesLocalDatasource ??= GradesLocalDatasource(this as SRDatabase);
-  AgendaLocalDatasource _agendaLocalDatasource;
+  AgendaLocalDatasource? _agendaLocalDatasource;
   AgendaLocalDatasource get agendaLocalDatasource =>
       _agendaLocalDatasource ??= AgendaLocalDatasource(this as SRDatabase);
-  LessonsLocalDatasource _lessonsLocalDatasource;
+  LessonsLocalDatasource? _lessonsLocalDatasource;
   LessonsLocalDatasource get lessonsLocalDatasource =>
       _lessonsLocalDatasource ??= LessonsLocalDatasource(this as SRDatabase);
-  SubjectsLocalDatasource _subjectsLocalDatasource;
+  SubjectsLocalDatasource? _subjectsLocalDatasource;
   SubjectsLocalDatasource get subjectsLocalDatasource =>
       _subjectsLocalDatasource ??= SubjectsLocalDatasource(this as SRDatabase);
-  ProfessorLocalDatasource _professorLocalDatasource;
+  ProfessorLocalDatasource? _professorLocalDatasource;
   ProfessorLocalDatasource get professorLocalDatasource =>
       _professorLocalDatasource ??=
           ProfessorLocalDatasource(this as SRDatabase);
-  PeriodsLocalDatasource _periodsLocalDatasource;
+  PeriodsLocalDatasource? _periodsLocalDatasource;
   PeriodsLocalDatasource get periodsLocalDatasource =>
       _periodsLocalDatasource ??= PeriodsLocalDatasource(this as SRDatabase);
-  NoticeboardLocalDatasource _noticeboardLocalDatasource;
+  NoticeboardLocalDatasource? _noticeboardLocalDatasource;
   NoticeboardLocalDatasource get noticeboardLocalDatasource =>
       _noticeboardLocalDatasource ??=
           NoticeboardLocalDatasource(this as SRDatabase);
-  TimetableLocalDatasource _timetableLocalDatasource;
+  TimetableLocalDatasource? _timetableLocalDatasource;
   TimetableLocalDatasource get timetableLocalDatasource =>
       _timetableLocalDatasource ??=
           TimetableLocalDatasource(this as SRDatabase);
-  DidacticsLocalDatasource _didacticsLocalDatasource;
+  DidacticsLocalDatasource? _didacticsLocalDatasource;
   DidacticsLocalDatasource get didacticsLocalDatasource =>
       _didacticsLocalDatasource ??=
           DidacticsLocalDatasource(this as SRDatabase);

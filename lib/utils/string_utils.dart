@@ -1,4 +1,4 @@
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
+import 'package:fimber/fimber.dart';
 
 class StringUtils {
   // john doe => John Doe
@@ -10,14 +10,14 @@ class StringUtils {
     }
   }
 
-  static String removeLastChar(String str) {
+  static String removeLastChar(String? str) {
     try {
       if (str != null && str.isNotEmpty) {
         str = str.substring(0, str.length - 2);
       }
-      return str;
+      return str ?? '';
     } catch (_) {
-      return str;
+      return str ?? '';
     }
   }
 
@@ -31,7 +31,8 @@ class StringUtils {
     }
   }
 
-  static String _getPascalCase({List<String> input, String separator}) {
+  static String _getPascalCase(
+      {required List<String> input, required String separator}) {
     List<String> words = input.map(_upperCaseFirstLetter).toList();
     return words.join(separator);
   }
@@ -81,7 +82,7 @@ class StringUtils {
         ret = string.substring(
             0, string.length > length ? length : string.length);
       } catch (e) {
-        Logger.info('Coldnt beatufiy string');
+        Fimber.i('Coldnt beatufiy string');
         String removedSpaces = string.replaceAll(' ', '');
         ret = string.substring(
             0, removedSpaces.length > length ? length : removedSpaces.length);

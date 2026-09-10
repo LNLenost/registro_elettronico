@@ -4,10 +4,12 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:open_file/open_file.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/core/presentation/custom/sr_failure_view.dart';
-import 'package:registro_elettronico/core/presentation/custom/sr_loading_view.dart';
-import 'package:registro_elettronico/core/presentation/custom/sr_search_empty_view.dart';
+import 'package:registro_elettronico/core/presentation/custom/states/sr_failure_view.dart';
+import 'package:registro_elettronico/core/presentation/custom/states/sr_loading_view.dart';
+import 'package:registro_elettronico/core/presentation/custom/states/sr_search_empty_view.dart';
 import 'package:registro_elettronico/core/presentation/widgets/cusotm_placeholder.dart';
+import 'package:registro_elettronico/feature/didactics/presentation/text_view_page.dart';
+import 'package:registro_elettronico/feature/noticeboard/data/model/attachment/attachment_file.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/notice_domain_model.dart';
 import 'package:registro_elettronico/feature/noticeboard/presentation/watcher/noticeboard_watcher_bloc.dart';
 import 'package:registro_elettronico/utils/update_manager.dart';
@@ -18,15 +20,17 @@ import 'notice_card.dart';
 final GlobalKey<RefreshIndicatorState> noticeboardRefresherKey = GlobalKey();
 
 class NoticeboardPage extends StatefulWidget {
-  const NoticeboardPage({Key key}) : super(key: key);
+  const NoticeboardPage({Key? key}) : super(key: key);
 
   @override
   _NoticeboardPageState createState() => _NoticeboardPageState();
 }
 
 class _NoticeboardPageState extends State<NoticeboardPage> {
-  SearchBar _searchBar;
+  late SearchBar _searchBar;
   String _searchQuery = '';
+  bool _unreadOnly = false;
+  String _range = 'all';
 
   @override
   void initState() {
@@ -62,13 +66,15 @@ class _NoticeboardPageState extends State<NoticeboardPage> {
         child: BlocBuilder<NoticeboardWatcherBloc, NoticeboardWatcherState>(
           builder: (context, state) {
             if (state is NoticeboardWatcherLoadSuccess) {
-              if (state.notices.isEmpty) {
+              if (state.notices!.isEmpty) {
                 return _NoticesEmpty();
               }
 
               return _NoticesLoaded(
                 notices: state.notices,
                 query: _searchQuery,
+                unreadOnly: _unreadOnly,
+                range: _range,
               );
             } else if (state is NoticeboardWatcherFailure) {
               return SRFailureView(failure: state.failure);
@@ -83,19 +89,97 @@ class _NoticeboardPageState extends State<NoticeboardPage> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      brightness: Theme.of(context).brightness,
       title: Text(
-        AppLocalizations.of(context).translate('notice_board'),
+        AppLocalizations.of(context)!.translate('notice_board')!,
       ),
       actions: [
         _searchBar.getSearchAction(context),
+        PopupMenuButton<bool>(
+          initialValue: _unreadOnly,
+          icon: const Icon(Icons.filter_list),
+          onSelected: (unreadOnly) {
+            setState(() => _unreadOnly = unreadOnly);
+          },
+          itemBuilder: (context) => [
+            PopupMenuItem<bool>(
+              value: false,
+              child: Text(
+                AppLocalizations.of(context)!.translate('all_notices')!,
+              ),
+            ),
+            PopupMenuItem<bool>(
+              value: true,
+              child: Text(
+                AppLocalizations.of(context)!.translate('unread_notices')!,
+              ),
+            ),
+          ],
+        ),
+        PopupMenuButton<String>(
+          initialValue: _range,
+          icon: const Icon(Icons.event_available),
+          onSelected: (range) {
+            setState(() => _range = range);
+          },
+          itemBuilder: (context) => [
+            PopupMenuItem<String>(
+              value: 'all',
+              child: Text(
+                AppLocalizations.of(context)!.translate('all_notices')!,
+              ),
+            ),
+            PopupMenuItem<String>(
+              value: 'active',
+              child: Text(
+                AppLocalizations.of(context)!.translate('active_notices')!,
+              ),
+            ),
+            PopupMenuItem<String>(
+              value: 'expired',
+              child: Text(
+                AppLocalizations.of(context)!.translate('expired_notices')!,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
 }
 
+List<NoticeDomainModel> filterNotices(
+  List<NoticeDomainModel> notices, {
+  required bool unreadOnly,
+  String? category,
+  String range = 'all',
+}) {
+  if (!unreadOnly &&
+      (category == null || category.isEmpty) &&
+      range == 'all') {
+    return notices;
+  }
+
+  Iterable<NoticeDomainModel> filtered = notices;
+
+  if (unreadOnly) {
+    filtered = filtered.where((notice) => notice.readStatus != true);
+  }
+
+  if (category != null && category.isNotEmpty) {
+    filtered = filtered.where((notice) => notice.contentCategory == category);
+  }
+
+  if (range == 'active') {
+    filtered = filtered.where((notice) => notice.validInRange == true);
+  } else if (range == 'expired') {
+    filtered = filtered.where((notice) => notice.validInRange != true);
+  }
+
+  return filtered.toList();
+}
+
 class _NoticesEmpty extends StatelessWidget {
-  const _NoticesEmpty({Key key}) : super(key: key);
+  const _NoticesEmpty({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,43 +187,80 @@ class _NoticesEmpty extends StatelessWidget {
       icon: Icons.email,
       showUpdate: true,
       onTap: () {
-        noticeboardRefresherKey.currentState.show();
+        noticeboardRefresherKey.currentState!.show();
       },
-      text: AppLocalizations.of(context).translate('no_notices'),
+      text: AppLocalizations.of(context)!.translate('no_notices'),
     );
   }
 }
 
-class _NoticesLoaded extends StatelessWidget {
-  final List<NoticeDomainModel> notices;
+class _NoticesLoaded extends StatefulWidget {
+  final List<NoticeDomainModel>? notices;
   final String query;
+  final bool unreadOnly;
+  final String range;
 
   const _NoticesLoaded({
-    Key key,
-    @required this.notices,
-    @required this.query,
+    Key? key,
+    required this.notices,
+    required this.query,
+    required this.unreadOnly,
+    required this.range,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<NoticeDomainModel> noticesToShow;
+  State<_NoticesLoaded> createState() => _NoticesLoadedState();
+}
 
-    if (query.isNotEmpty && query.length >= 2) {
-      noticesToShow = notices.where((l) => _showResult(query, l)).toList();
-    } else {
-      noticesToShow = notices;
+class _NoticesLoadedState extends State<_NoticesLoaded> {
+  String? _category;
+
+  @override
+  Widget build(BuildContext context) {
+    List<NoticeDomainModel> noticesToShow = filterNotices(
+      widget.notices!,
+      unreadOnly: widget.unreadOnly,
+      category: _category,
+      range: widget.range,
+    );
+
+    if (widget.query.isNotEmpty && widget.query.length >= 2) {
+      noticesToShow = noticesToShow
+          .where((l) => _showResult(widget.query, l))
+          .toList();
     }
 
+    final categories = widget.notices!
+        .map((notice) => notice.contentCategory)
+        .whereType<String>()
+        .where((category) => category.isNotEmpty)
+        .toSet()
+        .toList()
+      ..sort();
+
     if (noticesToShow.isEmpty) {
-      return SrSearchEmptyView();
+      return ListView(
+        padding: const EdgeInsets.all(12.0),
+        children: [
+          _buildCategoryFilter(context, categories),
+          const SizedBox(
+            height: 300,
+            child: SrSearchEmptyView(),
+          ),
+        ],
+      );
     }
 
     return ListView.builder(
-      itemCount: noticesToShow.length,
+      itemCount: noticesToShow.length + 1,
       padding: const EdgeInsets.all(12.0),
       itemBuilder: (context, index) {
+        if (index == 0) {
+          return _buildCategoryFilter(context, categories);
+        }
+
         return NoticeCard(
-          notice: noticesToShow[index],
+          notice: noticesToShow[index - 1],
           showDownloadSnackbar: () {
             final snackBar = SnackBar(
               content: _DownloadAttachmentSnackbar(),
@@ -147,7 +268,7 @@ class _NoticesLoaded extends StatelessWidget {
               behavior: SnackBarBehavior.floating,
             );
 
-            Scaffold.of(context)
+            ScaffoldMessenger.of(context)
               ..removeCurrentSnackBar()
               ..showSnackBar(snackBar);
           },
@@ -156,9 +277,45 @@ class _NoticesLoaded extends StatelessWidget {
     );
   }
 
+  Widget _buildCategoryFilter(BuildContext context, List<String> categories) {
+    final selectedCategory = categories.contains(_category) ? _category : '';
+
+    return Row(
+      children: [
+        Text(
+          AppLocalizations.of(context)!.translate('category')!,
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: DropdownButton<String>(
+            isExpanded: true,
+            value: selectedCategory,
+            items: [
+              DropdownMenuItem<String>(
+                value: '',
+                child: Text(
+                  AppLocalizations.of(context)!.translate('all_notices')!,
+                ),
+              ),
+              ...categories.map(
+                (category) => DropdownMenuItem<String>(
+                  value: category,
+                  child: Text(category),
+                ),
+              ),
+            ],
+            onChanged: (category) {
+              setState(() => _category = category);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   bool _showResult(String query, NoticeDomainModel notice) {
     final lQuery = query.toLowerCase().replaceAll(' ', '');
-    return notice.contentTitle
+    return notice.contentTitle!
             .toLowerCase()
             .replaceAll(' ', '')
             .contains(lQuery) ||
@@ -171,33 +328,51 @@ class _NoticesLoaded extends StatelessWidget {
 }
 
 class _DownloadAttachmentSnackbar extends StatelessWidget {
-  const _DownloadAttachmentSnackbar({Key key}) : super(key: key);
+  const _DownloadAttachmentSnackbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AttachmentDownloadBloc, AttachmentDownloadState>(
       listener: (context, state) {
-        if (state is AttachmentDownloadSuccess ||
-            state is AttachmentDownloadFailure) {
-          Future.delayed(Duration(seconds: 3))
-              .then((value) => Scaffold.of(context)..removeCurrentSnackBar());
+        if (state is AttachmentDownloadFailure) {
+          Future.delayed(Duration(seconds: 3)).then((value) =>
+              ScaffoldMessenger.of(context)..removeCurrentSnackBar());
         }
+
         if (state is AttachmentDownloadSuccess) {
-          OpenFile.open(state.downloadedAttachment.file.path);
+          ScaffoldMessenger.of(context)..removeCurrentSnackBar();
+        }
+
+        if (state is AttachmentDownloadSuccess) {
+          if (state.downloadedAttachment is AttachmentFile) {
+            final file = state.downloadedAttachment as AttachmentFile;
+            OpenFile.open(file.file.path);
+          } else if (state.downloadedAttachment is AttachmentText) {
+            final text = state.downloadedAttachment as AttachmentText?;
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TextViewPage(
+                  text: text!.text,
+                ),
+              ),
+            );
+          }
         }
       },
       builder: (context, state) {
         if (state is AttachmentDownloadSuccess) {
-          return Text(AppLocalizations.of(context)
-              .translate('file_downloaded_success'));
+          return Text(AppLocalizations.of(context)!
+              .translate('file_downloaded_success')!);
         } else if (state is AttachmentDownloadFailure) {
-          return Text(AppLocalizations.of(context).translate('error_download'));
+          return Text(
+              AppLocalizations.of(context)!.translate('error_download')!);
         } else if (state is AttachmentDownloadInProgress) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppLocalizations.of(context).translate('downloading'),
+                AppLocalizations.of(context)!.translate('downloading')!,
               ),
               Container(
                 height: 20,

@@ -14,12 +14,10 @@ class DoubleBackToCloseApp extends StatefulWidget {
   final Widget child;
 
   const DoubleBackToCloseApp({
-    Key key,
-    @required this.snackBar,
-    @required this.child,
-  })  : assert(snackBar != null),
-        assert(child != null),
-        super(key: key);
+    Key? key,
+    required this.snackBar,
+    required this.child,
+  }) : super(key: key);
 
   @override
   DoubleBackToCloseAppState createState() => DoubleBackToCloseAppState();
@@ -28,7 +26,7 @@ class DoubleBackToCloseApp extends StatefulWidget {
 @visibleForTesting
 class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
   /// The last time the user tapped Android's back-button.
-  DateTime lastTimeBackButtonWasTapped;
+  DateTime? lastTimeBackButtonWasTapped;
 
   /// Returns whether the current platform is Android.
   bool get isAndroid => Theme.of(context).platform == TargetPlatform.android;
@@ -44,7 +42,7 @@ class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
   bool get isSnackBarVisible =>
       (lastTimeBackButtonWasTapped != null) &&
       (widget.snackBar.duration >
-          DateTime.now().difference(lastTimeBackButtonWasTapped));
+          DateTime.now().difference(lastTimeBackButtonWasTapped!));
 
   /// Returns whether the next back navigation of this route will be handled
   /// internally.
@@ -53,12 +51,10 @@ class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
   /// local-history of the current route, in order to handle pop. This is done
   /// by [Drawer], for example, so it can close on pop.
   bool get willHandlePopInternally =>
-      ModalRoute.of(context).willHandlePopInternally;
+      ModalRoute.of(context)!.willHandlePopInternally;
 
   @override
   Widget build(BuildContext context) {
-    ensureThatContextContainsScaffold();
-
     if (isAndroid) {
       return WillPopScope(
         onWillPop: onWillPop,
@@ -75,17 +71,8 @@ class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
       return true;
     } else {
       lastTimeBackButtonWasTapped = DateTime.now();
-      Scaffold.of(context).showSnackBar(widget.snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(widget.snackBar);
       return false;
-    }
-  }
-
-  /// Throws a [StateError] if this widget was not wrapped in a [Scaffold].
-  void ensureThatContextContainsScaffold() {
-    if (Scaffold.of(context, nullOk: true) == null) {
-      throw StateError(
-        '`DoubleBackToCloseApp` must be wrapped in a `Scaffold`.',
-      );
     }
   }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grade_domain_model.dart';
 import 'package:registro_elettronico/feature/grades/domain/repository/grades_repository.dart';
@@ -12,12 +12,12 @@ part 'local_grades_watcher_state.dart';
 
 class LocalGradesWatcherBloc
     extends Bloc<LocalGradesWatcherEvent, LocalGradesWatcherState> {
-  final GradesRepository gradesRepository;
+  final GradesRepository? gradesRepository;
 
-  StreamSubscription _localGradesStreamSubscription;
+  late StreamSubscription _localGradesStreamSubscription;
 
   LocalGradesWatcherBloc({
-    @required this.gradesRepository,
+    required this.gradesRepository,
   }) : super(LocalGradesWatcherInitial());
 
   @override
@@ -33,7 +33,7 @@ class LocalGradesWatcherBloc
         yield LocalGradesWatcherLoading();
       }
     } else if (event is LocalGradesWatchAllStarted) {
-      _localGradesStreamSubscription = gradesRepository
+      _localGradesStreamSubscription = gradesRepository!
           .watchLocalGrades(
               subjectId: event.subjectId, periodPos: event.periodPos)
           .listen((resource) {

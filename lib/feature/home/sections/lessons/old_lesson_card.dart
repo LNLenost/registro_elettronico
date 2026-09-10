@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/lessons/domain/model/last_lessons_domain_model.dart';
 import 'package:registro_elettronico/utils/color_utils.dart';
 
 class LessonCard extends StatelessWidget {
-  final LessonWithDurationDomainModel lesson;
+  final LessonWithDurationDomainModel? lesson;
 
   const LessonCard({
-    Key key,
-    @required this.lesson,
+    Key? key,
+    this.lesson,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (lesson == null) {
+    if (lesson == null || lesson?.lesson == null) {
       return Container();
     }
 
@@ -35,8 +36,9 @@ class LessonCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('${lesson.duration}'),
-                  Text('Ora'),
+                  Text('${lesson!.duration}'),
+                  Text(AppLocalizations.of(context)!
+                      .translate('current_time')!),
                 ],
               ),
             ),
@@ -51,7 +53,7 @@ class LessonCard extends StatelessWidget {
                       height: 4,
                     ),
                     Text(
-                      lesson.lesson.subjectDescription.toString(),
+                      lesson!.lesson!.subjectDescription.toString(),
                       style: TextStyle(
                         fontSize: 15,
                       ),
@@ -63,7 +65,7 @@ class LessonCard extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        lesson.lesson.lessonArgoment,
+                        lesson!.lesson!.lessonArgoment!,
                         style: TextStyle(
                           fontSize: 12,
                         ),

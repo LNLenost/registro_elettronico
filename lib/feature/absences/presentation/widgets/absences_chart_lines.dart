@@ -6,11 +6,11 @@ import 'package:registro_elettronico/utils/constants/registro_constants.dart';
 import 'package:registro_elettronico/utils/date_utils.dart';
 
 class AbsencesChartLines extends StatefulWidget {
-  final Map<int, List<Absence>> absences;
+  final Map<int?, List<Absence>> absences;
 
   const AbsencesChartLines({
-    Key key,
-    @required this.absences,
+    Key? key,
+    required this.absences,
   }) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class AbsencesChartLines extends StatefulWidget {
 }
 
 class AbsencesChartLinesState extends State<AbsencesChartLines> {
-  bool isShowingMainData;
+  bool? isShowingMainData;
 
   @override
   void initState() {
@@ -65,40 +65,40 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
         touchTooltipData: LineTouchTooltipData(
             tooltipBgColor: Theme.of(context).brightness == Brightness.dark
                 ? Colors.white
-                : Colors.grey[900].withOpacity(0.9),
+                : Colors.grey[900]!.withOpacity(0.9),
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 final flSpot = barSpot;
-                String text;
+                String? text;
                 // This also checks if the event is only one and in case changes the text to singular
                 if (flSpot.barIndex == 0) {
-                  text = AppLocalizations.of(context)
-                      .translate('absences')
+                  text = AppLocalizations.of(context)!
+                      .translate('absences')!
                       .toLowerCase();
                   if (flSpot.y == 1) {
-                    text = AppLocalizations.of(context)
-                        .translate('absence')
+                    text = AppLocalizations.of(context)!
+                        .translate('absence')!
                         .toLowerCase();
                   }
                 }
                 if (flSpot.barIndex == 1) {
-                  text = AppLocalizations.of(context)
-                      .translate('delay')
+                  text = AppLocalizations.of(context)!
+                      .translate('delay')!
                       .toLowerCase();
                   if (flSpot.y == 1) {
-                    text = AppLocalizations.of(context)
-                        .translate('late')
+                    text = AppLocalizations.of(context)!
+                        .translate('late')!
                         .toLowerCase();
                   }
                 }
 
                 if (flSpot.barIndex == 2) {
-                  text = AppLocalizations.of(context)
-                      .translate('early_exits')
+                  text = AppLocalizations.of(context)!
+                      .translate('early_exits')!
                       .toLowerCase();
                   if (flSpot.y == 1) {
-                    text = AppLocalizations.of(context)
-                        .translate('early_exit')
+                    text = AppLocalizations.of(context)!
+                        .translate('early_exit')!
                         .toLowerCase();
                   }
                 }
@@ -118,10 +118,12 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
         show: false,
       ),
       titlesData: FlTitlesData(
+        topTitles: SideTitles(showTitles: false),
+        rightTitles: SideTitles(showTitles: false),
         bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 22,
-          getTextStyles: (value) {
+          getTextStyles: (context, value) {
             return TextStyle(
               color: Colors.white,
               fontSize: 12,
@@ -129,47 +131,47 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
           },
           margin: 10,
           getTitles: (value) {
-            final locale = AppLocalizations.of(context).locale.toString();
+            final locale = AppLocalizations.of(context)!.locale.toString();
             switch (value.toInt()) {
               case 1:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 9, 1), locale)
                     .toUpperCase();
               case 2:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 10, 1), locale)
                     .toUpperCase();
               case 3:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 11, 1), locale)
                     .toUpperCase();
               case 4:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 12, 1), locale)
                     .toUpperCase();
               case 5:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 1, 1), locale)
                     .toUpperCase();
               case 6:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 2, 1), locale)
                     .toUpperCase();
               case 7:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 3, 1), locale)
                     .toUpperCase();
 
               case 8:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 4, 1), locale)
                     .toUpperCase();
               case 9:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 5, 1), locale)
                     .toUpperCase();
               case 10:
-                return DateUtils.convertMonthForDisplay(
+                return SRDateUtils.convertMonthForDisplay(
                         DateTime.utc(2019, 6, 1), locale)
                     .toUpperCase();
             }
@@ -222,7 +224,7 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
       isCurved: true,
       preventCurveOverShooting: true,
       colors: [
-        Colors.yellow[600],
+        Colors.yellow[600]!,
       ],
       barWidth: 6,
       isStrokeCapRound: true,
@@ -240,8 +242,8 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
     ];
   }
 
-  FlSpot _getSpotForMonth(double month, String code, {String code2}) {
-    final absences = widget.absences[month];
+  FlSpot _getSpotForMonth(double month, String code, {String? code2}) {
+    final absences = widget.absences[month.toInt()];
     double monthGraph;
     if (month >= 9.0 && month <= 12.0) {
       monthGraph = month - 8;
@@ -254,8 +256,8 @@ class AbsencesChartLinesState extends State<AbsencesChartLines> {
         monthGraph,
         absences
             .where((absence) =>
-                (absence.evtCode == code || absence.evtCode == code2 ?? '') &&
-                absence.evtDate.month == month.toInt())
+                (absence.evtCode == code || absence.evtCode == code2) &&
+                absence.evtDate!.month == month.toInt())
             .length
             .toDouble(),
       );

@@ -3,7 +3,7 @@ import 'package:registro_elettronico/core/infrastructure/localizations/app_local
 
 class GeneralSortingSettingsDialog extends StatefulWidget {
   final bool ascending;
-  GeneralSortingSettingsDialog({Key key, @required this.ascending})
+  GeneralSortingSettingsDialog({Key? key, required this.ascending})
       : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class GeneralSortingSettingsDialog extends StatefulWidget {
 
 class _GeneralSortingSettingsDialogState
     extends State<GeneralSortingSettingsDialog> {
-  bool _ascending;
+  bool? _ascending;
 
   @override
   void initState() {
@@ -26,12 +26,12 @@ class _GeneralSortingSettingsDialogState
     return Column(
       children: <Widget>[
         RadioListTile(
-          title:
-              Text(AppLocalizations.of(context).translate('average_ascending')),
+          title: Text(
+              AppLocalizations.of(context)!.translate('average_ascending')!),
           value: true,
           groupValue: _ascending,
-          activeColor: Theme.of(context).accentColor,
-          onChanged: (value) {
+          activeColor: Theme.of(context).colorScheme.secondary,
+          onChanged: (dynamic value) {
             setState(() {
               _ascending = value;
             });
@@ -40,11 +40,11 @@ class _GeneralSortingSettingsDialogState
         ),
         RadioListTile(
           title: Text(
-              AppLocalizations.of(context).translate('average_descending')),
+              AppLocalizations.of(context)!.translate('average_descending')!),
           value: false,
           groupValue: _ascending,
-          activeColor: Theme.of(context).accentColor,
-          onChanged: (value) {
+          activeColor: Theme.of(context).colorScheme.secondary,
+          onChanged: (dynamic value) {
             setState(() {
               _ascending = value;
             });

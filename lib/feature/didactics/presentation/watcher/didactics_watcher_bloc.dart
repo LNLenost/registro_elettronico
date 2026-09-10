@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/didactics/domain/model/teacher_domain_model.dart';
 import 'package:registro_elettronico/feature/didactics/domain/repository/didactics_repository.dart';
@@ -12,12 +12,12 @@ part 'didactics_watcher_state.dart';
 
 class DidacticsWatcherBloc
     extends Bloc<DidacticsWatcherEvent, DidacticsWatcherState> {
-  final DidacticsRepository didacticsRepository;
+  final DidacticsRepository? didacticsRepository;
 
-  StreamSubscription _didacticsStreamSubscription;
+  StreamSubscription? _didacticsStreamSubscription;
 
   DidacticsWatcherBloc({
-    @required this.didacticsRepository,
+    required this.didacticsRepository,
   }) : super(DidacticsWatcherInitial());
 
   @override
@@ -36,10 +36,10 @@ class DidacticsWatcherBloc
       }
     } else if (event is DidacticsWatchAllStarted) {
       if (_didacticsStreamSubscription != null) {
-        await _didacticsStreamSubscription.cancel();
+        await _didacticsStreamSubscription!.cancel();
       }
       _didacticsStreamSubscription =
-          didacticsRepository.watchTeachersMaterials().listen((event) {
+          didacticsRepository!.watchTeachersMaterials().listen((event) {
         add(DidacticsDataReceived(resource: event));
       });
     }
@@ -47,7 +47,7 @@ class DidacticsWatcherBloc
 
   @override
   Future<void> close() {
-    _didacticsStreamSubscription.cancel();
+    _didacticsStreamSubscription!.cancel();
     return super.close();
   }
 }

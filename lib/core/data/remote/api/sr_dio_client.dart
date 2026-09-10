@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:registro_elettronico/core/data/remote/api/sr_api_config.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:registro_elettronico/feature/authentication/data/model/login/login_response_remote_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/repository/authentication_repository.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/login_page.dart';
@@ -12,14 +12,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 final GlobalKey<NavigatorState> navigator = GlobalKey();
 
 class SRDioClient {
-  final AuthenticationRepository authenticationRepository;
-  final FlutterSecureStorage flutterSecureStorage;
-  final SharedPreferences sharedPreferences;
+  final AuthenticationRepository? authenticationRepository;
+  final FlutterSecureStorage? flutterSecureStorage;
+  final SharedPreferences? sharedPreferences;
 
   SRDioClient({
-    @required this.authenticationRepository,
-    @required this.flutterSecureStorage,
-    @required this.sharedPreferences,
+    required this.authenticationRepository,
+    required this.flutterSecureStorage,
+    required this.sharedPreferences,
   });
 
   Dio createDio() {
@@ -33,36 +33,41 @@ class SRDioClient {
 
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (RequestOptions options) async {
+        onRequest: (requestOptions, handler) async {
           // Replace the student id with the current profile student id
-          if (options.path.contains('{studentId}')) {
+          if (requestOptions.path.contains('{studentId}')) {
             final studentId =
-                await authenticationRepository.getCurrentStudentId();
+                await authenticationRepository!.getCurrentStudentId();
 
-            final replaced = options.path.replaceAll(
+            final replaced = requestOptions.path.replaceAll(
               '{studentId}',
               studentId,
             );
-            options.path = replaced;
+            requestOptions.path = replaced;
           }
 
-          if (options.path != SRApiConfig.loginPath) {
+          if (requestOptions.path != SRApiConfig.loginPath) {
             _dio.lock();
 
             // get the profile from the database
-            final profile = await authenticationRepository.getProfile();
+            final profile = await authenticationRepository!.getProfile();
+
+            // if the profile is null just proceed, it will log out automatically
+            // this shouldnt happen but is there just in case
+            if (profile == null) {
+              return handler.next(requestOptions);
+            }
 
             //? This checks if the profile exires before now, so if this  results true the token is expired
-            if (profile.expire.isBefore(DateTime.now()) ||
-                profile == null ||
-                profile.token.isEmpty) {
-              Logger.info(
+            if (profile.expire!.isBefore(DateTime.now()) ||
+                profile.token!.isEmpty) {
+              Fimber.i(
                 '🔒 [DioINTERCEPTOR] Need to request new token - ${profile.expire.toString()}',
               );
 
               // Read the password from the secure storage
-              final password = await flutterSecureStorage.read(
-                key: profile.ident,
+              final password = await flutterSecureStorage!.read(
+                key: profile.ident!,
               );
 
               final _tokenDio = Dio();
@@ -76,19 +81,22 @@ class SRDioClient {
 
               _tokenDio.interceptors.add(
                 InterceptorsWrapper(
-                  onError: (DioError error) async {
+                  onError: (error, handler) async {
                     if (error.response != null &&
-                        error.response.statusCode == 422) {
-                      await authenticationRepository.logoutCurrentUser();
+                        error.response!.statusCode == 422) {
+                      await authenticationRepository!.logoutCurrentUser();
 
-                      unawaited(navigator.currentState.pushReplacement(
+                      unawaited(navigator.currentState!.pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => LoginPage(),
                         ),
                       ));
                       return null;
                     }
-                    Logger.e(text: error.toString());
+
+                    Fimber.e('Error with token dio', ex: error);
+
+                    return handler.next(error);
                   },
                 ),
               );
@@ -105,47 +113,48 @@ class SRDioClient {
               );
 
               // Update the profile with the new login response
-              await authenticationRepository.updateProfile(
+              await authenticationRepository!.updateProfile(
                 responseRemoteModel: loginResponse,
                 profileDomainModel: profile,
               );
 
-              Logger.info(
+              Fimber.i(
                 '🔒 [DioINTERCEPTOR] Got a new token - proceeding with request',
               );
 
               // this sets the token as the new one we just got from the api
-              options.headers["Z-Auth-Token"] = loginResponse.token;
+              requestOptions.headers["Z-Auth-Token"] = loginResponse.token;
             } else {
-              Logger.info(
+              Fimber.i(
                 '🆓 [DioINTERCEPTOR] No need for token - proceeding with request',
               );
 
               // If the token is still vaid we just use the one we got from the database
-              options.headers["Z-Auth-Token"] = profile.token;
+              requestOptions.headers["Z-Auth-Token"] = profile.token;
             }
             // unlock and proceed
             _dio.unlock();
           }
 
-          return options;
+          return handler.next(requestOptions);
         },
-        onResponse: (Response response) {
-          Logger.info(
-            '🌐 [DioEND] -> Response -> ${response.statusCode} [${response.request.path}] ${response.request.method}  ${response.request.responseType}',
+        onResponse: (response, handler) {
+          Fimber.i(
+            '🌐 [DioEND] -> Response -> ${response.statusCode} [${response.requestOptions.path}] ${response.requestOptions.method}  ${response.requestOptions.responseType}',
           );
 
-          return response; // continue
+          return handler.next(response); // continue
         },
-        onError: (DioError error) async {
+        onError: (error, handler) async {
           if (error.response == null) {
-            Logger.streamError(error.toString());
+            Fimber.i('DioError without a respoonse', ex: error);
           } else {
-            Logger.networkError(
-              '🤮 [DioERROR] ${error.type} Url: [${error.request.baseUrl}${error.request.path}] status:${error.response.statusCode} type:${error.type} Data: ${error.response.data} message: ${error.message}',
+            Fimber.e(
+              '🤮 [DioERROR] ${error.type} Url: [${error.requestOptions.baseUrl}${error.requestOptions.path}] status:${error.response!.statusCode} type:${error.type} Data: ${error.response!.data} message: ${error.message}',
+              ex: error,
             );
           }
-          return error;
+          return handler.next(error);
         },
       ),
     );

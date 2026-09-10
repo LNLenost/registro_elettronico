@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/feature/authentication/data/model/login/parent_response_remote_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/model/login_request_domain_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/repository/authentication_repository.dart';
@@ -12,10 +12,10 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final AuthenticationRepository authenticationRepository;
+  final AuthenticationRepository? authenticationRepository;
 
   AuthenticationBloc({
-    @required this.authenticationRepository,
+    required this.authenticationRepository,
   }) : super(AuthenticationInitial());
 
   @override
@@ -25,7 +25,7 @@ class AuthenticationBloc
     if (event is SignIn) {
       yield AuthenticationLoading();
 
-      final response = await authenticationRepository.loginUser(
+      final response = await authenticationRepository!.loginUser(
         loginRequestDomainModel: event.loginRequestDomainModel,
       );
 

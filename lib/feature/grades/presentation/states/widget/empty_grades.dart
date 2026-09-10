@@ -5,18 +5,18 @@ import 'package:registro_elettronico/feature/grades/domain/repository/grades_rep
 import 'package:registro_elettronico/feature/grades/grades_container.dart';
 
 class EmptyGradesPlaceholder extends StatelessWidget {
-  const EmptyGradesPlaceholder({Key key}) : super(key: key);
+  const EmptyGradesPlaceholder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPlaceHolder(
       icon: Icons.timeline,
       showUpdate: true,
-      onTap: () {
+      onTap: () async {
         final GradesRepository gradesRepository = sl();
-        return gradesRepository.updateGrades(ifNeeded: false);
+        await gradesRepository.updateGrades(ifNeeded: false);
       },
-      text: AppLocalizations.of(context).translate('no_grades'),
+      text: AppLocalizations.of(context)!.translate('no_grades'),
     );
   }
 }

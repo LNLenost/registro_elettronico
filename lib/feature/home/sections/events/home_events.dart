@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/core/presentation/custom/sr_failure_view.dart';
+import 'package:registro_elettronico/core/presentation/custom/states/sr_failure_view.dart';
 import 'package:registro_elettronico/core/presentation/widgets/cusotm_placeholder.dart';
 import 'package:registro_elettronico/feature/agenda/domain/model/agenda_event_domain_model.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/watcher/agenda_watcher_bloc.dart';
@@ -13,26 +13,26 @@ import 'agenda_timeline.dart';
 import 'next_events_page.dart';
 
 class HomeEvents extends StatelessWidget {
-  const HomeEvents({Key key}) : super(key: key);
+  const HomeEvents({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AgendaWatcherBloc, AgendaWatcherState>(
       builder: (context, state) {
         if (state is AgendaWatcherLoadSuccess) {
-          if (state.agendaDataDomainModel.events.isEmpty) {
+          if (state.agendaDataDomainModel!.events.isEmpty) {
             return _AgendaEmpty();
           }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: _AgendaLoaded(events: state.agendaDataDomainModel.events),
+            child: _AgendaLoaded(events: state.agendaDataDomainModel!.events),
           );
         } else if (state is AgendaWatcherFailure) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 28.0),
             child: SRFailureView(
               failure: state.failure,
-              refresh: homeRefresherKey.currentState.show,
+              refresh: homeRefresherKey.currentState!.show,
             ),
           );
         }
@@ -46,13 +46,13 @@ class HomeEvents extends StatelessWidget {
 }
 
 class HomeAgendaHeader extends StatelessWidget {
-  const HomeAgendaHeader({Key key}) : super(key: key);
+  const HomeAgendaHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Text(AppLocalizations.of(context).translate('next_events')),
+      child: Text(AppLocalizations.of(context)!.translate('next_events')!),
     );
   }
 }
@@ -61,8 +61,8 @@ class _AgendaLoaded extends StatelessWidget {
   final List<AgendaEventDomainModel> events;
 
   const _AgendaLoaded({
-    Key key,
-    @required this.events,
+    Key? key,
+    required this.events,
   }) : super(key: key);
 
   @override
@@ -72,7 +72,7 @@ class _AgendaLoaded extends StatelessWidget {
         AgendaTimeline(
           itemCount: events.length > 3 ? 3 : events.length,
           children: events.map((e) {
-            if (e.isLocal) {
+            if (e.isLocal!) {
               return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -89,7 +89,7 @@ class _AgendaLoaded extends StatelessWidget {
                           height: 2.5,
                         ),
                       Text(
-                        '${e.notes ?? ''} - ${GlobalUtils.getEventDateMessage(context, e.begin, e.isFullDay)}',
+                        '${e.notes ?? ''} - ${GlobalUtils.getEventDateMessage(context, e.begin!, e.isFullDay)}',
                         style: TextStyle(fontSize: 12.0),
                       ),
                     ],
@@ -113,7 +113,7 @@ class _AgendaLoaded extends StatelessWidget {
                         height: 8,
                       ),
                     Text(
-                      '${StringUtils.titleCase(e.author)} - ${_getDateMessage(e, context)}',
+                      '${StringUtils.titleCase(e.author!)} - ${_getDateMessage(e, context)}',
                       style: TextStyle(fontSize: 12.0),
                     ),
                   ],
@@ -122,13 +122,13 @@ class _AgendaLoaded extends StatelessWidget {
             );
           }).toList(),
           indicators: events.map((e) {
-            if (GlobalUtils.isCompito(e.notes)) {
+            if (GlobalUtils.isCompito(e.notes!)) {
               return Icon(
                 Icons.assignment,
                 color: Colors.grey[700],
               );
             }
-            if (GlobalUtils.isVerificaOrInterrogazione(e.notes)) {
+            if (GlobalUtils.isVerificaOrInterrogazione(e.notes!)) {
               return Icon(
                 Icons.assignment_late,
                 color: Colors.grey[700],
@@ -145,9 +145,12 @@ class _AgendaLoaded extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: SizedBox(
                   width: double.infinity,
-                  child: FlatButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.transparent,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -157,8 +160,8 @@ class _AgendaLoaded extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text(AppLocalizations.of(context)
-                        .translate('show_others')
+                    child: Text(AppLocalizations.of(context)!
+                        .translate('show_others')!
                         .toUpperCase()),
                   ),
                 ),
@@ -171,14 +174,14 @@ class _AgendaLoaded extends StatelessWidget {
   String _getDateMessage(
       AgendaEventDomainModel agendaEvent, BuildContext context) {
     return GlobalUtils.getEventDateMessage(
-        context, agendaEvent.begin, agendaEvent.isFullDay);
+        context, agendaEvent.begin!, agendaEvent.isFullDay);
   }
 }
 
 class _AgendaEmpty extends StatelessWidget {
   final bool showUpdate;
   const _AgendaEmpty({
-    Key key,
+    Key? key,
     this.showUpdate = true,
   }) : super(key: key);
 
@@ -187,11 +190,11 @@ class _AgendaEmpty extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 54.0),
       child: CustomPlaceHolder(
-        text: AppLocalizations.of(context).translate('no_events'),
+        text: AppLocalizations.of(context)!.translate('no_events'),
         icon: Icons.event,
         showUpdate: showUpdate,
         onTap: () {
-          homeRefresherKey.currentState.show();
+          homeRefresherKey.currentState!.show();
         },
       ),
     );

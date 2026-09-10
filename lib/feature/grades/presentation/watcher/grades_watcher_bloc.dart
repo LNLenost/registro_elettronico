@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grades_section.dart';
 import 'package:registro_elettronico/feature/grades/domain/repository/grades_repository.dart';
@@ -13,10 +13,10 @@ part 'grades_watcher_state.dart';
 class GradesWatcherBloc extends Bloc<GradesWatcherEvent, GradesWatcherState> {
   final GradesRepository gradesRepository;
 
-  StreamSubscription _gradesStreamSubscription;
+  StreamSubscription? _gradesStreamSubscription;
 
   GradesWatcherBloc({
-    @required this.gradesRepository,
+    required this.gradesRepository,
   }) : super(GradesWatcherInitial()) {
     _gradesStreamSubscription =
         gradesRepository.watchAllGradesSections().listen((resource) {
@@ -38,7 +38,7 @@ class GradesWatcherBloc extends Bloc<GradesWatcherEvent, GradesWatcherState> {
       }
     } else if (event is RestartWatcher) {
       if (_gradesStreamSubscription != null) {
-        await _gradesStreamSubscription.cancel();
+        await _gradesStreamSubscription!.cancel();
       }
 
       _gradesStreamSubscription =
@@ -50,7 +50,7 @@ class GradesWatcherBloc extends Bloc<GradesWatcherEvent, GradesWatcherState> {
 
   @override
   Future<void> close() {
-    _gradesStreamSubscription.cancel();
+    _gradesStreamSubscription!.cancel();
     return super.close();
   }
 }

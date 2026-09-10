@@ -26,7 +26,11 @@ abstract class RegistroConstants {
   static const DISCIPLINARY_NOTE = 'NTST';
 
   static const GITHUB_REPOSITORY =
-      'https://github.com/riccardocalligaro/registro_elettronico';
+      'https://github.com/LNLenost/registro_elettronico';
+  static const GITHUB_ISSUES =
+      'https://github.com/LNLenost/registro_elettronico/issues';
+  static const CLASSEVIVA_WEB_LOGIN =
+      'https://web.spaggiari.eu/home/app/default/login.php?index.php';
   static const WEBSITE =
       'https://riccardocalligaro.github.io/registroelettronico-website/';
 }

@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:registro_elettronico/core/infrastructure/theme/theme_data/text_styles.dart';
 
 class LightTheme {
   static ThemeData getThemeData(Color color) {
     return ThemeData(
-      primarySwatch: color,
-      accentColor: color,
+      colorScheme: ColorScheme.light(
+        primary: color,
+        secondary: color,
+      ),
       brightness: Brightness.light,
       fontFamily: 'Manrope',
-      //canvasColor: Colors.white,
       appBarTheme: AppBarTheme(
         elevation: 1,
-        color: Colors.white,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -26,9 +28,11 @@ class LightTheme {
         headline5: heaingSmall.copyWith(color: Colors.grey[900]),
         bodyText2: bodyStyle1.copyWith(color: Colors.grey[900]),
       ),
-      cursorColor: color,
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: color,
+        selectionHandleColor: color,
+      ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      textSelectionHandleColor: color,
     );
   }
 }

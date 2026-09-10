@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/didactics/data/model/remote/attachment/text_content_remote_model.dart';
 import 'package:registro_elettronico/feature/didactics/data/model/remote/attachment/url_content_remote_model.dart';
@@ -15,12 +15,12 @@ part 'didactics_attachment_state.dart';
 
 class DidacticsAttachmentBloc
     extends Bloc<DidacticsAttachmentEvent, DidacticsAttachmentState> {
-  final DidacticsRepository didacticsRepository;
+  final DidacticsRepository? didacticsRepository;
 
-  StreamSubscription _downloadSubscription;
+  late StreamSubscription _downloadSubscription;
 
   DidacticsAttachmentBloc({
-    @required this.didacticsRepository,
+    required this.didacticsRepository,
   }) : super(DidacticsAttachmentInitial());
 
   @override
@@ -40,7 +40,7 @@ class DidacticsAttachmentBloc
       }
 
       if (event.contentDomainModel.type == ContentType.file) {
-        _downloadSubscription = didacticsRepository
+        _downloadSubscription = didacticsRepository!
             .downloadFile(contentDomainModel: event.contentDomainModel)
             .listen(
           (resource) {
@@ -57,7 +57,7 @@ class DidacticsAttachmentBloc
           },
         );
       } else if (event.contentDomainModel.type == ContentType.text) {
-        final response = await didacticsRepository.downloadText(
+        final response = await didacticsRepository!.downloadText(
           contentDomainModel: event.contentDomainModel,
         );
 
@@ -69,7 +69,7 @@ class DidacticsAttachmentBloc
           );
         });
       } else if (event.contentDomainModel.type == ContentType.url) {
-        final response = await didacticsRepository.downloadURL(
+        final response = await didacticsRepository!.downloadURL(
           contentDomainModel: event.contentDomainModel,
         );
 

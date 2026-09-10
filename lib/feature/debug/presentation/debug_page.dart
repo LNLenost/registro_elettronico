@@ -1,10 +1,10 @@
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/fcm_service.dart';
 import 'package:registro_elettronico/feature/authentication/data/datasource/profiles_shared_datasource.dart';
 import 'package:registro_elettronico/feature/authentication/data/model/login/login_response_remote_model.dart';
@@ -13,10 +13,8 @@ import 'package:registro_elettronico/utils/bug_report.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'logs_page.dart';
-
 class DebugPage extends StatefulWidget {
-  DebugPage({Key key}) : super(key: key);
+  DebugPage({Key? key}) : super(key: key);
 
   @override
   _DebugPageState createState() => _DebugPageState();
@@ -26,7 +24,7 @@ class _DebugPageState extends State<DebugPage> {
   static const platform =
       MethodChannel('com.riccardocalligaro.registro_elettronico/multi-account');
 
-  String dbName = '';
+  String? dbName = '';
   String profiles = '';
 
   @override
@@ -54,20 +52,12 @@ class _DebugPageState extends State<DebugPage> {
               ReportManager.sendEmail(context);
             },
           ),
-          DebugButton(
-            title: 'View logs',
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LogsPage(),
-              ));
-            },
-          ),
           SectionDivider(text: '🔒 Authentication'),
           DebugButton(
             title: 'Cancel token',
             onTap: () async {
               final AuthenticationRepository authenticationRepository = sl();
-              final profile = await authenticationRepository.getProfile();
+              final profile = (await authenticationRepository.getProfile())!;
 
               await authenticationRepository.updateProfile(
                 responseRemoteModel: DefaultLoginResponseRemoteModel(
@@ -90,9 +80,9 @@ class _DebugPageState extends State<DebugPage> {
           DebugButton(
             title: 'Open DB',
             onTap: () {
-              final SRDatabase db = sl();
+              final SRDatabase? db = sl();
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
+                  MaterialPageRoute(builder: (context) => MoorDbViewer(db!)));
             },
           ),
           DebugButton(
@@ -114,7 +104,7 @@ class _DebugPageState extends State<DebugPage> {
               setState(() {
                 profiles = _profiles.toString();
               });
-              Logger.info(profiles.toString());
+              Fimber.i(profiles.toString());
             },
           ),
           if (profiles.isNotEmpty)
@@ -207,28 +197,28 @@ class _DebugPageState extends State<DebugPage> {
 }
 
 class DebugButton extends ListTile {
-  final BuildContext context;
+  final BuildContext? context;
   final bool dangerous;
 
   DebugButton({
-    @required String title,
-    String subtitle,
-    @required VoidCallback onTap,
+    required String title,
+    String? subtitle,
+    required VoidCallback onTap,
     this.context,
     this.dangerous = false,
   })  : assert(!dangerous || context != null),
         super(
-          onTap: (dangerous) ? () => safe(context, onTap) : onTap,
+          onTap: (dangerous) ? () => safe(context!, onTap) : onTap,
           title: Text(title),
           subtitle: subtitle != null ? Text(subtitle) : null,
         );
 
   static void safe(BuildContext context, VoidCallback callback) {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text("Nope"),
       onPressed: () => Navigator.of(context).pop(),
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text("Yup"),
       onPressed: () {
         callback();
@@ -258,12 +248,12 @@ class DebugButton extends ListTile {
 
 class SectionDivider extends StatelessWidget {
   final String text;
-  final Color color;
-  final Color textColor;
+  final Color? color;
+  final Color? textColor;
 
   const SectionDivider({
-    Key key,
-    @required this.text,
+    Key? key,
+    required this.text,
     this.color,
     this.textColor,
   }) : super(key: key);
@@ -280,7 +270,7 @@ class SectionDivider extends StatelessWidget {
           ),
         ),
       ),
-      color: color ?? Theme.of(context).accentColor.withOpacity(0.4),
+      color: color ?? Theme.of(context).colorScheme.secondary.withOpacity(0.4),
     );
   }
 }

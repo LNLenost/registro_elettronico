@@ -1,30 +1,26 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:fimber/fimber.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 
 class PushNotificationService {
-  final FirebaseMessaging fcm;
-
-  PushNotificationService(this.fcm);
-
   static const channelId = 'com.registroelettronico/notification';
   static const channelName = 'Registro elettronico';
   static const channelDescription = 'Send and receive notifications';
 
   Future initialise() async {
-    Logger.info('🔔 [FCM] Called initialisation...');
+    Fimber.i('🔔 [FCM] Called initialisation...');
 
     if (Platform.isIOS) {
-      fcm.requestNotificationPermissions(IosNotificationSettings());
+      await FirebaseMessaging.instance.requestPermission();
     }
 
     if (kDebugMode) {
-      final token = await fcm.getToken();
-      Logger.info("🔔 [FCM] Got token $token");
+      final token = await FirebaseMessaging.instance.getToken();
+      Fimber.i("🔔 [FCM] Got token $token");
     }
 
     AndroidInitializationSettings androidInitializationSettings =
@@ -62,24 +58,16 @@ class PushNotificationService {
       iOS: iOSPlatformChannelSpecifics,
     );
 
-    fcm.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        Logger.info("🔔 [FCM] Got FCM Message $message");
+    FirebaseMessaging.onMessage.listen((message) async {
+      Fimber.i('🔔 [FCM] Got FCM Message $message');
 
-        await flutterLocalNotificationsPlugin.show(
-          _randomId(),
-          message['notification']['title'],
-          message['notification']['body'],
-          platformChannelSpecifics,
-        );
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        Logger.info('🔔 [FCM] Launched push notification service $message');
-      },
-      onResume: (Map<String, dynamic> message) async {
-        Logger.info('🔔 [FCM] Resumed push notification service $message');
-      },
-    );
+      await flutterLocalNotificationsPlugin.show(
+        _randomId(),
+        message.notification!.title,
+        message.notification!.body,
+        platformChannelSpecifics,
+      );
+    });
   }
 
   int _randomId() {

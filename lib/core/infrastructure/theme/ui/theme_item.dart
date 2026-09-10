@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:registro_elettronico/utils/string_utils.dart';
 
 class ThemeItem extends StatelessWidget {
-  final Function onTap;
+  final Function() onTap;
   final Color color;
   final String name;
 
   ThemeItem({
-    this.onTap,
-    @required this.color,
-    @required this.name,
+    required this.onTap,
+    required this.color,
+    required this.name,
   });
 
   @override
@@ -25,6 +25,8 @@ class ThemeItem extends StatelessWidget {
                 .toString()
                 .substring(name.toString().lastIndexOf('.') + 1)[0]
                 .toUpperCase(),
+            style:
+                TextStyle(color: _isLight(name) ? Colors.black : Colors.white),
           ),
         ),
         padding: const EdgeInsets.all(2.0), // borde width
@@ -38,5 +40,10 @@ class ThemeItem extends StatelessWidget {
       ),
       onTap: onTap,
     );
+  }
+
+  bool _isLight(String name) {
+    return name.toString().substring(name.toString().lastIndexOf('.') + 1)[0] ==
+        'l';
   }
 }

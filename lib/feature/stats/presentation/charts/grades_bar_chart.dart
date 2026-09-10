@@ -10,8 +10,8 @@ class GradesBarChart extends StatefulWidget {
   final List<GradeDomainModel> grades;
 
   const GradesBarChart({
-    Key key,
-    @required this.grades,
+    Key? key,
+    required this.grades,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class GradesBarChartState extends State<GradesBarChart> {
   final Color barBackgroundColor = const Color(0xff72d8bf);
   final Duration animDuration = Duration(milliseconds: 250);
   int currentIndex = 0;
-  int touchedIndex;
+  int? touchedIndex;
 
   bool isPlaying = false;
 
@@ -41,21 +41,22 @@ class GradesBarChartState extends State<GradesBarChart> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(
-                    AppLocalizations.of(context).translate('grades'),
+                    AppLocalizations.of(context)!.translate('grades')!,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
-                    AppLocalizations.of(context).translate('bar_chart_message'),
+                    AppLocalizations.of(context)!
+                        .translate('bar_chart_message')!,
                     style: TextStyle(fontSize: 13),
                   ),
                   const SizedBox(
                     height: 18,
                   ),
-                  Text(AppLocalizations.of(context)
-                      .translate('y_axis_chart')
+                  Text(AppLocalizations.of(context)!
+                      .translate('y_axis_chart')!
                       .toLowerCase()),
                   const SizedBox(
                     height: 18,
@@ -114,13 +115,13 @@ class GradesBarChartState extends State<GradesBarChart> {
                         : Colors.white),
               );
             }),
-        touchCallback: (barTouchResponse) {
+        touchCallback: (event, barTouchResponse) {
           setState(() {
-            if (barTouchResponse.spot != null &&
-                barTouchResponse.touchInput is! FlPanEnd &&
-                barTouchResponse.touchInput is! FlLongPressEnd) {
-              touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
-            } else {
+            if (barTouchResponse!.spot != null &&
+                event is! FlPanEndEvent &&
+                event is! FlLongPressEnd) {
+              touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
+            } else if (event is FlPanDownEvent) {
               touchedIndex = -1;
             }
           });
@@ -128,9 +129,11 @@ class GradesBarChartState extends State<GradesBarChart> {
       ),
       titlesData: FlTitlesData(
         show: true,
+        topTitles: SideTitles(showTitles: false),
+        rightTitles: SideTitles(showTitles: false),
         bottomTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (_) {
+          getTextStyles: (context, __) {
             return TextStyle(
               fontSize: 14,
               color: Theme.of(context).brightness == Brightness.dark
@@ -147,7 +150,7 @@ class GradesBarChartState extends State<GradesBarChart> {
         leftTitles: SideTitles(
             margin: 16.0,
             showTitles: true,
-            getTextStyles: (_) => TextStyle(
+            getTextStyles: (context, __) => TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white
                     : Colors.black),
@@ -166,7 +169,8 @@ class GradesBarChartState extends State<GradesBarChart> {
         return makeGroupData(
             i,
             widget.grades
-                .where((g) => g.decimalValue >= i + 3 && g.decimalValue < i + 4)
+                .where(
+                    (g) => g.decimalValue! >= i + 3 && g.decimalValue! < i + 4)
                 .length
                 .toDouble(),
             isTouched: i == touchedIndex);
@@ -185,7 +189,7 @@ class GradesBarChartState extends State<GradesBarChart> {
       barRods: [
         BarChartRodData(
           y: y,
-          colors: [GlobalUtils.getColorFromAverage(x + 3.toDouble())],
+          colors: [GlobalUtils.getColorFromAverage(x + 3.toDouble())!],
           width: 22,
           backDrawRodData: BackgroundBarChartRodData(
             show: false,
@@ -199,19 +203,20 @@ class GradesBarChartState extends State<GradesBarChart> {
     return BarChartData(
         barTouchData: BarTouchData(
           touchTooltipData: BarTouchTooltipData(
-              tooltipBgColor: Colors.white,
-              getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                return BarTooltipItem(
-                  rod.y.toStringAsFixed(0),
-                  TextStyle(color: Colors.black),
-                );
-              }),
-          touchCallback: (barTouchResponse) {
+            tooltipBgColor: Colors.white,
+            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+              return BarTooltipItem(
+                rod.y.toStringAsFixed(0),
+                TextStyle(color: Colors.black),
+              );
+            },
+          ),
+          touchCallback: (event, response) {
             setState(() {
-              if (barTouchResponse.spot != null &&
-                  barTouchResponse.touchInput is! FlPanEnd &&
-                  barTouchResponse.touchInput is! FlLongPressEnd) {
-                touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
+              if (response!.spot != null &&
+                  event is! FlPanEndEvent &&
+                  event is! FlLongPressEnd) {
+                touchedIndex = response.spot!.touchedBarGroupIndex;
               } else {
                 touchedIndex = -1;
               }
@@ -222,7 +227,7 @@ class GradesBarChartState extends State<GradesBarChart> {
           show: true,
           bottomTitles: SideTitles(
             showTitles: true,
-            getTextStyles: (_) => TextStyle(
+            getTextStyles: (context, _) => TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white
@@ -236,7 +241,7 @@ class GradesBarChartState extends State<GradesBarChart> {
           leftTitles: SideTitles(
             margin: 8.0,
             showTitles: true,
-            getTextStyles: (_) => TextStyle(
+            getTextStyles: (context, _) => TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white
                     : Colors.black),
@@ -253,8 +258,8 @@ class GradesBarChartState extends State<GradesBarChart> {
               i,
               widget.grades
                   .getRange(0, currentIndex)
-                  .where(
-                      (g) => g.decimalValue >= i + 3 && g.decimalValue < i + 4)
+                  .where((g) =>
+                      g.decimalValue! >= i + 3 && g.decimalValue! < i + 4)
                   .length
                   .toDouble(),
               isTouched: i == touchedIndex);

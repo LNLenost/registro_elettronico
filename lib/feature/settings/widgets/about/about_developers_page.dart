@@ -1,19 +1,19 @@
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../header_text.dart';
 
 class AboutDevelopersPage extends StatelessWidget {
-  const AboutDevelopersPage({Key key}) : super(key: key);
+  const AboutDevelopersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final trans = AppLocalizations.of(context);
+    final trans = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(trans.translate('about_developers_title')),
+        title: Text(trans.translate('about_developers_title')!),
       ),
       body: Container(
         child: Column(
@@ -29,13 +29,36 @@ class AboutDevelopersPage extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 30.0,
                 backgroundImage: NetworkImage(
+                  'https://github.com/LNLenost.png?size=460',
+                ),
+                backgroundColor: Colors.transparent,
+              ),
+              title: Text(trans.translate('niccolo_salerno')!),
+              subtitle: Text(trans.translate('fork_maintainer')!),
+              trailing: IconButton(
+                icon: Icon(Icons.send),
+                onPressed: () async {
+                  const url = 'mailto:niccolo.salerno.2010@gmail.com';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+              ),
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                radius: 30.0,
+                backgroundImage: NetworkImage(
                   "https://avatars3.githubusercontent.com/u/18463831?s=460&v=4",
                 ),
                 backgroundColor: Colors.transparent,
               ),
-              title: Text(
-                  AppLocalizations.of(context).translate('riccardo_calligaro')),
-              subtitle: Text(trans.translate('riccardo_calligaro_description')),
+              title: Text(AppLocalizations.of(context)!
+                  .translate('riccardo_calligaro')!),
+              subtitle:
+                  Text(trans.translate('riccardo_calligaro_description')!),
               trailing: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: () async {
@@ -43,7 +66,7 @@ class AboutDevelopersPage extends StatelessWidget {
                   if (await canLaunch(url)) {
                     await launch(url);
                   } else {
-                    Logger.info('Could not launch $url');
+                    Fimber.i('Could not launch $url');
                     throw 'Could not launch $url';
                   }
                 },
@@ -57,9 +80,10 @@ class AboutDevelopersPage extends StatelessWidget {
                 ),
                 backgroundColor: Colors.transparent,
               ),
-              title:
-                  Text(AppLocalizations.of(context).translate('filippo_veggo')),
-              subtitle: Text(AppLocalizations.of(context).translate('design')),
+              title: Text(
+                  AppLocalizations.of(context)!.translate('filippo_veggo')!),
+              subtitle:
+                  Text(AppLocalizations.of(context)!.translate('design')!),
               trailing: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: () async {
@@ -85,35 +109,12 @@ class AboutDevelopersPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0, top: 8.0),
               child: HeaderText(
-                text: AppLocalizations.of(context).translate('thanks_to'),
+                text: AppLocalizations.of(context)!.translate('thanks_to'),
               ),
             ),
             ListTile(
               title: Text(
                   'Jacopo Ferian, Samuele Zanella, Andrea Nocco, Leone Bacciu, Diego Caspi'),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-              child: HeaderText(
-                text: AppLocalizations.of(context).translate('the_application'),
-              ),
-            ),
-            ListTile(
-              title: Text(trans.translate('app_description')),
-            ),
-            ListTile(
-              title: FlatButton(
-                child: Text(trans.translate('view_source_code')),
-                onPressed: () async {
-                  const url =
-                      'https://github.com/riccardocalligaro/registro_elettronico';
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-              ),
             ),
           ],
         ),

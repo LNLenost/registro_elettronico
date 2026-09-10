@@ -1,20 +1,19 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:registro_elettronico/feature/authentication/domain/model/profile_domain_model.dart';
 
 class CredentialsDomainModel {
-  ProfileDomainModel profile;
-  String password;
+  ProfileDomainModel? profile;
+  String? password;
 
   CredentialsDomainModel({
-    @required this.profile,
-    @required this.password,
+    required this.profile,
+    required this.password,
   });
 
   CredentialsDomainModel copyWith({
-    ProfileDomainModel profile,
-    String password,
+    ProfileDomainModel? profile,
+    String? password,
   }) {
     return CredentialsDomainModel(
       profile: profile ?? this.profile,
@@ -29,7 +28,7 @@ class CredentialsDomainModel {
     };
   }
 
-  factory CredentialsDomainModel.fromMap(Map<String, dynamic> map) {
+  static CredentialsDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return CredentialsDomainModel(
@@ -40,7 +39,7 @@ class CredentialsDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CredentialsDomainModel.fromJson(String source) =>
+  static CredentialsDomainModel? fromJson(String source) =>
       CredentialsDomainModel.fromMap(json.decode(source));
 
   @override

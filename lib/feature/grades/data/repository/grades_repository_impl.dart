@@ -1,14 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/handler.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/update.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:registro_elettronico/feature/agenda/data/datasource/local/agenda_local_datasource.dart';
 import 'package:registro_elettronico/feature/grades/data/datasource/local/local_grades_local_datasource.dart';
 import 'package:registro_elettronico/feature/grades/data/datasource/normal/grades_local_datasource.dart';
@@ -35,55 +33,57 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GradesRepositoryImpl extends GradesRepository {
   static const String lastUpdateKey = 'gradesLastUpdate';
 
-  final GradesRemoteDatasource gradesRemoteDatasource;
-  final GradesLocalDatasource gradesLocalDatasource;
+  final GradesRemoteDatasource? gradesRemoteDatasource;
+  final GradesLocalDatasource? gradesLocalDatasource;
 
-  final PeriodsLocalDatasource periodsLocalDatasource;
-  final SubjectsLocalDatasource subjectsLocalDatasource;
-  final ProfessorLocalDatasource professorLocalDatasource;
-  final LocalGradesLocalDatasource localGradesLocalDatasource;
-  final LessonsLocalDatasource lessonsLocalDatasource;
+  final PeriodsLocalDatasource? periodsLocalDatasource;
+  final SubjectsLocalDatasource? subjectsLocalDatasource;
+  final ProfessorLocalDatasource? professorLocalDatasource;
+  final LocalGradesLocalDatasource? localGradesLocalDatasource;
+  final LessonsLocalDatasource? lessonsLocalDatasource;
 
-  final AgendaLocalDatasource agendaLocalDatasource;
+  final AgendaLocalDatasource? agendaLocalDatasource;
 
-  final SharedPreferences sharedPreferences;
+  final SharedPreferences? sharedPreferences;
 
   GradesRepositoryImpl({
-    @required this.gradesRemoteDatasource,
-    @required this.gradesLocalDatasource,
-    @required this.sharedPreferences,
-    @required this.periodsLocalDatasource,
-    @required this.subjectsLocalDatasource,
-    @required this.professorLocalDatasource,
-    @required this.localGradesLocalDatasource,
-    @required this.lessonsLocalDatasource,
-    @required this.agendaLocalDatasource,
+    required this.gradesRemoteDatasource,
+    required this.gradesLocalDatasource,
+    required this.sharedPreferences,
+    required this.periodsLocalDatasource,
+    required this.subjectsLocalDatasource,
+    required this.professorLocalDatasource,
+    required this.localGradesLocalDatasource,
+    required this.lessonsLocalDatasource,
+    required this.agendaLocalDatasource,
   });
 
   @override
   Future<Either<Failure, List<GradeDomainModel>>> getGrades() async {
     try {
-      final grades = await gradesLocalDatasource.getGrades();
+      final grades = await gradesLocalDatasource!.getGrades();
       return Right(grades
           .map(
             (e) => GradeDomainModel.fromLocalModel(e),
           )
           .toList());
-    } catch (e) {
-      return Left(handleError(e));
+    } catch (e, s) {
+      return Left(handleError('[GradesRepository] Get grades error', e, s));
     }
   }
 
   @override
-  Future<Either<Failure, Success>> updateGrades({bool ifNeeded}) async {
+  Future<Either<Failure, Success>> updateGrades({
+    required bool ifNeeded,
+  }) async {
     try {
       if (!ifNeeded |
-          (ifNeeded && needUpdate(sharedPreferences.getInt(lastUpdateKey)))) {
-        final remoteGrades = await gradesRemoteDatasource.getGrades();
+          (ifNeeded && needUpdate(sharedPreferences!.getInt(lastUpdateKey)))) {
+        final remoteGrades = await gradesRemoteDatasource!.getGrades();
 
-        final localGrades = await gradesLocalDatasource.getGrades();
+        final localGrades = await gradesLocalDatasource!.getGrades();
 
-        final gradesMap = Map<int, GradeLocalModel>.fromIterable(localGrades,
+        final gradesMap = Map<int?, GradeLocalModel?>.fromIterable(localGrades,
             key: (v) => v.evtId, value: (v) => v);
 
         // get the ids
@@ -97,7 +97,7 @@ class GradesRepositoryImpl extends GradesRepository {
           }
         }
 
-        await gradesLocalDatasource.insertGrades(
+        await gradesLocalDatasource!.insertGrades(
           remoteGrades
               .map(
                 (e) => GradeLocalModelConverter.fromRemoteModel(
@@ -115,42 +115,43 @@ class GradesRepositoryImpl extends GradesRepository {
         );
 
         // delete the grades that were removed from the remote source
-        await gradesLocalDatasource.deleteGrades(gradesToDelete);
+        await gradesLocalDatasource!.deleteGrades(gradesToDelete);
 
-        await sharedPreferences.setInt(
-            lastUpdateKey, DateTime.now().millisecondsSinceEpoch);
+        await sharedPreferences!
+            .setInt(lastUpdateKey, DateTime.now().millisecondsSinceEpoch);
 
         return Right(SuccessWithUpdate());
       }
       return Right(SuccessWithoutUpdate());
-    } catch (e) {
-      return Left(handleError(e));
+    } catch (e, s) {
+      return Left(handleError('[GradesRepository] Update grades error', e, s));
     }
   }
 
   @override
   Stream<Resource<List<GradeDomainModel>>> watchAllGrades() async* {
-    yield* gradesLocalDatasource.watchGrades().map((localModels) {
+    yield* gradesLocalDatasource!.watchGrades().map((localModels) {
       return Resource.success(
           data: localModels
               .map((localModel) => GradeDomainModel.fromLocalModel(localModel))
               .toList());
     }).onErrorReturnWith(
-      (e) {
-        Logger.e(text: e.toString());
-        return Resource.failed(error: e);
+      (e, s) {
+        return Resource.failed(
+            error:
+                handleError('[GradesRepository] Watch all grade error', e, s));
       },
     );
   }
 
   @override
-  Stream<Resource<GradesPagesDomainModel>> watchAllGradesSections() {
+  Stream<Resource<GradesPagesDomainModel?>> watchAllGradesSections() {
     return Rx.combineLatest5(
-      periodsLocalDatasource.watchAllPeriods(),
-      subjectsLocalDatasource.watchAllSubjects(),
-      gradesLocalDatasource.watchGrades(),
-      agendaLocalDatasource.watchAllEvents(),
-      lessonsLocalDatasource.watchAllLessons(),
+      periodsLocalDatasource!.watchAllPeriods(),
+      subjectsLocalDatasource!.watchAllSubjects(),
+      gradesLocalDatasource!.watchGrades(),
+      agendaLocalDatasource!.watchAllEvents(),
+      lessonsLocalDatasource!.watchAllLessons(),
       (
         List<PeriodLocalModel> localPeriods,
         List<SubjectLocalModel> localSubjects,
@@ -192,23 +193,23 @@ class GradesRepositoryImpl extends GradesRepository {
             .toList();
 
         bool showAsending =
-            sharedPreferences.getBool(PrefsConstants.SORTING_ASCENDING) ??
+            sharedPreferences!.getBool(PrefsConstants.SORTING_ASCENDING) ??
                 false;
 
-        Map<int, int> objectives = Map();
+        Map<int?, int> objectives = Map();
 
-        final defaultObjective = sharedPreferences.getInt(
+        final defaultObjective = sharedPreferences!.getInt(
               PrefsConstants.OVERALL_OBJECTIVE,
             ) ??
             6;
 
         for (final mSubject in domainSubjects) {
-          final obj = sharedPreferences.getInt('${mSubject.id}_objective') ??
+          final obj = sharedPreferences!.getInt('${mSubject.id}_objective') ??
               defaultObjective;
           objectives[mSubject.id] = obj;
         }
 
-        localGrades.sort((b, a) => a.eventDate.compareTo(b.eventDate));
+        localGrades.sort((b, a) => a.eventDate!.compareTo(b.eventDate!));
 
         List<GradeDomainModel> grades = localGrades
             .map((localModel) => GradeDomainModel.fromLocalModel(localModel))
@@ -217,21 +218,21 @@ class GradesRepositoryImpl extends GradesRepository {
         if (localEvents.isNotEmpty &&
             localLessons.isNotEmpty &&
             localSubjects.isNotEmpty) {
-          Map<int, Set<String>> additionalProfessors = Map();
+          Map<int?, Set<String?>> additionalProfessors = Map();
 
           final lastLessons = localLessons
               .where((l) =>
-                  l.date.isAfter(DateTime.now().subtract(Duration(days: 45))))
+                  l.date!.isAfter(DateTime.now().subtract(Duration(days: 45))))
               .toList();
 
           for (final lesson in lastLessons) {
             final list = additionalProfessors[lesson.subjectId];
             if (lesson.author != null) {
               if (list != null) {
-                additionalProfessors[lesson.subjectId].add(lesson.author);
+                additionalProfessors[lesson.subjectId]!.add(lesson.author);
               } else {
                 additionalProfessors[lesson.subjectId] = Set();
-                additionalProfessors[lesson.subjectId].add(lesson.author);
+                additionalProfessors[lesson.subjectId]!.add(lesson.author);
               }
             }
           }
@@ -242,15 +243,16 @@ class GradesRepositoryImpl extends GradesRepository {
             localEvents,
             key: (e) => _convertDate(e.begin),
             value: (e) => localEvents
-                .where((event) => DateUtils.areSameDay(event.begin, e.begin))
+                .where((event) => SRDateUtils.areSameDay(event.begin!, e.begin))
                 .toList(),
           );
 
           // once we got the map we can check the grades
           for (final grade in grades) {
-            if (grade.notesForFamily.isEmpty) {
+            if (grade.notesForFamily!.isEmpty) {
               // check events for that day
-              final eventsForThatDay = eventsMap[_convertDate(grade.eventDate)];
+              final eventsForThatDay =
+                  eventsMap[_convertDate(grade.eventDate!)];
 
               if (eventsForThatDay == null) continue;
 
@@ -285,11 +287,11 @@ class GradesRepositoryImpl extends GradesRepository {
               gradesForThisPeriod.where((g) => _isValidGrade(g)).toList();
 
           filteredGradesForThisPeriod
-              .sort((b, a) => a.eventDate.compareTo(b.eventDate));
+              .sort((b, a) => a.eventDate!.compareTo(b.eventDate!));
 
           final average = _getAverageForPeriod(grades: gradesForThisPeriod);
 
-          final Map<int, GradeDomainModel> gradesMap = Map.fromIterable(
+          final Map<int?, GradeDomainModel?> gradesMap = Map.fromIterable(
             gradesForThisPeriod,
             key: (g) => g.subjectId,
             value: (g) => g,
@@ -321,7 +323,7 @@ class GradesRepositoryImpl extends GradesRepository {
 
           final invertedFilteredGrades = filteredGradesForThisPeriod;
           invertedFilteredGrades
-              .sort((a, b) => a.eventDate.compareTo(b.eventDate));
+              .sort((a, b) => a.eventDate!.compareTo(b.eventDate!));
 
           gradesPeriods.add(
             PeriodWithGradesDomainModel(
@@ -337,8 +339,8 @@ class GradesRepositoryImpl extends GradesRepository {
           );
         }
 
-        final notSeenGrades = grades.where((g) => !g.hasSeenIt);
-        final seenGrades = grades.where((g) => g.hasSeenIt);
+        final notSeenGrades = grades.where((g) => !g.hasSeenIt!);
+        final seenGrades = grades.where((g) => g.hasSeenIt!);
 
         List<GradeDomainModel> dividedGrades = [
           ...notSeenGrades,
@@ -354,11 +356,11 @@ class GradesRepositoryImpl extends GradesRepository {
 
         return Resource.success(data: gradesPagesDomainModel);
       },
-    ).handleError((e, s) {
-      Logger.e(exception: e, stacktrace: s);
-    }).onErrorReturnWith(
-      (e) {
-        return Resource.failed(error: handleStreamError(e));
+    ).onErrorReturnWith(
+      (e, s) {
+        return Resource.failed(
+            error: handleError(
+                '[GradesRepository] Watch all grades section error', e, s));
       },
     );
   }
@@ -369,9 +371,9 @@ class GradesRepositoryImpl extends GradesRepository {
   }
 
   List<FlSpot> _getAverageSpots({
-    @required List<GradeDomainModel> grades,
+    required List<GradeDomainModel> grades,
   }) {
-    List<FlSpot> spots = List<FlSpot>();
+    List<FlSpot> spots = <FlSpot>[];
 
     // simple algorithm to calculate avg
     double sum = 0;
@@ -381,12 +383,12 @@ class GradesRepositoryImpl extends GradesRepository {
     // good old for, rare these days
     for (int i = 0; i < grades.length; i++) {
       if (_isValidGrade(grades[i])) {
-        sum += grades[i].decimalValue;
+        sum += grades[i].decimalValue!;
         count++;
         average = sum / count;
         // with num.parse(average.toStringAsFixed(2)) we cut the decimal digits
         spots.add(FlSpot(
-            i.toDouble(), num.tryParse(average.toStringAsFixed(2) ?? 0)));
+            i.toDouble(), num.tryParse(average.toStringAsFixed(2)) as double));
 
         if (spots.length == 1) {
           spots.add(FlSpot(spots[0].x + 1, spots[0].y));
@@ -397,13 +399,13 @@ class GradesRepositoryImpl extends GradesRepository {
     return spots;
   }
 
-  List<FlSpot> _getNormalSpots({@required List<GradeDomainModel> grades}) {
-    List<FlSpot> spots = List<FlSpot>();
+  List<FlSpot> _getNormalSpots({required List<GradeDomainModel> grades}) {
+    List<FlSpot> spots = <FlSpot>[];
 
     // if we don't want to see the average we want to see the single grades during that time
     for (int i = 0; i < grades.length; i++) {
       if (_isValidGrade(grades[i])) {
-        spots.add(FlSpot(i.toDouble(), grades[i].decimalValue));
+        spots.add(FlSpot(i.toDouble(), grades[i].decimalValue!));
       }
     }
 
@@ -415,11 +417,11 @@ class GradesRepositoryImpl extends GradesRepository {
   }
 
   PeriodGradeDomainModel _getGradePeriodDomainModel({
-    @required SubjectDomainModel subject,
-    @required List<GradeDomainModel> grades,
-    @required Map<int, GradeDomainModel> gradesAndSubjectMap,
-    @required Map<int, int> objectives,
-    @required int numberOfFilteredGrades,
+    required SubjectDomainModel subject,
+    required List<GradeDomainModel> grades,
+    required Map<int?, GradeDomainModel?> gradesAndSubjectMap,
+    required Map<int?, int> objectives,
+    required int numberOfFilteredGrades,
   }) {
     final filteredSubjectGrades =
         grades.where((g) => g.subjectId == subject.id).toList();
@@ -447,7 +449,7 @@ class GradesRepositoryImpl extends GradesRepository {
   }
 
   double _getSubjectAverage({
-    @required List<GradeDomainModel> grades,
+    required List<GradeDomainModel> grades,
   }) {
     double sum = 0;
     int count = 0;
@@ -459,7 +461,7 @@ class GradesRepositoryImpl extends GradesRepository {
       }
 
       if (_isValidGrade(grade)) {
-        sum += grade.decimalValue;
+        sum += grade.decimalValue!;
         count++;
       }
     });
@@ -475,14 +477,14 @@ class GradesRepositoryImpl extends GradesRepository {
   }
 
   GradeNeededDomainModel _gradeNeededForObjective({
-    @required int obj,
-    @required double average,
-    @required int numberOfGrades,
+    required int? obj,
+    required double average,
+    required int numberOfGrades,
   }) {
     if (average.isNaN) {
       return GradeNeededDomainModel(message: GradeNeededMessage.dont_worry);
     }
-    if (obj > 10 || average > 10) {
+    if (obj! > 10 || average > 10) {
       return GradeNeededDomainModel(
         message: GradeNeededMessage.calculation_error,
       );
@@ -563,7 +565,7 @@ class GradesRepositoryImpl extends GradesRepository {
   }
 
   double _getAverageForPeriod({
-    @required List<GradeDomainModel> grades,
+    required List<GradeDomainModel> grades,
   }) {
     double sum = 0;
     int count = 0;
@@ -572,7 +574,7 @@ class GradesRepositoryImpl extends GradesRepository {
       if (grade.decimalValue != -1.00 ||
           grade.cancelled == true ||
           grade.localllyCancelled == true) {
-        sum += grade.decimalValue;
+        sum += grade.decimalValue!;
 
         count++;
       }
@@ -588,51 +590,53 @@ class GradesRepositoryImpl extends GradesRepository {
 
   @override
   Future<Either<Failure, Success>> toggleGradeLocallyCancelledStatus({
-    GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   }) async {
     try {
       final localModel = gradeDomainModel.toLocalModel();
-      await gradesLocalDatasource.updateGrade(
+      await gradesLocalDatasource!.updateGrade(
         localModel.copyWith(
-            localllyCancelled: !gradeDomainModel.localllyCancelled),
+            localllyCancelled: !gradeDomainModel.localllyCancelled!),
       );
 
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(handleError(
+          '[GradesRepository] Toogle grade locally cancelled status error',
+          e,
+          s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> changeSubjectObjective({
-    SubjectDomainModel subject,
-    int newValue,
+    required SubjectDomainModel subject,
+    required int newValue,
   }) async {
     try {
-      await sharedPreferences.setInt('${subject.id}_objective', newValue);
-      print('${subject.id}_objective');
-      print(newValue.toString());
+      await sharedPreferences!.setInt('${subject.id}_objective', newValue);
       return Right(Success());
-    } catch (e) {
-      return Left(handleError(e));
+    } catch (e, s) {
+      return Left(handleError(
+          '[GradesRepository] Change subject objective error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, SubjectDataDomainModel>> getSubjectData({
-    @required PeriodGradeDomainModel periodGradeDomainModel,
+    required PeriodGradeDomainModel periodGradeDomainModel,
   }) async {
     try {
-      final professors = await professorLocalDatasource
+      final professors = await professorLocalDatasource!
           .getProfessorsForSubject(periodGradeDomainModel.subject.id);
 
-      final lessons = await lessonsLocalDatasource.getAllLessons();
+      final lessons = await lessonsLocalDatasource!.getAllLessons();
 
-      Set<String> additionalProfessors = Set();
+      Set<String?> additionalProfessors = Set();
 
       final lastLessons = lessons
           .where((l) =>
-              l.date.isAfter(DateTime.now().subtract(Duration(days: 45))))
+              l.date!.isAfter(DateTime.now().subtract(Duration(days: 45))))
           .toList();
       for (final lesson in lastLessons) {
         if (lesson.subjectId == periodGradeDomainModel.subject.id) {
@@ -662,12 +666,13 @@ class GradesRepositoryImpl extends GradesRepository {
         ),
       );
     } catch (e, s) {
-      return Left(handleStreamError(e, s));
+      return Left(
+          handleError('[GradesRepository] Get subject data error', e, s));
     }
   }
 
   SubjectAveragesDomainModel _getSubjectAverages({
-    @required List<GradeDomainModel> grades,
+    required List<GradeDomainModel> grades,
   }) {
     // Declare variables for the different type of averages
     double sumAverage = 0;
@@ -686,7 +691,7 @@ class GradesRepositoryImpl extends GradesRepository {
       final decimalValue = grade.decimalValue;
       if (_isValidGrade(grade)) {
         // always check the average for all grades
-        sumAverage += decimalValue;
+        sumAverage += decimalValue!;
         countAverage++;
         // Orale
         if (grade.componentDesc == RegistroConstants.ORALE) {
@@ -716,10 +721,10 @@ class GradesRepositoryImpl extends GradesRepository {
 
   @override
   Stream<Resource<List<GradeDomainModel>>> watchLocalGrades({
-    int subjectId,
-    int periodPos,
+    int? subjectId,
+    int? periodPos,
   }) async* {
-    yield* localGradesLocalDatasource
+    yield* localGradesLocalDatasource!
         .watchGradesForSubject(subjectId, periodPos)
         .map((localModels) {
       return Resource.success(
@@ -727,38 +732,41 @@ class GradesRepositoryImpl extends GradesRepository {
               .map((localModel) => GradeDomainModel.fromLocalGrade(localModel))
               .toList());
     }).onErrorReturnWith(
-      (e) {
-        Logger.e(text: e.toString());
-        return Resource.failed(error: e);
+      (e, s) {
+        return Resource.failed(
+            error: handleError(
+                '[GradesRepository] Watch local grades error', e, s));
       },
     );
   }
 
   @override
   Future<Either<Failure, Success>> addLocalGrade({
-    GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   }) async {
     try {
       final localGrade = gradeDomainModel.toLocalGrade();
-      await localGradesLocalDatasource.insertGrade(localGrade);
+      await localGradesLocalDatasource!.insertGrade(localGrade);
 
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(
+          handleError('[GradesRepository] Add local grade error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> deleteLocalGrade({
-    GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   }) async {
     try {
-      await localGradesLocalDatasource
+      await localGradesLocalDatasource!
           .deleteGradeWithId(gradeDomainModel.evtId);
 
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(
+          handleError('[GradesRepository] Delete local grade error', e, s));
     }
   }
 }
