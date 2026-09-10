@@ -1,67 +1,146 @@
-<h1 align="center">
-  <img src="https://i.imgur.com/BCktmzl.png" alt="Registto elettronico"><br>
-</h1>
+<div align="center">
+  <img src="assets/icons/launcher_icon.png" alt="Registro Elettronico" width="96">
+  <h1>Registro Elettronico</h1>
+  <p>Un client Flutter moderno e non ufficiale per consultare il registro ClasseViva.</p>
 
-⚠️ **Important Update**  
-> Unfortunately, I had to remove Registro Elettronico from the Play Store.  
-> Google introduced a new policy requiring developers to display a full address and phone number on their app’s public listing. As a solo developer, this presents privacy concerns I'm not comfortable with.  
->  
-> Setting up a company account was another option, but it involves considerable bureaucracy and financial commitment that I can't justify at the moment.  
->  
-> 👉 [Read the full article here on my website](https://riccard0.dev/blog/why-i-removed-my-app-from-play-store/)
+  <p>
+    <a href="https://github.com/LNLenost/registro_elettronico"><img src="https://img.shields.io/badge/repository-LNLenost%2Fregistro__elettronico-181717?logo=github" alt="Repository GitHub"></a>
+    <a href="https://flutter.dev/"><img src="https://img.shields.io/badge/Flutter-2.5.3-02569B?logo=flutter&logoColor=white" alt="Flutter 2.5.3"></a>
+    <a href="LICENSE.md"><img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="Licenza CC BY-NC-SA 4.0"></a>
+  </p>
+</div>
 
----
+> **Nota:** questa è un’applicazione non ufficiale e non è affiliata, approvata o sponsorizzata da Spaggiari o ClasseViva.
 
-Mobile application for electronic school register (Classeviva) that I developed during highschool from december of 2019 to january of 2021. The app is currently on the [Play Store](https://play.google.com/store/apps/details?id=com.riccardocalligaro.registro_elettronico) and has more than 20 000 downloads and 5 000 daily active users.
+## Screenshot
 
-The app is currently in maintenance mode and I'm not adding new features, I'm just fixing major bugs and issues.
+Schermata reale dell’app, tratta dal post [“Nuovi temi personalizzabili”](https://www.instagram.com/p/CKRUUPtgWSb/?stkn=MWdrZ3Y0dnJncmhzeQ==) pubblicato dall’account Instagram del progetto:
 
-The code still uses flutter 1.22.6 (no null safety) and many libaries have been updated with breaking changes, so to build it you need to use a old version from 2021 with oudated pubs. Upgrading all the codebase (~35 000 lines) to null safety and the latest flutter version is a lot of work and currently I don't have time for it. If anybody wants to help me free to contact me.
+<p align="center">
+  <img src="docs/screenshots/custom-themes.jpg" alt="Schermate di Registro Elettronico con temi personalizzabili" width="520">
+</p>
 
-## Run the project
+## Cos’è
 
-To run the project you need to use flutter version `1.22.6`, I highly suggest to use [fvm](https://fvm.app/) so you can have multiple flutter versions installed on your machine and use the older version just for this project.
+**Registro Elettronico** è un’app Flutter per avere in un’unica interfaccia le principali informazioni scolastiche disponibili sul proprio account ClasseViva.
 
-After installing fvm run `fvm install 1.22.6` and then `fvm use 1.22.6` to use it.
+Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Calligaro](https://github.com/riccardocalligaro/registro_elettronico), con interventi di manutenzione, compatibilità, localizzazione e nuove funzioni per la consultazione quotidiana.
 
-Then you can run `fvm flutter pub get` to install all the dependencies and you are ready to go.
+L’app non sostituisce il portale ufficiale: alcune operazioni, come quelle che richiedono un flusso web o permessi specifici della scuola, vengono aperte tramite ClasseViva Web.
 
-Android builds fine but iOS doesn't because of a problem with some outdated google packages and the `Protobuf` library in Swift, I'm working on it.
+## Funzionalità
 
-## Contribute
+- autenticazione ClasseViva e gestione dei profili;
+- voti, materie e andamento scolastico;
+- statistiche sui voti e sull’anno scolastico;
+- assenze, ritardi e uscite, con filtro per intervallo di date;
+- agenda ed eventi personalizzati;
+- lezioni svolte e orario calcolato;
+- note e materiali didattici;
+- circolari nella Bacheca, con:
+  - caricamento nativo e fallback web autenticato;
+  - ricerca testuale;
+  - filtro per circolari lette/non lette;
+  - filtro per categoria;
+  - filtro per circolari attive/scadute;
+- documenti e scrutini disponibili sull’account;
+- pagina **Sostituzioni**;
+- apertura del **Libretto Web** ClasseViva dalla sezione Assenze;
+- temi personalizzabili e modalità chiara/scura;
+- interfaccia in italiano e inglese, con lingua iniziale basata sul dispositivo;
+- cambio lingua dalle Impostazioni.
 
-Any help or contribution is highly appreciated, if you want to contribute to the project you can open a PR or contact me on [Telegram](https://t.me/R1CCARD0).
+La disponibilità dei dati dipende dal profilo, dal ruolo dell’utente e dai moduli attivati dalla scuola.
 
-As I said before right now I don't have a lot of free time for other personal projects so the development of this app is currently on hold, but I'm still fixing major bugs and issues.
+## Requisiti
 
-It would be ideal to have someone who takes lead in the rewrite of the app to null safety and the latest flutter version. I started some work on branch `3.0` but I didn't have time to finish it.
+- Flutter **2.5.3**;
+- Dart compatibile con Flutter 2.5.3;
+- Java 11 per la build Android;
+- Android SDK e un dispositivo Android oppure un emulatore.
 
-## Main features of the app
+La pipeline GitHub Actions esegue i test mirati e produce APK debug e release usando Flutter 2.5.3.
 
-- ability to view entire school year statistics;
-- ability to add custom events;
-- multi-account
-- always keep an eye on your school activity with the many graphs offered by the app;
-- edit grades and notes to find out how your average varies with the "add/remove grade" feature;
-- view the trend of your average and grades over time for each subject;
-- share agenda events with whomever you want via any messaging app;
-- easily navigate through the various sections of the app with its simple and intuitive interface;
-- compare and share your Student Score with your friends and see who is the best!
-- neatly check your classes held at school in the "Lessons" section
-- check your absences and tardies
-- stay informed about school circulars thanks to the "Bulletin Board" section
-- customize your application by choosing the theme to use between light and dark;
-- access teaching materials from wherever you are from the "Teaching Materials" section
+## Avvio locale
 
-## Technologies and libraries used
+```bash
+git clone https://github.com/LNLenost/registro_elettronico.git
+cd registro_elettronico
+flutter pub get
+flutter run
+```
 
-- 🔝 Flutter + Dart
-- 📡 Dio for http
-- 💡 BLoC for state management
-- 📚 Moor for data persistency
-- 💉 GetIt for dependency injection
-- 🔗 Dartz for functional programming
+Per eseguire i test disponibili:
 
-## Project structure
+```bash
+flutter test test/noticeboard_filter_test.dart
+flutter test test/absences_filter_test.dart
+```
 
-<img src="https://i0.wp.com/resocoder.com/wp-content/uploads/2019/08/Clean-Architecture-Flutter-Diagram.png?resize=556%2C707&ssl=1">
+Per creare un APK di debug:
+
+```bash
+flutter build apk --debug
+```
+
+La build release firmata viene verificata nella [pipeline Android](https://github.com/LNLenost/registro_elettronico/actions/workflows/android-build.yml). Le chiavi di firma non sono incluse nel repository.
+
+## Struttura del progetto
+
+```text
+lib/
+├── core/                 # infrastruttura condivisa, rete, temi e localizzazione
+├── feature/
+│   ├── authentication/  # login e profili
+│   ├── absences/        # assenze e ritardi
+│   ├── agenda/          # agenda ed eventi
+│   ├── didactics/       # materiali didattici
+│   ├── grades/          # voti e periodi
+│   ├── lessons/         # lezioni
+│   ├── noticeboard/     # circolari
+│   ├── scrutini/        # documenti e scrutini
+│   ├── stats/            # statistiche
+│   └── substitutions/   # Sostituzioni
+├── utils/               # costanti e utilità
+└── main.dart
+
+test/                    # test mirati delle funzioni locali
+assets/                  # icone, font e risorse grafiche
+lang/                    # traduzioni italiano/inglese
+```
+
+## Stato del progetto
+
+Il progetto è in manutenzione attiva. Le funzioni già presenti vengono mantenute con modifiche mirate e verifiche tramite test e GitHub Actions.
+
+### In valutazione
+
+Le seguenti funzioni ClasseViva richiedono ancora un contratto API di scrittura verificato o un flusso web autorizzato prima di poter essere implementate correttamente:
+
+- giustificazione delle assenze;
+- adesione e risposta alle circolari;
+- upload dei compiti;
+- colloqui e sportello;
+- recuperi;
+- documenti storici.
+
+Non vengono inseriti endpoint, metodi HTTP o payload ipotetici.
+
+## Contribuire
+
+Bug report, proposte e pull request sono benvenuti:
+
+- [Apri una issue](https://github.com/LNLenost/registro_elettronico/issues);
+- [proponi una modifica con una pull request](https://github.com/LNLenost/registro_elettronico/pulls).
+
+Quando segnali un problema, indica dispositivo, versione Android/iOS, versione dell’app e passaggi per riprodurlo. **Non includere password, token, cookie o altri dati personali.**
+
+## Licenza
+
+Il progetto è distribuito secondo la [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE.md).
+
+## Crediti
+
+- Progetto originale: [Riccardo Calligaro](https://github.com/riccardocalligaro);
+- manutenzione del fork: [Niccolò Salerno](https://github.com/LNLenost);
+- backend e servizi dati: ClasseViva/Spaggiari, secondo le condizioni d’uso dei rispettivi servizi.
