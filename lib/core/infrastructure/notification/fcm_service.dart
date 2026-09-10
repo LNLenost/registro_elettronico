@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:fimber/fimber.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'notification_preferences.dart';
@@ -14,11 +16,17 @@ class PushNotificationService {
   static const channelDescription = 'Send and receive notifications';
 
   Future<void> requestPermission() async {
-    await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+    if (Platform.isIOS) {
+      await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+    } else if (Platform.isAndroid) {
+      await const MethodChannel(
+        'com.riccardocalligaro.registro_elettronico/multi-account',
+      ).invokeMethod<void>('requestNotificationPermission');
+    }
   }
 
   Future initialise() async {
