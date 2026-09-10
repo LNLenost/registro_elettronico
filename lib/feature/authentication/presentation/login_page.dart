@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/infrastructure/notification/fcm_service.dart';
 import 'package:registro_elettronico/core/presentation/widgets/gradient_red_button.dart';
 import 'package:registro_elettronico/feature/authentication/data/model/login/parent_response_remote_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/model/login_request_domain_model.dart';
@@ -46,13 +48,14 @@ class _LoginPageState extends State<LoginPage> {
             )
           : null,
       body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is AuthenticationFailure) {
             setState(() {
               _invalid = true;
               _erorrMessage = state.failure.localizedDescription(context);
             });
           } else if (state is AuthenticationSuccess) {
+            await sl<PushNotificationService>().requestPermission();
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => NavigatorPage(

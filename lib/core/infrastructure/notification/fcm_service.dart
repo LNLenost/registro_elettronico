@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:fimber/fimber.dart';
@@ -14,12 +13,16 @@ class PushNotificationService {
   static const channelName = 'Registro elettronico';
   static const channelDescription = 'Send and receive notifications';
 
+  Future<void> requestPermission() async {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+
   Future initialise() async {
     Fimber.i('🔔 [FCM] Called initialisation...');
-
-    if (Platform.isIOS) {
-      await FirebaseMessaging.instance.requestPermission();
-    }
 
     if (kDebugMode) {
       final token = await FirebaseMessaging.instance.getToken();
