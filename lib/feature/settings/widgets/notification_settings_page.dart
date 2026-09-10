@@ -53,7 +53,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   Widget _tile(String title, String key) {
     return SwitchListTile(
       title: Text(title),
-      value: _prefs!.getBool(key) ?? false,
+      value: _prefs!.getBool(key) ?? true,
       onChanged: (value) => _set(key, value),
     );
   }

@@ -18,13 +18,13 @@ class NotificationPreferences {
   static bool isEnabled(SharedPreferences prefs, String category) {
     switch (category) {
       case grades:
-        return prefs.getBool(PrefsConstants.gradesNotifications) ?? false;
+        return prefs.getBool(PrefsConstants.gradesNotifications) ?? true;
       case notices:
-        return prefs.getBool(PrefsConstants.noticesNotifications) ?? false;
+        return prefs.getBool(PrefsConstants.noticesNotifications) ?? true;
       case notes:
-        return prefs.getBool(PrefsConstants.notesNotifications) ?? false;
+        return prefs.getBool(PrefsConstants.notesNotifications) ?? true;
       case absences:
-        return prefs.getBool(PrefsConstants.absencesNotifications) ?? false;
+        return prefs.getBool(PrefsConstants.absencesNotifications) ?? true;
     }
     return false;
   }

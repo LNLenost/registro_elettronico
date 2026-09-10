@@ -6,6 +6,8 @@ import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/infrastructure/notification/local_content_notification_service.dart';
+import 'package:registro_elettronico/core/infrastructure/notification/local_notification.dart';
 import 'package:registro_elettronico/feature/absences/domain/repository/absences_repository.dart';
 import 'package:registro_elettronico/feature/agenda/domain/repository/agenda_repository.dart';
 import 'package:registro_elettronico/feature/didactics/domain/repository/didactics_repository.dart';
@@ -101,6 +103,13 @@ class SRUpdateManager {
 
       await noticesRepository!.updateNotices(ifNeeded: false);
     }
+
+    final notificationService = LocalContentNotificationService(
+      database: sl(),
+      preferences: sharedPreferences!,
+      notifications: LocalNotification((payload) async {}),
+    );
+    await notificationService.notifyNewContent();
   }
 
   Future<void> updateVitalData(BuildContext context) async {
