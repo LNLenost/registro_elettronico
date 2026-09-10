@@ -56,6 +56,22 @@ class _LoginPageState extends State<LoginPage> {
             });
           } else if (state is AuthenticationSuccess) {
             await sl<PushNotificationService>().requestPermission();
+            if (!mounted) return;
+            await showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!
+                    .translate('notifications_title')!),
+                content: Text(AppLocalizations.of(context)!
+                    .translate('notifications_message')!),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(AppLocalizations.of(context)!.translate('ok')!),
+                  ),
+                ],
+              ),
+            );
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => NavigatorPage(
