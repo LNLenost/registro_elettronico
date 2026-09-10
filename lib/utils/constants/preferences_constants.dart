@@ -51,4 +51,8 @@ class PrefsConstants {
   static const String navigationHidden = 'navigationHidden';
   static const String homeOrder = 'homeOrder';
   static const String homeHidden = 'homeHidden';
+  static const String gradesNotifications = 'gradesNotifications';
+  static const String noticesNotifications = 'noticesNotifications';
+  static const String notesNotifications = 'notesNotifications';
+  static const String absencesNotifications = 'absencesNotifications';
 }

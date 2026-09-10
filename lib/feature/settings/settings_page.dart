@@ -14,6 +14,7 @@ import 'package:registro_elettronico/feature/settings/widgets/account/account_se
 import 'package:registro_elettronico/feature/settings/widgets/customization/customization_settings.dart';
 import 'package:registro_elettronico/feature/settings/widgets/general/general_settings.dart';
 import 'package:registro_elettronico/feature/settings/widgets/header_text.dart';
+import 'package:registro_elettronico/feature/settings/widgets/notification_settings_page.dart';
 import 'package:registro_elettronico/utils/constants/registro_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,6 +73,16 @@ class _SettingsPageState extends State<SettingsPage> {
               GeneralSettings(),
 
               CustomizationSettings(),
+
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.translate('notifications')!),
+                subtitle: Text(AppLocalizations.of(context)!.translate('choose_what_to_notify')!),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NotificationSettingsPage(),
+                  ));
+                },
+              ),
 
               ListTile(
                 leading: Icon(Icons.language),

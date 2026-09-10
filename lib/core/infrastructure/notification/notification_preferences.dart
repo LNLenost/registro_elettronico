@@ -1,0 +1,31 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'constants/preferences_constants.dart';
+
+class NotificationPreferences {
+  static const grades = 'grades';
+  static const notices = 'notices';
+  static const notes = 'notes';
+  static const absences = 'absences';
+
+  static const categories = <String>[grades, notices, notes, absences];
+
+  static String? categoryFromMessage(Map<String, dynamic> data) {
+    final category = data['category'];
+    return category is String && categories.contains(category) ? category : null;
+  }
+
+  static bool isEnabled(SharedPreferences prefs, String category) {
+    switch (category) {
+      case grades:
+        return prefs.getBool(PrefsConstants.gradesNotifications) ?? false;
+      case notices:
+        return prefs.getBool(PrefsConstants.noticesNotifications) ?? false;
+      case notes:
+        return prefs.getBool(PrefsConstants.notesNotifications) ?? false;
+      case absences:
+        return prefs.getBool(PrefsConstants.absencesNotifications) ?? false;
+    }
+    return false;
+  }
+}
