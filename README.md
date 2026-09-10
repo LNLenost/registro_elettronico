@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/icons/launcher_icon.png" alt="Registro Elettronico" width="96">
   <h1>Registro Elettronico</h1>
-  <p>Un client Flutter moderno e non ufficiale per consultare il registro ClasseViva.</p>
+  <p>Un client Flutter moderno per consultare il registro eletteonico Classeviva.</p>
 
   <p>
     <a href="https://github.com/LNLenost/registro_elettronico"><img src="https://img.shields.io/badge/repository-LNLenost%2Fregistro__elettronico-181717?logo=github" alt="Repository GitHub"></a>
@@ -14,23 +14,20 @@
 
 ## Screenshot
 
-Schermata reale dell’app, tratta dal post [“Nuovi temi personalizzabili”](https://www.instagram.com/p/CKRUUPtgWSb/?stkn=MWdrZ3Y0dnJncmhzeQ==) pubblicato dall’account Instagram del progetto:
-
 <p align="center">
   <img src="docs/screenshots/custom-themes.jpg" alt="Schermate di Registro Elettronico con temi personalizzabili" width="520">
 </p>
 
 ## Cos’è
 
-**Registro Elettronico** è un’app Flutter per avere in un’unica interfaccia le principali informazioni scolastiche disponibili sul proprio account ClasseViva.
+**Registro Elettronico** è un client alternativo per Classeviva personalizzabile al 100%, con funzionalità aggiuntive.
 
-Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Calligaro](https://github.com/riccardocalligaro/registro_elettronico), con interventi di manutenzione, compatibilità, localizzazione e nuove funzioni per la consultazione quotidiana.
+Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Calligaro](https://github.com/riccardocalligaro/registro_elettronico), con interventi di manutenzione, compatibilità, localizzazione e nuove funzioni.
 
-L’app non sostituisce il portale ufficiale: alcune operazioni, come quelle che richiedono un flusso web o permessi specifici della scuola, vengono aperte tramite ClasseViva Web.
 
 ## Funzionalità
 
-- autenticazione ClasseViva e gestione dei profili;
+- autenticazione Classeviva e gestione dei profili;
 - voti, materie e andamento scolastico;
 - statistiche sui voti e sull’anno scolastico;
 - assenze, ritardi e uscite, con filtro per intervallo di date;
@@ -44,11 +41,10 @@ L’app non sostituisce il portale ufficiale: alcune operazioni, come quelle che
   - filtro per categoria;
   - filtro per circolari attive/scadute;
 - documenti e scrutini disponibili sull’account;
-- pagina **Sostituzioni**;
-- apertura del **Libretto Web** ClasseViva dalla sezione Assenze;
+- pagina **Sostituzioni** collegabile a SostituzioniDocenti o MyProf;
+- apertura del **Libretto Web** Classeviva dalla sezione Assenze;
 - temi personalizzabili e modalità chiara/scura;
-- interfaccia in italiano e inglese, con lingua iniziale basata sul dispositivo;
-- cambio lingua dalle Impostazioni.
+- interfaccia in italiano e inglese, con lingua iniziale basata sul dispositivo.
 
 La disponibilità dei dati dipende dal profilo, dal ruolo dell’utente e dai moduli attivati dalla scuola.
 
