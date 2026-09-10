@@ -23,6 +23,7 @@ jobs:
       - run: flutter test test/absences_filter_test.dart
       - run: flutter test test/navigation_config_test.dart
       - run: flutter test test/home_config_test.dart
+      - run: flutter test test/notification_diff_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
