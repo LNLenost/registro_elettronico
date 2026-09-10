@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'constants/preferences_constants.dart';
+import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 
 class NotificationPreferences {
   static const grades = 'grades';
