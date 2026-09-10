@@ -1,11 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/handler.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
@@ -27,47 +26,47 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AgendaRepositoryImpl implements AgendaRepository {
   static const String lastUpdateKey = 'agendaLastUpdate';
 
-  final AgendaLocalDatasource agendaLocalDatasource;
-  final AgendaRemoteDatasource agendaRemoteDatasource;
+  final AgendaLocalDatasource? agendaLocalDatasource;
+  final AgendaRemoteDatasource? agendaRemoteDatasource;
 
-  final LessonsLocalDatasource lessonsLocalDatasource;
+  final LessonsLocalDatasource? lessonsLocalDatasource;
 
-  final SharedPreferences sharedPreferences;
+  final SharedPreferences? sharedPreferences;
 
   AgendaRepositoryImpl({
-    @required this.agendaLocalDatasource,
-    @required this.agendaRemoteDatasource,
-    @required this.sharedPreferences,
-    @required this.lessonsLocalDatasource,
+    required this.agendaLocalDatasource,
+    required this.agendaRemoteDatasource,
+    required this.sharedPreferences,
+    required this.lessonsLocalDatasource,
   });
 
   @override
   Future<Either<Failure, Success>> deleteEvent({
-    AgendaEventDomainModel event,
+    required AgendaEventDomainModel event,
   }) async {
     try {
-      await agendaLocalDatasource.deleteEventWithId(event.id);
+      await agendaLocalDatasource!.deleteEventWithId(event.id);
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(handleError('[AgendaRepository] Delete event error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> insertEvent({
-    AgendaEventDomainModel event,
+    required AgendaEventDomainModel event,
   }) async {
     try {
-      await agendaLocalDatasource.insertEvent(event.toLocalModel());
+      await agendaLocalDatasource!.insertEvent(event.toLocalModel());
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(handleError('[AgendaRepository] Insert event error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> updateAgendaLatestDays({
-    bool ifNeeded,
+    required bool ifNeeded,
   }) async {
     try {
       if (_needUpdate(ifNeeded)) {
@@ -82,13 +81,14 @@ class AgendaRepositoryImpl implements AgendaRepository {
         return Right(SuccessWithoutUpdate());
       }
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(
+          handleError('[AgendaRepository] Update latest days error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> updateAllAgenda({
-    bool ifNeeded,
+    required bool ifNeeded,
   }) async {
     try {
       if (_needUpdate(ifNeeded)) {
@@ -105,39 +105,40 @@ class AgendaRepositoryImpl implements AgendaRepository {
         return Right(SuccessWithoutUpdate());
       }
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(
+          handleError('[AgendaRepository] Update all agenda error', e, s));
     }
   }
 
   @override
   Future<Either<Failure, Success>> updateEvent({
-    AgendaEventDomainModel event,
+    required AgendaEventDomainModel event,
   }) async {
     try {
-      await agendaLocalDatasource.updateEvent(event.toLocalModel());
+      await agendaLocalDatasource!.updateEvent(event.toLocalModel());
       return Right(Success());
     } catch (e, s) {
-      return Left(handleError(e, s));
+      return Left(handleError('[AgendaRepository] Update event error', e, s));
     }
   }
 
   @override
   Stream<Resource<AgendaDataDomainModel>> watchAgendaData() async* {
     yield* Rx.combineLatest2(
-      agendaLocalDatasource.watchAllEvents(),
-      lessonsLocalDatasource.watchAllLessons(),
+      agendaLocalDatasource!.watchAllEvents(),
+      lessonsLocalDatasource!.watchAllLessons(),
       (List<AgendaEventLocalModel> events, List<LessonLocalModel> lessons) {
-        events.sort((a, b) => a.begin.compareTo(b.begin));
+        events.sort((a, b) => a.begin!.compareTo(b.begin!));
         final domainEvents = events
             .map((l) => AgendaEventDomainModel.fromLocalModel(l))
             .toList();
-
-        final Map<DateTime, List<AgendaEventDomainModel>> eventsMap =
+//events[0].begin.toUtc()
+        final Map<DateTime?, List<AgendaEventDomainModel>> eventsMap =
             Map.fromIterable(
           events,
-          key: (e) => e.begin,
+          key: (e) => DateTime.utc(e.begin.year, e.begin.month, e.begin.day),
           value: (e) => domainEvents
-              .where((event) => DateUtils.areSameDay(event.begin, e.begin))
+              .where((event) => SRDateUtils.areSameDay(event.begin!, e.begin))
               .toList(),
         );
 
@@ -146,12 +147,12 @@ class AgendaRepositoryImpl implements AgendaRepository {
 
         final lessonsMap = groupBy<LessonDomainModel, String>(
           domainLessons,
-          (e) => _convertDate(e.date),
+          (e) => _convertDate(e.date!),
         );
 
         final eventsMapString = groupBy<AgendaEventDomainModel, String>(
           domainEvents,
-          (e) => _convertDate(e.begin),
+          (e) => _convertDate(e.begin!),
         );
 
         final today = DateTime.now();
@@ -160,8 +161,8 @@ class AgendaRepositoryImpl implements AgendaRepository {
         final eventsList = domainEvents
             .where(
               (e) =>
-                  e.begin.isAfter(today) ||
-                  (DateUtils.areSameDay(e.begin, today) &&
+                  e.begin!.isAfter(today) ||
+                  (SRDateUtils.areSameDay(e.begin!, today) &&
                       DateTime.now().hour <= 14),
             )
             .toList();
@@ -178,13 +179,14 @@ class AgendaRepositoryImpl implements AgendaRepository {
           ),
         );
       },
-    ).onErrorReturnWith((e) {
-      return Resource.failed(error: handleStreamError(e));
+    ).onErrorReturnWith((e, s) {
+      return Resource.failed(
+          error: handleError('[AgendaRepository] Agenda stream error', e, s));
     });
   }
 
   List<FlSpot> _getEventsSpotsForDays({
-    @required Map<String, List<AgendaEventDomainModel>> events,
+    required Map<String, List<AgendaEventDomainModel>> events,
   }) {
     List<FlSpot> spots = [];
 
@@ -203,7 +205,7 @@ class AgendaRepositoryImpl implements AgendaRepository {
     String currentString;
 
     for (var i = 1; i <= 6; i++) {
-      currentString = DateUtils.convertDate(dayOfWeek);
+      currentString = SRDateUtils.convertDate(dayOfWeek);
       final eventsForDay = events[currentString];
       final numberOfEvents = eventsForDay != null ? eventsForDay.length : 0;
 
@@ -241,21 +243,21 @@ class AgendaRepositoryImpl implements AgendaRepository {
 
   bool _needUpdate(bool ifNeeded) {
     return !ifNeeded |
-        (ifNeeded && needUpdate(sharedPreferences.getInt(lastUpdateKey)));
+        (ifNeeded && needUpdate(sharedPreferences!.getInt(lastUpdateKey)));
   }
 
   Future<Success> _updateBetweenDates({
-    @required DateTime start,
-    @required DateTime end,
+    required DateTime start,
+    required DateTime end,
   }) async {
-    final remoteAgendaEvents = await agendaRemoteDatasource.getEvents(
+    final remoteAgendaEvents = await agendaRemoteDatasource!.getEvents(
       start: _convertDate(start),
       end: _convertDate(end),
     );
 
-    final localAgendaEvents = await agendaLocalDatasource.getAllEvents();
+    final localAgendaEvents = await agendaLocalDatasource!.getAllEvents();
 
-    final agendasMap = Map<int, AgendaEventLocalModel>.fromIterable(
+    final agendasMap = Map<int?, AgendaEventLocalModel?>.fromIterable(
         localAgendaEvents,
         key: (v) => v.evtId,
         value: (v) => v);
@@ -270,7 +272,7 @@ class AgendaRepositoryImpl implements AgendaRepository {
       }
     }
 
-    await agendaLocalDatasource.insertEvents(
+    await agendaLocalDatasource!.insertEvents(
       remoteAgendaEvents
           .map(
             (e) => AgendaEventLocalModelConverter.fromRemoteModel(
@@ -283,10 +285,10 @@ class AgendaRepositoryImpl implements AgendaRepository {
     );
 
     // delete the agendas that were removed from the remote source
-    await agendaLocalDatasource.deleteEvents(agendasToDelete);
+    await agendaLocalDatasource!.deleteEvents(agendasToDelete);
 
-    await sharedPreferences.setInt(
-        lastUpdateKey, DateTime.now().millisecondsSinceEpoch);
+    await sharedPreferences!
+        .setInt(lastUpdateKey, DateTime.now().millisecondsSinceEpoch);
 
     return SuccessWithUpdate();
   }
@@ -294,7 +296,7 @@ class AgendaRepositoryImpl implements AgendaRepository {
 
 Color _eventColor(AgendaEventRemoteModel event) {
   Color color;
-  if (GlobalUtils.isVerificaOrInterrogazione(event.notes)) {
+  if (GlobalUtils.isVerificaOrInterrogazione(event.notes!)) {
     color = Colors.red;
   } else {
     color = Colors.green;
@@ -306,6 +308,5 @@ class _DateTimeInterval {
   DateTime begin;
   DateTime end;
 
-  _DateTimeInterval({@required this.begin, @required this.end})
-      : assert(begin != null && end != null);
+  _DateTimeInterval({required this.begin, required this.end});
 }

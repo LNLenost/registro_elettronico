@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grade_domain_model.dart';
@@ -10,36 +9,36 @@ import 'package:registro_elettronico/feature/subjects/domain/model/subject_domai
 
 abstract class GradesRepository {
   Stream<Resource<List<GradeDomainModel>>> watchLocalGrades({
-    @required int subjectId,
-    @required int periodPos,
+    required int? subjectId,
+    required int? periodPos,
   });
 
   Stream<Resource<List<GradeDomainModel>>> watchAllGrades();
 
-  Stream<Resource<GradesPagesDomainModel>> watchAllGradesSections();
+  Stream<Resource<GradesPagesDomainModel?>> watchAllGradesSections();
 
-  Future<Either<Failure, Success>> updateGrades({@required bool ifNeeded});
+  Future<Either<Failure, Success>> updateGrades({required bool ifNeeded});
 
   Future<Either<Failure, SubjectDataDomainModel>> getSubjectData({
-    @required PeriodGradeDomainModel periodGradeDomainModel,
+    required PeriodGradeDomainModel periodGradeDomainModel,
   });
 
   Future<Either<Failure, List<GradeDomainModel>>> getGrades();
 
   Future<Either<Failure, Success>> toggleGradeLocallyCancelledStatus({
-    @required GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   });
 
   Future<Either<Failure, Success>> changeSubjectObjective({
-    @required int newValue,
-    @required SubjectDomainModel subject,
+    required int newValue,
+    required SubjectDomainModel subject,
   });
 
   Future<Either<Failure, Success>> deleteLocalGrade({
-    @required GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   });
 
   Future<Either<Failure, Success>> addLocalGrade({
-    @required GradeDomainModel gradeDomainModel,
+    required GradeDomainModel gradeDomainModel,
   });
 }

@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 
 import 'content_remote_model.dart';
 
 class FolderRemoteModel {
-  int folderId;
-  String folderName;
-  String lastShareDT;
-  List<ContentRemoteModel> contents;
+  int? folderId;
+  String? folderName;
+  String? lastShareDT;
+  List<ContentRemoteModel>? contents;
 
   FolderRemoteModel({
     this.folderId,
@@ -17,13 +16,13 @@ class FolderRemoteModel {
   });
 
   FolderLocalModel toLocalModel({
-    @required teacherId,
+    required teacherId,
   }) {
     return FolderLocalModel(
       teacherId: teacherId ?? '',
       id: this.folderId ?? -1,
-      name: this.folderName ?? -1,
-      lastShare: DateTime.tryParse(this.lastShareDT) ??
+      name: this.folderName ?? -1 as String?,
+      lastShare: DateTime.tryParse(this.lastShareDT!) ??
           DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
@@ -33,9 +32,9 @@ class FolderRemoteModel {
     folderName = json['folderName'];
     lastShareDT = json['lastShareDT'];
     if (json['contents'] != null) {
-      contents = List<ContentRemoteModel>();
+      contents = <ContentRemoteModel>[];
       json['contents'].forEach((v) {
-        contents.add(ContentRemoteModel.fromJson(v));
+        contents!.add(ContentRemoteModel.fromJson(v));
       });
     }
   }
@@ -46,7 +45,7 @@ class FolderRemoteModel {
     data['folderName'] = this.folderName;
     data['lastShareDT'] = this.lastShareDT;
     if (this.contents != null) {
-      data['contents'] = this.contents.map((v) => v.toJson()).toList();
+      data['contents'] = this.contents!.map((v) => v.toJson()).toList();
     }
     return data;
   }

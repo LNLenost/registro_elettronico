@@ -1,15 +1,14 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 import 'package:registro_elettronico/feature/didactics/domain/model/didactics_file.dart';
 
 class ContentDomainModel {
-  int id;
-  String name;
-  int objectId;
-  ContentType type;
-  DateTime shareDate;
-  List<DidacticsFile> files;
+  int? id;
+  String? name;
+  int? objectId;
+  ContentType? type;
+  DateTime? shareDate;
+  List<DidacticsFile>? files;
 
   ContentDomainModel({
     this.id,
@@ -21,8 +20,8 @@ class ContentDomainModel {
   });
 
   ContentDomainModel.fromLocalModel({
-    @required ContentLocalModel l,
-    @required List<DidacticsFile> files,
+    required ContentLocalModel l,
+    required List<DidacticsFile>? files,
   }) {
     this.id = l.id;
     this.name = l.name;
@@ -32,7 +31,7 @@ class ContentDomainModel {
     this.files = files;
   }
 
-  ContentType _typeFromName(String type) {
+  ContentType _typeFromName(String? type) {
     if (type == 'link') {
       return ContentType.url;
     } else if (type == 'text') {

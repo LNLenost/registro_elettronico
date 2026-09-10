@@ -21,6 +21,8 @@ class NoticeboardContainer {
     _sl.registerLazySingleton(
       () => NoticeboardRemoteDatasource(
         dio: _sl(),
+        webSpaggiariClient: _sl(),
+        authenticationRepository: _sl(),
       ),
     );
 

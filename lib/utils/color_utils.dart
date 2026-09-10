@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/utils/constants/registro_constants.dart';
-import 'package:tinycolor/tinycolor.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 class ColorUtils {
   /// Returns a color by checking the event [code]
   ///
   /// [Red] for Absence, [Blue] for delay and [yellow] for early exit
-  static Color getColorFromCode(String code) {
+  static Color? getColorFromCode(String? code) {
     if (code == RegistroConstants.ASSENZA) {
       return Colors.red;
     } else if (code == RegistroConstants.RITARDO) {
@@ -22,8 +22,8 @@ class ColorUtils {
     }
   }
 
-  static Color getLessonCardColor(BuildContext context) {
-    final themeColor = Theme.of(context).accentColor;
+  static Color? getLessonCardColor(BuildContext context) {
+    final themeColor = Theme.of(context).colorScheme.secondary;
 
     if (themeColor == Colors.red || themeColor.value == 4294198070) {
       return Colors.red[400];
@@ -32,8 +32,8 @@ class ColorUtils {
     return themeColor;
   }
 
-  static List<Color> getCardsColors(int length) {
-    List<Color> _colors = [
+  static List<Color?> getCardsColors(int length) {
+    List<Color?> _colors = [
       Colors.pink,
       Colors.purple,
       Colors.deepPurple,
@@ -62,7 +62,7 @@ class ColorUtils {
     return _colors;
   }
 
-  static Color getDropHeaderColor(BuildContext context) {
+  static Color? getDropHeaderColor(BuildContext context) {
     if (Theme.of(context).brightness == Brightness.light) {
       return Colors.white;
     } else if (Theme.of(context).scaffoldBackgroundColor == Colors.black) {
@@ -76,17 +76,17 @@ class ColorUtils {
     bool button = false,
   }) {
     if (color == Colors.yellow) {
-      return [Colors.yellow[700], Colors.yellow[900]];
+      return [Colors.yellow[700]!, Colors.yellow[900]!];
     } else if (color == Colors.green) {
-      return [Colors.green[500], Colors.green[800]];
+      return [Colors.green[500]!, Colors.green[800]!];
     } else if (color == Colors.red || color.value == 4294198070) {
       if (button) {
         return [
-          Colors.red[600],
-          Colors.red[800],
+          Colors.red[600]!,
+          Colors.red[800]!,
         ];
       }
-      return [Colors.red[400], Colors.red[800]];
+      return [Colors.red[400]!, Colors.red[800]!];
     }
 
     return [
@@ -97,7 +97,8 @@ class ColorUtils {
 
   static MaterialColor createMaterialColor(Color color) {
     List strengths = <double>[.05];
-    Map swatch = <int, Color>{};
+    Map<int, Color> swatch = <int, Color>{};
+
     final int r = color.red, g = color.green, b = color.blue;
     for (int i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
@@ -111,6 +112,7 @@ class ColorUtils {
         1,
       );
     });
+    // TODO: fix this
     return MaterialColor(color.value, swatch);
   }
 
@@ -153,13 +155,13 @@ class ColorUtils {
   //   return Colors.red;
   // }
 
-  static Color getRandomMaterialColor() {
+  static Color? getRandomMaterialColor() {
     Random random = Random();
     int randomNumber = random.nextInt(5);
     return getColorFromIndex(randomNumber);
   }
 
-  static Color getColorFromIndex(int index) {
+  static Color? getColorFromIndex(int index) {
     if (index > 16) {
       try {
         Random random = Random();
@@ -173,53 +175,38 @@ class ColorUtils {
     switch (index) {
       case 0:
         return Colors.red;
-        break;
       case 1:
         return Colors.pink;
-        break;
       case 2:
         return Colors.purple;
-        break;
       case 3:
         return Colors.deepPurple;
-        break;
       case 4:
         return Colors.indigo;
-        break;
       case 5:
         return Colors.blue;
-        break;
       case 6:
         return Colors.green;
-        break;
       case 7:
         return Colors.greenAccent;
-        break;
       case 8:
         return Colors.amber;
-        break;
       case 9:
         return Colors.orange;
-        break;
       case 10:
         return Colors.blue[900];
-        break;
       case 11:
         return Colors.lightGreen;
       case 12:
         return Colors.lightBlue;
       case 13:
         return Colors.yellow[700];
-        break;
       case 14:
         return Colors.teal;
-        break;
       case 15:
         return Colors.tealAccent;
-        break;
       case 16:
         return Colors.redAccent;
-        break;
       default:
         return Colors.red;
     }

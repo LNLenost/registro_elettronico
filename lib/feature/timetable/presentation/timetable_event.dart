@@ -11,9 +11,8 @@ import 'model/timetable_entry_presentation_model.dart';
 class TimetableEventWidget extends StatelessWidget {
   const TimetableEventWidget(
     this.event, {
-    Key key,
-  })  : assert(event != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   /// The [BasicEvent] to be displayed.
   final TimetableEntryPresentationModel event;
@@ -42,40 +41,39 @@ class TimetableEventWidget extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.calendar_today),
                     title: Text(
-                      DateUtils.convertSingleDayForDisplay(
-                        event.start.toDateTimeLocal(),
-                        AppLocalizations.of(context).locale.toString(),
+                      SRDateUtils.convertSingleDayForDisplay(
+                        event.start,
+                        AppLocalizations.of(context)!.locale.toString(),
                       ),
                     ),
                   ),
                   ListTile(
                     leading: Icon(Icons.access_time),
                     title: Text(
-                      '${event.start.hourOfDay}:00-${event.end.hourOfDay}:00',
+                      '${event.start.hour}:00-${event.end.hour}:00',
                     ),
                   )
                 ],
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () async {
                     final TimetableRepository timetableRepository = sl();
                     await timetableRepository.deleteTimetableEntry(
                       id: event.id,
                     );
-
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)
-                      .translate('delete')
+                  child: Text(AppLocalizations.of(context)!
+                      .translate('delete')!
                       .toUpperCase()),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)
-                      .translate('ok')
+                  child: Text(AppLocalizations.of(context)!
+                      .translate('ok')!
                       .toUpperCase()),
                 )
               ],

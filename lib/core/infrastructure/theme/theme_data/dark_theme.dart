@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:registro_elettronico/core/infrastructure/theme/theme_data/text_styles.dart';
 
 class DarkTheme {
   static ThemeData getThemeData(MaterialColor color) {
     return ThemeData(
-      primarySwatch: color,
-      accentColor: color,
-      // primaryColor: color,
+      colorScheme: ColorScheme.highContrastDark(
+        primary: color,
+        secondary: color,
+      ),
       brightness: Brightness.dark,
       fontFamily: 'Manrope',
       appBarTheme: AppBarTheme(
         elevation: 0,
         color: Colors.grey[900],
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -23,10 +25,13 @@ class DarkTheme {
         headline5: heaingSmall.copyWith(color: Colors.white),
         bodyText2: bodyStyle1.copyWith(color: Colors.white),
       ),
+      // A little darker cards
       cardTheme: CardTheme(color: Colors.grey[900]),
-      cursorColor: color,
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: color,
+        selectionHandleColor: color,
+      ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      textSelectionHandleColor: color,
     );
   }
 }

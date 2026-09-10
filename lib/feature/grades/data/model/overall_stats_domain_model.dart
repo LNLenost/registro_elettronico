@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:registro_elettronico/feature/subjects/domain/model/subject_domain_model.dart';
 
 class OverallStatsDomainModel {
@@ -11,23 +10,23 @@ class OverallStatsDomainModel {
   final SubjectDomainModel worstSubject;
 
   OverallStatsDomainModel({
-    @required this.average,
-    @required this.insufficienze,
-    @required this.sufficienze,
-    @required this.votoMin,
-    @required this.votoMax,
-    @required this.bestSubject,
-    @required this.worstSubject,
+    required this.average,
+    required this.insufficienze,
+    required this.sufficienze,
+    required this.votoMin,
+    required this.votoMax,
+    required this.bestSubject,
+    required this.worstSubject,
   });
 
   OverallStatsDomainModel copyWith({
-    double average,
-    int insufficienze,
-    int sufficienze,
-    double votoMin,
-    double votoMax,
-    SubjectDomainModel bestSubject,
-    SubjectDomainModel worstSubject,
+    double? average,
+    int? insufficienze,
+    int? sufficienze,
+    double? votoMin,
+    double? votoMax,
+    SubjectDomainModel? bestSubject,
+    SubjectDomainModel? worstSubject,
   }) {
     return OverallStatsDomainModel(
       average: average ?? this.average,

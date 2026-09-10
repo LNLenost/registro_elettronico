@@ -5,12 +5,13 @@ import 'package:registro_elettronico/core/infrastructure/localizations/app_local
 import 'package:registro_elettronico/core/presentation/widgets/about_app_dialog.dart';
 import 'package:registro_elettronico/feature/settings/widgets/about/about_developers_page.dart';
 import 'package:registro_elettronico/feature/settings/widgets/account/account_settings.dart';
-import 'package:registro_elettronico/utils/bug_report.dart';
+import 'package:registro_elettronico/utils/constants/registro_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpPage extends StatelessWidget {
   final bool fromSettings;
   const HelpPage({
-    Key key,
+    Key? key,
     this.fromSettings = false,
   }) : super(key: key);
 
@@ -18,7 +19,8 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('help_page_title')),
+        title:
+            Text(AppLocalizations.of(context)!.translate('help_page_title')!),
       ),
       body: ExpandableTheme(
         data: ExpandableThemeData(
@@ -30,97 +32,89 @@ class HelpPage extends StatelessWidget {
         child: ListView(
           children: [
             ExpandablePanel(
+              collapsed: Container(),
               header: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_1_q'),
+                  AppLocalizations.of(context)!.translate('faq_1_q')!,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               expanded: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                 child: SelectableText(
-                  AppLocalizations.of(context).translate('faq_1_a'),
+                  AppLocalizations.of(context)!.translate('faq_1_a')!,
                 ),
               ),
             ),
             ExpandablePanel(
+              collapsed: Container(),
               header: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_2_q'),
+                  AppLocalizations.of(context)!.translate('faq_2_q')!,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               expanded: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                child: Text(AppLocalizations.of(context).translate('faq_2_a')),
+                child:
+                    Text(AppLocalizations.of(context)!.translate('faq_2_a')!),
               ),
             ),
             ExpandablePanel(
+              collapsed: Container(),
               header: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_3_q'),
+                  AppLocalizations.of(context)!.translate('faq_3_q')!,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               expanded: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                child: Text(AppLocalizations.of(context).translate('faq_3_a')),
+                child:
+                    Text(AppLocalizations.of(context)!.translate('faq_3_a')!),
               ),
             ),
             ExpandablePanel(
+              collapsed: Container(),
               header: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_4_q'),
+                  AppLocalizations.of(context)!.translate('faq_4_q')!,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               expanded: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_4_a'),
+                  AppLocalizations.of(context)!.translate('faq_4_a')!,
                 ),
               ),
             ),
             ExpandablePanel(
+              collapsed: Container(),
               header: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  AppLocalizations.of(context).translate('faq_5_q'),
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-              expanded: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                child: SelectableText(
-                  AppLocalizations.of(context).translate('faq_5_a'),
-                ),
-              ),
-            ),
-            ExpandablePanel(
-              header: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  AppLocalizations.of(context).translate('faq_6_q'),
+                  AppLocalizations.of(context)!.translate('faq_6_q')!,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               expanded: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                 child: SelectableText(
-                  AppLocalizations.of(context).translate('faq_6_a'),
+                  AppLocalizations.of(context)!.translate('faq_6_a')!,
                 ),
               ),
             ),
             if (!fromSettings)
               ListTile(
-                title: Text(AppLocalizations.of(context)
-                    .translate('about_developers_title')),
-                subtitle: Text(AppLocalizations.of(context)
-                    .translate('about_developers_subtitle')),
+                title: Text(AppLocalizations.of(context)!
+                    .translate('about_developers_title')!),
+                subtitle: Text(AppLocalizations.of(context)!
+                    .translate('about_developers_subtitle')!),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -132,20 +126,23 @@ class HelpPage extends StatelessWidget {
               ),
             if (!fromSettings)
               ListTile(
-                title: Text(
-                    AppLocalizations.of(context).translate('report_bug_title')),
-                subtitle: Text(AppLocalizations.of(context)
-                    .translate('report_bug_message')),
+                title: Text(AppLocalizations.of(context)!
+                    .translate('report_bug_title')!),
+                subtitle: Text(AppLocalizations.of(context)!
+                    .translate('report_bug_message')!),
                 onTap: () async {
-                  await ReportManager.sendEmail(context);
+                  final url = RegistroConstants.GITHUB_ISSUES;
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
                 },
               ),
             if (!fromSettings)
               ListTile(
                 title: Text(
-                    AppLocalizations.of(context).translate('info_app_title')),
-                subtitle: Text(AppLocalizations.of(context)
-                    .translate('info_app_subtitle')),
+                    AppLocalizations.of(context)!.translate('info_app_title')!),
+                subtitle: Text(AppLocalizations.of(context)!
+                    .translate('info_app_subtitle')!),
                 onTap: () async {
                   PackageInfo packageInfo = await PackageInfo.fromPlatform();
                   await showDialog(
@@ -158,10 +155,10 @@ class HelpPage extends StatelessWidget {
               ),
             if (!fromSettings)
               ListTile(
-                title:
-                    Text(AppLocalizations.of(context).translate('reset_data')),
-                subtitle: Text(AppLocalizations.of(context)
-                    .translate('reset_data_message')),
+                title: Text(
+                    AppLocalizations.of(context)!.translate('reset_data')!),
+                subtitle: Text(AppLocalizations.of(context)!
+                    .translate('reset_data_message')!),
                 onTap: () {
                   showDialog(
                     context: context,

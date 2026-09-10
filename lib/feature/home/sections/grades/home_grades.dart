@@ -1,7 +1,6 @@
-import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/core/presentation/widgets/cusotm_placeholder.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grade_domain_model.dart';
@@ -11,9 +10,10 @@ import 'package:registro_elettronico/feature/home/home_page.dart';
 import 'package:registro_elettronico/utils/date_utils.dart';
 import 'package:registro_elettronico/utils/global_utils.dart';
 import 'package:registro_elettronico/utils/string_utils.dart';
+import 'package:share/share.dart';
 
 class HomeGrades extends StatelessWidget {
-  const HomeGrades({Key key}) : super(key: key);
+  const HomeGrades({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +33,21 @@ class HomeGrades extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                if (state.gradesSections.newNotSeenGrades > 0)
+                if (state.gradesSections!.newNotSeenGrades > 0)
                   Text(
-                    AppLocalizations.of(context)
-                        .translate('last_grades_new')
+                    AppLocalizations.of(context)!
+                        .translate('last_grades_new')!
                         .replaceAll(
                           '{number}',
-                          state.gradesSections.newNotSeenGrades.toString(),
+                          state.gradesSections!.newNotSeenGrades.toString(),
                         ),
                   ),
-                if (state.gradesSections.newNotSeenGrades == 0)
+                if (state.gradesSections!.newNotSeenGrades == 0)
                   Text(
-                    AppLocalizations.of(context).translate('last_grades'),
+                    AppLocalizations.of(context)!.translate('last_grades')!,
                   ),
                 _LastGradesLoaded(
-                  grades: state.gradesSections.grades.take(3).toList(),
+                  grades: state.gradesSections!.grades.take(3).toList(),
                 ),
               ],
             ),
@@ -74,7 +74,7 @@ class HomeGrades extends StatelessWidget {
             height: 16,
           ),
           Text(
-            AppLocalizations.of(context).translate('last_grades'),
+            AppLocalizations.of(context)!.translate('last_grades')!,
           ),
           widget
         ],
@@ -87,8 +87,8 @@ class _LastGradesLoaded extends StatelessWidget {
   final List<GradeDomainModel> grades;
 
   const _LastGradesLoaded({
-    Key key,
-    @required this.grades,
+    Key? key,
+    required this.grades,
   }) : super(key: key);
 
   @override
@@ -108,10 +108,10 @@ class _LastGradesLoaded extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 32.0),
         child: CustomPlaceHolder(
           icon: Icons.timeline,
-          text: AppLocalizations.of(context).translate('no_grades'),
+          text: AppLocalizations.of(context)!.translate('no_grades'),
           showUpdate: true,
           onTap: () {
-            homeRefresherKey.currentState.show();
+            homeRefresherKey.currentState!.show();
           },
         ),
       );
@@ -121,23 +121,22 @@ class _LastGradesLoaded extends StatelessWidget {
   Widget _buildListViewCard(GradeDomainModel grade, BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        final trans = AppLocalizations.of(context);
+        final trans = AppLocalizations.of(context)!;
 
         String message = "";
 
-        final gradeSubject = grade.subjectDesc.length > 35
-            ? StringUtils.titleCase(
-                GlobalUtils.reduceSubjectTitleWithLength(grade.subjectDesc, 34))
-            : StringUtils.titleCase(grade.subjectDesc);
-        final date = DateUtils.convertDateLocale(
-            grade.eventDate, AppLocalizations.of(context).locale.toString());
+        final gradeSubject = grade.subjectDesc!.length > 35
+            ? StringUtils.titleCase(GlobalUtils.reduceSubjectTitleWithLength(
+                grade.subjectDesc!, 34))
+            : StringUtils.titleCase(grade.subjectDesc!);
+        final date = SRDateUtils.convertDateLocale(
+            grade.eventDate, AppLocalizations.of(context)!.locale.toString());
 
         message += '${trans.translate('author')}: $gradeSubject';
         message += "\n${trans.translate('date')}: $date";
         message += '\n${grade.displayValue}';
 
-        Share.text(AppLocalizations.of(context).translate('share'), message,
-            'text/plain');
+        Share.share(message);
       },
       child: Card(
         margin: const EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 4.0),
@@ -159,16 +158,16 @@ class _LastGradesLoaded extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  grade.subjectDesc.length > 35
+                  grade.subjectDesc!.length > 35
                       ? StringUtils.titleCase(
                           GlobalUtils.reduceSubjectTitleWithLength(
-                              grade.subjectDesc, 34))
-                      : StringUtils.titleCase(grade.subjectDesc),
+                              grade.subjectDesc!, 34))
+                      : StringUtils.titleCase(grade.subjectDesc!),
                   style: TextStyle(fontSize: 15),
                 ),
                 Text(
-                  DateUtils.convertDateLocale(grade.eventDate,
-                      AppLocalizations.of(context).locale.toString()),
+                  SRDateUtils.convertDateLocale(grade.eventDate,
+                      AppLocalizations.of(context)!.locale.toString()),
                   style: TextStyle(fontSize: 11),
                 )
               ],
@@ -177,7 +176,7 @@ class _LastGradesLoaded extends StatelessWidget {
           trailing: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              grade.displayValue,
+              grade.displayValue!,
               style: TextStyle(fontSize: 18),
             ),
           ),
@@ -191,7 +190,7 @@ class _LastGradesLoading extends StatelessWidget {
   final bool showUpdate;
 
   const _LastGradesLoading({
-    Key key,
+    Key? key,
     this.showUpdate = false,
   }) : super(key: key);
 
@@ -210,17 +209,17 @@ class _LastGradesLoading extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(AppLocalizations.of(context).translate('no_grades')),
+            Text(AppLocalizations.of(context)!.translate('no_grades')!),
             if (showUpdate)
-              FlatButton(
+              TextButton(
                 child: Text(
-                  AppLocalizations.of(context).translate('sync'),
+                  AppLocalizations.of(context)!.translate('sync')!,
                   style: TextStyle(
                     color: Colors.grey[600],
                   ),
                 ),
                 onPressed: () {
-                  homeRefresherKey.currentState.show();
+                  homeRefresherKey.currentState!.show();
                 },
               )
           ],
@@ -231,18 +230,18 @@ class _LastGradesLoading extends StatelessWidget {
 }
 
 class _LastGradesError extends StatelessWidget {
-  final Failure failure;
+  final Failure? failure;
 
   const _LastGradesError({
-    Key key,
-    @required this.failure,
+    Key? key,
+    required this.failure,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPlaceHolder(
       icon: Icons.error,
-      text: failure.localizedDescription(context),
+      text: failure!.localizedDescription(context),
       showUpdate: true,
       onTap: () {
         BlocProvider.of<GradesUpdaterBloc>(context).add(UpdateGrades());

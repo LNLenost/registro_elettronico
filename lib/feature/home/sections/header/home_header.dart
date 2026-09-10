@@ -10,7 +10,7 @@ import 'package:registro_elettronico/utils/date_utils.dart';
 import 'package:registro_elettronico/utils/string_utils.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({Key key}) : super(key: key);
+  const HomeHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class HomeHeader extends StatelessWidget {
               ),
               _buildNameText(context),
               Text(
-                DateUtils.convertDateLocale(
+                SRDateUtils.convertDateLocale(
                   DateTime.now(),
-                  AppLocalizations.of(context).locale.toString(),
+                  AppLocalizations.of(context)!.locale.toString(),
                 ),
                 style: TextStyle(
                   color: Colors.white,
@@ -51,18 +51,8 @@ class HomeHeader extends StatelessWidget {
     ProfilesLocalDatasource profilesLocalDatasource = sl();
     final profile = profilesLocalDatasource.getLoggedInUserSync();
 
-    if (profile != null) {
-      return Text(
-        '${DateUtils.localizedTimeMessage(context)}, ${StringUtils.titleCase(profile.firstName ?? '')}.',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 24,
-          fontWeight: FontWeight.w400,
-        ),
-      );
-    }
     return Text(
-      '${DateUtils.localizedTimeMessage(context)}.',
+      '${SRDateUtils.localizedTimeMessage(context)}, ${StringUtils.titleCase(profile.firstName ?? '')}.',
       style: TextStyle(
         color: Colors.white,
         fontSize: 24,
@@ -73,7 +63,7 @@ class HomeHeader extends StatelessWidget {
 }
 
 class _WeekEventsChart extends StatelessWidget {
-  const _WeekEventsChart({Key key}) : super(key: key);
+  const _WeekEventsChart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,16 +73,16 @@ class _WeekEventsChart extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       elevation: 2,
-      child: Container(
-        height: 140,
-        width: double.infinity,
+      child: AspectRatio(
+        aspectRatio: 3,
+        // width: double.infinity,
         child: BlocBuilder<AgendaWatcherBloc, AgendaWatcherState>(
           builder: (context, state) {
             if (state is AgendaWatcherLoadSuccess) {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(1, 0, 24, 0),
                 child: WeekSummaryChart(
-                  events: state.agendaDataDomainModel.eventsSpots,
+                  events: state.agendaDataDomainModel!.eventsSpots,
                 ),
               );
             }
@@ -105,7 +95,7 @@ class _WeekEventsChart extends StatelessWidget {
 }
 
 class _BackgroundGradient extends StatelessWidget {
-  const _BackgroundGradient({Key key}) : super(key: key);
+  const _BackgroundGradient({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +105,7 @@ class _BackgroundGradient extends StatelessWidget {
         gradient: LinearGradient(
           stops: [0.4, 1],
           colors: ColorUtils.getGradientForColor(
-            Theme.of(context).accentColor,
+            Theme.of(context).colorScheme.secondary,
           ),
           begin: Alignment(-1.0, -2.0),
           end: Alignment(1.0, 2.0),

@@ -1,11 +1,11 @@
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:registro_elettronico/core/data/model/event_type.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/local_notification.dart';
-import 'package:registro_elettronico/core/presentation/widgets/app_drawer.dart';
+import 'package:registro_elettronico/core/presentation/custom/no_glow_behavior.dart';
+import 'package:registro_elettronico/feature/agenda/domain/model/agenda_data_domain_model.dart';
 import 'package:registro_elettronico/feature/agenda/domain/model/agenda_event_domain_model.dart';
 import 'package:registro_elettronico/feature/agenda/domain/repository/agenda_repository.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/agenda_page.dart';
@@ -18,11 +18,11 @@ import 'package:registro_elettronico/utils/global_utils.dart';
 import 'package:registro_elettronico/utils/string_utils.dart';
 
 class NewEventPage extends StatefulWidget {
-  final EventType eventType;
-  final DateTime initialDate;
+  final AgendaEventType? eventType;
+  final DateTime? initialDate;
 
   NewEventPage({
-    Key key,
+    Key? key,
     this.eventType,
     this.initialDate,
   }) : super(key: key);
@@ -35,13 +35,13 @@ class _NewEventPageState extends State<NewEventPage> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
 
-  Color _labelColor;
-  DateTime _selectedDate;
+  Color? _labelColor;
+  DateTime? _selectedDate;
 
   TimeOfDay _timeOfDay = TimeOfDay(hour: 9, minute: 0);
   // Duration _repeat = Duration(milliseconds: 0);
 
-  SubjectDomainModel _selectedSubject;
+  SubjectDomainModel? _selectedSubject;
 
   bool _notifyEvent = false;
   Duration _beforeNotify = Duration(minutes: 30);
@@ -51,13 +51,13 @@ class _NewEventPageState extends State<NewEventPage> {
   @override
   void initState() {
     _selectedDate = widget.initialDate;
-    if (DateUtils.areSameDay(_selectedDate, DateTime.now())) {
+    if (SRDateUtils.areSameDay(_selectedDate!, DateTime.now())) {
       final addedHour = DateTime.now().add(Duration(hours: 2));
       _timeOfDay = TimeOfDay(hour: addedHour.hour, minute: 0);
     }
-    if (widget.eventType == EventType.test) {
+    if (widget.eventType == AgendaEventType.test) {
       _labelColor = Colors.orange;
-    } else if (widget.eventType == EventType.assigment) {
+    } else if (widget.eventType == AgendaEventType.assigment) {
       _labelColor = Colors.blue;
     } else {
       _labelColor = Colors.green;
@@ -69,15 +69,14 @@ class _NewEventPageState extends State<NewEventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('new_event')),
-        brightness: Theme.of(context).brightness,
+        title: Text(AppLocalizations.of(context)!.translate('new_event')!),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
             onPressed: () async {
-              Logger.info('Pressed the check button');
+              Fimber.i('Pressed the check button');
               _insertEventInDb();
-              Logger.info('Inserted the element, popping the navigator');
+              Fimber.i('Inserted the element, popping the navigator');
             },
           ),
         ],
@@ -88,7 +87,7 @@ class _NewEventPageState extends State<NewEventPage> {
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[
             _buildTopCard(),
-            widget.eventType != EventType.memo
+            widget.eventType != AgendaEventType.memo
                 ? _buildSubjectCard()
                 : Container(),
             // _buildNotificationCard(),
@@ -100,24 +99,24 @@ class _NewEventPageState extends State<NewEventPage> {
   }
 
   void _insertEventInDb() async {
-    Logger.info('Inside the insert event button');
+    Fimber.i('Inside the insert event button');
 
     final id = DateTime.now().millisecondsSinceEpoch.toSigned(32);
 
-    Logger.info('Set new event id to $id');
+    Fimber.i('Set new event id to $id');
 
-    final DateTime _date = DateTime(
-      _selectedDate.year,
-      _selectedDate.month,
-      _selectedDate.day,
+    final DateTime? _date = DateTime(
+      _selectedDate!.year,
+      _selectedDate!.month,
+      _selectedDate!.day,
       _timeOfDay.hour,
       _timeOfDay.minute,
     );
 
-    Logger.info('Date of the new event $_date');
+    Fimber.i('Date of the new event $_date');
 
     AgendaEventDomainModel event;
-    if (widget.eventType == EventType.memo) {
+    if (widget.eventType == AgendaEventType.memo) {
       event = AgendaEventDomainModel(
         subjectId: -1,
         isLocal: true,
@@ -130,24 +129,24 @@ class _NewEventPageState extends State<NewEventPage> {
         className: '',
         id: id,
         notes: _descriptionController.text,
-        labelColor: _labelColor.value.toString(),
+        labelColor: _labelColor!.value.toString(),
         title: _titleController.text,
       );
     } else {
       if (_selectedSubject != null) {
         event = AgendaEventDomainModel(
-          subjectId: _selectedSubject.id,
+          subjectId: _selectedSubject!.id,
           isLocal: true,
           isFullDay: false,
           code: '',
           begin: _date,
           end: _date,
-          subjectName: _selectedSubject.name,
+          subjectName: _selectedSubject!.name,
           author: '',
           className: '',
           id: id,
           notes: _descriptionController.text,
-          labelColor: _labelColor.value.toString(),
+          labelColor: _labelColor!.value.toString(),
           title: _titleController.text,
         );
       } else {
@@ -163,19 +162,26 @@ class _NewEventPageState extends State<NewEventPage> {
 
     Navigator.pop(context, _selectedDate);
 
-    Logger.info('Added event');
+    Fimber.i('Added event');
 
     if (_notifyEvent) {
-      Logger.info('Setting up notifications');
+      Fimber.i('Setting up notifications');
 
       final LocalNotification localNotification =
           LocalNotification(onSelectNotification);
 
+      DateTime scheduledTime;
+
+      if (_date != null) {
+        scheduledTime = _date.subtract(_beforeNotify);
+      } else {
+        scheduledTime = DateTime.now().add(Duration(hours: 1));
+      }
+
       await localNotification.scheduleNotification(
-        title: AppLocalizations.of(context).translate('new_event') ?? '',
-        message: _titleController.text ?? '',
-        scheduledTime: _date.subtract(_beforeNotify) ??
-            DateTime.now().add(Duration(hours: 1)),
+        title: AppLocalizations.of(context)!.translate('new_event') ?? '',
+        message: _titleController.text,
+        scheduledTime: scheduledTime,
         eventId: id,
       );
     }
@@ -192,7 +198,8 @@ class _NewEventPageState extends State<NewEventPage> {
           maxLines: null,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: AppLocalizations.of(context).translate('add_description'),
+            hintText:
+                AppLocalizations.of(context)!.translate('add_description'),
           ),
         ),
       ),
@@ -205,14 +212,13 @@ class _NewEventPageState extends State<NewEventPage> {
         children: <Widget>[
           SwitchListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-            title: Text(AppLocalizations.of(context).translate('notify_event')),
+            title:
+                Text(AppLocalizations.of(context)!.translate('notify_event')!),
             value: _notifyEvent,
             onChanged: (bool value) {
-              if (value != null) {
-                setState(() {
-                  _notifyEvent = value;
-                });
-              }
+              setState(() {
+                _notifyEvent = value;
+              });
             },
           ),
           if (_notifyEvent)
@@ -242,8 +248,8 @@ class _NewEventPageState extends State<NewEventPage> {
               const SizedBox(
                 width: 30.0,
               ),
-              Text(
-                  DateUtils.getBeforeNotifyTimeMessage(_beforeNotify, context)),
+              Text(SRDateUtils.getBeforeNotifyTimeMessage(
+                  _beforeNotify, context)!),
             ],
           ),
         ),
@@ -270,7 +276,7 @@ class _NewEventPageState extends State<NewEventPage> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(71, 8, 16, 16),
               child: Text(
-                  AppLocalizations.of(context).translate('add_notification')),
+                  AppLocalizations.of(context)!.translate('add_notification')!),
             ),
           ),
         ),
@@ -292,7 +298,8 @@ class _NewEventPageState extends State<NewEventPage> {
                 maxLines: null,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: AppLocalizations.of(context).translate('add_title'),
+                  hintText:
+                      AppLocalizations.of(context)!.translate('add_title'),
                 ),
               ),
             ),
@@ -306,13 +313,12 @@ class _NewEventPageState extends State<NewEventPage> {
                       contentPadding: const EdgeInsets.all(0.0),
                       content: SingleChildScrollView(
                         child: MaterialPicker(
-                          pickerColor: _labelColor,
+                          pickerColor: _labelColor!,
                           onColorChanged: (color) {
-                            if (color != null) {
-                              setState(() {
-                                _labelColor = color;
-                              });
-                            }
+                            setState(() {
+                              _labelColor = color;
+                            });
+
                             Navigator.pop(context);
                           },
                           enableLabel: true,
@@ -326,7 +332,7 @@ class _NewEventPageState extends State<NewEventPage> {
                 Icons.label,
               ),
               title: Text(
-                AppLocalizations.of(context).translate('label'),
+                AppLocalizations.of(context)!.translate('label')!,
               ),
               trailing: ClipOval(
                 child: Container(
@@ -338,12 +344,12 @@ class _NewEventPageState extends State<NewEventPage> {
             ),
             ListTile(
               leading: Icon(Icons.today),
-              title: Text(AppLocalizations.of(context).translate('date')),
-              trailing: Text(DateUtils.getNewEventDateMessage(
-                _selectedDate,
-                AppLocalizations.of(context).locale.toString(),
+              title: Text(AppLocalizations.of(context)!.translate('date')!),
+              trailing: Text(SRDateUtils.getNewEventDateMessage(
+                _selectedDate!,
+                AppLocalizations.of(context)!.locale.toString(),
                 context,
-              )),
+              )!),
               onTap: () {
                 showDialog(
                   context: context,
@@ -360,7 +366,7 @@ class _NewEventPageState extends State<NewEventPage> {
             ListTile(
               leading: Icon(Icons.access_time),
               title: Text(
-                AppLocalizations.of(context).translate('time'),
+                AppLocalizations.of(context)!.translate('time')!,
               ),
               trailing: Text(_timeOfDay.format(context)),
               onTap: () {
@@ -391,8 +397,8 @@ class _NewEventPageState extends State<NewEventPage> {
         ),
         title: Text(
           _selectedSubject != null
-              ? _getReducedName(_selectedSubject.name)
-              : AppLocalizations.of(context).translate('choose_subject'),
+              ? _getReducedName(_selectedSubject!.name!)
+              : AppLocalizations.of(context)!.translate('choose_subject')!,
           style: TextStyle(
             color: _getColorForMissingSubject(),
           ),
@@ -426,7 +432,7 @@ class _NewEventPageState extends State<NewEventPage> {
     }
   }
 
-  Future onSelectNotification(String payload) async {
+  Future onSelectNotification(String? payload) async {
     if (payload != null) {
       debugPrint('notification payload: ' + payload);
     }
@@ -444,7 +450,7 @@ class _NewEventPageState extends State<NewEventPage> {
     }
   }
 
-  Color _getIconColorForMissingSubject() {
+  Color? _getIconColorForMissingSubject() {
     if (_missingSubject) {
       return Colors.red;
     } else {

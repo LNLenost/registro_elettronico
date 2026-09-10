@@ -1,18 +1,16 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 
 class ProfessorDomainModel {
-  String id;
-  String name;
-  int subjectId;
+  String? id;
+  String? name;
+  int? subjectId;
 
   ProfessorDomainModel({
-    @required this.id,
-    @required this.name,
-    @required this.subjectId,
+    required this.id,
+    required this.name,
+    required this.subjectId,
   });
 
   ProfessorDomainModel.fromLocalModel(ProfessorLocalModel l) {
@@ -22,9 +20,9 @@ class ProfessorDomainModel {
   }
 
   ProfessorDomainModel copyWith({
-    String id,
-    String name,
-    int subjectId,
+    String? id,
+    String? name,
+    int? subjectId,
   }) {
     return ProfessorDomainModel(
       id: id ?? this.id,
@@ -41,7 +39,7 @@ class ProfessorDomainModel {
     };
   }
 
-  factory ProfessorDomainModel.fromMap(Map<String, dynamic> map) {
+  static ProfessorDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return ProfessorDomainModel(
@@ -53,7 +51,7 @@ class ProfessorDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ProfessorDomainModel.fromJson(String source) =>
+  static ProfessorDomainModel? fromJson(String source) =>
       ProfessorDomainModel.fromMap(json.decode(source));
 
   @override

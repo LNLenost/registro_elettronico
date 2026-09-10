@@ -1,23 +1,22 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 
 class TimetableEntryDomainModel {
-  int id;
-  int start;
-  int end;
-  int dayOfWeek;
-  int subject;
-  String subjectName;
+  int? id;
+  int? start;
+  int? end;
+  int? dayOfWeek;
+  int? subject;
+  String? subjectName;
 
   TimetableEntryDomainModel({
-    @required this.id,
-    @required this.start,
-    @required this.end,
-    @required this.dayOfWeek,
-    @required this.subject,
-    @required this.subjectName,
+    required this.id,
+    required this.start,
+    required this.end,
+    required this.dayOfWeek,
+    required this.subject,
+    required this.subjectName,
   });
 
   TimetableEntryDomainModel.fromLocalModel(TimetableEntryLocalModel l) {
@@ -31,6 +30,7 @@ class TimetableEntryDomainModel {
 
   TimetableEntryLocalModel toLocalModel() {
     return TimetableEntryLocalModel(
+      id: this.id,
       start: this.start,
       end: this.end,
       dayOfWeek: this.dayOfWeek,
@@ -40,12 +40,12 @@ class TimetableEntryDomainModel {
   }
 
   TimetableEntryDomainModel copyWith({
-    int id,
-    int start,
-    int end,
-    int dayOfWeek,
-    int subject,
-    String subjectName,
+    int? id,
+    int? start,
+    int? end,
+    int? dayOfWeek,
+    int? subject,
+    String? subjectName,
   }) {
     return TimetableEntryDomainModel(
       id: id ?? this.id,
@@ -68,7 +68,7 @@ class TimetableEntryDomainModel {
     };
   }
 
-  factory TimetableEntryDomainModel.fromMap(Map<String, dynamic> map) {
+  static TimetableEntryDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return TimetableEntryDomainModel(
@@ -83,7 +83,7 @@ class TimetableEntryDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory TimetableEntryDomainModel.fromJson(String source) =>
+  static TimetableEntryDomainModel? fromJson(String source) =>
       TimetableEntryDomainModel.fromMap(json.decode(source));
 
   @override

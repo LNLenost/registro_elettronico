@@ -5,12 +5,12 @@ import 'package:registro_elettronico/feature/grades/domain/model/grade_domain_mo
 
 class StatsGradesChart extends StatefulWidget {
   final List<GradeDomainModel> grades;
-  final int objective;
-  final bool showAverageFirst;
+  final int? objective;
+  final bool? showAverageFirst;
 
   const StatsGradesChart({
-    Key key,
-    @required this.grades,
+    Key? key,
+    required this.grades,
     this.objective,
     this.showAverageFirst,
   }) : super(key: key);
@@ -36,13 +36,12 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
 
   /// Stream builder that takes data from the bloc stream
   Widget _buildChart(BuildContext context) {
-    print('build chart');
     // we take the grades from the state
     final grades = widget.grades;
 
-    grades.sort((a, b) => a.eventDate.compareTo(b.eventDate));
+    grades.sort((a, b) => a.eventDate!.compareTo(b.eventDate!));
     // spots for the graph
-    List<FlSpot> spots = List<FlSpot>();
+    List<FlSpot> spots = <FlSpot>[];
 
     // if we are viewing the average we want to use the average in our points
     if (showAvg) {
@@ -54,12 +53,12 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
       // good old for, rare these days
       for (int i = 0; i < grades.length; i++) {
         if (grades[i].decimalValue != -1.00) {
-          sum += grades[i].decimalValue;
+          sum += grades[i].decimalValue!;
           count++;
           average = sum / count;
           // with num.parse(average.toStringAsFixed(2)) we cut the decimal digits
-          spots.add(FlSpot(
-              i.toDouble(), num.tryParse(average.toStringAsFixed(2) ?? 0)));
+          spots.add(FlSpot(i.toDouble(),
+              num.tryParse(average.toStringAsFixed(2)) as double));
         }
         if (spots.length == 1) {
           spots.add(FlSpot(spots[0].x + 1, spots[0].y));
@@ -69,7 +68,7 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
       // if we don't want to see the average we want to see the single grades during that time
       for (int i = 0; i < grades.length; i++) {
         if (grades[i].decimalValue != -1.00) {
-          spots.add(FlSpot(i.toDouble(), grades[i].decimalValue));
+          spots.add(FlSpot(i.toDouble(), grades[i].decimalValue!));
         }
       }
 
@@ -106,23 +105,23 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
           SizedBox(
             width: 60,
             height: 34,
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
                 setState(() {
                   showAvg = !showAvg;
                 });
               },
               child: Text(
-                AppLocalizations.of(context).translate('avg'),
+                AppLocalizations.of(context)!.translate('avg')!,
                 style: TextStyle(
                   fontSize: 8,
                   color: showAvg
                       ? Theme.of(context)
                           .primaryTextTheme
-                          .headline5
-                          .color
+                          .headline5!
+                          .color!
                           .withOpacity(0.5)
-                      : Theme.of(context).primaryTextTheme.headline5.color,
+                      : Theme.of(context).primaryTextTheme.headline5!.color,
                 ),
               ),
             ),
@@ -139,10 +138,33 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
     BuildContext context,
   ) {
     double cutOffYValue =
-        widget.objective != null ? widget.objective.toDouble() : 6.0;
+        widget.objective != null ? widget.objective!.toDouble() : 6.0;
 
     return LineChartData(
       // The grid behind the graph
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          tooltipMargin: 23,
+          tooltipBgColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.grey[900]!.withOpacity(0.9),
+          getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+            return touchedBarSpots.map((barSpot) {
+              final flSpot = barSpot;
+
+              return LineTooltipItem(
+                flSpot.y.toStringAsFixed(1),
+                TextStyle(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? flSpot.bar.colors.first
+                      : Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }).toList();
+          },
+        ),
+      ),
       gridData: FlGridData(
         show: true,
         getDrawingHorizontalLine: (value) {
@@ -158,21 +180,23 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
         horizontalLines: [
           HorizontalLine(
             y: cutOffYValue,
-            color: Theme.of(context).accentColor.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
             strokeWidth: 1.5,
           ),
         ],
       ),
 
       // All the titles
+
       titlesData: FlTitlesData(
         show: true,
-
+        rightTitles: SideTitles(showTitles: false),
+        topTitles: SideTitles(showTitles: false),
         // Some dates of the grades
         bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 22,
-          getTextStyles: (value) {
+          getTextStyles: (context, value) {
             return TextStyle(
               color: const Color(0xff68737d),
               fontWeight: FontWeight.w500,
@@ -188,7 +212,7 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
         // Left tiles that shows the marks
         leftTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (value) {
+          getTextStyles: (context, value) {
             return TextStyle(
               color: const Color(0xff67727d),
               fontWeight: FontWeight.w300,
@@ -231,7 +255,7 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
           isCurved: false,
           barWidth: 1.2,
           colors: [
-            Theme.of(context).accentColor,
+            Theme.of(context).colorScheme.secondary,
           ],
           isStrokeCapRound: true,
           dotData: FlDotData(
@@ -241,7 +265,7 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
           belowBarData: BarAreaData(
             show: true,
             colors: _getGradients(context)
-                .map((color) => color.withOpacity(0.4))
+                .map((color) => color!.withOpacity(0.4))
                 .toList(),
             gradientColorStops: [0.5, 1.0],
             gradientFrom: const Offset(0, 0),
@@ -251,7 +275,7 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
           // Cut off for showing how much you need for the minmium mark
           aboveBarData: BarAreaData(
             show: true,
-            colors: [Colors.grey[500].withOpacity(0.6)],
+            colors: [Colors.grey[500]!.withOpacity(0.6)],
             cutOffY: cutOffYValue,
             applyCutOffY: true,
           ),
@@ -260,9 +284,9 @@ class _StatsGradesChartState extends State<StatsGradesChart> {
     );
   }
 
-  List<Color> _getGradients(BuildContext context) {
+  List<Color?> _getGradients(BuildContext context) {
     return [
-      Theme.of(context).accentColor,
+      Theme.of(context).colorScheme.secondary,
       Theme.of(context).brightness == Brightness.dark
           ? Colors.grey[900]
           : Colors.white

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/presentation/widgets/dialogs.dart';
 import 'package:registro_elettronico/feature/grades/presentation/watcher/grades_watcher_bloc.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +13,7 @@ import 'general_sorting_settings_dialog.dart';
 
 class GeneralSettings extends StatefulWidget {
   GeneralSettings({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -34,7 +34,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
   }
 
   void restore() async {
-    SharedPreferences sharedPrefs = sl();
+    SharedPreferences? sharedPrefs = sl();
     setState(() {
       _sliderValue = sharedPrefs.getInt(PrefsConstants.OVERALL_OBJECTIVE) ?? 6;
 
@@ -52,12 +52,12 @@ class _GeneralSettingsState extends State<GeneralSettings> {
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 16.0),
           child: HeaderText(
-            text: AppLocalizations.of(context).translate('general'),
+            text: AppLocalizations.of(context)!.translate('general'),
           ),
         ),
         ListTile(
           title: Text(
-            AppLocalizations.of(context).translate('your_objective'),
+            AppLocalizations.of(context)!.translate('your_objective')!,
           ),
           subtitle: Text('$_sliderValue'),
           onTap: () async {
@@ -72,7 +72,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
               ),
             ).then((value) async {
               if (value != null) {
-                SharedPreferences preferences = sl();
+                SharedPreferences? preferences = sl();
                 setState(() {
                   _sliderValue = value;
                   preferences.setInt(PrefsConstants.OVERALL_OBJECTIVE, value);
@@ -110,12 +110,12 @@ class _GeneralSettingsState extends State<GeneralSettings> {
         // ),
         ListTile(
           title: Text(
-            AppLocalizations.of(context).translate('sort_averages_by'),
+            AppLocalizations.of(context)!.translate('sort_averages_by')!,
           ),
           subtitle: Text(
             !_ascending
-                ? AppLocalizations.of(context).translate('average_descending')
-                : AppLocalizations.of(context).translate('average_ascending'),
+                ? AppLocalizations.of(context)!.translate('average_descending')!
+                : AppLocalizations.of(context)!.translate('average_ascending')!,
           ),
           onTap: () async {
             await showDialog(
@@ -143,24 +143,16 @@ class _GeneralSettingsState extends State<GeneralSettings> {
           },
         ),
         ListTile(
-          title: Text(AppLocalizations.of(context).translate('class_title')),
+          title: Text(AppLocalizations.of(context)!.translate('class_title')!),
           subtitle:
-              Text(AppLocalizations.of(context).translate('class_subtitle')),
+              Text(AppLocalizations.of(context)!.translate('class_subtitle')!),
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return NumberPickerDialog.integer(
-                  initialIntegerValue: _class,
-                  minValue: 1,
-                  maxValue: 5,
-                  title: Text(
-                      AppLocalizations.of(context).translate('class_title')),
-                  cancelWidget: Text(AppLocalizations.of(context)
-                      .translate('cancel')
-                      .toUpperCase()),
-                );
-              },
+            showNumberPicker(
+              context,
+              initialValue: _class,
+              minValue: 1,
+              maxValue: 5,
+              title: AppLocalizations.of(context)!.translate('class_title'),
             ).then((value) {
               if (value != null) {
                 setState(() {

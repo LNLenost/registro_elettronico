@@ -1,36 +1,40 @@
-import 'package:f_logs/f_logs.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'logger.dart';
 
 class LoggerBlocDelegate extends BlocObserver {
   @override
-  void onEvent(Cubit bloc, Object event) {
-    Logger.info('📟 [BLOC] $bloc Event: $event');
+  void onChange(BlocBase bloc, Change change) {
+    Fimber.i('📟 [BLOC] $bloc Change: $change');
+    super.onChange(bloc, change);
+  }
+
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    Fimber.i('📟 [BLOC] $bloc Event: $event');
     super.onEvent(bloc, event);
   }
 
   @override
-  void onTransition(Cubit bloc, Transition transition) {
-    Logger.info('📟 [BLOC] $transition');
+  void onClose(BlocBase bloc) {
+    Fimber.i('📟 Close BLOC $bloc');
+    super.onClose(bloc);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    Fimber.i('📟 [BLOC] $bloc Transition: $transition');
     super.onTransition(bloc, transition);
   }
 
   @override
-  void onError(Cubit bloc, Object e, StackTrace s) {
-    Object ex;
+  void onError(BlocBase bloc, Object e, StackTrace s) {
+    Object? ex;
     if (e is Exception) {
     } else {
       ex = Exception(e.toString());
     }
 
-    FLog.error(
-      text: '📟❌ [BLOC] $bloc',
-      exception: ex,
-      stacktrace: s,
-      methodName: '',
-      className: '',
-    );
+    Fimber.e('📟❌ [BLOC] $bloc', ex: ex, stacktrace: s);
 
     super.onError(bloc, e, s);
   }

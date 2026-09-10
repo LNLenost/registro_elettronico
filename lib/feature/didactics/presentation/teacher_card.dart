@@ -19,8 +19,8 @@ class TeacherCard extends StatelessWidget {
   final DidacticsTeacherDomainModel teacher;
 
   const TeacherCard({
-    Key key,
-    @required this.teacher,
+    Key? key,
+    required this.teacher,
   }) : super(key: key);
 
   @override
@@ -31,12 +31,12 @@ class TeacherCard extends StatelessWidget {
           title: Text(
             PresentationConstants.isForPresentation
                 ? GlobalUtils.getMockupName().toUpperCase()
-                : teacher.name,
-            style: TextStyle(color: Theme.of(context).accentColor),
+                : teacher.name!,
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
         _buildFolderList(
-          folders: teacher.folders,
+          folders: teacher.folders!,
           context: context,
         ),
       ],
@@ -44,8 +44,8 @@ class TeacherCard extends StatelessWidget {
   }
 
   Widget _buildFolderList({
-    @required List<FolderDomainModel> folders,
-    @required BuildContext context,
+    required List<FolderDomainModel> folders,
+    required BuildContext context,
   }) {
     return ListView.builder(
       padding: EdgeInsets.zero,
@@ -53,13 +53,14 @@ class TeacherCard extends StatelessWidget {
       itemCount: folders.length,
       shrinkWrap: true,
       itemBuilder: (ctx, index) {
-        final folderContents = folders[index].contents;
+        final folderContents = folders[index].contents!;
 
         return ExpandableTheme(
           data: ExpandableThemeData(
             iconColor: Theme.of(context).iconTheme.color,
           ),
           child: ExpandablePanel(
+            collapsed: Container(),
             theme: ExpandableThemeData(
               tapHeaderToExpand: true,
               hasIcon: true,
@@ -67,12 +68,12 @@ class TeacherCard extends StatelessWidget {
             header: ListTile(
               leading: Icon(Icons.folder),
               title: Text(
-                _getFolderText(folders[index].name, context),
+                _getFolderText(folders[index].name!, context)!,
               ),
               subtitle: Text(
-                DateUtils.convertDateLocale(
+                SRDateUtils.convertDateLocale(
                   folders[index].lastShareDate,
-                  AppLocalizations.of(context).locale.toString(),
+                  AppLocalizations.of(context)!.locale.toString(),
                 ),
               ),
             ),
@@ -86,17 +87,17 @@ class TeacherCard extends StatelessWidget {
     );
   }
 
-  String _getFolderText(String text, BuildContext context) {
+  String? _getFolderText(String text, BuildContext context) {
     if (text.isNotEmpty) {
       return text;
     } else {
-      return AppLocalizations.of(context).translate('no_name');
+      return AppLocalizations.of(context)!.translate('no_name');
     }
   }
 
   Widget _buildContentsList({
-    @required List<ContentDomainModel> contents,
-    @required BuildContext context,
+    required List<ContentDomainModel> contents,
+    required BuildContext context,
   }) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
@@ -109,68 +110,63 @@ class TeacherCard extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 32.0),
           leading: _getIconFromFileType(content.type),
           title: Text(
-            content.name.isEmpty
-                ? AppLocalizations.of(context).translate('no_name')
-                : content.name,
+            content.name!.isEmpty
+                ? AppLocalizations.of(context)!.translate('no_name')!
+                : content.name!,
           ),
           onTap: () async {
-            if (content.type == ContentType.file) {
-              // si tratta di un file
-              if (content.files != null &&
-                  content.files.first.file != null &&
-                  content.files.first.file.existsSync()) {
-                unawaited(OpenFile.open(content.files.first.file.path));
-              } else {
-                BlocProvider.of<DidacticsAttachmentBloc>(context).add(
-                  DownloadContentAttachment(contentDomainModel: content),
-                );
+            if (content.files != null &&
+                content.files!.first.file != null &&
+                content.files!.first.file!.existsSync()) {
+              unawaited(OpenFile.open(content.files!.first.file!.path));
+            } else {
+              BlocProvider.of<DidacticsAttachmentBloc>(context).add(
+                DownloadContentAttachment(contentDomainModel: content),
+              );
 
-                final snackBar = SnackBar(
-                  content: _DownloadAttachmentSnackbar(),
-                  duration: Duration(minutes: 1),
-                  behavior: SnackBarBehavior.floating,
-                );
+              final snackBar = SnackBar(
+                content: _DownloadAttachmentSnackbar(),
+                duration: Duration(minutes: 1),
+                behavior: SnackBarBehavior.floating,
+              );
 
-                didacticsScaffold.currentState
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(snackBar);
-              }
-            } else if (content.type == ContentType.url) {
-              // TODO: open other file contents
+              ScaffoldMessenger.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(snackBar);
             }
           },
           onLongPress: () async {
-            if (content.files.isNotEmpty) {
-              final file = content.files.first;
+            if (content.files!.isNotEmpty) {
+              final file = content.files!.first;
 
-              if (file.file != null && await file.file.exists()) {
+              if (file.file != null && await file.file!.exists()) {
                 await showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text(AppLocalizations.of(context)
-                          .translate('sure_to_delete_it')),
-                      content: Text(AppLocalizations.of(context)
-                          .translate('the_file_will_be_deleted')),
+                      title: Text(AppLocalizations.of(context)!
+                          .translate('sure_to_delete_it')!),
+                      content: Text(AppLocalizations.of(context)!
+                          .translate('the_file_will_be_deleted')!),
                       actions: <Widget>[
-                        FlatButton(
+                        TextButton(
                           child: Text(
-                            AppLocalizations.of(context)
-                                .translate('cancel')
+                            AppLocalizations.of(context)!
+                                .translate('cancel')!
                                 .toUpperCase(),
                           ),
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
-                        FlatButton(
+                        TextButton(
                           child: Text(
-                            AppLocalizations.of(context)
-                                .translate('delete')
+                            AppLocalizations.of(context)!
+                                .translate('delete')!
                                 .toUpperCase(),
                           ),
                           onPressed: () async {
-                            await file.file.delete();
+                            await file.file!.delete();
                             Navigator.pop(context);
                           },
                         )
@@ -186,7 +182,7 @@ class TeacherCard extends StatelessWidget {
     );
   }
 
-  Icon _getIconFromFileType(ContentType type) {
+  Icon _getIconFromFileType(ContentType? type) {
     if (type == ContentType.url) {
       return Icon(Icons.link);
     } else if (type == ContentType.text) {
@@ -198,7 +194,7 @@ class TeacherCard extends StatelessWidget {
 }
 
 class _DownloadAttachmentSnackbar extends StatelessWidget {
-  const _DownloadAttachmentSnackbar({Key key}) : super(key: key);
+  const _DownloadAttachmentSnackbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +208,7 @@ class _DownloadAttachmentSnackbar extends StatelessWidget {
           Future.delayed(Duration(seconds: 3)).then(
             (value) {
               if (didacticsScaffold.currentState != null) {
-                didacticsScaffold.currentState..removeCurrentSnackBar();
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
               }
             },
           );
@@ -220,9 +216,9 @@ class _DownloadAttachmentSnackbar extends StatelessWidget {
 
         if (state is DidacticsAttachmentFileDownloadSuccess) {
           // ignore: unawaited_futures
-          OpenFile.open(state.didacticsFile.file.path);
+          OpenFile.open(state.didacticsFile!.file!.path);
         } else if (state is DidacticsAttachmentURLDownloadSuccess) {
-          final url = state.urlContentRemoteModel.item.link;
+          final url = state.urlContentRemoteModel.item!.link!;
           if (await canLaunch(url)) {
             await launch(url);
           } else {
@@ -240,18 +236,19 @@ class _DownloadAttachmentSnackbar extends StatelessWidget {
         if (state is DidacticsAttachmentFileDownloadSuccess ||
             state is DidacticsAttachmentTextDownloadSuccess ||
             state is DidacticsAttachmentURLDownloadSuccess) {
-          return Text(AppLocalizations.of(context)
-              .translate('file_downloaded_success'));
+          return Text(AppLocalizations.of(context)!
+              .translate('file_downloaded_success')!);
         } else if (state is DidacticsAttachmentDownloadFailure) {
-          return Text(AppLocalizations.of(context).translate('error_download'));
+          return Text(
+              AppLocalizations.of(context)!.translate('error_download')!);
         } else if (state is DidacticsAttachmentDownloadInProgress) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppLocalizations.of(context).translate('downloading'),
+                AppLocalizations.of(context)!.translate('downloading')!,
               ),
-              if (state.percentage < 0)
+              if (state.percentage! < 0)
                 Container(
                   height: 20,
                   width: 20,
@@ -259,7 +256,7 @@ class _DownloadAttachmentSnackbar extends StatelessWidget {
                     value: state.percentage,
                   ),
                 ),
-              if (state.percentage >= 0)
+              if (state.percentage! >= 0)
                 Container(
                   height: 20,
                   width: 20,

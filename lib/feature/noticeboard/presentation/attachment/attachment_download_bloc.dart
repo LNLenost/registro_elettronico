@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/noticeboard/data/model/attachment/attachment_file.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/attachment_domain_model.dart';
@@ -14,12 +14,12 @@ part 'attachment_download_state.dart';
 
 class AttachmentDownloadBloc
     extends Bloc<AttachmentDownloadEvent, AttachmentDownloadState> {
-  final NoticeboardRepository noticeboardRepository;
+  final NoticeboardRepository? noticeboardRepository;
 
-  StreamSubscription _downloadSubscription;
+  late StreamSubscription _downloadSubscription;
 
   AttachmentDownloadBloc({
-    @required this.noticeboardRepository,
+    required this.noticeboardRepository,
   }) : super(AttachmentDownloadInitial());
 
   @override
@@ -33,7 +33,7 @@ class AttachmentDownloadBloc
     } else if (event is AttachmentDownloadProgressTickedEvent) {
       yield AttachmentDownloadInProgress(percentage: event.value);
     } else if (event is DownloadAttachment) {
-      _downloadSubscription = noticeboardRepository
+      _downloadSubscription = noticeboardRepository!
           .downloadFile(notice: event.notice, attachment: event.attachment)
           .listen(
         (resource) {

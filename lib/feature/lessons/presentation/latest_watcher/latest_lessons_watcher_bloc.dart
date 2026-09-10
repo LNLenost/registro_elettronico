@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/lessons/domain/model/last_lessons_domain_model.dart';
 import 'package:registro_elettronico/feature/lessons/domain/repository/lessons_repository.dart';
@@ -14,10 +14,10 @@ class LatestLessonsWatcherBloc
     extends Bloc<LatestLessonsWatcherEvent, LatestLessonsWatcherState> {
   final LessonsRepository lessonsRepository;
 
-  StreamSubscription _latestLessonsSubscription;
+  late StreamSubscription _latestLessonsSubscription;
 
   LatestLessonsWatcherBloc({
-    @required this.lessonsRepository,
+    required this.lessonsRepository,
   }) : super(LatestLessonsWatcherInitial()) {
     _latestLessonsSubscription =
         lessonsRepository.watchLatestLessonsWithDuration().listen((resource) {

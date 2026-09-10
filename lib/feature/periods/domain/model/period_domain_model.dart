@@ -1,26 +1,24 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 
 class PeriodDomainModel {
-  String code;
-  int position;
-  String description;
-  bool isFinal;
-  DateTime start;
-  DateTime end;
-  String miurDivisionCode;
+  String? code;
+  int? position;
+  String? description;
+  bool? isFinal;
+  DateTime? start;
+  DateTime? end;
+  String? miurDivisionCode;
 
   PeriodDomainModel({
-    @required this.code,
-    @required this.position,
-    @required this.description,
-    @required this.isFinal,
-    @required this.start,
-    @required this.end,
-    @required this.miurDivisionCode,
+    required this.code,
+    required this.position,
+    required this.description,
+    required this.isFinal,
+    required this.start,
+    required this.end,
+    required this.miurDivisionCode,
   });
 
   PeriodDomainModel.fromLocalModel(PeriodLocalModel l) {
@@ -34,13 +32,13 @@ class PeriodDomainModel {
   }
 
   PeriodDomainModel copyWith({
-    String code,
-    int position,
-    String description,
-    bool isFinal,
-    DateTime start,
-    DateTime end,
-    String miurDivisionCode,
+    String? code,
+    int? position,
+    String? description,
+    bool? isFinal,
+    DateTime? start,
+    DateTime? end,
+    String? miurDivisionCode,
   }) {
     return PeriodDomainModel(
       code: code ?? this.code,
@@ -65,7 +63,7 @@ class PeriodDomainModel {
     };
   }
 
-  factory PeriodDomainModel.fromMap(Map<String, dynamic> map) {
+  static PeriodDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return PeriodDomainModel(
@@ -81,7 +79,7 @@ class PeriodDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PeriodDomainModel.fromJson(String source) =>
+  static PeriodDomainModel? fromJson(String source) =>
       PeriodDomainModel.fromMap(json.decode(source));
 
   @override

@@ -10,8 +10,8 @@ class GradeCard extends StatelessWidget {
   final bool fromSubjectGrades;
 
   const GradeCard({
-    Key key,
-    @required this.grade,
+    Key? key,
+    required this.grade,
     this.fromSubjectGrades = false,
   }) : super(key: key);
 
@@ -48,7 +48,7 @@ class GradeCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 15.0),
                       child: AutoSizeText(
-                        grade.displayValue,
+                        grade.displayValue!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
@@ -65,17 +65,21 @@ class GradeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           AutoSizeText(
-                            grade.subjectDesc.length > 20
+                            grade.subjectDesc!.length > 20
                                 ? GlobalUtils.reduceSubjectTitle(
-                                    grade.subjectDesc)
-                                : grade.subjectDesc,
+                                        grade.subjectDesc!) ??
+                                    ''
+                                : grade.subjectDesc!,
                             style: TextStyle(color: Colors.white),
                             maxLines: 1,
                           ),
                           _buildLessonArgument(grade),
                           AutoSizeText(
-                            DateUtils.convertDateLocale(grade.eventDate,
-                                AppLocalizations.of(context).locale.toString()),
+                            SRDateUtils.convertDateLocale(
+                                grade.eventDate,
+                                AppLocalizations.of(context)!
+                                    .locale
+                                    .toString()),
                             style: TextStyle(color: Colors.white),
                             maxLines: 1,
                           )
@@ -96,15 +100,15 @@ class GradeCard extends StatelessWidget {
   void _showGradeInfoDialog(BuildContext context) {
     final trans = AppLocalizations.of(context);
     String valueRow;
-    if (grade.localllyCancelled) {
+    if (grade.localllyCancelled!) {
       valueRow = 'Valore: ${grade.decimalValue} (voto cancellato localmente)';
-    } else if (grade.cancelled) {
+    } else if (grade.cancelled!) {
       valueRow = 'Valore: voto cancellato';
     } else if (grade.decimalValue == -1) {
       valueRow = 'Valore che non fa media (voto in blu): ${grade.displayValue}';
     } else {
       valueRow =
-          '${trans.translate('decimal_value')}: ${grade.decimalValue.toString()}';
+          '${trans!.translate('decimal_value')}: ${grade.decimalValue.toString()}';
     }
     showDialog(
       context: context,
@@ -117,7 +121,7 @@ class GradeCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "${trans.translate('notes')}: ${grade.notesForFamily.isNotEmpty ? grade.notesForFamily : trans.translate('not_presents').toLowerCase()}",
+                  "${trans!.translate('notes')}: ${grade.notesForFamily!.isNotEmpty ? grade.notesForFamily : trans.translate('not_presents')!.toLowerCase()}",
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -131,14 +135,14 @@ class GradeCard extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  '${trans.translate('date')}: ${DateUtils.convertDateLocale(grade.eventDate, trans.locale.toString())}',
+                  '${trans.translate('date')}: ${SRDateUtils.convertDateLocale(grade.eventDate, trans.locale.toString())}',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  '${trans.translate('term')}: ${grade.periodDesc.toLowerCase()}',
+                  '${trans.translate('term')}: ${grade.periodDesc!.toLowerCase()}',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -157,39 +161,26 @@ class GradeCard extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(grade.localllyCancelled
-              ? AppLocalizations.of(context)
-                  .translate('delete_grade_title_restore')
-              : AppLocalizations.of(context)
-                  .translate('delete_grade_title_cancel')),
+          title: Text(grade.localllyCancelled!
+              ? AppLocalizations.of(context)!
+                  .translate('delete_grade_title_restore')!
+              : AppLocalizations.of(context)!
+                  .translate('delete_grade_title_cancel')!),
           //content: Text(grades[index].localllyCancelled.toString()),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
-                AppLocalizations.of(context).translate('no').toUpperCase(),
+                AppLocalizations.of(context)!.translate('no')!.toUpperCase(),
               ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            FlatButton(
-              child: Text(
-                  AppLocalizations.of(context).translate('yes').toUpperCase()),
+            TextButton(
+              child: Text(AppLocalizations.of(context)!
+                  .translate('yes')!
+                  .toUpperCase()),
               onPressed: () async {
-                // if (grade.localllyCancelled) {
-                //   await RepositoryProvider.of<GradesRepository>(context)
-                //       .updateGrade(grade.copyWith(localllyCancelled: false));
-                //   BlocProvider.of<GradesBloc>(context).add(GetGrades());
-                //   BlocProvider.of<SubjectsGradesBloc>(context)
-                //       .add(GetGradesAndSubjects());
-                // } else {
-                //   await RepositoryProvider.of<GradesRepository>(context)
-                //       .updateGrade(grade.copyWith(localllyCancelled: true));
-                //   BlocProvider.of<GradesBloc>(context).add(GetGrades());
-                //   BlocProvider.of<SubjectsGradesBloc>(context)
-                //       .add(GetGradesAndSubjects());
-                // }
-
                 Navigator.pop(context);
               },
             )
@@ -200,7 +191,7 @@ class GradeCard extends StatelessWidget {
   }
 
   Widget _buildLessonArgument(GradeDomainModel grade) {
-    String text = grade.notesForFamily;
+    String text = grade.notesForFamily!;
     if (text.isNotEmpty) {
       if (text.length > 30) {
         text = text.substring(0, 30);

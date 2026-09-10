@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/infrastructure/localizations/bloc/bloc.dart';
 import 'package:registro_elettronico/core/presentation/widgets/about_app_dialog.dart';
 import 'package:registro_elettronico/feature/authentication/data/datasource/profiles_shared_datasource.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/help_page.dart';
@@ -12,18 +14,19 @@ import 'package:registro_elettronico/feature/settings/widgets/account/account_se
 import 'package:registro_elettronico/feature/settings/widgets/customization/customization_settings.dart';
 import 'package:registro_elettronico/feature/settings/widgets/general/general_settings.dart';
 import 'package:registro_elettronico/feature/settings/widgets/header_text.dart';
-import 'package:registro_elettronico/utils/bug_report.dart';
+import 'package:registro_elettronico/utils/constants/registro_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  SharedPreferences sharedPrefs;
+  SharedPreferences? sharedPrefs;
 
   bool _showDebug = false;
 
@@ -46,9 +49,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Theme.of(context).brightness,
         title: Text(
-          AppLocalizations.of(context).translate('settings'),
+          AppLocalizations.of(context)!.translate('settings')!,
         ),
       ),
       body: SingleChildScrollView(
@@ -71,6 +73,25 @@ class _SettingsPageState extends State<SettingsPage> {
 
               CustomizationSettings(),
 
+              ListTile(
+                leading: Icon(Icons.language),
+                title: Text(
+                  AppLocalizations.of(context)!.translate('language')!,
+                ),
+                subtitle: Text(
+                  AppLocalizations.of(context)!.translate('change_language')!,
+                ),
+                onTap: () {
+                  final currentLocale =
+                      AppLocalizations.of(context)!.locale.languageCode;
+                  final locale = currentLocale == 'it'
+                      ? const Locale('en', 'EN')
+                      : const Locale('it', 'IT');
+                  BlocProvider.of<LocalizationsBloc>(context)
+                      .add(LocaleChanged(locale: locale));
+                },
+              ),
+
               AccountSettings(),
 
               _buildAboutSection()
@@ -82,37 +103,40 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildAboutSection() {
-    final trans = AppLocalizations.of(context);
+    final trans = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 16.0, left: 16.0),
           child: HeaderText(
-            text: AppLocalizations.of(context).translate('about_title'),
+            text: AppLocalizations.of(context)!.translate('about_title'),
           ),
         ),
         ListTile(
-          title: Text(trans.translate('about_developers_title')),
-          subtitle: Text(trans.translate('about_developers_subtitle')),
+          title: Text(trans.translate('about_developers_title')!),
+          subtitle: Text(trans.translate('about_developers_subtitle')!),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AboutDevelopersPage()));
           },
         ),
         ListTile(
-          title:
-              Text(AppLocalizations.of(context).translate('report_bug_title')),
+          title: Text(
+              AppLocalizations.of(context)!.translate('report_bug_title')!),
           subtitle: Text(
-              AppLocalizations.of(context).translate('report_bug_message')),
+              AppLocalizations.of(context)!.translate('report_bug_message')!),
           onTap: () async {
-            await ReportManager.sendEmail(context);
+            final url = RegistroConstants.GITHUB_ISSUES;
+            if (await canLaunch(url)) {
+              await launch(url);
+            }
           },
         ),
         // DonateTile(),
         ListTile(
-          title: Text(trans.translate('info_app_title')),
-          subtitle: Text(trans.translate('info_app_subtitle')),
+          title: Text(trans.translate('info_app_title')!),
+          subtitle: Text(trans.translate('info_app_subtitle')!),
           onTap: () async {
             PackageInfo packageInfo = await PackageInfo.fromPlatform();
             await showDialog(
@@ -124,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
           },
         ),
         ListTile(
-          title: Text(trans.translate('help_page_title')),
+          title: Text(trans.translate('help_page_title')!),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(

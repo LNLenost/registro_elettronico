@@ -6,10 +6,10 @@ abstract class GradesWatcherEvent {}
 class WatchAllStarted extends GradesWatcherEvent {}
 
 class GradesReceived extends GradesWatcherEvent {
-  final Resource<GradesPagesDomainModel> resource;
+  final Resource<GradesPagesDomainModel?> resource;
 
   GradesReceived({
-    @required this.resource,
+    required this.resource,
   });
 }
 

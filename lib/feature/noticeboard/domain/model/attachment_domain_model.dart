@@ -1,20 +1,18 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 
 class AttachmentDomainModel {
-  int id;
-  int pubId;
-  String fileName;
-  int attachNumber;
+  int? id;
+  int? pubId;
+  String? fileName;
+  int? attachNumber;
 
   AttachmentDomainModel({
-    @required this.id,
-    @required this.pubId,
-    @required this.fileName,
-    @required this.attachNumber,
+    required this.id,
+    required this.pubId,
+    required this.fileName,
+    required this.attachNumber,
   });
 
   AttachmentDomainModel.fromLocalModel(NoticeAttachmentLocalModel l) {
@@ -25,10 +23,10 @@ class AttachmentDomainModel {
   }
 
   AttachmentDomainModel copyWith({
-    int id,
-    int pubId,
-    String fileName,
-    int attachNumber,
+    int? id,
+    int? pubId,
+    String? fileName,
+    int? attachNumber,
   }) {
     return AttachmentDomainModel(
       id: id ?? this.id,
@@ -47,7 +45,7 @@ class AttachmentDomainModel {
     };
   }
 
-  factory AttachmentDomainModel.fromMap(Map<String, dynamic> map) {
+  static AttachmentDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return AttachmentDomainModel(
@@ -60,7 +58,7 @@ class AttachmentDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AttachmentDomainModel.fromJson(String source) =>
+  static AttachmentDomainModel? fromJson(String source) =>
       AttachmentDomainModel.fromMap(json.decode(source));
 
   @override

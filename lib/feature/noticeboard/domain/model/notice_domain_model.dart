@@ -1,28 +1,27 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/attachment_domain_model.dart';
 
 class NoticeDomainModel {
-  int id;
-  DateTime date;
-  bool readStatus;
-  String code;
-  int contentId;
-  DateTime validFrom;
-  DateTime validTo;
-  bool validInRange;
-  String status;
-  String contentTitle;
-  String contentCategory;
-  bool hasChanged;
-  bool hasAttach;
-  bool needJoin;
-  bool needReply;
-  bool needFile;
-  List<AttachmentDomainModel> attachments;
+  int? id;
+  DateTime? date;
+  bool? readStatus;
+  String? code;
+  int? contentId;
+  DateTime? validFrom;
+  DateTime? validTo;
+  bool? validInRange;
+  String? status;
+  String? contentTitle;
+  String? contentCategory;
+  bool? hasChanged;
+  bool? hasAttach;
+  bool? needJoin;
+  bool? needReply;
+  bool? needFile;
+  List<AttachmentDomainModel>? attachments;
 
   NoticeDomainModel({
     this.id,
@@ -45,8 +44,8 @@ class NoticeDomainModel {
   });
 
   NoticeDomainModel.fromLocalModel({
-    @required NoticeLocalModel l,
-    @required List<AttachmentDomainModel> attachments,
+    required NoticeLocalModel l,
+    required List<AttachmentDomainModel>? attachments,
   }) {
     this.id = l.pubId;
     this.date = l.pubDate;
@@ -89,23 +88,23 @@ class NoticeDomainModel {
   }
 
   NoticeDomainModel copyWith({
-    int id,
-    DateTime date,
-    bool readStatus,
-    String code,
-    int contentId,
-    DateTime validFrom,
-    DateTime validTo,
-    bool validInRange,
-    String status,
-    String contentTitle,
-    String contentCategory,
-    bool hasChanged,
-    bool hasAttach,
-    bool needJoin,
-    bool needReply,
-    bool needFile,
-    List<AttachmentDomainModel> attachments,
+    int? id,
+    DateTime? date,
+    bool? readStatus,
+    String? code,
+    int? contentId,
+    DateTime? validFrom,
+    DateTime? validTo,
+    bool? validInRange,
+    String? status,
+    String? contentTitle,
+    String? contentCategory,
+    bool? hasChanged,
+    bool? hasAttach,
+    bool? needJoin,
+    bool? needReply,
+    bool? needFile,
+    List<AttachmentDomainModel>? attachments,
   }) {
     return NoticeDomainModel(
       id: id ?? this.id,
@@ -146,11 +145,11 @@ class NoticeDomainModel {
       'needJoin': needJoin,
       'needReply': needReply,
       'needFile': needFile,
-      'attachments': attachments?.map((x) => x?.toMap())?.toList(),
+      'attachments': attachments?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory NoticeDomainModel.fromMap(Map<String, dynamic> map) {
+  static NoticeDomainModel? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;
 
     return NoticeDomainModel(
@@ -177,7 +176,7 @@ class NoticeDomainModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NoticeDomainModel.fromJson(String source) =>
+  static NoticeDomainModel? fromJson(String source) =>
       NoticeDomainModel.fromMap(json.decode(source));
 
   @override

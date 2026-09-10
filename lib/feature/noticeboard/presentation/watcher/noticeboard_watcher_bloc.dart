@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/notice_domain_model.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/repository/noticeboard_repository.dart';
@@ -14,10 +14,10 @@ class NoticeboardWatcherBloc
     extends Bloc<NoticeboardWatcherEvent, NoticeboardWatcherState> {
   final NoticeboardRepository noticeboardRepository;
 
-  StreamSubscription _noticesStreamSubscription;
+  late StreamSubscription _noticesStreamSubscription;
 
   NoticeboardWatcherBloc({
-    @required this.noticeboardRepository,
+    required this.noticeboardRepository,
   }) : super(NoticeboardWatcherInitial()) {
     _noticesStreamSubscription =
         noticeboardRepository.watchAllNotices().listen((resource) {

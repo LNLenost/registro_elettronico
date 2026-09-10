@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:registro_elettronico/feature/stats/data/model/student_report.dart';
 import 'package:registro_elettronico/feature/stats/domain/repository/stats_repository.dart';
@@ -10,10 +9,10 @@ part 'stats_event.dart';
 part 'stats_state.dart';
 
 class StatsBloc extends Bloc<StatsEvent, StatsState> {
-  final StatsRepository statsRepository;
+  final StatsRepository? statsRepository;
 
   StatsBloc({
-    @required this.statsRepository,
+    required this.statsRepository,
   }) : super(StatsInitial());
 
   @override
@@ -32,16 +31,17 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   Stream<StatsState> _mapGetStudentsStatsEventToState() async* {
     yield StatsLoadInProgress();
     try {
-      final stats = await statsRepository.getStudentReport();
+      final stats = await statsRepository!.getStudentReport();
       yield stats.fold(
         (failure) {
-          Logger.e(text: 'Error getting student report');
+          // Logger.e(text: 'Error getting student report');
           return StatsLoadError();
         },
         (report) => StatsLoadSuccess(studentReport: report),
       );
-    } catch (e, s) {
-      Logger.e(exception: e, stacktrace: s, text: 'Error getting user stats');
+    } catch (e) {
+      yield StatsLoadError();
+      // Logger.e(exception: e, stacktrace: s, text: 'Error getting user stats');
     }
   }
 }

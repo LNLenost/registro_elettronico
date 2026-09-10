@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grades_section.dart';
 import 'package:registro_elettronico/feature/professors/domain/model/professor_domain_model.dart';
 
@@ -9,16 +8,16 @@ class SubjectDataDomainModel {
 
   PeriodGradeDomainModel data;
   List<ProfessorDomainModel> professors;
-  List<String> professorsString;
+  List<String>? professorsString;
 
   SubjectAveragesDomainModel averages;
 
   SubjectDataDomainModel({
-    @required this.data,
-    @required this.professors,
-    @required this.averages,
-    @required this.averageSpots,
-    @required this.normalSpots,
+    required this.data,
+    required this.professors,
+    required this.averages,
+    required this.averageSpots,
+    required this.normalSpots,
   });
 }
 
@@ -29,10 +28,10 @@ class SubjectAveragesDomainModel {
   final double oraleAverage;
 
   SubjectAveragesDomainModel({
-    @required this.praticoAverage,
-    @required this.scrittoAverage,
-    @required this.oraleAverage,
-    @required this.average,
+    required this.praticoAverage,
+    required this.scrittoAverage,
+    required this.oraleAverage,
+    required this.average,
   });
 
   String get averageValue => (!this.average.isNaN || this.average > 0)

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:registro_elettronico/core/infrastructure/error/failures_v2.dart';
+import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grade_domain_model.dart';
 import 'package:registro_elettronico/feature/grades/domain/repository/grades_repository.dart';
 import 'package:registro_elettronico/feature/subjects/domain/model/subject_domain_model.dart';
@@ -12,10 +12,10 @@ part 'grades_operations_state.dart';
 
 class GradesOperationsBloc
     extends Bloc<GradesOperationsEvent, GradesOperationsState> {
-  final GradesRepository gradesRepository;
+  final GradesRepository? gradesRepository;
 
   GradesOperationsBloc({
-    @required this.gradesRepository,
+    required this.gradesRepository,
   }) : super(GradesOperationsInitial());
 
   @override
@@ -32,7 +32,7 @@ class GradesOperationsBloc
   Stream<GradesOperationsState> _mapChangeSubjectObjective(
     ChangeSubjectObjective event,
   ) async* {
-    final res = await gradesRepository.changeSubjectObjective(
+    final res = await gradesRepository!.changeSubjectObjective(
       newValue: event.newValue,
       subject: event.subject,
     );
@@ -50,7 +50,7 @@ class GradesOperationsBloc
   Stream<GradesOperationsState> _mapDeleteGradeLocallyToState(
     ToggleGradeLocallyCancelledState event,
   ) async* {
-    final res = await gradesRepository.toggleGradeLocallyCancelledStatus(
+    final res = await gradesRepository!.toggleGradeLocallyCancelledStatus(
         gradeDomainModel: event.gradeDomainModel);
 
     yield* res.fold(

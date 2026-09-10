@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:fimber/fimber.dart';
 import 'package:registro_elettronico/core/data/remote/web/web_spaggiari_client.dart';
 import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 
 class WebSpaggiariClientImpl implements WebSpaggiariClient {
   Dio _dio;
@@ -10,11 +10,11 @@ class WebSpaggiariClientImpl implements WebSpaggiariClient {
 
   @override
   Future<String> getPHPToken({
-    String username,
-    String password,
-    bool lastYear,
+    required String username,
+    required String password,
+    bool? lastYear,
   }) async {
-    Logger.info('Requesting new PHP Token');
+    Fimber.i('Requesting new PHP Token');
 
     String loginPage;
     if (lastYear ?? false) {
@@ -38,15 +38,16 @@ class WebSpaggiariClientImpl implements WebSpaggiariClient {
       data: bodyParams,
     );
 
-    if (_result.headers.map.containsKey('set-cookie')) {
-      final key =
-          _result.headers.map.keys.where((k) => k == 'set-cookie').single;
-      final ssid = _result.headers.map[key].elementAt(1);
+    final cookies = _result.headers.map.entries
+        .where((entry) => entry.key.toLowerCase() == 'set-cookie')
+        .expand((entry) => entry.value)
+        .map((cookie) => cookie.split(';').first.trim())
+        .where((cookie) => cookie.startsWith('PHPSESSID='));
 
-      return ssid;
-    } else {
-      Logger.info('Erorr');
-      throw ServerFailure();
+    if (cookies.isNotEmpty) {
+      return cookies.first;
     }
+
+    throw GenericFailure();
   }
 }

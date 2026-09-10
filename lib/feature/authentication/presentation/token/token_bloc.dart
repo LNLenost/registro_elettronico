@@ -1,27 +1,26 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:fimber/fimber.dart';
 import 'package:meta/meta.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
-import 'package:registro_elettronico/core/data/model/last_year_token.dart';
-import 'package:registro_elettronico/core/data/model/login_token.dart';
 import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
+import 'package:registro_elettronico/feature/authentication/domain/model/last_year_token.dart';
+import 'package:registro_elettronico/feature/authentication/domain/model/login_token.dart';
 import 'package:registro_elettronico/feature/scrutini/domain/repository/scrutini_repository.dart';
 
 part 'token_event.dart';
 part 'token_state.dart';
 
 class TokenBloc extends Bloc<TokenEvent, TokenState> {
-  final ScrutiniRepository scrutiniRepository;
+  final ScrutiniRepository? scrutiniRepository;
 
   TokenBloc({
-    @required this.scrutiniRepository,
+    required this.scrutiniRepository,
   }) : super(TokenInitial());
 
-  LoginToken loginToken;
-  LastYearToken lastYearToken;
+  LoginToken? loginToken;
+  LastYearToken? lastYearToken;
 
   @override
   Stream<TokenState> mapEventToState(
@@ -31,15 +30,15 @@ class TokenBloc extends Bloc<TokenEvent, TokenState> {
       yield TokenLoadInProgress();
 
       if (loginToken != null) {
-        Logger.info('Got token from singleton');
+        Fimber.i('Got token from singleton');
         yield TokenSchoolReportLoadSuccess(
-          token: loginToken.token.split(';')[0],
+          token: loginToken!.token.split(';')[0],
           schoolReport: event.schoolReport,
         );
       } else {
         try {
-          final res = await scrutiniRepository.getLoginToken();
-          Logger.info('Got token from Spaggiari');
+          final res = await scrutiniRepository!.getLoginToken();
+          Fimber.i('Got token from Spaggiari');
 
           yield* res.fold((failure) async* {
             yield TokenLoadError();
@@ -55,24 +54,23 @@ class TokenBloc extends Bloc<TokenEvent, TokenState> {
         }
       }
     } else if (event is GetLoginToken) {
-      Logger.info('Getting login token');
+      Fimber.i('Getting login token');
       yield TokenLoadInProgress();
 
       if (event.lastYear) {
         if (lastYearToken != null) {
-          Logger.info('Got token from singleton');
+          Fimber.i('Got token from singleton');
           yield TokenLoadSuccess(
-            token: loginToken.token.split(';')[0],
+            token: loginToken!.token.split(';')[0],
           );
         } else {
-          final res = await scrutiniRepository.getLoginToken(lastYear: true);
-          Logger.info('Got token from Spaggiari');
+          final res = await scrutiniRepository!.getLoginToken(lastYear: true);
+          Fimber.i('Got token from Spaggiari');
           yield* res.fold((failure) async* {
-            Logger.e(
-              text: 'Error getting token from spaggiari',
+            Fimber.e(
+              'Error getting token from spaggiari',
             );
-            await FirebaseCrashlytics.instance
-                .log('Error getting token from spaggiari');
+
             yield TokenLoadError();
           }, (token) async* {
             loginToken = LoginToken(token);
@@ -83,20 +81,17 @@ class TokenBloc extends Bloc<TokenEvent, TokenState> {
         }
       } else {
         if (loginToken != null) {
-          Logger.info('Got token from singleton');
+          Fimber.i('Got token from singleton');
           yield TokenLoadSuccess(
-            token: loginToken.token.split(';')[0],
+            token: loginToken!.token.split(';')[0],
           );
         } else {
-          final res = await scrutiniRepository.getLoginToken();
-          Logger.info('Got token from Spaggiari');
+          final res = await scrutiniRepository!.getLoginToken();
+          Fimber.i('Got token from Spaggiari');
           yield* res.fold((failure) async* {
-            Logger.e(
-              text: 'Error getting token from spaggiari',
+            Fimber.e(
+              'Error getting token from spaggiari',
             );
-            await FirebaseCrashlytics.instance
-                .log('Error getting token from spaggiari');
-            yield TokenLoadError();
           }, (token) async* {
             loginToken = LoginToken(token);
             yield TokenLoadSuccess(

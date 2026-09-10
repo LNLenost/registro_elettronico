@@ -1,11 +1,11 @@
 import 'dart:io';
 
+import 'package:fimber/fimber.dart';
 import 'package:moor/ffi.dart';
 import 'package:moor/moor.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
-import 'package:registro_elettronico/core/infrastructure/log/logger.dart';
 import 'package:registro_elettronico/feature/absences/data/dao/absence_dao.dart';
 import 'package:registro_elettronico/feature/absences/data/model/absence_local_model.dart';
 import 'package:registro_elettronico/feature/agenda/data/datasource/local/agenda_local_datasource.dart';
@@ -44,7 +44,7 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     final SharedPreferences sharedPreferences = sl();
-    String dbName = sharedPreferences.getString(PrefsConstants.databaseName);
+    String? dbName = sharedPreferences.getString(PrefsConstants.databaseName);
 
     if (dbName == null ||
         dbName == PrefsConstants.databaseNameBeforeMigration) {
@@ -100,7 +100,7 @@ class SRDatabase extends _$SRDatabase {
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onUpgrade: (Migrator m, int from, int to) async {
-          Logger.info('🗄️ [MIGRATIONS] From $from to $to');
+          Fimber.i('🗄️ [MIGRATIONS] From $from to $to');
 
           if (from == 1) {
             await m.deleteTable(attachments.actualTableName);

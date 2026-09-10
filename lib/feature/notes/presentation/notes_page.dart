@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registro_elettronico/core/data/local/moor_database.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/core/infrastructure/navigator.dart';
+import 'package:registro_elettronico/core/presentation/custom/states/sr_alternative_loading_view.dart';
 import 'package:registro_elettronico/core/presentation/widgets/cusotm_placeholder.dart';
 import 'package:registro_elettronico/core/presentation/widgets/custom_refresher.dart';
 import 'package:registro_elettronico/utils/date_utils.dart';
@@ -12,7 +13,7 @@ import 'bloc/attachments/note_attachments_bloc.dart';
 import 'bloc/notes_bloc.dart';
 
 class NotesPage extends StatefulWidget {
-  const NotesPage({Key key}) : super(key: key);
+  const NotesPage({Key? key}) : super(key: key);
 
   @override
   _NotesPageState createState() => _NotesPageState();
@@ -30,18 +31,17 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Theme.of(context).brightness,
-        title: Text(AppLocalizations.of(context).translate('notes')),
+        title: Text(AppLocalizations.of(context)!.translate('notes')!),
       ),
       body: MultiBlocListener(
         listeners: [
           BlocListener<NotesBloc, NotesState>(
             listener: (context, state) {
               if (state is NotesLoadErrorNotConnected) {
-                Scaffold.of(context)
+                ScaffoldMessenger.of(context)
                   ..removeCurrentSnackBar()
                   ..showSnackBar(
-                    AppNavigator.instance.getNetworkErrorSnackBar(context),
+                    AppNavigator.instance!.getNetworkErrorSnackBar(context),
                   );
               }
             },
@@ -49,10 +49,10 @@ class _NotesPageState extends State<NotesPage> {
           BlocListener<NoteAttachmentsBloc, NoteAttachmentsState>(
             listener: (context, state) {
               if (state is NoteAttachmentsLoadNotConnected) {
-                Scaffold.of(context)
+                ScaffoldMessenger.of(context)
                   ..removeCurrentSnackBar()
                   ..showSnackBar(
-                    AppNavigator.instance.getNetworkErrorSnackBar(context),
+                    AppNavigator.instance!.getNetworkErrorSnackBar(context),
                   );
               }
             },
@@ -67,9 +67,7 @@ class _NotesPageState extends State<NotesPage> {
     return BlocBuilder<NotesBloc, NotesState>(
       builder: (context, state) {
         if (state is NotesLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return SRAlternativeLoadingView();
         }
 
         if (state is NotesLoaded) {
@@ -79,7 +77,7 @@ class _NotesPageState extends State<NotesPage> {
         if (state is NotesError || state is NotesUpdateError) {
           return CustomPlaceHolder(
             icon: Icons.error,
-            text: AppLocalizations.of(context)
+            text: AppLocalizations.of(context)!
                 .translate('unexcepted_error_single'),
             showUpdate: true,
             onTap: () {
@@ -90,9 +88,7 @@ class _NotesPageState extends State<NotesPage> {
         }
 
         if (state is NotesUpdateLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return SRAlternativeLoadingView();
         }
         return Container();
       },
@@ -113,7 +109,7 @@ class _NotesPageState extends State<NotesPage> {
             return ListTile(
               title: Text('${note.author}'),
               subtitle: Text(
-                  '${AppLocalizations.of(context).translate(note.type.toLowerCase()) ?? ""} - ${DateUtils.convertDateLocale(note.date, AppLocalizations.of(context).locale.toString())}'),
+                  '${AppLocalizations.of(context)!.translate(note.type!.toLowerCase()) ?? ""} - ${SRDateUtils.convertDateLocale(note.date, AppLocalizations.of(context)!.locale.toString())}'),
               onTap: () {
                 BlocProvider.of<NoteAttachmentsBloc>(context)
                     .add(ReadNote(eventId: note.id, type: note.type));
@@ -134,7 +130,7 @@ class _NotesPageState extends State<NotesPage> {
     } else {
       return CustomPlaceHolder(
         icon: Icons.info,
-        text: AppLocalizations.of(context).translate('no_notes'),
+        text: AppLocalizations.of(context)!.translate('no_notes'),
         showUpdate: true,
         onTap: () {
           BlocProvider.of<NotesBloc>(context).add(UpdateNotes());
@@ -152,7 +148,7 @@ class _NotesPageState extends State<NotesPage> {
 
 class NoteDialog extends StatelessWidget {
   const NoteDialog({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -173,7 +169,7 @@ class NoteDialog extends StatelessWidget {
           final attachment = state.attachment;
           return ListTile(
             title: Text(
-              "${AppLocalizations.of(context).translate('description')}: ${attachment.description}",
+              "${AppLocalizations.of(context)!.translate('description')}: ${attachment.description}",
             ),
           );
         } else if (state is NoteAttachmentsLoadError) {
