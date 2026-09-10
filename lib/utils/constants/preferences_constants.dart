@@ -47,4 +47,6 @@ class PrefsConstants {
   static const String profilesList = 'profilesList';
   static const String beforeUpdate9 = 'beforeUpdate9';
   static const String preferredCalendarFormat = 'preferredCalendarFormat';
+  static const String navigationOrder = 'navigationOrder';
+  static const String navigationHidden = 'navigationHidden';
 }

@@ -47,6 +47,8 @@
   "contact_us_message": "Inviaci una mail per qualsiasi richiesta o segnalazione",
   "credits": "Crediti: {credits}",
   "customization": "Personalizzazione",
+  "customize_navigation_title": "Navigazione",
+  "customize_navigation_subtitle": "Scegli e riordina le sezioni della barra inferiore",
   "date": "Data",
   "date_event": "Data: {date}",
   "days_to_school_end": "Giorni alla fine della scuola: {days}",

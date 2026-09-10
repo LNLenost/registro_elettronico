@@ -3,7 +3,7 @@ name: Android build
 on:
   workflow_dispatch:
   push:
-    branches: ["fix/android-login-build"]
+    branches: ["main"]
 
 jobs:
   build:
@@ -21,6 +21,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test test/noticeboard_filter_test.dart
       - run: flutter test test/absences_filter_test.dart
+      - run: flutter test test/navigation_config_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}

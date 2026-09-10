@@ -47,6 +47,8 @@
   "contact_us_message": "Отправьте нам электронное письмо с запросом о новой функции или сообщением об ошибке",
   "credits": "Авторы: {credits}",
   "customization": "Настройка",
+  "customize_navigation_title": "Навигация",
+  "customize_navigation_subtitle": "Выберите и измените порядок разделов нижней панели",
   "date": "Дата",
   "date_event": "Дата: {дата}",
   "days_to_school_end": "Дней до окончания учебы: {дни}",

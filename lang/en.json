@@ -47,6 +47,8 @@
   "contact_us_message": "Send us an email with a new feature request or a bug report",
   "credits": "Credits: {credits}",
   "customization": "Customization",
+  "customize_navigation_title": "Navigation",
+  "customize_navigation_subtitle": "Choose and reorder the bottom bar sections",
   "date": "Date",
   "date_event": "Date: {date}",
   "days_to_school_end": "Days to school finish: {days}",

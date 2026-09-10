@@ -74,8 +74,8 @@ class AppNavigator {
     Navigator.pushNamed(context, Routes.WEB_VIEW, arguments: data);
   }
 
-  void navToSettings(BuildContext context) {
-    Navigator.pushNamed(context, Routes.SETTINGS);
+  Future<void> navToSettings(BuildContext context) async {
+    await Navigator.pushNamed(context, Routes.SETTINGS);
   }
 
   Future showMessageDialog(

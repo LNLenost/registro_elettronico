@@ -12,7 +12,9 @@ import 'package:registro_elettronico/feature/web/presentation/spaggiari_web_view
 import 'package:registro_elettronico/utils/constants/registro_constants.dart';
 
 class MorePage extends StatelessWidget {
-  const MorePage({Key? key}) : super(key: key);
+  final VoidCallback? onNavigationChanged;
+
+  const MorePage({Key? key, this.onNavigationChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -138,8 +140,9 @@ class MorePage extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context)!.translate('settings')!,
             ),
-            onTap: () {
-              AppNavigator.instance!.navToSettings(context);
+            onTap: () async {
+              await AppNavigator.instance!.navToSettings(context);
+              onNavigationChanged?.call();
             },
           ),
           ListTile(
