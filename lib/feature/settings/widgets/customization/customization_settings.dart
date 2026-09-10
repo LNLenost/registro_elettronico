@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/settings/widgets/customization/color_settings_dialog.dart';
+import 'package:registro_elettronico/feature/settings/widgets/customization/home_settings_page.dart';
 import 'package:registro_elettronico/feature/settings/widgets/customization/navigation_settings_page.dart';
 
 import '../header_text.dart';
@@ -56,6 +57,17 @@ class _CustomizationSettingsState extends State<CustomizationSettings> {
                 );
               },
             );
+          },
+        ),
+        ListTile(
+          title: Text(AppLocalizations.of(context)!
+              .translate('customize_home_title')!),
+          subtitle: Text(AppLocalizations.of(context)!
+              .translate('customize_home_subtitle')!),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => HomeSettingsPage(),
+            ));
           },
         ),
         ListTile(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/home/sections/events/home_events.dart';
@@ -8,6 +9,8 @@ import 'package:registro_elettronico/feature/home/sections/header/home_header.da
 import 'package:registro_elettronico/feature/home/sections/lessons/home_lessons.dart';
 import 'package:registro_elettronico/feature/substitutions/substitutions_page.dart';
 import 'package:registro_elettronico/feature/timetable/presentation/timetable_page.dart';
+import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
+import 'package:registro_elettronico/utils/home_config.dart';
 import 'package:registro_elettronico/utils/update_manager.dart';
 
 final GlobalKey<RefreshIndicatorState> homeRefresherKey = GlobalKey();
@@ -25,8 +28,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> _homeOrder = HomeConfig.items;
+  List<String> _hiddenHomeItems = const [];
+
   @override
   void initState() {
+    HomeConfig.changes.addListener(_reloadHomeConfiguration);
+    _loadHomeConfiguration();
     if (widget.fromLogin) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -40,6 +48,51 @@ class _HomePageState extends State<HomePage> {
       });
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    HomeConfig.changes.removeListener(_reloadHomeConfiguration);
+    super.dispose();
+  }
+
+  void _reloadHomeConfiguration() => _loadHomeConfiguration();
+
+  Future<void> _loadHomeConfiguration() async {
+    final prefs = await SharedPreferences.getInstance();
+    final order = HomeConfig.normalizeOrder(
+      prefs.getStringList(PrefsConstants.homeOrder),
+    );
+    final hidden = HomeConfig.normalizeHidden(
+      order,
+      prefs.getStringList(PrefsConstants.homeHidden),
+    );
+    if (!mounted) return;
+    setState(() {
+      _homeOrder = order;
+      _hiddenHomeItems = hidden;
+    });
+  }
+
+  Widget _homeSection(String id) {
+    switch (id) {
+      case HomeConfig.actions:
+        return _TodayActions();
+      case HomeConfig.grades:
+        return HomeGrades();
+      case HomeConfig.lessons:
+        return Column(
+          children: [
+            HomeLessonsHeader(),
+            SizedBox(height: 140, child: HomeLessons()),
+          ],
+        );
+      case HomeConfig.agenda:
+        return Column(
+          children: [HomeAgendaHeader(), HomeEvents()],
+        );
+    }
+    return const SizedBox.shrink();
   }
 
   @override
@@ -58,18 +111,8 @@ class _HomePageState extends State<HomePage> {
             physics: ClampingScrollPhysics(),
             children: [
               HomeHeader(),
-              _TodayActions(),
-              // GRADES
-              HomeGrades(),
-              // LESSONS
-              HomeLessonsHeader(),
-
-              SizedBox(
-                height: 140,
-                child: HomeLessons(),
-              ),
-              HomeAgendaHeader(),
-              HomeEvents(),
+              ...HomeConfig.visibleItems(_homeOrder, _hiddenHomeItems)
+                  .map(_homeSection),
             ],
           ),
         ),

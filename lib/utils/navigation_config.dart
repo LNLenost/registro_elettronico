@@ -13,14 +13,17 @@ class NavigationConfig {
     more,
   ];
 
-  static List<String> normalizeOrder(Iterable<String>? stored) {
+  static List<String> normalizeOrder(
+    Iterable<String>? stored, {
+    List<String> known = defaultOrder,
+  }) {
     final result = <String>[];
     for (final id in stored ?? const <String>[]) {
-      if (defaultOrder.contains(id) && !result.contains(id)) {
+      if (known.contains(id) && !result.contains(id)) {
         result.add(id);
       }
     }
-    for (final id in defaultOrder) {
+    for (final id in known) {
       if (!result.contains(id)) result.add(id);
     }
     return result;
@@ -28,9 +31,10 @@ class NavigationConfig {
 
   static List<String> normalizeHidden(
     Iterable<String> order,
-    Iterable<String>? hidden,
-  ) {
-    final normalizedOrder = normalizeOrder(order);
+    Iterable<String>? hidden, {
+    List<String> known = defaultOrder,
+  }) {
+    final normalizedOrder = normalizeOrder(order, known: known);
     final result = <String>[];
     for (final id in hidden ?? const <String>[]) {
       if (normalizedOrder.contains(id) && !result.contains(id)) {
@@ -45,10 +49,15 @@ class NavigationConfig {
 
   static List<String> visibleItems(
     Iterable<String> order,
-    Iterable<String>? hidden,
-  ) {
-    final normalizedOrder = normalizeOrder(order);
-    final normalizedHidden = normalizeHidden(normalizedOrder, hidden);
+    Iterable<String>? hidden, {
+    List<String> known = defaultOrder,
+  }) {
+    final normalizedOrder = normalizeOrder(order, known: known);
+    final normalizedHidden = normalizeHidden(
+      normalizedOrder,
+      hidden,
+      known: known,
+    );
     return normalizedOrder
         .where((id) => !normalizedHidden.contains(id))
         .toList();

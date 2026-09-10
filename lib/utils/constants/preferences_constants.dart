@@ -49,4 +49,6 @@ class PrefsConstants {
   static const String preferredCalendarFormat = 'preferredCalendarFormat';
   static const String navigationOrder = 'navigationOrder';
   static const String navigationHidden = 'navigationHidden';
+  static const String homeOrder = 'homeOrder';
+  static const String homeHidden = 'homeHidden';
 }
