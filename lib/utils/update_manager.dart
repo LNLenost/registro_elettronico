@@ -121,9 +121,10 @@ class SRUpdateManager {
     if (!Platform.isAndroid) return;
     final events = await sl<SRDatabase>().agendaLocalDatasource.getAllEvents();
     final upcoming = events
-        .where((event) => event.begin.isAfter(DateTime.now()))
+        .where((event) =>
+            event.begin != null && event.begin!.isAfter(DateTime.now()))
         .toList()
-      ..sort((a, b) => a.begin.compareTo(b.begin));
+      ..sort((a, b) => a.begin!.compareTo(b.begin!));
     if (upcoming.isEmpty) return;
     final event = upcoming.first;
     await const MethodChannel(
