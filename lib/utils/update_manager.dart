@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
+import 'package:registro_elettronico/core/data/local/moor_database.dart';
 import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/local_content_notification_service.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/local_notification.dart';
+import 'package:flutter/services.dart';
 import 'package:registro_elettronico/feature/absences/domain/repository/absences_repository.dart';
 import 'package:registro_elettronico/feature/agenda/domain/repository/agenda_repository.dart';
 import 'package:registro_elettronico/feature/didactics/domain/repository/didactics_repository.dart';
@@ -110,6 +114,23 @@ class SRUpdateManager {
       notifications: LocalNotification((payload) async {}),
     );
     await notificationService.notifyNewContent();
+    await _updateNextEventWidget();
+  }
+
+  Future<void> _updateNextEventWidget() async {
+    if (!Platform.isAndroid) return;
+    final events = await sl<SRDatabase>().agendaLocalDatasource.getAllEvents();
+    final upcoming = events
+        .where((event) => event.begin.isAfter(DateTime.now()))
+        .toList()
+      ..sort((a, b) => a.begin.compareTo(b.begin));
+    if (upcoming.isEmpty) return;
+    final event = upcoming.first;
+    await const MethodChannel(
+      'com.riccardocalligaro.registro_elettronico/multi-account',
+    ).invokeMethod<void>('updateWidget', {
+      'event': '${event.title ?? event.notes} - ${event.begin}',
+    });
   }
 
   Future<void> updateVitalData(BuildContext context) async {

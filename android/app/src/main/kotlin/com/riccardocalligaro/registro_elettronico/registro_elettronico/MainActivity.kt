@@ -1,6 +1,7 @@
 package com.riccardocalligaro.registro_elettronico
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -22,6 +23,13 @@ class MainActivity: FlutterActivity() {
                         1001
                     )
                 }
+                result.success(null)
+            } else if (call.method == "updateWidget") {
+                getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+                    .edit()
+                    .putString("flutter.widget_next_event", call.argument<String>("event"))
+                    .apply()
+                NextEventWidgetProvider.updateAll(this)
                 result.success(null)
             } else if (call.method == "restartApp") {
                 val packageManager: PackageManager = context.packageManager
