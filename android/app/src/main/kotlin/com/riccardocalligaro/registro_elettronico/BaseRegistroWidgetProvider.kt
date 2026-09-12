@@ -22,7 +22,7 @@ abstract class BaseRegistroWidgetProvider : AppWidgetProvider() {
     fun update(context: Context, manager: AppWidgetManager, id: Int) {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val views = RemoteViews(context.packageName, layout)
-        val color = prefs.getInt(COLOR_KEY, Color.WHITE)
+        val color = (prefs.all[COLOR_KEY] as? Number)?.toInt() ?: Color.WHITE
         val textColor = if (isLight(color)) Color.BLACK else Color.WHITE
         views.setInt(R.id.widget_root, "setBackgroundColor", color)
         views.setTextColor(R.id.widget_title, textColor)
