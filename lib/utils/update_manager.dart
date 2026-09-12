@@ -272,13 +272,15 @@ class SRUpdateManager {
       DateTime.now().millisecondsSinceEpoch,
     );
 
-    return Future.wait([
+    final updates = await Future.wait([
       absencesRepository!.updateAbsences(),
       noticesRepository!.updateNotices(ifNeeded: false),
       notesRepository!.updateNotes(),
       didacticsRepository!.updateMaterials(ifNeeded: false),
       documentsRepository!.updateDocuments(),
     ]);
+    await updateNextEventWidget();
+    return updates;
   }
 
   bool _needToUpdateAllData({
