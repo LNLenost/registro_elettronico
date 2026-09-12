@@ -114,11 +114,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     await prefs!.setString(PrefsConstants.themeType, themeType.toString());
 
-    await prefs!.setInt(PrefsConstants.themeColor, color.shade500.value);
+    await prefs!.setInt(PrefsConstants.themeColor, color.value);
     if (Platform.isAndroid) {
       await const MethodChannel(
         'com.riccardocalligaro.registro_elettronico/multi-account',
-      ).invokeMethod<void>('updateWidgetTheme', color.shade500.value);
+      ).invokeMethod<void>('updateWidgetTheme', color.value);
     }
   }
 
