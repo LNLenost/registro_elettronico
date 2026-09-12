@@ -19,4 +19,7 @@ class ThemeChanged extends ThemeEvent {
     required this.type,
     required this.color,
   });
+
+  @override
+  List<Object?> get props => [type, color];
 }

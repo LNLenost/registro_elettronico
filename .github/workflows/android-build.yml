@@ -25,6 +25,7 @@ jobs:
       - run: flutter test test/home_config_test.dart
       - run: flutter test test/notification_diff_test.dart
       - run: flutter test test/notification_preferences_test.dart
+      - run: flutter test test/theme_event_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}

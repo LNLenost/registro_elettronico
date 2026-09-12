@@ -40,6 +40,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     ThemeEvent event,
   ) async* {
     if (event is ThemeChanged) {
+      if (prefs == null) prefs = await SharedPreferences.getInstance();
       ThemeType? _themeType;
 
       if (event.type == null) {
