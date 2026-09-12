@@ -70,9 +70,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
         ));
       }
 
-      final MaterialColor color = event.color ??
-          ColorUtils.createMaterialColor(Color(
-              prefs!.getInt(PrefsConstants.themeColor) ?? Colors.red.value));
+      final Color color = event.color ??
+          Color(prefs!.getInt(PrefsConstants.themeColor) ?? Colors.red.value);
 
       await _saveSettings(_themeType, color);
 
@@ -87,9 +86,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   ThemeData _getThemeData(ThemeType? themeType, Color color) {
     if (themeType == ThemeType.dark) {
-      return DarkTheme.getThemeData(color as MaterialColor);
+      return DarkTheme.getThemeData(color);
     } else if (themeType == ThemeType.black) {
-      return BlackTheme.getThemeData(color as MaterialColor);
+      return BlackTheme.getThemeData(color);
     } else {
       return LightTheme.getThemeData(color);
     }
@@ -107,11 +106,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     add(ThemeChanged(
       type: _themeType,
-      color: _themeColor as MaterialColor?,
+      color: _themeColor,
     ));
   }
 
-  Future<void> _saveSettings(ThemeType? themeType, MaterialColor color) async {
+  Future<void> _saveSettings(ThemeType? themeType, Color color) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     await prefs!.setString(PrefsConstants.themeType, themeType.toString());
 

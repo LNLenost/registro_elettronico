@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:registro_elettronico/core/infrastructure/theme/theme_data/text_styles.dart';
 
 class DarkTheme {
-  static ThemeData getThemeData(MaterialColor color) {
+  static ThemeData getThemeData(Color color) {
     return ThemeData(
       colorScheme: ColorScheme.highContrastDark(
         primary: color,

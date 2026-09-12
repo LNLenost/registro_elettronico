@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:registro_elettronico/core/infrastructure/theme/theme_data/text_styles.dart';
 
 class BlackTheme {
-  static ThemeData getThemeData(MaterialColor color) {
+  static ThemeData getThemeData(Color color) {
     return ThemeData(
       scaffoldBackgroundColor: Colors.black,
       dialogBackgroundColor: Color(0xff0f0f0f),
