@@ -125,8 +125,10 @@ class SRUpdateManager {
     final upcoming = events.where((event) =>
         event.begin != null && event.begin!.isAfter(now)).toList()
       ..sort((a, b) => a.begin!.compareTo(b.begin!));
-    final grades = await database.gradesLocalDatasource.getGrades();
-    grades.sort((a, b) => b.eventDate.compareTo(a.eventDate));
+    final grades = (await database.gradesLocalDatasource.getGrades())
+        .where((grade) => grade.eventDate != null)
+        .toList()
+      ..sort((a, b) => b.eventDate!.compareTo(a.eventDate!));
     final timetable = await database.timetableLocalDatasource.getAllEntries();
     final color = sharedPreferences!.getInt(PrefsConstants.themeColor) ??
         Colors.red.value;
