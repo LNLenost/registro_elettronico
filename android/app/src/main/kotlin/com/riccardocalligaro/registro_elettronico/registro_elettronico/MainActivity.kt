@@ -39,7 +39,7 @@ class MainActivity: FlutterActivity() {
                 editor.putString("flutter.widget_agenda", call.argument<String>("agenda"))
                 editor.putString("flutter.widget_grades", call.argument<String>("grades"))
                 editor.putString("flutter.widget_timetable", call.argument<String>("timetable"))
-                editor.putInt("flutter.themeColor", call.argument<Int>("color") ?: android.graphics.Color.RED)
+                editor.putInt("flutter.themeColor", call.argument<Number>("color")?.toInt() ?: android.graphics.Color.RED)
                 editor.apply()
                 AgendaWidgetProvider().updateAll(this)
                 GradesWidgetProvider().updateAll(this)
@@ -48,7 +48,7 @@ class MainActivity: FlutterActivity() {
             } else if (call.method == "updateWidgetTheme") {
                 getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
                     .edit()
-                    .putInt("flutter.themeColor", call.arguments as Int)
+                    .putInt("flutter.themeColor", (call.arguments as Number).toInt())
                     .apply()
                 AgendaWidgetProvider().updateAll(this)
                 GradesWidgetProvider().updateAll(this)
