@@ -193,7 +193,7 @@ class _ScrutiniPageState extends State<ScrutiniPage> {
           child: BlocBuilder<DocumentsBloc, DocumentsState>(
             builder: (context, state) {
               if (state is DocumentsLoadSuccess) {
-                if (state.documents.isEmpty && state.documents.isEmpty) {
+                if (state.documents.isEmpty && state.schoolReports.isEmpty) {
                   return CustomPlaceHolder(
                     icon: Icons.import_contacts,
                     showUpdate: true,
@@ -253,7 +253,7 @@ class _ScrutiniPageState extends State<ScrutiniPage> {
       children: <Widget>[
         ListTile(
           title: Text(
-            AppLocalizations.of(context)!.translate('scrutini_documents')!,
+            AppLocalizations.of(context)!.translate('scrutini_school_reports')!,
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
@@ -277,7 +277,7 @@ class _ScrutiniPageState extends State<ScrutiniPage> {
         ),
         ListTile(
           title: Text(
-            AppLocalizations.of(context)!.translate('scrutini_school_reports')!,
+            AppLocalizations.of(context)!.translate('scrutini_documents')!,
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
