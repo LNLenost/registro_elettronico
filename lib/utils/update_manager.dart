@@ -114,10 +114,10 @@ class SRUpdateManager {
       notifications: LocalNotification((payload) async {}),
     );
     await notificationService.notifyNewContent();
-    await _updateNextEventWidget();
+    await updateNextEventWidget();
   }
 
-  Future<void> _updateNextEventWidget() async {
+  Future<void> updateNextEventWidget() async {
     if (!Platform.isAndroid) return;
     final events = await sl<SRDatabase>().agendaLocalDatasource.getAllEvents();
     final upcoming = events
@@ -125,12 +125,13 @@ class SRUpdateManager {
             event.begin != null && event.begin!.isAfter(DateTime.now()))
         .toList()
       ..sort((a, b) => a.begin!.compareTo(b.begin!));
-    if (upcoming.isEmpty) return;
-    final event = upcoming.first;
+    final event = upcoming.isEmpty ? null : upcoming.first;
     await const MethodChannel(
       'com.riccardocalligaro.registro_elettronico/multi-account',
     ).invokeMethod<void>('updateWidget', {
-      'event': '${event.title ?? event.notes} - ${event.begin}',
+      'event': event == null
+          ? 'Nessun prossimo evento'
+          : '${event.title ?? event.notes} - ${event.begin}',
     });
   }
 
@@ -152,6 +153,7 @@ class SRUpdateManager {
     final updates = [update1, update2, update3];
 
     _updateMultipleData(context: context, updates: updates);
+    await updateNextEventWidget();
   }
 
   Future<void> updateDidacticsData(BuildContext context) async {
@@ -172,6 +174,7 @@ class SRUpdateManager {
 
     final updates = [update1, update2];
     _updateMultipleData(context: context, updates: updates);
+    await updateNextEventWidget();
   }
 
   Future<void> updateSubjects(BuildContext context) async {
