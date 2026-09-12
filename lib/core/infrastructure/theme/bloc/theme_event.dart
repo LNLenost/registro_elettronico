@@ -21,5 +21,5 @@ class ThemeChanged extends ThemeEvent {
   });
 
   @override
-  List<Object?> get props => [type, color];
+  List<Object> get props => [type ?? '', color ?? Colors.transparent];
 }
