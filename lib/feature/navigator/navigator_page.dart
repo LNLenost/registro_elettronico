@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
@@ -37,7 +40,32 @@ class _NavigatorPageState extends State<NavigatorPage> {
     unawaited(srUpdateManager!.checkForUpdates());
     _pages = _buildPages();
     _loadNavigationConfig();
+    unawaited(_openWidgetRoute());
     super.initState();
+  }
+
+  Future<void> _openWidgetRoute() async {
+    if (!Platform.isAndroid) return;
+    const channel = MethodChannel(
+      'com.riccardocalligaro.registro_elettronico/multi-account',
+    );
+    channel.setMethodCallHandler((call) async {
+      if (call.method == 'openWidgetRoute') {
+        _navigateWidgetRoute(call.arguments as String?);
+      }
+    });
+    final route = await channel.invokeMethod<String>('getWidgetRoute');
+    _navigateWidgetRoute(route);
+  }
+
+  void _navigateWidgetRoute(String? route) {
+    if (!mounted || route == null) return;
+    if (route == '/timetable') {
+      Navigator.of(context).pushNamed(route);
+    } else if (route == NavigationConfig.agenda ||
+        route == NavigationConfig.grades) {
+      setState(() => _currentPage = route);
+    }
   }
 
   List<Widget> _buildPages() {

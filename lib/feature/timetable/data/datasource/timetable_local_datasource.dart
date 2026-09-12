@@ -14,6 +14,9 @@ class TimetableLocalDatasource extends DatabaseAccessor<SRDatabase>
   Stream<List<TimetableEntryLocalModel>> watchAllEntries() =>
       select(timetableEntries).watch();
 
+  Future<List<TimetableEntryLocalModel>> getAllEntries() =>
+      select(timetableEntries).get();
+
   Future deleteEntries() => delete(timetableEntries).go();
 
   Future deleteTimetableEntry(TimetableEntryLocalModel entry) =>

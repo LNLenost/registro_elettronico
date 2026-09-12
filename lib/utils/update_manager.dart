@@ -119,19 +119,30 @@ class SRUpdateManager {
 
   Future<void> updateNextEventWidget() async {
     if (!Platform.isAndroid) return;
-    final events = await sl<SRDatabase>().agendaLocalDatasource.getAllEvents();
-    final upcoming = events
-        .where((event) =>
-            event.begin != null && event.begin!.isAfter(DateTime.now()))
-        .toList()
+    final database = sl<SRDatabase>();
+    final now = DateTime.now();
+    final events = await database.agendaLocalDatasource.getAllEvents();
+    final upcoming = events.where((event) =>
+        event.begin != null && event.begin!.isAfter(now)).toList()
       ..sort((a, b) => a.begin!.compareTo(b.begin!));
-    final event = upcoming.isEmpty ? null : upcoming.first;
+    final grades = await database.gradesLocalDatasource.getGrades();
+    grades.sort((a, b) => b.eventDate.compareTo(a.eventDate));
+    final timetable = await database.timetableLocalDatasource.getAllEntries();
+    final color = sharedPreferences!.getInt(PrefsConstants.themeColor) ??
+        Colors.red.value;
     await const MethodChannel(
       'com.riccardocalligaro.registro_elettronico/multi-account',
-    ).invokeMethod<void>('updateWidget', {
-      'event': event == null
-          ? 'Nessun prossimo evento'
-          : '${event.title ?? event.notes} - ${event.begin}',
+    ).invokeMethod<void>('updateWidgets', {
+      'agenda': upcoming.isEmpty
+          ? 'Nessun compito in agenda'
+          : '${upcoming.first.title ?? upcoming.first.notes}',
+      'grades': grades.isEmpty
+          ? 'Nessun voto disponibile'
+          : '${grades.first.subjectDesc ?? ''}: ${grades.first.displayValue ?? ''}',
+      'timetable': timetable.isEmpty
+          ? 'Orario non disponibile'
+          : timetable.take(4).map((entry) => entry.subjectName).join(' · '),
+      'color': color,
     });
   }
 
