@@ -22,8 +22,11 @@ abstract class BaseRegistroWidgetProvider : AppWidgetProvider() {
     fun update(context: Context, manager: AppWidgetManager, id: Int) {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val views = RemoteViews(context.packageName, layout)
-        val color = prefs.getInt(COLOR_KEY, Color.RED)
+        val color = prefs.getInt(COLOR_KEY, Color.WHITE)
+        val textColor = if (isLight(color)) Color.BLACK else Color.WHITE
         views.setInt(R.id.widget_root, "setBackgroundColor", color)
+        views.setTextColor(R.id.widget_title, textColor)
+        views.setTextColor(contentId, textColor)
         views.setTextViewText(R.id.widget_title, title)
         views.setTextViewText(contentId, prefs.getString(dataKey, null) ?: "Apri l'app per sincronizzare")
         val intent = Intent(context, MainActivity::class.java).putExtra(ROUTE_KEY, route)
@@ -34,6 +37,13 @@ abstract class BaseRegistroWidgetProvider : AppWidgetProvider() {
         )
         views.setOnClickPendingIntent(R.id.widget_root, pendingIntent)
         manager.updateAppWidget(id, views)
+    }
+
+    private fun isLight(color: Int): Boolean {
+        val r = Color.red(color)
+        val g = Color.green(color)
+        val b = Color.blue(color)
+        return (r * 299 + g * 587 + b * 114) >= 150000
     }
 
     fun updateAll(context: Context) {
