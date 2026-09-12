@@ -45,6 +45,15 @@ class MainActivity: FlutterActivity() {
                 GradesWidgetProvider().updateAll(this)
                 TimetableWidgetProvider().updateAll(this)
                 result.success(null)
+            } else if (call.method == "updateWidgetTheme") {
+                getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+                    .edit()
+                    .putInt("flutter.themeColor", call.arguments as Int)
+                    .apply()
+                AgendaWidgetProvider().updateAll(this)
+                GradesWidgetProvider().updateAll(this)
+                TimetableWidgetProvider().updateAll(this)
+                result.success(null)
             } else if (call.method == "getWidgetRoute") {
                 result.success(intent.getStringExtra("widget_route"))
             } else if (call.method == "restartApp") {

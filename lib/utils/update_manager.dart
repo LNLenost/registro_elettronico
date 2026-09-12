@@ -137,10 +137,11 @@ class SRUpdateManager {
     ).invokeMethod<void>('updateWidgets', {
       'agenda': upcoming.isEmpty
           ? 'Nessun compito in agenda'
-          : '${upcoming.first.title ?? upcoming.first.notes}',
+          : upcoming.take(3).map((event) => event.title ?? event.notes).join(' · '),
       'grades': grades.isEmpty
           ? 'Nessun voto disponibile'
-          : '${grades.first.subjectDesc ?? ''}: ${grades.first.displayValue ?? ''}',
+          : grades.take(3).map((grade) =>
+              '${grade.subjectDesc ?? ''}: ${grade.displayValue ?? ''}').join(' · '),
       'timetable': timetable.isEmpty
           ? 'Orario non disponibile'
           : timetable.take(4).map((entry) => entry.subjectName).join(' · '),

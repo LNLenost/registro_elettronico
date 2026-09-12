@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -115,6 +116,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     await prefs!.setString(PrefsConstants.themeType, themeType.toString());
 
     await prefs!.setInt(PrefsConstants.themeColor, color.shade500.value);
+    if (Platform.isAndroid) {
+      await const MethodChannel(
+        'com.riccardocalligaro.registro_elettronico/multi-account',
+      ).invokeMethod<void>('updateWidgetTheme', color.shade500.value);
+    }
   }
 
   ThemeType _typeFromString(String type) {
