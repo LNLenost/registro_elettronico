@@ -20,7 +20,7 @@
 
 ## Cos’è
 
-**Registro Elettronico** è un client alternativo per Classeviva personalizzabile al 100%, con funzionalità aggiuntive.
+**Registro Elettronico** è un client alternativo per Classeviva personalizzabile al 100% con funzionalità aggiuntive.
 
 Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Calligaro](https://github.com/riccardocalligaro/registro_elettronico), con interventi di manutenzione, compatibilità, localizzazione e nuove funzioni.
 
@@ -42,12 +42,9 @@ Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Call
   - filtro per circolari attive/scadute;
 - documenti e scrutini disponibili sull’account;
 - documenti storici separati dalle pagelle;
-- pagina **Sostituzioni** collegabile a SostituzioniDocenti o MyProf;
-- apertura del **Libretto Web** Classeviva dalla sezione Assenze;
+- pagina **Sostituzioni** collegabile a SostituzioniDocenti / MyProf;
 - temi personalizzabili e modalità chiara/scura;
-- interfaccia in italiano e inglese, con lingua iniziale basata sul dispositivo.
-
-La disponibilità dei dati dipende dal profilo, dal ruolo dell’utente e dai moduli attivati dalla scuola.
+- interfaccia in italiano e inglese, con lingua iniziale basata sulla lingua del dispositivo.
 
 ## Requisiti
 
@@ -110,7 +107,7 @@ lang/                    # traduzioni italiano/inglese
 
 Il progetto è in manutenzione attiva. Le funzioni già presenti vengono mantenute con modifiche mirate e verifiche tramite test e GitHub Actions.
 
-### In valutazione
+### TODO
 
 Le seguenti funzioni ClasseViva richiedono ancora un contratto API di scrittura verificato o un flusso web autorizzato prima di poter essere implementate correttamente:
 
@@ -121,14 +118,12 @@ Le seguenti funzioni ClasseViva richiedono ancora un contratto API di scrittura 
 - recuperi;
 
 
-Non vengono inseriti endpoint, metodi HTTP o payload ipotetici.
-
 ## Contribuire
 
 Bug report, proposte e pull request sono benvenuti:
 
 - [Apri una issue](https://github.com/LNLenost/registro_elettronico/issues);
-- [proponi una modifica con una pull request](https://github.com/LNLenost/registro_elettronico/pulls).
+- [Proponi una modifica con una pull request](https://github.com/LNLenost/registro_elettronico/pulls).
 
 Quando segnali un problema, indica dispositivo, versione Android/iOS, versione dell’app e passaggi per riprodurlo. **Non includere password, token, cookie o altri dati personali.**
 
@@ -139,5 +134,5 @@ Il progetto è distribuito secondo la [Creative Commons Attribution-NonCommercia
 ## Crediti
 
 - Progetto originale: [Riccardo Calligaro](https://github.com/riccardocalligaro);
-- manutenzione del fork: [Niccolò Salerno](https://github.com/LNLenost);
-- backend e servizi dati: ClasseViva/Spaggiari, secondo le condizioni d’uso dei rispettivi servizi.
+- Manutenzione del fork: [Niccolò Salerno](https://github.com/LNLenost);
+- Backend e servizi dati: ClasseViva/Spaggiari, secondo le condizioni d’uso dei rispettivi servizi.
