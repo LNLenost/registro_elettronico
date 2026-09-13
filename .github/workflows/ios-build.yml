@@ -1,0 +1,29 @@
+name: iOS build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.5.3"
+          channel: stable
+      - run: flutter pub get
+      - run: flutter test test/noticeboard_filter_test.dart
+      - run: flutter test test/absences_filter_test.dart
+      - run: flutter test test/navigation_config_test.dart
+      - run: flutter test test/home_config_test.dart
+      - run: flutter test test/notification_diff_test.dart
+      - run: flutter test test/notification_preferences_test.dart
+      - run: flutter test test/theme_event_test.dart
+      - run: flutter build ios --release --no-codesign
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registro-elettronico-ios-unsigned
+          path: build/ios/iphoneos/Runner.app
