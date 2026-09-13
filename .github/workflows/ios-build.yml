@@ -26,6 +26,8 @@ jobs:
           path.write_text(source.replace("File.exists?", "File.exist?"))
           PY
       - run: flutter pub get
+      - name: Refresh stale Firebase pod lock
+        run: cd ios && pod update Firebase/CoreOnly
       - run: flutter test test/noticeboard_filter_test.dart
       - run: flutter test test/absences_filter_test.dart
       - run: flutter test test/navigation_config_test.dart
