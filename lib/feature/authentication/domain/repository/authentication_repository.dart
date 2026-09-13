@@ -18,6 +18,8 @@ abstract class AuthenticationRepository {
 
   Future<CredentialsDomainModel> getCredentials();
 
+  Future<String?> getStoredToken(String ident);
+
   Future<Either<Failure, List<ProfileDomainModel>>> getNonActiveAccounts();
 
   Future<Either<Failure, GenericLoginResponse>> loginUser({

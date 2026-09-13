@@ -84,7 +84,7 @@ class ProfileLocalModel {
 
   @override
   String toString() {
-    return 'ProfileLocalModel(studentId: $studentId, ident: $ident, firstName: $firstName, lastName: $lastName, token: $token, release: $release, expire: $expire, currentlyLoggedIn: $currentlyLoggedIn, dbName: $dbName)';
+    return 'ProfileLocalModel(studentId: $studentId, ident: $ident, firstName: $firstName, lastName: $lastName, token: [REDACTED], release: $release, expire: $expire, currentlyLoggedIn: $currentlyLoggedIn, dbName: $dbName)';
   }
 
   @override

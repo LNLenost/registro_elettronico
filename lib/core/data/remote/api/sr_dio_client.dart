@@ -59,8 +59,11 @@ class SRDioClient {
             }
 
             //? This checks if the profile exires before now, so if this  results true the token is expired
+            final storedToken =
+                await authenticationRepository!.getStoredToken(profile.ident!);
             if (profile.expire!.isBefore(DateTime.now()) ||
-                profile.token!.isEmpty) {
+                storedToken == null ||
+                storedToken.isEmpty) {
               Fimber.i(
                 '🔒 [DioINTERCEPTOR] Need to request new token - ${profile.expire.toString()}',
               );
@@ -130,7 +133,7 @@ class SRDioClient {
               );
 
               // If the token is still vaid we just use the one we got from the database
-              requestOptions.headers["Z-Auth-Token"] = profile.token;
+              requestOptions.headers["Z-Auth-Token"] = storedToken;
             }
             // unlock and proceed
             _dio.unlock();
@@ -150,7 +153,7 @@ class SRDioClient {
             Fimber.i('DioError without a respoonse', ex: error);
           } else {
             Fimber.e(
-              '🤮 [DioERROR] ${error.type} Url: [${error.requestOptions.baseUrl}${error.requestOptions.path}] status:${error.response!.statusCode} type:${error.type} Data: ${error.response!.data} message: ${error.message}',
+              '🤮 [DioERROR] ${error.type} Url: [${error.requestOptions.baseUrl}${error.requestOptions.path}] status:${error.response!.statusCode} type:${error.type} message:${error.message}',
               ex: error,
             );
           }

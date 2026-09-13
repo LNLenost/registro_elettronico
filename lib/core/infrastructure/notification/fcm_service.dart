@@ -33,8 +33,8 @@ class PushNotificationService {
     Fimber.i('🔔 [FCM] Called initialisation...');
 
     if (kDebugMode) {
-      final token = await FirebaseMessaging.instance.getToken();
-      Fimber.i("🔔 [FCM] Got token $token");
+      await FirebaseMessaging.instance.getToken();
+      Fimber.i('🔔 [FCM] Token acquired');
     }
 
     AndroidInitializationSettings androidInitializationSettings =

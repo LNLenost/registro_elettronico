@@ -48,7 +48,7 @@ class LoginRequestDomainModel {
 
   @override
   String toString() =>
-      'LoginRequestDomainModel(ident: $ident, pass: $pass, uid: $uid)';
+      'LoginRequestDomainModel(ident: $ident, pass: [REDACTED], uid: $uid)';
 
   @override
   bool operator ==(Object o) {

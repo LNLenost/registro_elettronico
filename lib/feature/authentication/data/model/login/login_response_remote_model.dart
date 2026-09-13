@@ -75,6 +75,6 @@ class DefaultLoginResponseRemoteModel {
 
   @override
   String toString() {
-    return 'DefaultLoginResponseRemoteModel(ident: $ident, firstName: $firstName, lastName: $lastName, token: $token, release: $release, expire: $expire)';
+    return 'DefaultLoginResponseRemoteModel(ident: $ident, firstName: $firstName, lastName: $lastName, token: [REDACTED], release: $release, expire: $expire)';
   }
 }

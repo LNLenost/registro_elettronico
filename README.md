@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/icons/launcher_icon.png" alt="Registro Elettronico" width="96">
   <h1>Registro Elettronico</h1>
-  <p>Un client Flutter moderno per consultare il registro eletteonico Classeviva.</p>
+  <p>Un client Flutter moderno per consultare il registro elettronico Classeviva.</p>
 
   <p>
     <a href="https://github.com/LNLenost/registro_elettronico"><img src="https://img.shields.io/badge/repository-LNLenost%2Fregistro__elettronico-181717?logo=github" alt="Repository GitHub"></a>
@@ -41,6 +41,7 @@ Il progetto nasce come fork aggiornato di [Registro Elettronico di Riccardo Call
   - filtro per categoria;
   - filtro per circolari attive/scadute;
 - documenti e scrutini disponibili sull’account;
+- documenti storici separati dalle pagelle;
 - pagina **Sostituzioni** collegabile a SostituzioniDocenti o MyProf;
 - apertura del **Libretto Web** Classeviva dalla sezione Assenze;
 - temi personalizzabili e modalità chiara/scura;
@@ -118,7 +119,7 @@ Le seguenti funzioni ClasseViva richiedono ancora un contratto API di scrittura 
 - upload dei compiti;
 - colloqui e sportello;
 - recuperi;
-- documenti storici.
+
 
 Non vengono inseriti endpoint, metodi HTTP o payload ipotetici.
 

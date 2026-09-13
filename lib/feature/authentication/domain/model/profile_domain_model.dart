@@ -114,7 +114,7 @@ class ProfileDomainModel {
 
   @override
   String toString() {
-    return 'ProfileDomainModel(ident: $ident, firstName: $firstName, lastName: $lastName, token: $token, release: $release, expire: $expire, studentId: $studentId, currentlyLoggedIn: $currentlyLoggedIn, dbName: $dbName)';
+    return 'ProfileDomainModel(ident: $ident, firstName: $firstName, lastName: $lastName, token: [REDACTED], release: $release, expire: $expire, studentId: $studentId, currentlyLoggedIn: $currentlyLoggedIn, dbName: $dbName)';
   }
 
   @override

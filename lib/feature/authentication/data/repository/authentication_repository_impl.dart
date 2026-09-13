@@ -60,6 +60,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     return CredentialsDomainModel(profile: profile, password: password);
   }
 
+  Future<String?> getStoredToken(String ident) {
+    return flutterSecureStorage!.read(key: 'token:$ident');
+  }
+
   @override
   Future<String> getCurrentStudentId() async {
     final profile = await _getProfile();
@@ -83,8 +87,17 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
           // parse it
           final domainProfile = ProfileDomainModel.fromJson(legacyProfile);
 
-          await profilesLocalDatasource!
-              .insertProfile(domainProfile!.toLocalModel());
+          final migratedProfile = domainProfile!.toLocalModel();
+          if (migratedProfile.ident != null &&
+              migratedProfile.token?.isNotEmpty == true) {
+            await flutterSecureStorage!.write(
+              key: 'token:${migratedProfile.ident!}',
+              value: migratedProfile.token,
+            );
+          }
+          await profilesLocalDatasource!.insertProfile(
+            migratedProfile.copyWith(token: ''),
+          );
 
           await sharedPreferences!.setString(
             PrefsConstants.databaseName,
@@ -98,8 +111,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         }
         return null;
       }
-      profileSingleton.profile =
-          ProfileDomainModel.fromLocalModel(localProfiles.first);
+      var localProfile = localProfiles.first;
+      if (localProfile.ident != null && localProfile.token?.isNotEmpty == true) {
+        await flutterSecureStorage!.write(
+          key: 'token:${localProfile.ident!}',
+          value: localProfile.token,
+        );
+        localProfile = localProfile.copyWith(token: '');
+        await profilesLocalDatasource!.updateProfile(localProfile);
+      }
+      profileSingleton.profile = ProfileDomainModel.fromLocalModel(localProfile);
     }
 
     return profileSingleton.profile;
@@ -142,7 +163,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
           final localModel = loginResponse.toLocalModelFromLogin(
             currentlyLoggedIn: true,
             dbName: dbName,
-          );
+          ).copyWith(token: '');
 
           if (loggedInIds.contains(localModel.studentId)) {
             return Left(AlreadyLoggedInFailure());
@@ -156,7 +177,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
             }
           }
 
-          await profilesLocalDatasource!.insertProfile(localModel);
+          final secureToken = loginResponse.token;
+          await flutterSecureStorage!.write(
+            key: 'token:${loginResponse.ident!}',
+            value: secureToken,
+          );
+          await profilesLocalDatasource!.insertProfile(
+            localModel.copyWith(token: ''),
+          );
 
           final domainModel = ProfileDomainModel.fromLocalModel(localModel);
 
@@ -205,7 +233,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     required DefaultLoginResponseRemoteModel responseRemoteModel,
     required ProfileDomainModel profileDomainModel,
   }) async {
-    final localModel = responseRemoteModel.toLocalModel(profileDomainModel);
+    final token = responseRemoteModel.token;
+    if (profileDomainModel.ident != null) {
+      await flutterSecureStorage!.write(
+        key: 'token:${profileDomainModel.ident!}',
+        value: token,
+      );
+    }
+    final localModel = responseRemoteModel
+        .toLocalModel(profileDomainModel)
+        .copyWith(token: '');
     await profilesLocalDatasource!.updateProfile(localModel);
     final domainModel = ProfileDomainModel.fromLocalModel(localModel);
     // we update the singleton
@@ -219,6 +256,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       final profile = await _getProfile();
 
       await profilesLocalDatasource!.deleteWithIdent(profile?.ident);
+      if (profile?.ident != null) {
+        await flutterSecureStorage!.delete(key: profile!.ident!);
+        await flutterSecureStorage!.delete(key: 'token:${profile.ident!}');
+      }
 
       await srDatabase!.resetDb();
 
@@ -252,8 +293,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         );
 
         _ProfileSingleton.instance.profile = null;
-
-        await flutterSecureStorage!.write(key: profile!.ident!, value: '');
 
         await navigator.currentState!.push(
           MaterialPageRoute(builder: (context) => LoginPage()),

@@ -44,7 +44,7 @@ class CredentialsDomainModel {
 
   @override
   String toString() =>
-      'CredentialsDomainModel(profile: $profile, password: $password)';
+      'CredentialsDomainModel(profile: $profile, password: [REDACTED])';
 
   @override
   bool operator ==(Object o) {
