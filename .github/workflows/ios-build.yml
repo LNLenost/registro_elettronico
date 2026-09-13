@@ -15,6 +15,16 @@ jobs:
           flutter-version: "2.5.3"
           architecture: x64
           channel: stable
+      - name: Support Ruby 3.3 in Flutter podhelper
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          path = Path(os.environ["FLUTTER_ROOT"]) / "packages/flutter_tools/bin/podhelper.rb"
+          source = path.read_text()
+          assert "File.exists?" in source
+          path.write_text(source.replace("File.exists?", "File.exist?"))
+          PY
       - run: flutter pub get
       - run: flutter test test/noticeboard_filter_test.dart
       - run: flutter test test/absences_filter_test.dart
