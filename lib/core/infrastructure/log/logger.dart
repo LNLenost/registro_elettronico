@@ -56,7 +56,7 @@
 //   }) {
 //     if (e.response != null) {
 //       FLog.error(
-//         text: '⛔ ${e.response!.data}',
+//         text: '⛔ HTTP request failed',
 //         exception: Exception(e.response!.statusCode),
 //         dataLogType: type.toString(),
 //       );
