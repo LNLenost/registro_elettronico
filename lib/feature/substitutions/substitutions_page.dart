@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/feature/substitutions/data/myprof_api.dart';
-import 'package:registro_elettronico/feature/web/presentation/spaggiari_web_view.dart';
+import 'package:registro_elettronico/feature/substitutions/substitutions_results_page.dart';
 
-/// Metodo C: apre il portale ufficiale in WebView dopo aver salvato il codice.
-/// ponytail: non duplico un portale esterno finché non esiste un'API pubblica.
+/// Native, read-only MyProf substitutions entry point.
+/// ponytail: uses the existing provider adapter instead of duplicating its portal.
 class SubstitutionsPage extends StatefulWidget {
   const SubstitutionsPage({Key? key}) : super(key: key);
 
@@ -16,7 +15,6 @@ class SubstitutionsPage extends StatefulWidget {
 
 class _SubstitutionsPageState extends State<SubstitutionsPage> {
   static const _schoolCodeKey = 'substitutions_school_code';
-  static const _portalUrl = 'https://www.sostituzionidocenti.net/web/';
   final _controller = TextEditingController();
   bool _loading = true;
 
@@ -45,32 +43,8 @@ class _SubstitutionsPageState extends State<SubstitutionsPage> {
     }
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_schoolCodeKey, code);
-    try {
-      final result = await MyProfApi().initSchool(code);
-      if (result.expired && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!
-                .translate('substitutions_expired_code')!),
-          ),
-        );
-      }
-    } catch (_) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!
-                .translate('substitutions_unreachable')!),
-          ),
-        );
-      }
-    }
     await Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => SpaggiariWebView(
-        appBarTitle: AppLocalizations.of(context)!
-            .translate('substitutions_title'),
-        url: _portalUrl,
-      ),
+      builder: (_) => SubstitutionsResultsPage(schoolCode: code),
     ));
   }
 

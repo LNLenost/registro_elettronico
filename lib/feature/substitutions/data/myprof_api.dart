@@ -86,6 +86,12 @@ class MyProfApi {
     return response.data;
   }
 
+  static int? idFromRecord(Map<String, dynamic> record) {
+    final value = record['id'];
+    if (value is num) return value.toInt();
+    return value == null ? null : int.tryParse(value.toString());
+  }
+
   static String? _normaliseApi(String? value) {
     if (value == null || value.isEmpty) return null;
     return value.endsWith('/') ? value : '$value/';
