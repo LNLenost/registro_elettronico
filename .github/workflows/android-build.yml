@@ -40,12 +40,14 @@ jobs:
       - name: Install compatible Android NDK
         env:
           SKIP_JDK_VERSION_CHECK: true
-        run: /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --install "ndk;20.1.5948944"
+        run: /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-35" "build-tools;35.0.0" "ndk;20.1.5948944"
       - run: flutter build apk --debug
       - run: flutter build apk --release
+      - run: flutter build appbundle --release
       - uses: actions/upload-artifact@v4
         with:
           name: registro-elettronico-apks
           path: |
             build/app/outputs/flutter-apk/app-debug.apk
             build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab

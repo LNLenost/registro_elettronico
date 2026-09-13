@@ -65,23 +65,14 @@ class _SpaggiariWebViewState extends State<SpaggiariWebView> {
             _controller = webViewController;
           });
         },
-        onProgress: (int progress) {
-          print("WebView is loading (progress : $progress%)");
-        },
         javascriptChannels: <JavascriptChannel>{},
         navigationDelegate: (NavigationRequest request) {
           if (request.url.startsWith('https://www.youtube.com/')) {
-            print('blocking navigation to $request}');
             return NavigationDecision.prevent;
           }
-          print('allowing navigation to $request');
           return NavigationDecision.navigate;
         },
-        onPageStarted: (String url) {
-          print('Page started loading: $url');
-        },
         onPageFinished: (String url) async {
-          print('Page finished loading: $url');
 
           final AuthenticationRepository authenticationRepository = sl();
           final userInfo = await authenticationRepository.getCredentials();
@@ -90,8 +81,6 @@ class _SpaggiariWebViewState extends State<SpaggiariWebView> {
               '\$("#login").val("${widget.email ?? userInfo.profile?.ident}");');
           await _controller?.evaluateJavascript(
               '\$("#password").val("${userInfo.password}");');
-          print(widget.email ?? userInfo.profile?.ident);
-          // await Future.delayed(Duration(seconds: 1));
           await _controller?.evaluateJavascript('\$(".accedi").click()');
         },
         gestureNavigationEnabled: true,
