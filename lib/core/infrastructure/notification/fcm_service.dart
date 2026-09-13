@@ -74,7 +74,9 @@ class PushNotificationService {
 
     final prefs = await SharedPreferences.getInstance();
     FirebaseMessaging.onMessage.listen((message) async {
-      Fimber.i('🔔 [FCM] Got FCM Message $message');
+      Fimber.i(
+        '🔔 [FCM] Message received: ${message.messageId ?? 'without-id'}',
+      );
 
       final category = NotificationPreferences.categoryFromMessage(message.data);
       if (category != null && !NotificationPreferences.isEnabled(prefs, category)) {
