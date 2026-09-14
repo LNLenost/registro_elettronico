@@ -21,6 +21,9 @@ import 'package:registro_elettronico/feature/noticeboard/domain/repository/notic
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+bool preserveReadStatus(bool? remote, bool? local) =>
+    remote == true || local == true;
+
 class NoticeboardRepositoryImpl implements NoticeboardRepository {
   static const String lastUpdateKey = 'noticeboardLastUpdate';
 
@@ -65,10 +68,18 @@ class NoticeboardRepositoryImpl implements NoticeboardRepository {
           }
         }
 
+        final localReadStatuses = {
+          for (final notice in localNotices) notice.pubId: notice.readStatus,
+        };
         await noticeboardLocalDatasource!.insertNotices(
           remoteNotices
               .map(
-                (e) => e.toLocalModel(),
+                (notice) => notice.toLocalModel().copyWith(
+                  readStatus: preserveReadStatus(
+                    notice.readStatus,
+                    localReadStatuses[notice.pubId],
+                  ),
+                ),
               )
               .toList(),
         );
