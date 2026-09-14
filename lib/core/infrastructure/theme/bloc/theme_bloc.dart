@@ -118,7 +118,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     await prefs!.setInt(PrefsConstants.themeColor, color.value);
     if (Platform.isAndroid) {
       await const MethodChannel(
-        'com.riccardocalligaro.registro_elettronico/multi-account',
+        'com.lnlenost.registroelettronico/multi-account',
       ).invokeMethod<void>('updateWidgetTheme', color.value);
     }
   }

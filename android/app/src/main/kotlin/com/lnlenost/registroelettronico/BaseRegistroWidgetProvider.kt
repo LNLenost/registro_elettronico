@@ -1,4 +1,4 @@
-package com.riccardocalligaro.registro_elettronico
+package com.lnlenost.registroelettronico
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager

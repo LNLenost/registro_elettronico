@@ -1,37 +1,26 @@
 {
   "project_info": {
-    "project_number": "225518586212",
-    "firebase_url": "https://registro-elettronico-37017.firebaseio.com",
-    "project_id": "registro-elettronico-37017",
-    "storage_bucket": "registro-elettronico-37017.appspot.com"
+    "project_number": "971537207316",
+    "project_id": "registro-elettronico-6bcfd",
+    "storage_bucket": "registro-elettronico-6bcfd.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:225518586212:android:b9bf9ccd6a11515b7e1271",
+        "mobilesdk_app_id": "1:971537207316:android:2e9c089d9c360ae893d701",
         "android_client_info": {
-          "package_name": "com.riccardocalligaro.registro_elettronico"
+          "package_name": "com.lnlenost.registroelettronico"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "225518586212-0fpokab2fit181u04nmuvmnc8k2i5c17.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBtds_6wtoCsNTX8anFFQ6_gzNYSJMji0w"
+          "current_key": "AIzaSyBwOkLjd6zli0qIrqcDSB4N9dgbiZspvo8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "225518586212-0fpokab2fit181u04nmuvmnc8k2i5c17.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

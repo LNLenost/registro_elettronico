@@ -22,7 +22,7 @@ class DebugPage extends StatefulWidget {
 
 class _DebugPageState extends State<DebugPage> {
   static const platform =
-      MethodChannel('com.riccardocalligaro.registro_elettronico/multi-account');
+      MethodChannel('com.lnlenost.registroelettronico/multi-account');
 
   String? dbName = '';
   String profiles = '';

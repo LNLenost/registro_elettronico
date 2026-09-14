@@ -141,7 +141,7 @@ class SRUpdateManager {
     final color = sharedPreferences!.getInt(PrefsConstants.themeColor) ??
         Colors.red.value;
     await const MethodChannel(
-      'com.riccardocalligaro.registro_elettronico/multi-account',
+      'com.lnlenost.registroelettronico/multi-account',
     ).invokeMethod<void>('updateWidgets', {
       'agenda': upcoming.isEmpty
           ? 'Nessun compito in agenda'

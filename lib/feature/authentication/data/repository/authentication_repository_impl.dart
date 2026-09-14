@@ -25,7 +25,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   static const platform =
-      MethodChannel('com.riccardocalligaro.registro_elettronico/multi-account');
+      MethodChannel('com.lnlenost.registroelettronico/multi-account');
 
   final AuthenticationRemoteDatasource? authenticationRemoteDatasource;
   final ProfilesLocalDatasource? profilesLocalDatasource;

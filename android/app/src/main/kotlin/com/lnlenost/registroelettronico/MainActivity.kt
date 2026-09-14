@@ -1,4 +1,4 @@
-package com.riccardocalligaro.registro_elettronico
+package com.lnlenost.registroelettronico
 
 import android.content.ComponentName
 import android.content.Context
@@ -10,7 +10,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
-    private val CHANNEL = "com.riccardocalligaro.registro_elettronico/multi-account"
+    private val CHANNEL = "com.lnlenost.registroelettronico/multi-account"
     private var widgetChannel: MethodChannel? = null
 
     override fun onNewIntent(intent: Intent) {

@@ -1,4 +1,4 @@
-package com.riccardocalligaro.registro_elettronico
+package com.lnlenost.registroelettronico
 
 class TimetableWidgetProvider : BaseRegistroWidgetProvider() {
     override val layout = R.layout.widget_timetable

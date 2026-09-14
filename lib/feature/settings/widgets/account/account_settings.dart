@@ -69,7 +69,7 @@ class ResetDialog extends StatelessWidget {
             await sharedPreferences.clear();
 
             const platform = MethodChannel(
-                'com.riccardocalligaro.registro_elettronico/multi-account');
+                'com.lnlenost.registroelettronico/multi-account');
             return platform.invokeMethod('restartApp');
 
             // ignore: unawaited_futures

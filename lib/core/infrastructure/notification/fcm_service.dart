@@ -24,7 +24,7 @@ class PushNotificationService {
       );
     } else if (Platform.isAndroid) {
       await const MethodChannel(
-        'com.riccardocalligaro.registro_elettronico/multi-account',
+        'com.lnlenost.registroelettronico/multi-account',
       ).invokeMethod<void>('requestNotificationPermission');
     }
   }

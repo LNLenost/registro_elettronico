@@ -1,4 +1,4 @@
-package com.riccardocalligaro.registro_elettronico
+package com.lnlenost.registroelettronico
 
 class GradesWidgetProvider : BaseRegistroWidgetProvider() {
     override val layout = R.layout.widget_grades

@@ -53,7 +53,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
   Future<void> _openWidgetRoute() async {
     if (!Platform.isAndroid) return;
     const channel = MethodChannel(
-      'com.riccardocalligaro.registro_elettronico/multi-account',
+      'com.lnlenost.registroelettronico/multi-account',
     );
     channel.setMethodCallHandler((call) async {
       if (call.method == 'openWidgetRoute') {
