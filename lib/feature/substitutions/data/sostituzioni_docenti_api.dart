@@ -65,8 +65,9 @@ List<Map<String, String>> parseSubstitutionRows(String page) {
       .toList();
 }
 
-String _text(dynamic element) => html
-    .parseFragment(element.innerHtml.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), ' '))
-    .text
-    .replaceAll(RegExp(r'\s+'), ' ')
-    .trim();
+String _text(dynamic element) {
+  final text = html.parseFragment(
+    element.innerHtml.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), ' '),
+  ).text ?? '';
+  return text.replaceAll(RegExp(r'\s+'), ' ').trim();
+}
