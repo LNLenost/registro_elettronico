@@ -58,6 +58,7 @@ jobs:
       - run: flutter test test/myprof_api_test.dart
       - run: flutter test test/background_sync_test.dart
       - run: flutter test test/notice_read_status_test.dart
+      - run: flutter test test/sostituzioni_docenti_api_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}

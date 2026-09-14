@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
-import 'package:registro_elettronico/feature/substitutions/data/myprof_api.dart';
+import 'package:registro_elettronico/feature/substitutions/data/sostituzioni_docenti_api.dart';
 
-/// Native, read-only MyProf substitutions view.
+/// Native, read-only substitutions view backed by the teacher room.
 class SubstitutionsResultsPage extends StatefulWidget {
   final String schoolCode;
 
@@ -17,63 +17,29 @@ class SubstitutionsResultsPage extends StatefulWidget {
 }
 
 class _SubstitutionsResultsPageState extends State<SubstitutionsResultsPage> {
-  final MyProfApi _api = MyProfApi();
-  final DateTime _date = DateTime.now();
-  List<Map<String, dynamic>> _classes = const [];
-  List<Map<String, dynamic>> _substitutions = const [];
-  int? _classId;
-  int? _hour;
+  final SostituzioniDocentiApi _api = SostituzioniDocentiApi();
+  List<Map<String, String>> _substitutions = const [];
   bool _loading = true;
-  bool _loadingSubstitutions = false;
   String? _errorKey;
 
   @override
   void initState() {
     super.initState();
-    _loadClasses();
+    _loadSubstitutions();
   }
 
-  Future<void> _loadClasses() async {
+  Future<void> _loadSubstitutions() async {
     setState(() {
       _loading = true;
       _errorKey = null;
-      _classId = null;
-      _hour = null;
-      _substitutions = const [];
     });
     try {
-      final school = await _api.initSchool(widget.schoolCode);
-      if (school.expired || school.apiBase == null) {
-        if (mounted) setState(() => _errorKey = 'substitutions_expired_code');
-        return;
-      }
-      final classes = await _api.classesForDay(_date.weekday);
-      if (mounted) setState(() => _classes = classes);
-    } catch (_) {
-      if (mounted) setState(() => _errorKey = 'substitutions_unreachable');
-    } finally {
-      if (mounted) setState(() => _loading = false);
-    }
-  }
-
-  Future<void> _loadSubstitutions(int classId, int hour) async {
-    setState(() {
-      _classId = classId;
-      _hour = hour;
-      _loadingSubstitutions = true;
-      _substitutions = const [];
-    });
-    try {
-      final substitutions = await _api.substitutionsForHour(
-        id: classId,
-        date: _date,
-        hour: hour,
-      );
+      final substitutions = await _api.fetchToday(widget.schoolCode);
       if (mounted) setState(() => _substitutions = substitutions);
     } catch (_) {
       if (mounted) setState(() => _errorKey = 'substitutions_unreachable');
     } finally {
-      if (mounted) setState(() => _loadingSubstitutions = false);
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -86,7 +52,7 @@ class _SubstitutionsResultsPageState extends State<SubstitutionsResultsPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: _loading ? null : _loadClasses,
+            onPressed: _loading ? null : _loadSubstitutions,
             tooltip: trans.translate('substitutions_refresh'),
           ),
         ],
@@ -96,90 +62,26 @@ class _SubstitutionsResultsPageState extends State<SubstitutionsResultsPage> {
           : _errorKey != null
               ? _Message(
                   text: trans.translate(_errorKey!)!,
-                  action: _loadClasses,
+                  action: _loadSubstitutions,
                   actionLabel: trans.translate('substitutions_retry')!,
                 )
-              : ListView(
-                  padding: const EdgeInsets.all(16),
-                  children: [
-                    Text(
-                      trans.translate('substitutions_today_classes')!,
-                      style: Theme.of(context).textTheme.headline6,
+              : _substitutions.isEmpty
+                  ? _Message(
+                      text: trans.translate('substitutions_no_results')!,
+                    )
+                  : ListView(
+                      padding: const EdgeInsets.all(16),
+                      children: _substitutions.map(_recordCard).toList(),
                     ),
-                    const SizedBox(height: 8),
-                    if (_classes.isEmpty)
-                      _Message(text: trans.translate('substitutions_no_classes')!)
-                    else
-                      ..._classes.map((record) => _classTile(context, record)),
-                    if (_classId != null) ...[
-                      const SizedBox(height: 20),
-                      Text(
-                        trans.translate('substitutions_select_hour')!,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: List.generate(
-                          10,
-                          (index) {
-                            final hour = index + 1;
-                            return ChoiceChip(
-                              label: Text('$hour'),
-                              selected: _hour == hour,
-                              onSelected: (_) =>
-                                  _loadSubstitutions(_classId!, hour),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                    if (_hour != null) ...[
-                      const SizedBox(height: 20),
-                      if (_loadingSubstitutions)
-                        const Center(child: CircularProgressIndicator())
-                      else if (_substitutions.isEmpty)
-                        _Message(
-                          text: trans.translate('substitutions_no_results')!,
-                        )
-                      else
-                        ..._substitutions.map(_recordCard),
-                    ],
-                  ],
-                ),
     );
   }
 
-  Widget _classTile(BuildContext context, Map<String, dynamic> record) {
-    final trans = AppLocalizations.of(context)!;
-    final id = MyProfApi.idFromRecord(record);
-    return Card(
-      child: ListTile(
-        title: Text(_recordSummary(record)),
-        subtitle: id == null
-            ? Text(trans.translate('substitutions_missing_class_id')!)
-            : null,
-        trailing: const Icon(Icons.chevron_right),
-        enabled: id != null,
-        onTap: id == null
-            ? null
-            : () => setState(() {
-                  _classId = id;
-                  _hour = null;
-                  _substitutions = const [];
-                }),
-      ),
-    );
-  }
-
-  Widget _recordCard(Map<String, dynamic> record) => Card(
+  Widget _recordCard(Map<String, String> record) => Card(
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: record.entries
-                .where((entry) => entry.value != null && entry.value != '')
                 .map(
                   (entry) => Padding(
                     padding: const EdgeInsets.only(bottom: 4),
@@ -190,16 +92,6 @@ class _SubstitutionsResultsPageState extends State<SubstitutionsResultsPage> {
           ),
         ),
       );
-
-  String _recordSummary(Map<String, dynamic> record) {
-    final values = record.entries
-        .where((entry) => entry.key != 'id' && entry.value != null)
-        .map((entry) => entry.value.toString())
-        .where((value) => value.isNotEmpty)
-        .take(3)
-        .toList();
-    return values.isEmpty ? '—' : values.join(' · ');
-  }
 }
 
 class _Message extends StatelessWidget {
