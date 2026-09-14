@@ -15,6 +15,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'core/data/remote/api/sr_dio_client.dart';
 import 'core/infrastructure/log/logger_bloc.dart';
+import 'core/infrastructure/notification/background_sync.dart';
 import 'core/infrastructure/notification/fcm_service.dart';
 import 'core/infrastructure/routes.dart';
 
@@ -24,6 +25,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
+  await BackgroundSync.initialize();
 
   // Dependency injection
   await CoreContainer.init();

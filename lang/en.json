@@ -11,6 +11,8 @@
   "about_title": "About",
   "absence": "Absence",
   "absences": "Absences",
+  "background_sync": "Automatic sync",
+  "background_sync_subtitle": "Check for new content in the background",
   "absent_all_day": "Absent all day",
   "account": "Account",
   "add": "Add",

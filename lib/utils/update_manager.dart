@@ -112,6 +112,19 @@ class SRUpdateManager {
     await updateNextEventWidget();
   }
 
+  Future<bool> syncNotificationContent() async {
+    await Future.wait([
+      gradesRepository!.updateGrades(ifNeeded: false),
+      noticesRepository!.updateNotices(ifNeeded: false),
+      notesRepository!.updateNotes(),
+      didacticsRepository!.updateMaterials(ifNeeded: false),
+      absencesRepository!.updateAbsences(),
+      documentsRepository!.updateDocuments(),
+    ]);
+    await _notifyNewContent();
+    return true;
+  }
+
   Future<void> updateNextEventWidget() async {
     if (!Platform.isAndroid) return;
     final database = sl<SRDatabase>();

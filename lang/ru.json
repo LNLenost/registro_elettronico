@@ -11,6 +11,8 @@
   "about_title": "О нас",
   "absence": "Отсутствие",
   "absences": "Отсутствия",
+  "background_sync": "Автоматическая синхронизация",
+  "background_sync_subtitle": "Проверять новые данные в фоне",
   "absent_all_day": "Отсутствует весь день",
   "account": "Аккаунт",
   "add": "Добавить",

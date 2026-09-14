@@ -20,6 +20,7 @@ class LocalContentNotificationService {
     await _notifyNotices();
     await _notifyNotes();
     await _notifyAbsences();
+    await _notifyDidactics();
     await _notifyReports();
   }
 
@@ -56,6 +57,15 @@ class LocalContentNotificationService {
       'absences',
       items.map((item) => item.evtId),
       'Nuova assenza',
+    );
+  }
+
+  Future<void> _notifyDidactics() async {
+    final items = await database.didacticsLocalDatasource.getAllContents();
+    await _notifyIds(
+      'didactics',
+      items.map((item) => item.id),
+      'Nuovo compito o materiale',
     );
   }
 
@@ -103,6 +113,8 @@ class LocalContentNotificationService {
         return preferences.getBool(PrefsConstants.notesNotifications) ?? true;
       case 'absences':
         return preferences.getBool(PrefsConstants.absencesNotifications) ?? true;
+      case 'didactics':
+        return preferences.getBool(PrefsConstants.didacticsNotifications) ?? true;
       case 'reports':
         return true;
     }

@@ -7,8 +7,9 @@ class NotificationPreferences {
   static const notices = 'notices';
   static const notes = 'notes';
   static const absences = 'absences';
+  static const didactics = 'didactics';
 
-  static const categories = <String>[grades, notices, notes, absences];
+  static const categories = <String>[grades, notices, notes, absences, didactics];
 
   static String? categoryFromMessage(Map<String, dynamic> data) {
     final category = data['category'];
@@ -25,6 +26,8 @@ class NotificationPreferences {
         return prefs.getBool(PrefsConstants.notesNotifications) ?? true;
       case absences:
         return prefs.getBool(PrefsConstants.absencesNotifications) ?? true;
+      case didactics:
+        return prefs.getBool(PrefsConstants.didacticsNotifications) ?? true;
     }
     return false;
   }

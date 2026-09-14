@@ -55,4 +55,6 @@ class PrefsConstants {
   static const String noticesNotifications = 'noticesNotifications';
   static const String notesNotifications = 'notesNotifications';
   static const String absencesNotifications = 'absencesNotifications';
+  static const String didacticsNotifications = 'didacticsNotifications';
+  static const String backgroundSyncMinutes = 'backgroundSyncMinutes';
 }

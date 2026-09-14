@@ -31,6 +31,9 @@ class DidacticsLocalDatasource extends DatabaseAccessor<SRDatabase>
   Stream<List<DidacticsDownloadedFileLocalModel>> watchAllDownloadedFiles() =>
       select(didacticsDownloadedFiles).watch();
 
+  Future<List<ContentLocalModel>> getAllContents() =>
+      select(didacticsContents).get();
+
   Future<List<DidacticsDownloadedFileLocalModel>> getAllDownloadedFiles() =>
       select(didacticsDownloadedFiles).get();
 

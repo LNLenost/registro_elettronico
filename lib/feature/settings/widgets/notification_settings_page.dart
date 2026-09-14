@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
+import 'package:registro_elettronico/core/infrastructure/notification/background_sync.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +46,34 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           _tile(trans.translate('notice_board')!, PrefsConstants.noticesNotifications),
           _tile(trans.translate('notes')!, PrefsConstants.notesNotifications),
           _tile(trans.translate('absences')!, PrefsConstants.absencesNotifications),
+          _tile(trans.translate('school_material')!, PrefsConstants.didacticsNotifications),
+          const Divider(),
+          _backgroundSyncTile(trans),
         ],
+      ),
+    );
+  }
+
+  Widget _backgroundSyncTile(AppLocalizations trans) {
+    final selected = BackgroundSync.normalizeInterval(
+      _prefs!.getInt(PrefsConstants.backgroundSyncMinutes),
+    );
+    return ListTile(
+      title: Text(trans.translate('background_sync')!),
+      subtitle: Text(trans.translate('background_sync_subtitle')!),
+      trailing: DropdownButton<int>(
+        value: selected,
+        onChanged: (minutes) async {
+          if (minutes == null) return;
+          await BackgroundSync.schedule(minutes);
+          if (mounted) setState(() {});
+        },
+        items: BackgroundSync.availableIntervals
+            .map((minutes) => DropdownMenuItem(
+                  value: minutes,
+                  child: Text('${minutes}m'),
+                ))
+            .toList(),
       ),
     );
   }

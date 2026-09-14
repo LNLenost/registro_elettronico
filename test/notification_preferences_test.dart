@@ -7,6 +7,10 @@ void main() {
       NotificationPreferences.categoryFromMessage({'category': 'grades'}),
       equals(NotificationPreferences.grades),
     );
+    expect(
+      NotificationPreferences.categoryFromMessage({'category': 'didactics'}),
+      equals(NotificationPreferences.didactics),
+    );
     expect(NotificationPreferences.categoryFromMessage({}), isNull);
     expect(
       NotificationPreferences.categoryFromMessage({'category': 'unknown'}),
