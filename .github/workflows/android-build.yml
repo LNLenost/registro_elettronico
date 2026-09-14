@@ -39,6 +39,13 @@ jobs:
                 source,
             )
             assert count == 1, path
+            if plugin == 'workmanager':
+              updated, count = re.subn(
+                  r'(def work_version\s*=\s*["\'])2\.4\.0(["\'])',
+                  r'\g<1>2.7.1\2',
+                  updated,
+              )
+              assert count == 1, path
             path.write_text(updated)
           PY
       - run: flutter test test/noticeboard_filter_test.dart
