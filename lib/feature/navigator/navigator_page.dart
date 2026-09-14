@@ -38,12 +38,16 @@ class _NavigatorPageState extends State<NavigatorPage> {
   @override
   void initState() {
     srUpdateManager = sl();
-    unawaited(srUpdateManager!.checkForUpdates());
-    unawaited(BackgroundSync.schedule());
+    unawaited(_initialUpdate());
     _pages = _buildPages();
     _loadNavigationConfig();
     unawaited(_openWidgetRoute());
     super.initState();
+  }
+
+  Future<void> _initialUpdate() async {
+    await srUpdateManager!.checkForUpdates();
+    await BackgroundSync.schedule();
   }
 
   Future<void> _openWidgetRoute() async {
