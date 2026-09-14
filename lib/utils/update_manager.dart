@@ -108,12 +108,7 @@ class SRUpdateManager {
       await noticesRepository!.updateNotices(ifNeeded: false);
     }
 
-    final notificationService = LocalContentNotificationService(
-      database: sl(),
-      preferences: sharedPreferences!,
-      notifications: LocalNotification((payload) async {}),
-    );
-    await notificationService.notifyNewContent();
+    await _notifyNewContent();
     await updateNextEventWidget();
   }
 
@@ -155,7 +150,7 @@ class SRUpdateManager {
     final update3 = await lessonsRepository!.updateAllLessons(ifNeeded: false);
     final updates = [update1, update2, update3];
 
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
   }
 
   Future<void> updateHomeData(BuildContext context) async {
@@ -166,20 +161,20 @@ class SRUpdateManager {
 
     final updates = [update1, update2, update3];
 
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
     await updateNextEventWidget();
   }
 
   Future<void> updateDidacticsData(BuildContext context) async {
     final update1 = await didacticsRepository!.updateMaterials(ifNeeded: false);
     final updates = [update1];
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
   }
 
   Future<void> updateNoticeboardData(BuildContext context) async {
     final update1 = await noticesRepository!.updateNotices(ifNeeded: false);
     final updates = [update1];
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
   }
 
   Future<void> updateAgendaData(BuildContext context) async {
@@ -187,7 +182,7 @@ class SRUpdateManager {
     final update2 = await lessonsRepository!.updateAllLessons(ifNeeded: false);
 
     final updates = [update1, update2];
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
     await updateNextEventWidget();
   }
 
@@ -196,7 +191,7 @@ class SRUpdateManager {
     final update2 = await lessonsRepository!.updateAllLessons(ifNeeded: false);
 
     final updates = [update1, update2];
-    _updateMultipleData(context: context, updates: updates);
+    await _updateMultipleData(context: context, updates: updates);
   }
 
   Future<void> updateGradesData({
@@ -213,19 +208,19 @@ class SRUpdateManager {
 
       final updates = [update1, update2, update3];
 
-      _updateMultipleData(context: context, updates: updates);
+      await _updateMultipleData(context: context, updates: updates);
     } else {
       final update1 = await gradesRepository!.updateGrades(ifNeeded: false);
       final updates = [update1];
 
-      _updateMultipleData(context: context, updates: updates);
+      await _updateMultipleData(context: context, updates: updates);
     }
   }
 
-  void _updateMultipleData({
+  Future<void> _updateMultipleData({
     required List<Either<Failure, Success>> updates,
     required BuildContext context,
-  }) {
+  }) async {
     for (final update in updates) {
       if (update.isLeft()) {
         final message = update.fold(
@@ -234,9 +229,18 @@ class SRUpdateManager {
         );
 
         _showErrorSnackbar(context, message);
-        break;
+        return;
       }
     }
+    await _notifyNewContent();
+  }
+
+  Future<void> _notifyNewContent() {
+    return LocalContentNotificationService(
+      database: sl(),
+      preferences: sharedPreferences!,
+      notifications: LocalNotification((payload) async {}),
+    ).notifyNewContent();
   }
 
   void _showErrorSnackbar(BuildContext context, String? failure) {
