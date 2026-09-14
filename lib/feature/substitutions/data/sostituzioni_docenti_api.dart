@@ -57,7 +57,7 @@ List<Map<String, String>> parseSubstitutionRows(String page) {
         final record = <String, String>{};
         for (var index = 0; index < _headers.length; index++) {
           final value = cells[index];
-          if (value.isNotEmpty && value != '-') record[_headers[index]] = value;
+          if (value.isNotEmpty) record[_headers[index]] = value;
         }
         return record;
       })
@@ -65,5 +65,8 @@ List<Map<String, String>> parseSubstitutionRows(String page) {
       .toList();
 }
 
-String _text(dynamic element) =>
-    element.text.replaceAll(RegExp(r'\s+'), ' ').trim();
+String _text(dynamic element) => html
+    .parseFragment(element.innerHtml.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), ' '))
+    .text
+    .replaceAll(RegExp(r'\s+'), ' ')
+    .trim();
