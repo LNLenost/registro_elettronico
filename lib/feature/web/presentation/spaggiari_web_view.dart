@@ -9,12 +9,14 @@ class SpaggiariWebView extends StatefulWidget {
   final String url;
   final String? appBarTitle;
   final String? email;
+  final bool autofillCredentials;
 
   const SpaggiariWebView({
     Key? key,
     required this.url,
     required this.appBarTitle,
     this.email,
+    this.autofillCredentials = true,
   }) : super(key: key);
 
   @override
@@ -73,6 +75,7 @@ class _SpaggiariWebViewState extends State<SpaggiariWebView> {
           return NavigationDecision.navigate;
         },
         onPageFinished: (String url) async {
+          if (!widget.autofillCredentials) return;
 
           final AuthenticationRepository authenticationRepository = sl();
           final userInfo = await authenticationRepository.getCredentials();

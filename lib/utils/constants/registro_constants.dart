@@ -31,6 +31,8 @@ abstract class RegistroConstants {
       'https://github.com/LNLenost/registro_elettronico/issues';
   static const CLASSEVIVA_WEB_LOGIN =
       'https://web.spaggiari.eu/home/app/default/login.php?index.php';
+  static const CLASSEVIVA_HOMEWORK =
+      'https://web.spaggiari.eu/fml/app/default/regdidattica_studenti_compito.php';
   static const WEBSITE =
       'https://riccardocalligaro.github.io/registroelettronico-website/';
 }

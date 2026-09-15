@@ -59,6 +59,22 @@ class MorePage extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.assignment),
+            title: Text(AppLocalizations.of(context)!.translate('homework')!),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SpaggiariWebView(
+                    appBarTitle:
+                        AppLocalizations.of(context)!.translate('homework'),
+                    url: RegistroConstants.CLASSEVIVA_HOMEWORK,
+                    autofillCredentials: false,
+                  ),
+                ),
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.assessment),
             title: Text(
               AppLocalizations.of(context)!.translate('absences')!,
