@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:registro_elettronico/feature/homework/data/homework_filters.dart';
 import 'package:registro_elettronico/feature/homework/data/homework_remote_datasource.dart';
 
-const _today = DateTime(2026, 9, 15);
+final _today = DateTime(2026, 9, 15);
 
 Homework _homework(String id, String deadline) => Homework(
       id: id,
