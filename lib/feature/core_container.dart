@@ -87,6 +87,7 @@ class CoreContainer {
         webDio: _sl.get<Dio>(instanceName: 'WebSpaggiariDio'),
         webSpaggiariClient: _sl(),
         authenticationRepository: _sl(),
+        preferences: _sl(),
       ),
     );
 

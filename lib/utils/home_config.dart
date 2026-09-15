@@ -7,8 +7,9 @@ class HomeConfig {
   static const grades = 'grades';
   static const lessons = 'lessons';
   static const agenda = 'agenda';
+  static const homework = 'homework';
 
-  static const items = <String>[actions, grades, lessons, agenda];
+  static const items = <String>[actions, grades, lessons, agenda, homework];
   static final ValueNotifier<int> changes = ValueNotifier<int>(0);
 
   static List<String> normalizeOrder(Iterable<String>? stored) {

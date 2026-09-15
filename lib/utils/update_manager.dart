@@ -17,6 +17,7 @@ import 'package:registro_elettronico/feature/agenda/domain/repository/agenda_rep
 import 'package:registro_elettronico/feature/didactics/domain/repository/didactics_repository.dart';
 import 'package:registro_elettronico/feature/grades/domain/model/grades_section.dart';
 import 'package:registro_elettronico/feature/grades/domain/repository/grades_repository.dart';
+import 'package:registro_elettronico/feature/homework/data/homework_remote_datasource.dart';
 import 'package:registro_elettronico/feature/lessons/domain/repository/lessons_repository.dart';
 import 'package:registro_elettronico/feature/notes/domain/repository/notes_repository.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/repository/noticeboard_repository.dart';
@@ -108,6 +109,7 @@ class SRUpdateManager {
       await noticesRepository!.updateNotices(ifNeeded: false);
     }
 
+    await _syncHomeworks(notify: true);
     await _notifyNewContent();
     await updateNextEventWidget();
   }
@@ -121,6 +123,7 @@ class SRUpdateManager {
       absencesRepository!.updateAbsences(),
       documentsRepository!.updateDocuments(),
     ]);
+    await _syncHomeworks(notify: true);
     await _notifyNewContent();
     return true;
   }
@@ -175,6 +178,7 @@ class SRUpdateManager {
     final updates = [update1, update2, update3];
 
     await _updateMultipleData(context: context, updates: updates);
+    await _syncHomeworks(notify: false);
     await updateNextEventWidget();
   }
 
@@ -254,6 +258,23 @@ class SRUpdateManager {
       preferences: sharedPreferences!,
       notifications: LocalNotification((payload) async {}),
     ).notifyNewContent();
+  }
+
+  Future<void> _syncHomeworks({required bool notify}) async {
+    try {
+      final datasource = sl<HomeworkRemoteDatasource>();
+      final previous = datasource.getCachedHomeworks();
+      final current = await datasource.refresh();
+      if (!notify || previous.isEmpty ||
+          !(sharedPreferences!.getBool(PrefsConstants.didacticsNotifications) ?? true)) return;
+      final ids = previous.map((item) => item.id).toSet();
+      for (final item in current.where((item) => !ids.contains(item.id))) {
+        await LocalNotification((_) async {}).showNotificationWithDefaultSound(
+          item.id.hashCode, 'Nuovo compito', 'Nuovo contenuto disponibile');
+      }
+    } catch (_) {
+      // ponytail: homework must not block the existing school-data sync.
+    }
   }
 
   void _showErrorSnackbar(BuildContext context, String? failure) {

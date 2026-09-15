@@ -53,6 +53,7 @@ class _HomeSettingsPageState extends State<HomeSettingsPage> {
       HomeConfig.grades: trans.translate('last_grades'),
       HomeConfig.lessons: trans.translate('last_lessons'),
       HomeConfig.agenda: trans.translate('next_events'),
+      HomeConfig.homework: trans.translate('homework'),
     }[id]!;
   }
 
@@ -62,6 +63,7 @@ class _HomeSettingsPageState extends State<HomeSettingsPage> {
       HomeConfig.grades: Icons.assessment,
       HomeConfig.lessons: Icons.book,
       HomeConfig.agenda: Icons.today,
+      HomeConfig.homework: Icons.assignment,
     }[id]!;
   }
 

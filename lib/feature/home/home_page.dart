@@ -6,6 +6,7 @@ import 'package:registro_elettronico/core/infrastructure/localizations/app_local
 import 'package:registro_elettronico/feature/home/sections/events/home_events.dart';
 import 'package:registro_elettronico/feature/home/sections/grades/home_grades.dart';
 import 'package:registro_elettronico/feature/home/sections/header/home_header.dart';
+import 'package:registro_elettronico/feature/home/sections/home_homework.dart';
 import 'package:registro_elettronico/feature/home/sections/lessons/home_lessons.dart';
 import 'package:registro_elettronico/feature/substitutions/substitutions_page.dart';
 import 'package:registro_elettronico/feature/timetable/presentation/timetable_page.dart';
@@ -91,6 +92,8 @@ class _HomePageState extends State<HomePage> {
         return Column(
           children: [HomeAgendaHeader(), HomeEvents()],
         );
+      case HomeConfig.homework:
+        return const HomeHomework();
     }
     return const SizedBox.shrink();
   }
