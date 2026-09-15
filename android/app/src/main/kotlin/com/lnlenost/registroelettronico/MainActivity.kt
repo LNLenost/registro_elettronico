@@ -35,12 +35,17 @@ class MainActivity: FlutterActivity() {
                 }
                 result.success(null)
             } else if (call.method == "updateWidgets") {
+                val agenda = call.argument<String>("agenda")
+                val grades = call.argument<String>("grades")
+                val timetable = call.argument<String>("timetable")
+                val color = call.argument<Number>("color")?.toInt() ?: android.graphics.Color.RED
                 val editor = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE).edit()
-                editor.putString("flutter.widget_agenda", call.argument<String>("agenda"))
-                editor.putString("flutter.widget_grades", call.argument<String>("grades"))
-                editor.putString("flutter.widget_timetable", call.argument<String>("timetable"))
-                editor.putInt("flutter.themeColor", call.argument<Number>("color")?.toInt() ?: android.graphics.Color.RED)
+                editor.putString("flutter.widget_agenda", agenda)
+                editor.putString("flutter.widget_grades", grades)
+                editor.putString("flutter.widget_timetable", timetable)
+                editor.putInt("flutter.themeColor", color)
                 editor.apply()
+                WearSync.publish(this, agenda, grades, timetable, color)
                 AgendaWidgetProvider().updateAll(this)
                 GradesWidgetProvider().updateAll(this)
                 TimetableWidgetProvider().updateAll(this)
