@@ -1,0 +1,38 @@
+name: Web build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "webapp/**"
+      - "functions/**"
+      - "firebase.json"
+      - ".firebaserc"
+      - ".github/workflows/web-build.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            webapp/package-lock.json
+            functions/package-lock.json
+      - name: Build frontend
+        working-directory: webapp
+        run: |
+          npm ci
+          npm audit --omit=dev --audit-level=high
+          npm run build
+      - name: Build Functions
+        working-directory: functions
+        run: |
+          npm ci
+          npm audit --omit=dev --audit-level=high
+          npm run lint
+          npm run build

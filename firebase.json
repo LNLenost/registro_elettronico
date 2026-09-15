@@ -1,0 +1,4 @@
+{
+  "functions": [{ "source": "functions", "codebase": "default" }],
+  "hosting": { "public": "webapp/dist", "ignore": ["firebase.json", "**/.*", "**/node_modules/**"], "rewrites": [{ "source": "/api/**", "function": "classevivaApi" }] }
+}
