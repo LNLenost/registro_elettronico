@@ -5,7 +5,7 @@ void main() {
   test('normalizes order and always keeps every known item once', () {
     expect(
       NavigationConfig.normalizeOrder(const ['grades', 'grades', 'unknown']),
-      equals(const ['grades', 'home', 'agenda', 'noticeboard', 'more']),
+      equals(const ['grades', 'home', 'agenda', 'noticeboard', 'didactics', 'more']),
     );
   });
 
@@ -15,7 +15,7 @@ void main() {
         const ['home', 'grades', 'agenda', 'noticeboard', 'more'],
         const ['home', 'grades', 'agenda', 'noticeboard', 'more'],
       ),
-      equals(const ['home', 'grades', 'agenda', 'noticeboard']),
+      equals(const ['home', 'grades', 'agenda', 'noticeboard', 'more']),
     );
   });
 
@@ -25,7 +25,7 @@ void main() {
         const ['noticeboard', 'home', 'grades', 'agenda', 'more'],
         const ['grades', 'more'],
       ),
-      equals(const ['noticeboard', 'home', 'agenda']),
+      equals(const ['noticeboard', 'home', 'agenda', 'didactics']),
     );
   });
 }
