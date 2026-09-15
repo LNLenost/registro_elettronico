@@ -13,6 +13,7 @@ import 'package:registro_elettronico/core/infrastructure/notification/fcm_servic
 import 'package:registro_elettronico/feature/absences/absences_container.dart';
 import 'package:registro_elettronico/feature/agenda/agenda_container.dart';
 import 'package:registro_elettronico/feature/authentication/authentication_container.dart';
+import 'package:registro_elettronico/feature/homework/data/homework_remote_datasource.dart';
 import 'package:registro_elettronico/feature/lessons/lessons_container.dart';
 import 'package:registro_elettronico/feature/noticeboard/noticeboard_container.dart';
 import 'package:registro_elettronico/feature/periods/periods_container.dart';
@@ -81,6 +82,13 @@ class CoreContainer {
     await GradesContainer.init();
     await AbsencesContainer.init();
     await DidacticsContainer.init();
+    _sl.registerLazySingleton(
+      () => HomeworkRemoteDatasource(
+        webDio: _sl.get<Dio>(instanceName: 'WebSpaggiariDio'),
+        webSpaggiariClient: _sl(),
+        authenticationRepository: _sl(),
+      ),
+    );
 
     sl.registerLazySingleton(() => NoteDao(sl()));
     sl.registerLazySingleton(() => DocumentsDao(sl()));

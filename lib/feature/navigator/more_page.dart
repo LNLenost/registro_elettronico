@@ -6,6 +6,7 @@ import 'package:registro_elettronico/core/infrastructure/navigator.dart';
 import 'package:registro_elettronico/feature/authentication/domain/repository/authentication_repository.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/change_account_dialog.dart';
 import 'package:registro_elettronico/feature/debug/presentation/debug_page.dart';
+import 'package:registro_elettronico/feature/homework/presentation/homework_page.dart';
 import 'package:registro_elettronico/feature/settings/widgets/header_text.dart';
 import 'package:registro_elettronico/feature/substitutions/substitutions_page.dart';
 import 'package:registro_elettronico/feature/web/presentation/spaggiari_web_view.dart';
@@ -56,6 +57,15 @@ class MorePage extends StatelessWidget {
             ),
             onTap: () {
               AppNavigator.instance!.navToSchoolMaterial(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.assignment),
+            title: Text(AppLocalizations.of(context)!.translate('homework')!),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => HomeworkPage()),
+              );
             },
           ),
           ListTile(
