@@ -3,7 +3,6 @@ class NavigationConfig {
   static const grades = 'grades';
   static const agenda = 'agenda';
   static const noticeboard = 'noticeboard';
-  static const didactics = 'didactics';
   static const more = 'more';
 
   static const defaultOrder = <String>[
@@ -11,7 +10,6 @@ class NavigationConfig {
     grades,
     agenda,
     noticeboard,
-    didactics,
     more,
   ];
 

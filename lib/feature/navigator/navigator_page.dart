@@ -8,7 +8,6 @@ import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/background_sync.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/agenda_page.dart';
-import 'package:registro_elettronico/feature/didactics/presentation/didactics_page.dart';
 import 'package:registro_elettronico/feature/grades/presentation/grades_page.dart';
 import 'package:registro_elettronico/feature/home/home_page.dart';
 import 'package:registro_elettronico/feature/navigator/more_page.dart';
@@ -81,7 +80,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
       GradesPage(),
       AgendaPage(),
       NoticeboardPage(),
-      DidacticsPage(),
       MorePage(onNavigationChanged: _loadNavigationConfig),
     ];
   }
@@ -148,7 +146,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
       NavigationConfig.grades: trans.translate('grades'),
       NavigationConfig.agenda: trans.translate('agenda'),
       NavigationConfig.noticeboard: trans.translate('notice_board'),
-      NavigationConfig.didactics: trans.translate('school_material'),
       NavigationConfig.more: trans.translate('more_page'),
     };
     final icons = {
@@ -156,7 +153,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
       NavigationConfig.grades: Icons.class_,
       NavigationConfig.agenda: Icons.today,
       NavigationConfig.noticeboard: Icons.email,
-      NavigationConfig.didactics: Icons.folder,
       NavigationConfig.more: Icons.more_horiz,
     };
     return BottomNavigationBarItem(
@@ -173,8 +169,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
     } else if (page == NavigationConfig.grades &&
         gradesRefresherKey.currentState != null) {
       gradesRefresherKey.currentState!.show();
-    } else if (page == NavigationConfig.didactics) {
-      srUpdateManager!.updateDidacticsData(context);
     } else if (page == NavigationConfig.noticeboard &&
         noticeboardRefresherKey.currentState != null) {
       noticeboardRefresherKey.currentState!.show();
