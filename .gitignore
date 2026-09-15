@@ -35,10 +35,6 @@
 /build/
 
 # Web related
-webapp/node_modules/
-webapp/dist/
-functions/node_modules/
-functions/lib/
 lib/generated_plugin_registrant.dart
 
 # Symbolication related
