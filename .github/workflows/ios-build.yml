@@ -42,5 +42,5 @@ jobs:
       - run: flutter build ios --release --no-codesign
       - uses: actions/upload-artifact@v4
         with:
-          name: registro-elettronico-ios-unsigned
-          path: build/ios/iphoneos/Runner.app
+          name: ios-release
+          path: build/ios/iphoneos/app.ipa
