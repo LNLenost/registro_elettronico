@@ -3,6 +3,7 @@ import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 import 'package:registro_elettronico/core/infrastructure/error/handler.dart';
 import 'package:registro_elettronico/core/infrastructure/error/successes.dart';
 import 'package:registro_elettronico/core/infrastructure/generic/resource.dart';
+import 'package:registro_elettronico/feature/lessons/data/datasource/lessons_local_datasource.dart';
 import 'package:registro_elettronico/feature/timetable/data/datasource/timetable_local_datasource.dart';
 import 'package:registro_elettronico/feature/timetable/domain/model/timetable_data_domain_model.dart';
 import 'package:registro_elettronico/feature/timetable/domain/model/timetable_entry_domain_model.dart';
@@ -10,8 +11,12 @@ import 'package:registro_elettronico/feature/timetable/domain/repository/timetab
 
 class TimetableRepositoryImpl implements TimetableRepository {
   final TimetableLocalDatasource timetableLocalDatasource;
+  final LessonsLocalDatasource lessonsLocalDatasource;
 
-  TimetableRepositoryImpl({required this.timetableLocalDatasource});
+  TimetableRepositoryImpl({
+    required this.timetableLocalDatasource,
+    required this.lessonsLocalDatasource,
+  });
 
   @override
   Future<Either<Failure, Success>> insertTimetableEntry({
@@ -77,14 +82,24 @@ class TimetableRepositoryImpl implements TimetableRepository {
 
   @override
   Stream<Resource<TimetableDataDomainModel>> watchTimetableData() {
-    return timetableLocalDatasource.watchAllEntries().map(
-          (entries) => Resource.success(
-            data: TimetableDataDomainModel(
-              entries: entries
-                  .map((entry) => TimetableEntryDomainModel.fromLocalModel(entry))
-                  .toList(),
-            ),
-          ),
-        );
+    return timetableLocalDatasource.watchAllEntries().asyncMap((entries) async {
+      final lessons = await lessonsLocalDatasource.getAllLessons();
+      String? className;
+      for (final lesson in lessons) {
+        final candidate = lesson.classe?.trim();
+        if (candidate != null && candidate.isNotEmpty) {
+          className = candidate;
+          break;
+        }
+      }
+      return Resource.success(
+        data: TimetableDataDomainModel(
+          className: className,
+          entries: entries
+              .map((entry) => TimetableEntryDomainModel.fromLocalModel(entry))
+              .toList(),
+        ),
+      );
+    });
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
@@ -9,6 +11,22 @@ import 'package:registro_elettronico/feature/timetable/domain/repository/timetab
 import 'package:registro_elettronico/feature/timetable/presentation/watcher/timetable_watcher_bloc.dart';
 
 const _weekdays = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+const _subjectColors = [
+  Color(0xffddc87c),
+  Color(0xffcfa287),
+  Color(0xffebd8c4),
+  Color(0xff96b4c0),
+  Color(0xffd8e6ef),
+  Color(0xffc6dee9),
+  Color(0xffd88579),
+  Color(0xfff3f0e4),
+  Color(0xffc5bfa2),
+];
+
+Color timetableColorForSubject(String? subjectName) {
+  final subject = subjectName?.trim().toLowerCase() ?? '';
+  return _subjectColors[subject.hashCode.abs() % _subjectColors.length];
+}
 
 class TimetablePage extends StatefulWidget {
   const TimetablePage({Key? key}) : super(key: key);
@@ -34,7 +52,10 @@ class _TimetablePageState extends State<TimetablePage> {
       body: BlocBuilder<TimetableWatcherBloc, TimetableWatcherState>(
         builder: (context, state) {
           if (state is TimetableWatcherLoadSuccess) {
-            return _WeeklyTimetable(entries: state.timetableData.entries);
+            return _WeeklyTimetable(
+              className: state.timetableData.className,
+              entries: state.timetableData.entries,
+            );
           }
           if (state is TimetableWatcherFailure) {
             return SRFailureView(
@@ -51,136 +72,288 @@ class _TimetablePageState extends State<TimetablePage> {
 }
 
 class _WeeklyTimetable extends StatelessWidget {
+  final String? className;
   final List<TimetableEntryDomainModel> entries;
 
-  const _WeeklyTimetable({required this.entries});
+  const _WeeklyTimetable({required this.className, required this.entries});
 
   @override
   Widget build(BuildContext context) {
+    final validEntries = entries.where((entry) => entry.hasValidTimeRange).toList();
+    final firstHour = validEntries.isEmpty
+        ? 8
+        : validEntries.map((entry) => entry.startHour).reduce(min);
+    final lastHour = validEntries.isEmpty
+        ? 13
+        : max(firstHour + 5, validEntries.map((entry) => entry.endHour).reduce(max));
+    final rowCount = lastHour - firstHour;
+
     return LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Orario settimanale'),
-            const SizedBox(height: 4),
-            Text(
-              'Aggiungi materie e orari manualmente. Non sono associate a date.',
-              style: Theme.of(context).textTheme.bodyText2,
+      builder: (context, constraints) {
+        final dayWidth = ((constraints.maxWidth - 34) / 2)
+            .clamp(128.0, 180.0)
+            .toDouble();
+        const rowHeight = 86.0;
+        final gridHeight = rowCount * rowHeight;
+
+        return SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(12, 24, 12, 12),
+          child: Column(
+            children: [
+              Text(
+                (className?.isNotEmpty == true ? className : 'CLASSE')!
+                    .toUpperCase(),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 12),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Column(
+                  children: [
+                    _WeekHeader(dayWidth: dayWidth),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _PeriodGutter(
+                          firstHour: firstHour,
+                          rowCount: rowCount,
+                          rowHeight: rowHeight,
+                        ),
+                        _ScheduleGrid(
+                          dayWidth: dayWidth,
+                          firstHour: firstHour,
+                          rowCount: rowCount,
+                          rowHeight: rowHeight,
+                          gridHeight: gridHeight,
+                          entries: validEntries,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _WeekHeader extends StatelessWidget {
+  final double dayWidth;
+
+  const _WeekHeader({required this.dayWidth});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(width: 34),
+        for (final day in _weekdays)
+          Container(
+            width: dayWidth,
+            height: 28,
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.black, width: 0.8),
+                right: BorderSide(color: Colors.black, width: 0.8),
+                bottom: BorderSide(color: Colors.black, width: 0.8),
+              ),
             ),
-            const SizedBox(height: 12),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            child: Text(day, style: const TextStyle(fontSize: 11)),
+          ),
+      ],
+    );
+  }
+}
+
+class _PeriodGutter extends StatelessWidget {
+  final int firstHour;
+  final int rowCount;
+  final double rowHeight;
+
+  const _PeriodGutter({
+    required this.firstHour,
+    required this.rowCount,
+    required this.rowHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        rowCount,
+        (index) => Container(
+          width: 34,
+          height: rowHeight,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.black, width: 0.8)),
+          ),
+          child: Text(
+            '${index + 1}\n${_formatHour(firstHour + index)}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 9, height: 1.25),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ScheduleGrid extends StatelessWidget {
+  final double dayWidth;
+  final int firstHour;
+  final int rowCount;
+  final double rowHeight;
+  final double gridHeight;
+  final List<TimetableEntryDomainModel> entries;
+
+  const _ScheduleGrid({
+    required this.dayWidth,
+    required this.firstHour,
+    required this.rowCount,
+    required this.rowHeight,
+    required this.gridHeight,
+    required this.entries,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: dayWidth * _weekdays.length,
+      height: gridHeight,
+      child: Stack(
+        children: [
+          Row(
+            children: List.generate(
+              _weekdays.length,
+              (day) => Column(
                 children: List.generate(
-                  _weekdays.length,
-                  (day) => SizedBox(
-                    width: (constraints.maxWidth / 3).clamp(140.0, 190.0).toDouble(),
-                    child: _DayColumn(
+                  rowCount,
+                  (row) => GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => _editEntry(
+                      context,
                       day: day,
-                      entries: entries
-                          .where((entry) => entry.dayOfWeek == day)
-                          .toList()
-                        ..sort((a, b) => a.startHour.compareTo(b.startHour)),
+                      startHour: firstHour + row,
+                    ),
+                    child: Container(
+                      width: dayWidth,
+                      height: rowHeight,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: BorderSide(color: Colors.black, width: 0.8),
+                          bottom: BorderSide(color: Colors.black, width: 0.8),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ],
+          ),
+          for (final entry in entries)
+            Positioned(
+              left: entry.dayOfWeek! * dayWidth,
+              top: (entry.startHour - firstHour) * rowHeight,
+              width: dayWidth,
+              height: (entry.endHour - entry.startHour) * rowHeight,
+              child: _LessonBlock(entry: entry),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LessonBlock extends StatelessWidget {
+  final TimetableEntryDomainModel entry;
+
+  const _LessonBlock({required this.entry});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: timetableColorForSubject(entry.subjectName),
+      child: InkWell(
+        onTap: () => _editEntry(context, entry: entry),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            border: Border(
+              right: BorderSide(color: Colors.black, width: 0.8),
+              bottom: BorderSide(color: Colors.black, width: 0.8),
+              left: BorderSide(color: Colors.black, width: 0.8),
+              top: BorderSide(color: Colors.black, width: 0.8),
+            ),
+          ),
+          padding: const EdgeInsets.all(6),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                entry.subjectName ?? 'Materia',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                '${_formatHour(entry.startHour)} – ${_formatHour(entry.endHour)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class _DayColumn extends StatelessWidget {
-  final int day;
-  final List<TimetableEntryDomainModel> entries;
+Future<void> _editEntry(
+  BuildContext context, {
+  int? day,
+  int? startHour,
+  TimetableEntryDomainModel? entry,
+}) async {
+  final mutation = await showDialog<_EntryMutation>(
+    context: context,
+    builder: (_) => _EntryEditorDialog(
+      entry: entry,
+      initialDay: day,
+      initialStartHour: startHour,
+    ),
+  );
+  if (mutation == null) return;
 
-  const _DayColumn({required this.day, required this.entries});
+  final TimetableRepository repository = sl();
+  final result = mutation.delete
+      ? await repository.deleteTimetableEntry(id: entry!.id!)
+      : entry == null
+          ? await repository.insertTimetableEntry(entry: mutation.entry!)
+          : await repository.updateTimetableEntry(entry: mutation.entry!);
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      margin: const EdgeInsets.all(4),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    _weekdays[day],
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add),
-                  tooltip: 'Aggiungi lezione',
-                  onPressed: () => _editEntry(context, day: day),
-                ),
-              ],
-            ),
-            const Divider(height: 1),
-            if (entries.isEmpty)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text('Nessuna lezione'),
-              ),
-            for (final entry in entries)
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                title: Text(entry.subjectName ?? 'Materia'),
-                subtitle: Text(
-                  '${_formatHour(entry.startHour)} – ${_formatHour(entry.endHour)}',
-                ),
-                onTap: () => _editEntry(context, entry: entry),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> _editEntry(
-    BuildContext context, {
-    int? day,
-    TimetableEntryDomainModel? entry,
-  }) async {
-    final mutation = await showDialog<_EntryMutation>(
-      context: context,
-      builder: (_) => _EntryEditorDialog(entry: entry, initialDay: day),
-    );
-    if (mutation == null) return;
-
-    final TimetableRepository repository = sl();
-    final result = mutation.delete
-        ? await repository.deleteTimetableEntry(id: entry!.id!)
-        : entry == null
-            ? await repository.insertTimetableEntry(entry: mutation.entry!)
-            : await repository.updateTimetableEntry(entry: mutation.entry!);
-
-    result.fold(
-      (_) => ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Impossibile salvare l’orario')),
-      ),
-      (_) {},
-    );
-  }
+  result.fold(
+    (_) => ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Impossibile salvare l’orario')),
+    ),
+    (_) {},
+  );
 }
 
 class _EntryEditorDialog extends StatefulWidget {
   final TimetableEntryDomainModel? entry;
   final int? initialDay;
+  final int? initialStartHour;
 
-  const _EntryEditorDialog({this.entry, this.initialDay});
+  const _EntryEditorDialog({
+    this.entry,
+    this.initialDay,
+    this.initialStartHour,
+  });
 
   @override
   State<_EntryEditorDialog> createState() => _EntryEditorDialogState();
@@ -199,8 +372,8 @@ class _EntryEditorDialogState extends State<_EntryEditorDialog> {
     final entry = widget.entry;
     _subjectController = TextEditingController(text: entry?.subjectName ?? '');
     _day = entry?.dayOfWeek ?? widget.initialDay ?? 0;
-    _startHour = entry?.startHour ?? 8;
-    _endHour = entry?.endHour ?? 9;
+    _startHour = entry?.startHour ?? widget.initialStartHour ?? 8;
+    _endHour = entry?.endHour ?? _startHour + 1;
   }
 
   @override
@@ -280,10 +453,7 @@ class _EntryEditorDialogState extends State<_EntryEditorDialog> {
           onPressed: () => Navigator.pop(context),
           child: const Text('Annulla'),
         ),
-        ElevatedButton(
-          onPressed: _save,
-          child: const Text('Salva'),
-        ),
+        ElevatedButton(onPressed: _save, child: const Text('Salva')),
       ],
     );
   }
