@@ -49,11 +49,48 @@ class _Grid extends StatelessWidget {
   const _Grid({this.className, required this.entries});
   @override Widget build(BuildContext context) {
     final times = _periodTimes(); const h = 72.0, w = 145.0;
-    return SingleChildScrollView(padding: const EdgeInsets.fromLTRB(12, 24, 12, 12), child: Column(children: [Text((className?.isNotEmpty == true ? className : 'CLASSE')!.toUpperCase(), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)), const SizedBox(height: 12), SingleChildScrollView(scrollDirection: Axis.horizontal, child: Column(children: [Row(children: [const SizedBox(width: 38), for (final d in _days) _box(w, 28, Text(d, style: const TextStyle(fontSize: 11)))]), Row(crossAxisAlignment: CrossAxisAlignment.start, children: [_Gutter(times: times, height: h), SizedBox(width: w * 6, height: h * 10, child: Stack(children: [_Background(times: times, width: w, height: h), for (final e in entries.where((e) => e.hasValidTimeRange)) _block(context, e, times, w, h)])])])])])));
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(12, 24, 12, 12),
+      child: Column(
+        children: [
+          Text((className?.isNotEmpty == true ? className : 'CLASSE')!.toUpperCase(), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+          const SizedBox(height: 12),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Column(children: [
+              Row(children: [const SizedBox(width: 38), for (final d in _days) _box(w, 28, Text(d, style: const TextStyle(fontSize: 11)))]),
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                _Gutter(times: times, height: h),
+                SizedBox(width: w * 6, height: h * 10, child: Stack(children: [
+                  _Background(times: times, width: w, height: h),
+                  for (final e in entries.where((e) => e.hasValidTimeRange)) _block(context, e, times, w, h),
+                ])),
+              ]),
+            ]),
+          ),
+        ],
+      ),
+    );
   }
   Widget _block(BuildContext context, TimetableEntryDomainModel e, List<int> times, double w, double h) {
     final start = _index(times, e.startMinutes); final end = max(start + 1, _index(times, e.endMinutes));
-    return Positioned(left: e.dayOfWeek! * w, top: start * h, width: w, height: (end - start) * h, child: Material(color: timetableColorForSubject(e.subjectName), child: InkWell(onTap: () => _edit(context, entry: e), child: Container(decoration: const BoxDecoration(border: Border.fromBorderSide(BorderSide(color: Colors.black, width: .8))), alignment: Alignment.center, padding: const EdgeInsets.all(5), child: Column(mainAxisSize: MainAxisSize.min, children: [Text(e.subjectName ?? 'Materia', textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)), Text('${_time(e.startMinutes)} – ${_time(e.endMinutes)}', style: const TextStyle(fontSize: 9, fontStyle: FontStyle.italic))]))));
+    return Positioned(
+      left: e.dayOfWeek! * w, top: start * h, width: w, height: (end - start) * h,
+      child: Material(
+        color: timetableColorForSubject(e.subjectName),
+        child: InkWell(
+          onTap: () => _edit(context, entry: e),
+          child: Container(
+            decoration: const BoxDecoration(border: Border.fromBorderSide(BorderSide(color: Colors.black, width: .8))),
+            alignment: Alignment.center, padding: const EdgeInsets.all(5),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Text(e.subjectName ?? 'Materia', textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)),
+              Text('${_time(e.startMinutes)} – ${_time(e.endMinutes)}', style: const TextStyle(fontSize: 9, fontStyle: FontStyle.italic)),
+            ]),
+          ),
+        ),
+      ),
+    );
   }
   int _index(List<int> times, int value) { for (var i = times.length - 1; i >= 0; i--) { if (value >= times[i]) return i; } return 0; }
 }
