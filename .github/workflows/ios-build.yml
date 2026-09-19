@@ -40,6 +40,13 @@ jobs:
       - run: flutter test test/notice_read_status_test.dart
       - run: flutter test test/sostituzioni_docenti_api_test.dart
       - run: flutter build ios --release --no-codesign
+       run: |
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
       - uses: actions/upload-artifact@v4
         with:
           name: ios-release
