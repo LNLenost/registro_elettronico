@@ -7,6 +7,8 @@ void main() {
     expect(preserveReadStatus(false, true), isTrue);
     expect(preserveReadStatus(true, false), isTrue);
     expect(preserveReadStatus(false, false), isFalse);
+  });
+
   test('reads the ClasseViva response flag when REST readStatus is absent', () {
     expect(noticeReadStatus({'response': {'letto': 1}}), isTrue);
     expect(noticeReadStatus({'response': {'letto': 0}}), isFalse);
