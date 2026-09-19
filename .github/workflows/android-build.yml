@@ -64,6 +64,7 @@ jobs:
       - run: flutter test test/homework_filters_test.dart
       - run: flutter test test/agenda_local_events_test.dart
       - run: flutter test test/timetable_entry_test.dart
+      - run: flutter test test/stats_period_gate_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}

@@ -21,6 +21,12 @@ import 'package:registro_elettronico/utils/global_utils.dart';
 import 'package:registro_elettronico/utils/grades_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+bool canBuildStudentReport({
+  required int periodsCount,
+  required int validGradesCount,
+}) =>
+    periodsCount > 0 && validGradesCount > 0;
+
 class StatsRepositoryImpl implements StatsRepository {
   final GradesLocalDatasource? gradeDao;
   final AbsenceDao? absenceDao;
@@ -77,7 +83,7 @@ class StatsRepositoryImpl implements StatsRepository {
 
       final year = sharedPreferences!.getInt(PrefsConstants.STUDENT_YEAR) ?? 3;
 
-      if (periods.length >= 2) {
+      if (periods.isNotEmpty) {
         double average = 0;
         double firstTermAverage = 0;
         double secondTermAverage = 0;
@@ -142,7 +148,8 @@ class StatsRepositoryImpl implements StatsRepository {
               if (grade.periodPos == periods.elementAt(0).position) {
                 firstTermAverage += grade.decimalValue!;
                 firstTermGradesCount++;
-              } else if (grade.periodPos == periods.elementAt(1).position) {
+              } else if (periods.length > 1 &&
+                  grade.periodPos == periods.elementAt(1).position) {
                 secondTermAverage += grade.decimalValue!;
                 secondTermGradesCount++;
               }
@@ -161,7 +168,10 @@ class StatsRepositoryImpl implements StatsRepository {
           }
         });
 
-        if (gradesCount == 0) {
+        if (!canBuildStudentReport(
+          periodsCount: periods.length,
+          validGradesCount: gradesCount,
+        )) {
           return Left(GenericFailure());
         }
 
@@ -173,7 +183,7 @@ class StatsRepositoryImpl implements StatsRepository {
             ? 0
             : secondTermAverage / secondTermGradesCount;
 
-        if (secondTermAverage > 0) {
+        if (periods.length > 1 && secondTermAverage > 0) {
           if (firstTermAverage >= secondTermAverage) {
             mostProfitablePeriod = periods.elementAt(0);
           } else {
@@ -189,7 +199,7 @@ class StatsRepositoryImpl implements StatsRepository {
         );
 
         final daysRemaining =
-            periods.elementAt(1).end!.difference(DateTime.now());
+            periods.last.end!.difference(DateTime.now());
 
         int schoolCredits;
 
@@ -307,7 +317,7 @@ class StatsRepositoryImpl implements StatsRepository {
       }
     });
 
-    return initialScore >= 100 ? 100 : initialScore;
+    return initialScore.clamp(0.0, 100.0).toDouble();
   }
 
   int _getSkippedTests({
