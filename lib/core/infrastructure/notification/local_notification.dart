@@ -7,7 +7,7 @@ class LocalNotification {
   static const CHANNEL_DESCRIPTION = "Send and receive notifications";
 
   static TZDateTime timezoneTime(DateTime scheduledTime) =>
-      TZDateTime.from(scheduledTime, local);
+      TZDateTime.from(scheduledTime, UTC);
 
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
