@@ -8,8 +8,6 @@ import 'package:registro_elettronico/feature/timetable/domain/model/timetable_en
 abstract class TimetableRepository {
   Stream<Resource<TimetableDataDomainModel>> watchTimetableData();
 
-  Future<Either<Failure, Success>> regenerateTimetable();
-
   Future<Either<Failure, Success>> deleteTimetableEntry({
     required int id,
   });

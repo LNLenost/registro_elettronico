@@ -18,8 +18,6 @@ class TimetableContainer {
     _sl.registerLazySingleton<TimetableRepository>(
       () => TimetableRepositoryImpl(
         timetableLocalDatasource: _sl(),
-        lessonsLocalDatasource: _sl(),
-        subjectsLocalDatasource: _sl(),
       ),
     );
   }

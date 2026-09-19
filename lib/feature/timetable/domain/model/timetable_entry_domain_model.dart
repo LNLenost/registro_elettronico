@@ -19,6 +19,35 @@ class TimetableEntryDomainModel {
     required this.subjectName,
   });
 
+  factory TimetableEntryDomainModel.manual({
+    required int? id,
+    required int dayOfWeek,
+    required String subjectName,
+    required int startHour,
+    required int endHour,
+  }) {
+    return TimetableEntryDomainModel(
+      id: id,
+      start: startHour - 7,
+      end: endHour - 8,
+      dayOfWeek: dayOfWeek,
+      subject: null,
+      subjectName: subjectName,
+    );
+  }
+
+  int get startHour => (start ?? 0) + 7;
+  int get endHour => (end ?? 0) + 8;
+  bool get hasValidTimeRange =>
+      dayOfWeek != null &&
+      dayOfWeek! >= 0 &&
+      dayOfWeek! < 6 &&
+      subjectName != null &&
+      subjectName!.trim().isNotEmpty &&
+      startHour >= 0 &&
+      endHour <= 24 &&
+      endHour > startHour;
+
   TimetableEntryDomainModel.fromLocalModel(TimetableEntryLocalModel l) {
     this.id = l.id;
     this.start = l.start;

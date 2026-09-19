@@ -24,7 +24,6 @@ import 'package:registro_elettronico/feature/noticeboard/domain/repository/notic
 import 'package:registro_elettronico/feature/periods/domain/repository/periods_repository.dart';
 import 'package:registro_elettronico/feature/scrutini/domain/repository/documents_repository.dart';
 import 'package:registro_elettronico/feature/subjects/domain/repository/subjects_repository.dart';
-import 'package:registro_elettronico/feature/timetable/domain/repository/timetable_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/preferences_constants.dart';
@@ -42,7 +41,6 @@ class SRUpdateManager {
   final SubjectsRepository? subjectsRepository;
   final DocumentsRepository? documentsRepository;
   final NotesRepository? notesRepository;
-  final TimetableRepository? timetableRepository;
 
   SRUpdateManager({
     required this.sharedPreferences,
@@ -56,7 +54,6 @@ class SRUpdateManager {
     required this.subjectsRepository,
     required this.documentsRepository,
     required this.notesRepository,
-    required this.timetableRepository,
   });
 
   Future<void> checkForUpdates() async {
@@ -76,8 +73,7 @@ class SRUpdateManager {
       // update all the endpoints
       await updateAllData(databaseName);
 
-      // We also need to rigenerate the timetable
-      await timetableRepository!.regenerateTimetable();
+      // ponytail: manual data stays local; add an explicit import only if needed.
     } else {
       // se mancano dei dati essenziali
       final needToUpdateVitalData = await _needUpdateVitalData(

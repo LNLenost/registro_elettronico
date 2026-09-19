@@ -141,7 +141,6 @@ class CoreContainer {
         subjectsRepository: _sl(),
         documentsRepository: _sl(),
         notesRepository: _sl(),
-        timetableRepository: _sl(),
       );
     });
   }
