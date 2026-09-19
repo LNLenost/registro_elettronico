@@ -49,5 +49,5 @@ jobs:
           zip -r app.ipa Payload
       - uses: actions/upload-artifact@v4
         with:
-          name: ios-release
+          name: registro-elettronico-ios-unsigned
           path: build/ios/iphoneos/app.ipa
