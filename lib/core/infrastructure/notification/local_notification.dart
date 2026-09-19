@@ -6,6 +6,9 @@ class LocalNotification {
   static const CHANNEL_NAME = "Registro elettronico";
   static const CHANNEL_DESCRIPTION = "Send and receive notifications";
 
+  static TZDateTime timezoneTime(DateTime scheduledTime) =>
+      TZDateTime.from(scheduledTime, local);
+
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   LocalNotification(
@@ -97,7 +100,7 @@ class LocalNotification {
       eventId,
       title,
       message,
-      scheduledTime as TZDateTime,
+      timezoneTime(scheduledTime),
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:

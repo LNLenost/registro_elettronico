@@ -6,6 +6,7 @@ import 'package:pedantic/pedantic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/notification/background_sync.dart';
+import 'package:registro_elettronico/core/infrastructure/notification/fcm_service.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/agenda_page.dart';
 import 'package:registro_elettronico/feature/grades/presentation/grades_page.dart';
@@ -38,6 +39,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
   @override
   void initState() {
     srUpdateManager = sl();
+    unawaited(sl<PushNotificationService>().requestPermission());
     unawaited(_initialUpdate());
     _pages = _buildPages();
     _loadNavigationConfig();
