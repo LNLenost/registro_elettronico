@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart' hide OpenFile;
@@ -5,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/core/infrastructure/localizations/app_localizations.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/attachment_domain_model.dart';
 import 'package:registro_elettronico/feature/noticeboard/domain/model/notice_domain_model.dart';
+import 'package:registro_elettronico/feature/noticeboard/domain/repository/noticeboard_repository.dart';
 import 'package:registro_elettronico/feature/noticeboard/presentation/attachment/attachment_download_bloc.dart';
 import 'package:registro_elettronico/utils/date_utils.dart';
 
@@ -45,6 +48,11 @@ class NoticeCard extends StatelessWidget {
                   color: Colors.red,
                 ),
           onTap: () {
+            unawaited(
+              sl<NoticeboardRepository>()
+                  .markNoticeRead(notice: notice)
+                  .catchError((_) {}),
+            );
             if (notice.attachments != null) {
               _showDownloadDialog(context);
             } else {

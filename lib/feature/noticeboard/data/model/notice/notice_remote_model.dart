@@ -3,6 +3,16 @@ import 'package:registro_elettronico/feature/noticeboard/data/model/attachment/a
 import 'package:registro_elettronico/utils/date_utils.dart';
 import 'package:registro_elettronico/utils/global_utils.dart';
 
+bool? noticeReadStatus(Map<String, dynamic> json) {
+  final readStatus = json['readStatus'];
+  if (readStatus is bool) return readStatus;
+  if (readStatus is num) return readStatus != 0;
+
+  final letto = (json['response'] as Map?)?['letto'];
+  if (letto is num) return letto != 0;
+  return null;
+}
+
 class NoticeRemoteModel {
   int? pubId;
   String? pubDT;
@@ -68,7 +78,7 @@ class NoticeRemoteModel {
   NoticeRemoteModel.fromJson(Map<String, dynamic> json) {
     pubId = json['pubId'];
     pubDT = json['pubDT'];
-    readStatus = json['readStatus'];
+    readStatus = noticeReadStatus(json);
     evtCode = json['evtCode'];
     cntId = json['cntId'];
     cntValidFrom = json['cntValidFrom'];
@@ -94,7 +104,7 @@ class NoticeRemoteModel {
   NoticeRemoteModel.fromWebJson(Map<String, dynamic> json) {
     pubId = json['id'];
     pubDT = (json['pubblicazione'] ?? '').replaceFirst(' ', 'T');
-    readStatus = json['response']?['letto'] == 1;
+    readStatus = noticeReadStatus(json);
     evtCode = 'WEB:${json['anno_scol']}';
     cntId = json['id'];
     cntValidFrom = (json['pubblicazione'] ?? '').split(' ').first;

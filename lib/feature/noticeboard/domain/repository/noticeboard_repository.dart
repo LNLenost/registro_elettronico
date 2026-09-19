@@ -14,6 +14,8 @@ abstract class NoticeboardRepository {
     required AttachmentDomainModel? attachment,
   });
 
+  Future<void> markNoticeRead({required NoticeDomainModel notice});
+
   Future<Either<Failure, Success>> updateNotices({
     required bool ifNeeded,
   });

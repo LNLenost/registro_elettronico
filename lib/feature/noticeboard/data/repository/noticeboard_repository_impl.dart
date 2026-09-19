@@ -108,6 +108,14 @@ class NoticeboardRepositoryImpl implements NoticeboardRepository {
   }
 
   @override
+  Future<void> markNoticeRead({required NoticeDomainModel notice}) async {
+    if (notice.readStatus == true) return;
+    await noticeboardRemoteDatasource!.readNotice(notice.code, notice.id);
+    await noticeboardLocalDatasource!
+        .updateNotice(notice.toLocalModel().copyWith(readStatus: true));
+  }
+
+  @override
   Stream<Resource<List<NoticeDomainModel>>> watchAllNotices() {
     return Rx.combineLatest2(
       noticeboardLocalDatasource!.watchAllNotices(),
