@@ -23,123 +23,37 @@ class TimetableEntryDomainModel {
     required int? id,
     required int dayOfWeek,
     required String subjectName,
-    required int startHour,
-    required int endHour,
-  }) {
-    return TimetableEntryDomainModel(
-      id: id,
-      start: startHour - 7,
-      end: endHour - 8,
-      dayOfWeek: dayOfWeek,
-      subject: null,
-      subjectName: subjectName,
-    );
-  }
+    required int startMinutes,
+    required int endMinutes,
+  }) =>
+      TimetableEntryDomainModel(
+        id: id,
+        start: startMinutes,
+        end: endMinutes,
+        dayOfWeek: dayOfWeek,
+        subject: null,
+        subjectName: subjectName,
+      );
 
-  int get startHour => (start ?? 0) + 7;
-  int get endHour => (end ?? 0) + 8;
+  // ponytail: pre-existing rows stored relative hours; minute values are new.
+  int get startMinutes => (start ?? 0) >= 420 ? start! : ((start ?? 0) + 7) * 60;
+  int get endMinutes => (end ?? 0) >= 480 ? end! : ((end ?? 0) + 8) * 60;
   bool get hasValidTimeRange =>
-      dayOfWeek != null &&
-      dayOfWeek! >= 0 &&
-      dayOfWeek! < 6 &&
-      subjectName != null &&
-      subjectName!.trim().isNotEmpty &&
-      startHour >= 0 &&
-      endHour <= 24 &&
-      endHour > startHour;
+      dayOfWeek != null && dayOfWeek! >= 0 && dayOfWeek! < 6 &&
+      subjectName != null && subjectName!.trim().isNotEmpty &&
+      startMinutes >= 0 && endMinutes <= 1440 && endMinutes > startMinutes;
 
-  TimetableEntryDomainModel.fromLocalModel(TimetableEntryLocalModel l) {
-    this.id = l.id;
-    this.start = l.start;
-    this.end = l.end;
-    this.dayOfWeek = l.dayOfWeek;
-    this.subject = l.subject;
-    this.subjectName = l.subjectName;
-  }
+  TimetableEntryDomainModel.fromLocalModel(TimetableEntryLocalModel l)
+      : id = l.id, start = l.start, end = l.end, dayOfWeek = l.dayOfWeek,
+        subject = l.subject, subjectName = l.subjectName;
 
-  TimetableEntryLocalModel toLocalModel() {
-    return TimetableEntryLocalModel(
-      id: this.id,
-      start: this.start,
-      end: this.end,
-      dayOfWeek: this.dayOfWeek,
-      subject: this.subject,
-      subjectName: this.subjectName,
-    );
-  }
+  TimetableEntryLocalModel toLocalModel() => TimetableEntryLocalModel(
+    id: id, start: start, end: end, dayOfWeek: dayOfWeek,
+    subject: subject, subjectName: subjectName,
+  );
 
-  TimetableEntryDomainModel copyWith({
-    int? id,
-    int? start,
-    int? end,
-    int? dayOfWeek,
-    int? subject,
-    String? subjectName,
-  }) {
-    return TimetableEntryDomainModel(
-      id: id ?? this.id,
-      start: start ?? this.start,
-      end: end ?? this.end,
-      dayOfWeek: dayOfWeek ?? this.dayOfWeek,
-      subject: subject ?? this.subject,
-      subjectName: subjectName ?? this.subjectName,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'start': start,
-      'end': end,
-      'dayOfWeek': dayOfWeek,
-      'subject': subject,
-      'subjectName': subjectName,
-    };
-  }
-
-  static TimetableEntryDomainModel? fromMap(Map<String, dynamic>? map) {
-    if (map == null) return null;
-
-    return TimetableEntryDomainModel(
-      id: map['id'],
-      start: map['start'],
-      end: map['end'],
-      dayOfWeek: map['dayOfWeek'],
-      subject: map['subject'],
-      subjectName: map['subjectName'],
-    );
-  }
-
+  Map<String, dynamic> toMap() => {'id': id, 'start': start, 'end': end, 'dayOfWeek': dayOfWeek, 'subject': subject, 'subjectName': subjectName};
+  static TimetableEntryDomainModel? fromMap(Map<String, dynamic>? map) => map == null ? null : TimetableEntryDomainModel(id: map['id'], start: map['start'], end: map['end'], dayOfWeek: map['dayOfWeek'], subject: map['subject'], subjectName: map['subjectName']);
   String toJson() => json.encode(toMap());
-
-  static TimetableEntryDomainModel? fromJson(String source) =>
-      TimetableEntryDomainModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'TimetableEntryDomainModel(id: $id, start: $start, end: $end, dayOfWeek: $dayOfWeek, subject: $subject, subjectName: $subjectName)';
-  }
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is TimetableEntryDomainModel &&
-        o.id == id &&
-        o.start == start &&
-        o.end == end &&
-        o.dayOfWeek == dayOfWeek &&
-        o.subject == subject &&
-        o.subjectName == subjectName;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        start.hashCode ^
-        end.hashCode ^
-        dayOfWeek.hashCode ^
-        subject.hashCode ^
-        subjectName.hashCode;
-  }
+  static TimetableEntryDomainModel? fromJson(String source) => TimetableEntryDomainModel.fromMap(json.decode(source));
 }
