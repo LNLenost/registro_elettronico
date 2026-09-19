@@ -81,7 +81,7 @@ class TimetableRepositoryImpl implements TimetableRepository {
           (entries) => Resource.success(
             data: TimetableDataDomainModel(
               entries: entries
-                  .map(TimetableEntryDomainModel.fromLocalModel)
+                  .map((entry) => TimetableEntryDomainModel.fromLocalModel(entry))
                   .toList(),
             ),
           ),
