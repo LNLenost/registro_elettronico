@@ -380,18 +380,20 @@ class _AddEntryDialogState extends State<_AddEntryDialog> {
           ),
         if (status == AddEntryStatus.subject)
           TextButton(
-            onPressed: () async {
-              final entry = TimetableEntryDomainModel(
-                id: null,
-                start: (_hourValue! - 7),
-                end: (_hourValue! + _durationValue!) - 8,
-                dayOfWeek: widget.dayOfWeek - 1,
-                subject: _selectedSubject?.id,
-                subjectName: _selectedSubject?.name,
-              );
+            onPressed: _selectedSubject == null
+              ? null
+              : () async {
+                  final entry = TimetableEntryDomainModel(
+                    id: null,
+                    start: (_hourValue! - 7),
+                    end: (_hourValue! + _durationValue!) - 8,
+                    dayOfWeek: widget.dayOfWeek - 1,
+                    subject: _selectedSubject!.id,
+                    subjectName: _selectedSubject!.name,
+                  );
 
-              Navigator.pop(context, entry);
-            },
+                  Navigator.pop(context, entry);
+                },
             child: Text(AppLocalizations.of(context)!
                 .translate('finish')!
                 .toUpperCase()),
@@ -424,33 +426,33 @@ class _AddEntryDialogState extends State<_AddEntryDialog> {
   }
 
   Widget _buildSelectHour() {
-    return Container();
-    // return NumberPicker.integer(
-    //   key: UniqueKey(),
-    //   initialValue: _hourValue,
-    //   minValue: 0,
-    //   maxValue: 22,
-    //   onChanged: (value) {
-    //     setState(() {
-    //       _hourValue = value;
-    //     });
-    //   },
-    // );
+    return DropdownButtonFormField<int>(
+      value: _hourValue,
+      isExpanded: true,
+      items: List.generate(
+        23,
+        (hour) => DropdownMenuItem(
+          value: hour,
+          child: Text('${hour.toString().padLeft(2, '0')}:00'),
+        ),
+      ),
+      onChanged: (hour) => setState(() => _hourValue = hour),
+    );
   }
 
   Widget _buildSelectDuration() {
-    return Container();
-    // return NumberPicker.integer(
-    //   key: UniqueKey(),
-    //   initialValue: _durationValue,
-    //   minValue: 1,
-    //   maxValue: 5,
-    //   onChanged: (value) {
-    //     setState(() {
-    //       _durationValue = value;
-    //     });
-    //   },
-    // );
+    return DropdownButtonFormField<int>(
+      value: _durationValue,
+      isExpanded: true,
+      items: List.generate(
+        5,
+        (index) {
+          final hours = index + 1;
+          return DropdownMenuItem(value: hours, child: Text('$hours h'));
+        },
+      ),
+      onChanged: (duration) => setState(() => _durationValue = duration),
+    );
   }
 
   Widget _buildSubjects() {
@@ -465,9 +467,7 @@ class _AddEntryDialogState extends State<_AddEntryDialog> {
               return RadioListTile<SubjectDomainModel>(
                 activeColor: Theme.of(context).colorScheme.secondary,
                 title: Text(
-                  // TODO:
-                  'das',
-                  // GlobalUtils.reduceSubjectTitle(widget.subjects[index].name),
+                  widget.subjects[index].name ?? '',
                   style: TextStyle(fontSize: 13),
                 ),
                 value: widget.subjects[index],
