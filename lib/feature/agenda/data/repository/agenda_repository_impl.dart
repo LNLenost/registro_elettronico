@@ -23,6 +23,14 @@ import 'package:registro_elettronico/utils/global_utils.dart';
 import 'package:rxdart/rxdart.dart' hide Subject;
 import 'package:shared_preferences/shared_preferences.dart';
 
+List<AgendaEventLocalModel> agendaEventsMissingFromRemote({
+  required Iterable<AgendaEventLocalModel> localEvents,
+  required Iterable<int?> remoteIds,
+}) =>
+    localEvents
+        .where((event) => event.isLocal != true && !remoteIds.contains(event.evtId))
+        .toList();
+
 class AgendaRepositoryImpl implements AgendaRepository {
   static const String lastUpdateKey = 'agendaLastUpdate';
 
@@ -264,13 +272,10 @@ class AgendaRepositoryImpl implements AgendaRepository {
 
     final remoteIds = remoteAgendaEvents.map((e) => e.evtId).toList();
 
-    List<AgendaEventLocalModel> agendasToDelete = [];
-
-    for (final localAgendaEvent in localAgendaEvents) {
-      if (!remoteIds.contains(localAgendaEvent.evtId)) {
-        agendasToDelete.add(localAgendaEvent);
-      }
-    }
+    final agendasToDelete = agendaEventsMissingFromRemote(
+      localEvents: localAgendaEvents,
+      remoteIds: remoteIds,
+    );
 
     await agendaLocalDatasource!.insertEvents(
       remoteAgendaEvents
