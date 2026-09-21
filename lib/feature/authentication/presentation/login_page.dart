@@ -7,6 +7,7 @@ import 'package:registro_elettronico/core/infrastructure/notification/fcm_servic
 import 'package:registro_elettronico/core/presentation/widgets/gradient_red_button.dart';
 import 'package:registro_elettronico/feature/authentication/data/model/login/parent_response_remote_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/model/login_request_domain_model.dart';
+import 'package:registro_elettronico/feature/authentication/domain/model/registry_provider.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/help_page.dart';
 import 'package:registro_elettronico/feature/debug/presentation/debug_page.dart';
@@ -17,10 +18,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   final bool fromChangeAccount;
+  final RegistryProvider provider;
 
   LoginPage({
     Key? key,
     this.fromChangeAccount = false,
+    this.provider = RegistryProvider.classeViva,
   }) : super(key: key);
 
   @override
@@ -149,6 +152,16 @@ class _LoginPageState extends State<LoginPage> {
             ),
             autofillHints: [AutofillHints.username],
           ),
+          if (widget.provider == RegistryProvider.didUp)
+            const Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: TextField(
+                enabled: false,
+                decoration: InputDecoration(
+                  hintText: 'Codice scuola didUP',
+                ),
+              ),
+            ),
           const SizedBox(
             height: 30,
           ),
@@ -179,7 +192,23 @@ class _LoginPageState extends State<LoginPage> {
               final username = _usernameController.text;
               final password = _passwordController.text;
 
-              if (username != '' && password != '') {
+              if (widget.provider == RegistryProvider.didUp) {
+                showDialog<void>(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: const Text('didUP'),
+                    content: const Text(
+                      'Il collegamento didUP è stato preparato, ma il login OAuth2/PKCE non è ancora attivo.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (username != '' && password != '') {
                 BlocProvider.of<AuthenticationBloc>(context).add(
                   SignIn(
                     loginRequestDomainModel: LoginRequestDomainModel(
@@ -276,7 +305,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         Container(
-          child: Text('Classeviva',
+          child: Text(widget.provider.label,
               style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
         ),
       ],
