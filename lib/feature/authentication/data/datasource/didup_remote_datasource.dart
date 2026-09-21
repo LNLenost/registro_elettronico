@@ -106,7 +106,7 @@ class DidUpRemoteDatasource {
     required String nonce,
     required String codeChallenge,
   }) {
-    return Uri.parse(config.authorizationUrl).replace(queryParameters: {
+    return Uri.parse(DidUpConfig.authorizationUrl).replace(queryParameters: {
       'redirect_uri': DidUpConfig.redirectUri,
       'client_id': DidUpConfig.clientId,
       'response_type': 'code',
