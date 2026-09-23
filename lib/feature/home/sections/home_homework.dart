@@ -12,7 +12,12 @@ class HomeHomework extends StatelessWidget {
     return ValueListenableBuilder<int>(
       valueListenable: HomeworkRemoteDatasource.changes,
       builder: (_, __, ___) {
-        final items = sl<HomeworkRemoteDatasource>().getCachedHomeworks()
+        final datasource = sl<HomeworkRemoteDatasource>();
+        final completedIds = datasource.getCompletedIds();
+        final items = datasource
+            .getCachedHomeworks()
+            .where((item) => !completedIds.contains(item.id))
+            .toList()
           ..sort((a, b) => (a.deadline ?? DateTime(9999)).compareTo(b.deadline ?? DateTime(9999)));
         if (items.isEmpty) return const SizedBox.shrink();
         return Padding(
