@@ -45,6 +45,7 @@ class PrefsConstants {
   static const String defaultDbName = 'registro';
 
   static const String profilesList = 'profilesList';
+  static const String registryProvider = 'registryProvider';
   static const String beforeUpdate9 = 'beforeUpdate9';
   static const String preferredCalendarFormat = 'preferredCalendarFormat';
   static const String navigationOrder = 'navigationOrder';
