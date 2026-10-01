@@ -6,6 +6,9 @@ import 'package:registro_elettronico/feature/authentication/domain/model/registr
 import 'package:registro_elettronico/feature/authentication/domain/repository/authentication_repository.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/login_page.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/registry_provider_page.dart';
+import 'package:registro_elettronico/feature/docente/data/docente_session_store.dart';
+import 'package:registro_elettronico/feature/docente/presentation/docente_navigator_page.dart';
+import 'package:registro_elettronico/feature/docente/presentation/docente_login_page.dart';
 import 'package:registro_elettronico/feature/navigator/navigator_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -38,6 +41,13 @@ class _SplashScreenState extends State<SplashScreen> {
     if (provider == null) {
       await Navigator.of(context).pushReplacement(NoAnimationMaterialPageRoute(
         builder: (context) => const RegistryProviderPage(),
+      ));
+    } else if (provider == RegistryProvider.classeVivaDocente) {
+      final hasSession = await DocenteSessionStore(sl()).read() != null;
+      await Navigator.of(context).pushReplacement(NoAnimationMaterialPageRoute(
+        builder: (context) => hasSession
+            ? const DocenteNavigatorPage()
+            : const DocenteLoginPage(),
       ));
     } else if (authenticated) {
       await Navigator.of(context).pushReplacement(NoAnimationMaterialPageRoute(

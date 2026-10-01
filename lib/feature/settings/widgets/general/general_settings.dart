@@ -134,11 +134,11 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                 });
                 BlocProvider.of<GradesWatcherBloc>(context)
                     .add(RestartWatcher());
+                // Only when a choice was made: dismissing the dialog gives null.
+                SharedPreferences sharedPreferences = sl();
+                await sharedPreferences.setBool(
+                    PrefsConstants.SORTING_ASCENDING, value);
               }
-
-              SharedPreferences sharedPreferences = sl();
-              await sharedPreferences.setBool(
-                  PrefsConstants.SORTING_ASCENDING, value);
             });
           },
         ),

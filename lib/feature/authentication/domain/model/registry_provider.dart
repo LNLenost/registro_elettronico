@@ -1,6 +1,7 @@
 enum RegistryProvider {
   classeViva,
   didUp,
+  classeVivaDocente,
 }
 
 extension RegistryProviderValue on RegistryProvider {
@@ -10,6 +11,8 @@ extension RegistryProviderValue on RegistryProvider {
         return 'classeviva';
       case RegistryProvider.didUp:
         return 'didup';
+      case RegistryProvider.classeVivaDocente:
+        return 'classeviva_docente';
     }
   }
 
@@ -19,6 +22,8 @@ extension RegistryProviderValue on RegistryProvider {
         return 'ClasseViva';
       case RegistryProvider.didUp:
         return 'didUP';
+      case RegistryProvider.classeVivaDocente:
+        return 'ClasseViva (SPID/CIE)';
     }
   }
 
@@ -30,6 +35,8 @@ RegistryProvider? registryProviderFromStorage(String? value) {
       return RegistryProvider.classeViva;
     case 'didup':
       return RegistryProvider.didUp;
+    case 'classeviva_docente':
+      return RegistryProvider.classeVivaDocente;
     default:
       return null;
   }

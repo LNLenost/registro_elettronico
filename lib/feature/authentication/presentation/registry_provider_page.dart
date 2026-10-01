@@ -3,6 +3,8 @@ import 'package:registro_elettronico/core/infrastructure/app_injection.dart';
 import 'package:registro_elettronico/feature/authentication/data/datasource/registry_provider_preferences.dart';
 import 'package:registro_elettronico/feature/authentication/domain/model/registry_provider.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/login_page.dart';
+import 'package:registro_elettronico/feature/docente/presentation/docente_async_view.dart';
+import 'package:registro_elettronico/feature/docente/presentation/docente_login_page.dart';
 
 class RegistryProviderPage extends StatelessWidget {
   const RegistryProviderPage({Key? key}) : super(key: key);
@@ -10,7 +12,11 @@ class RegistryProviderPage extends StatelessWidget {
   Future<void> _select(BuildContext context, RegistryProvider provider) async {
     await RegistryProviderPreferences(sl()).write(provider);
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => LoginPage(provider: provider)),
+      MaterialPageRoute(
+        builder: (_) => provider == RegistryProvider.classeVivaDocente
+            ? const DocenteLoginPage()
+            : LoginPage(provider: provider),
+      ),
     );
   }
 
@@ -38,6 +44,12 @@ class RegistryProviderPage extends StatelessWidget {
             OutlinedButton(
               onPressed: () => _select(context, RegistryProvider.didUp),
               child: const Text('didUP'),
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: () =>
+                  _select(context, RegistryProvider.classeVivaDocente),
+              child: Text(docenteText(context, 'docente_provider_button')),
             ),
           ],
         ),

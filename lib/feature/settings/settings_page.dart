@@ -6,6 +6,7 @@ import 'package:registro_elettronico/core/infrastructure/localizations/app_local
 import 'package:registro_elettronico/core/infrastructure/localizations/bloc/bloc.dart';
 import 'package:registro_elettronico/core/presentation/widgets/about_app_dialog.dart';
 import 'package:registro_elettronico/feature/authentication/data/datasource/profiles_shared_datasource.dart';
+import 'package:registro_elettronico/feature/authentication/data/model/profile_local_model.dart';
 import 'package:registro_elettronico/feature/authentication/presentation/help_page.dart';
 import 'package:registro_elettronico/feature/debug/presentation/debug_page.dart';
 import 'package:registro_elettronico/feature/grades/grades_container.dart';
@@ -20,7 +21,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  /// Teacher area: only the app-wide settings (theme, colour, language,
+  /// about); the student ones (grades, class, home and tab layout, grade and
+  /// absence notifications, student data reset) do not apply.
+  final bool teacher;
+
+  const SettingsPage({Key? key, this.teacher = false}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -36,7 +42,14 @@ class _SettingsPageState extends State<SettingsPage> {
     super.initState();
 
     ProfilesLocalDatasource profilesLocalDatasource = sl();
-    final profile = profilesLocalDatasource.getLoggedInUserSync();
+    // Teacher (SPID/CIE web session) and didUP accounts have no ClasseViva
+    // student profile: getLoggedInUserSync would throw "No element".
+    final ProfileLocalModel profile;
+    try {
+      profile = profilesLocalDatasource.getLoggedInUserSync();
+    } on StateError {
+      return;
+    }
 
     // My personal ident
     if (profile.ident == 'S6102171X') {
@@ -70,19 +83,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
 
               /// General settings
-              GeneralSettings(),
+              if (!widget.teacher) GeneralSettings(),
 
-              CustomizationSettings(),
+              CustomizationSettings(showLayout: !widget.teacher),
 
-              ListTile(
-                title: Text(AppLocalizations.of(context)!.translate('notifications')!),
-                subtitle: Text(AppLocalizations.of(context)!.translate('choose_what_to_notify')!),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NotificationSettingsPage(),
-                  ));
-                },
-              ),
+              if (!widget.teacher)
+                ListTile(
+                  title: Text(AppLocalizations.of(context)!
+                      .translate('notifications')!),
+                  subtitle: Text(AppLocalizations.of(context)!
+                      .translate('choose_what_to_notify')!),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => NotificationSettingsPage(),
+                    ));
+                  },
+                ),
 
               ListTile(
                 leading: Icon(Icons.language),
@@ -103,7 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
 
-              AccountSettings(),
+              if (!widget.teacher) AccountSettings(),
 
               _buildAboutSection()
             ],

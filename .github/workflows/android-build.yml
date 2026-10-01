@@ -65,6 +65,23 @@ jobs:
       - run: flutter test test/agenda_local_events_test.dart
       - run: flutter test test/timetable_entry_test.dart
       - run: flutter test test/stats_period_gate_test.dart
+      - run: flutter test test/registry_provider_test.dart
+      - run: flutter test test/docente_web_api_test.dart
+      - run: flutter test test/docente_classes_parser_test.dart
+      - run: flutter test test/docente_register_parser_test.dart
+      - run: flutter test test/docente_grades_parser_test.dart
+      - run: flutter test test/docente_absences_parser_test.dart
+      - run: flutter test test/docente_class_agenda_test.dart
+      - run: flutter test test/docente_journal_parser_test.dart
+      - run: flutter test test/docente_class_directory_test.dart
+      - run: flutter test test/docente_meetings_parser_test.dart
+      - run: flutter test test/docente_notes_parser_test.dart
+      - run: flutter test test/docente_timetable_parser_test.dart
+      - run: flutter test test/docente_books_parser_test.dart
+      - run: flutter test test/docente_didactics_parser_test.dart
+      - run: flutter test test/docente_dad_parser_test.dart
+      - run: flutter test test/docente_scrutiny_parser_test.dart
+      - run: flutter test test/docente_services_parser_test.dart
       - name: Configure release signing
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}

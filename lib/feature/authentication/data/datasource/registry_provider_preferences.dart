@@ -15,4 +15,6 @@ class RegistryProviderPreferences {
         PrefsConstants.registryProvider,
         provider.storageValue,
       );
+
+  Future<void> clear() => preferences.remove(PrefsConstants.registryProvider);
 }

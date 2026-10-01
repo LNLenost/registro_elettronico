@@ -1,0 +1,8092 @@
+[
+ {
+  "path": "/home/app/default/menu_classevivadocente.php",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/acc/app/default/me.php",
+  "title": "Profilo",
+  "params": [],
+  "forms": [
+   {
+    "action": "/acc/app/default/me.fn.php",
+    "method": "post",
+    "fields": [
+     "act",
+     "imagebase64"
+    ]
+   }
+  ],
+  "scripts": [
+   "/acc/lib/js/session-ck-alive.js",
+   "/sps/lib/js/socialconn.js",
+   "/acc/lib/js/color-picker/jscolor.min.js",
+   "/acc/lib/js/utl.js",
+   "/acc/lib/js/me.js"
+  ],
+  "endpoints": [
+   "me.xhr.php",
+   "me.fn.php"
+  ],
+  "links": [
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "fs"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/acc/app/default/agenda.php",
+  "title": "Agenda personale del docente",
+  "params": [],
+  "forms": [
+   {
+    "action": "/acc/app/default/agenda.fn.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "user"
+    ]
+   },
+   {
+    "action": "/acc/app/default/agenda.php",
+    "method": "get",
+    "fields": [
+     "action",
+     "evento_id",
+     "nota_1",
+     "evento_data",
+     "all_day",
+     "time_start",
+     "time_end",
+     "nota_2"
+    ]
+   }
+  ],
+  "scripts": [
+   "/acc/lib/js/session-ck-alive.js",
+   "/sps/lib/js/socialconn.js",
+   "/acc/lib/js/agenda.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "cerca"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "data_start"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/img/document/privacy_spag_071021.pdf",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/acc/app/default/documentazione.php",
+  "title": "Crea ticket di assistenza",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/ngs_common/lib/js/common.js",
+   "/ngs_common/lib/js/vue/production.js",
+   "/acc/lib/js/crea_ticket.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/crea_ticket.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/didattica_distanza.php",
+  "title": "Gestione didattica a distanza",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/common.js"
+  ],
+  "endpoints": [
+   "../../../tic/app/default/selezione_classi.php",
+   "didattica_distanza.php",
+   "didattica_distanza_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza_sottogruppo.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [
+     "classe_id",
+     "data_start"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/ldt/app/default/libri_classi.php",
+  "title": "Lista Classi",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ldt/app/default/libri_classi.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "id_scuola",
+     "anno_scol"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ldt/lib/js/libri_classi.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "ref"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_selezione.php",
+  "title": "Le mie classi",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/gioprof_selezione.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_selezione.php",
+    "method": "get",
+    "fields": []
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "gioprof_selezione.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/orario_docente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/dirigente_alunno.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regwifi.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "materia",
+     "ope",
+     "codocenza",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/disposizione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/selezione_classi.php",
+  "title": "Selezione classi",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/selezione_classi.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/alw/app/default/riepilogo_deleghe.php",
+    "params": [
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/orario_docente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "quad"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/disposizione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/selezione_gruppi.php",
+  "title": "Selezione Corsi",
+  "params": [
+   "corsoextra"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/selezione_gruppi.php",
+    "method": "get",
+    "fields": [
+     "corsoextra",
+     "cerca"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "gestione_gruppi.php",
+   "classificazioni.php",
+   "classificazioniio.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "corsoextra",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/didattica.php",
+  "title": "Didattica multimediale",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/didattica.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/didattica.php",
+    "method": "get",
+    "fields": [
+     "a",
+     "module_name"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/didattica.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/didattica_docenti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica_compito.php",
+    "params": [
+     "vista",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/quiz.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/sif/app/default/bacheca_personale.php",
+  "title": "Bacheca",
+  "params": [],
+  "forms": [
+   {
+    "action": "/sif/app/default/bacheca_personale.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "relazione_id"
+    ]
+   },
+   {
+    "action": "/sif/app/default/bacheca_personale.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "relazione_id"
+    ]
+   },
+   {
+    "action": "/sif/app/default/bacheca_personale.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "relazione_id"
+    ]
+   },
+   {
+    "action": "/sif/app/default/bacheca_personale.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "relazione_id",
+     "testo_risposta"
+    ]
+   },
+   {
+    "action": "/sif/app/default/bacheca_personale.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "relazione_id",
+     "file_risposta"
+    ]
+   }
+  ],
+  "scripts": [
+   "/sif/lib/js/bacheca_personale.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/scp/app/default/bacheca_ministeriale.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_scrutinionlinedocente.php",
+  "title": "Lo Scrutinio on-line",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/gioprof_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_colloqui.php",
+  "title": "Colloqui con la famiglia",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/sock/lib/js/npo.src.js"
+  ],
+  "endpoints": [
+   ".php",
+   "gioprof_colloqui.php",
+   "colloquio_live.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/docenti_colloqui_generali.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_sportello.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_verdi.php",
+  "title": "Verbali Digitali",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/home/lib/js/privacy.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/vrd/app/default/riunioni_pers.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/compilazione_modulo.php",
+  "title": "Moduli on-line",
+  "params": [],
+  "forms": [
+   {
+    "action": "/home/app/default/login.php",
+    "method": "post",
+    "fields": [
+     "custcode",
+     "login",
+     "password"
+    ]
+   },
+   {
+    "action": "/home/app/default/login.php",
+    "method": "post",
+    "fields": [
+     "login",
+     "password"
+    ]
+   },
+   {
+    "action": "/ber/app/default/login.php",
+    "method": "post",
+    "fields": [
+     "badge_ident"
+    ]
+   },
+   {
+    "action": "/ber/app/default/login.php",
+    "method": "post",
+    "fields": []
+   },
+   {
+    "action": "/ber/app/default/compilazione_modulo.php",
+    "method": "get",
+    "fields": [
+     "a",
+     "sede_codice",
+     "target",
+     "cerca"
+    ]
+   },
+   {
+    "action": "/ber/app/default/compilazione_modulo.php",
+    "method": "get",
+    "fields": []
+   },
+   {
+    "action": "/ber/app/default/compilazione_modulo.php",
+    "method": "get",
+    "fields": []
+   },
+   {
+    "action": "/ber/app/default/compilazione_modulo.php",
+    "method": "get",
+    "fields": [
+     "mod_ass"
+    ]
+   },
+   {
+    "action": "/ber/app/default/compilazione_modulo.php",
+    "method": "get",
+    "fields": [
+     "a",
+     "id",
+     "email_value"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/compilazione_modulo.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sso/app/default/sam.php",
+    "params": [
+     "a"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_competenze.php",
+  "title": "",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/home/lib/js/privacy.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [
+     "stampa"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_scuoladelfuturo.php",
+  "title": "Applicazioni Gruppo Spaggiari Parma",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/home/lib/js/privacy.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/sol",
+  "title": "Lo Scrutinio on-line",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/gioprof_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/pdp/app/default/lista_studenti_pfi.php",
+  "title": "",
+  "params": [],
+  "forms": [
+   {
+    "action": "/pdp/app/default/selezione_classi.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   }
+  ],
+  "scripts": [
+   "/pdp/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [
+     "classe_id",
+     "stampa"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cmp/app/default/statistiche.php",
+  "title": "Statistiche competenze",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/cmp/lib/js/statistiche.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/pdp/app/default/portfolio_studente.php",
+  "title": "Consulta",
+  "params": [],
+  "forms": [
+   {
+    "action": "/pdp/app/default/portfolio_studente.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "studente_id",
+     "stampa"
+    ]
+   }
+  ],
+  "scripts": [
+   "/pdp/lib/js/session-ck-alive.js",
+   "/pdp/lib/js/common_functions.js"
+  ],
+  "endpoints": [
+   "lista_studenti_pfi.php",
+   "/sdg/app/default/firma_anywhere.php",
+   "portfolio_studente.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_classeviva.php",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regclasse.php",
+  "title": "Registro di classe",
+  "params": [
+   "classe_id",
+   "data_start"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/regclasse.php",
+    "method": "get",
+    "fields": [
+     "check_studente[]"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/regclasse_io.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "classe_id",
+     "data_start",
+     "supplenza",
+     "conteggioassenze",
+     "firmaparziale",
+     "materia",
+     "annualita",
+     "unita",
+     "tipo_attivita",
+     "ora_posizione",
+     "numero_ore",
+     "uda_firma",
+     "fase_firma",
+     "id_progetto_set",
+     "peso_ora",
+     "text_nota",
+     "output"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/bacheca_comunicazione.js",
+   "/cvv/lib/js/regclasse.js",
+   "/cvv/lib/js/regclasse_mod_firma.js"
+  ],
+  "endpoints": [
+   "regclasse_io.php",
+   "regclasse_cambiaorapos.php",
+   "regclasse_cancella_firma.php",
+   "regclasse_conpresenza.php",
+   "ck_sess_connect.php",
+   "gioprof.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv-interactive/app/default/whiteboard.php",
+    "params": [
+     "whiteboardid",
+     "classe_desc"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regappello.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "ins"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "view"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "iniziali",
+     "data_start",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id",
+     "iniziali"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/acc/app/default/crea_ticket.php",
+  "title": "Crea ticket di assistenza",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/ngs_common/lib/js/common.js",
+   "/ngs_common/lib/js/vue/production.js",
+   "/acc/lib/js/crea_ticket.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/crea_ticket.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/didattica_distanza_sottogruppo.php",
+  "title": "Gestione etichette sottogruppi",
+  "params": [
+   "classe_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "../../../tic/app/default/selezione_classi.php",
+   "didattica_distanza_sottogruppo.php",
+   "didattica_distanza_sottogruppo_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza_sottogruppo.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [
+     "classe_id",
+     "data_start"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regdidattica.php",
+  "title": "Didattica multimediale",
+  "params": [
+   "vista"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/didattica.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/didattica.php",
+    "method": "get",
+    "fields": [
+     "a",
+     "module_name"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/didattica.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/didattica_docenti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica_compito.php",
+    "params": [
+     "vista",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/quiz.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/orario_docente.php",
+  "title": "Orario Docente",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/orario_docente.php",
+    "method": "get",
+    "fields": [
+     "periodo",
+     "ope"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/orario_docente.php",
+    "params": [
+     "ope"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/dirigente_alunno.php",
+  "title": "Alunni",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/dirigente_alunno.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "../../../sol/app/default/genitori_singolo.php",
+   "../../../s1c/app/default/tabellone_genitore.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvp/app/default/dettaglio_studente.php",
+    "params": [
+     "s"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/xml_export.php",
+    "params": [
+     "tipo_export",
+     "ope",
+     "formato"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/alw/app/default/scuola_alu_view.php",
+    "params": [
+     "id_alunno"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/dirigente_alunno.php",
+    "params": [
+     "studente_id",
+     "stampa"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/alias.php",
+    "params": [
+     "studente_id",
+     "ckk"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/agenda.php",
+  "title": "Agenda di classe",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regclasse_io.php",
+   "regclasse_note_alunno.php",
+   "agenda.php",
+   "popup_compiti.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gestione_aule.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "mode",
+     "aula_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_note.php",
+  "title": "Agenda",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/gioprof_note.php",
+    "method": "get",
+    "fields": [
+     "check_studente[N]"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regclasse_note_alunno.php",
+   "regclasse_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gestione_aule.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "mode",
+     "aula_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "ope",
+     "tipo"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regwifi.php",
+  "title": "",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/regappello.php",
+    "method": "post",
+    "fields": [
+     "action",
+     "classe_id",
+     "classe_desc",
+     "gruppo_id",
+     "account_id",
+     "data_start",
+     "granular",
+     "stato_N",
+     "ora_pos_N",
+     "stato_iniz_N",
+     "ora_pos_iniz_N"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regwifi.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof.php",
+  "title": "Registro",
+  "params": [
+   "classe_id",
+   "materia",
+   "ope",
+   "codocenza",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "gioprof_relazioni.php",
+   "regclasse_io.php",
+   "regclasse_update_firma.php",
+   "gioprof_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "materia",
+     "ope",
+     "codocenza",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/tools/app/default/stampacy.php",
+    "params": [
+     "pagina",
+     "mac",
+     "crypt",
+     "secure",
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6",
+     "rptfilename",
+     "materia_id",
+     "dal",
+     "al",
+     "altro1",
+     "altro2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "gruppo_id",
+     "classe_id",
+     "materia_id",
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regvoti.php",
+  "title": "Situazione Valutazioni",
+  "params": [
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/regvoti.php",
+    "method": "post",
+    "fields": [
+     "classe_id",
+     "colonne",
+     "materia_id",
+     "mode",
+     "quad",
+     "comp",
+     "gruppo_id",
+     "data_start",
+     "data_voto_tastiera",
+     "forza",
+     "usanuovecomp",
+     "usanuoveuda",
+     "materia"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/home/lib/js/utl.js",
+   "/cvv/lib/js/regvoti.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/pdp/app/default/regvoti_uda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_competenze.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_prove_strutturate.php",
+    "params": [
+     "classe_id",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/scrutinio_singolo_recuperi.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_dettaglio.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/recuperi_docente.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/rubrica.php",
+    "params": [
+     "action",
+     "classe_id",
+     "materia"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/disposizione.php",
+  "title": "Registro",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/disposizione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/didattica_docenti.php",
+  "title": "Allegati multimediali condivisi",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "didattica.php",
+   "didattica_docenti.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/didattica_docenti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica_compito.php",
+    "params": [
+     "vista",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/quiz.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regdidattica_compito.php",
+  "title": "Materiale compiti",
+  "params": [
+   "vista",
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/regdidattica_compito.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_docenti.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica_compito.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/quiz.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione1.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/quiz.php",
+  "title": "Quiz e Test",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/quiz.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "cat_id",
+     "anno_scol",
+     "ope",
+     "ordinamento",
+     "proprieta",
+     "stato",
+     "esito",
+     "archiviati",
+     "quiz_id",
+     "asg_id"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/dropzone-quiz.js"
+  ],
+  "endpoints": [
+   "quiz.php",
+   "importa_quiz.php",
+   "ck_sess_connect.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/xml_export.php",
+    "params": [
+     "tipo_export",
+     "dal"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/quiz.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_webinfoschool.php",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/gioprof_scrutinionline.php",
+  "title": "Le mie classi",
+  "params": [],
+  "forms": [
+   {
+    "action": "/sol/app/default/gioprof_scrutinionline.php",
+    "method": "get",
+    "fields": [
+     "cerca"
+    ]
+   },
+   {
+    "action": "/sol/app/default/gioprof_scrutinionline.php",
+    "method": "get",
+    "fields": []
+   }
+  ],
+  "scripts": [],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "scrutinionline",
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/home/app/default/menu_scrutinionline.php",
+  "title": "Lo Scrutinio on-line",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/gioprof_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_webinfoschool.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/docenti_colloqui_generali.php",
+  "title": "Colloqui",
+  "params": [
+   "autore_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "docenti_colloqui_generali.php",
+   "gioprof_colloqui.php",
+   "colloquio_live.php",
+   "genitori_colloqui_generali.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/docenti_colloqui_generali.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_sportello.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_sportello.php",
+  "title": "Sportello per gli alunni",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   ".php",
+   "gioprof_sportello.php",
+   "gioprof_colloqui.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/docenti_colloqui_generali.php",
+    "params": [
+     "autore_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_sportello.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/ber/",
+  "title": "Bergantini - Home",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ber/app/default/indici.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/home.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/indici.php",
+    "params": [
+     "cerca",
+     "view",
+     "cercaagg"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/rivista.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/news.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/normativa.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/riviste/2026_16/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regassenze.php",
+  "title": "Registro di classe",
+  "params": [
+   "granular",
+   "classe_id",
+   "iniziali",
+   "data_start",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regassenzeins.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gestione_assenze.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "iniziali",
+     "data_start",
+     "gruppo_id",
+     "ope"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "cerca",
+     "iniziali"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "ope",
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_relazioni.php",
+  "title": "Il Giornale del Professore",
+  "params": [
+   "classe_id",
+   "gruppo_id",
+   "materia_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/gioprof_relazioni.php",
+    "method": "get",
+    "fields": [
+     "text_nota",
+     "ope"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/easygantt/easygantt.js"
+  ],
+  "endpoints": [
+   "gioprof_relazioni.php",
+   "/cmp/app/default/rubrica_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "materia",
+     "ope",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "autore_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/programma_struttura.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni_prec.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regvoti_proposti.php",
+  "title": "Voti Proposti",
+  "params": [
+   "classe_id",
+   "gruppo_id",
+   "materia_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/giudizi.js"
+  ],
+  "endpoints": [
+   "regvoti_proposti_io.php",
+   "regvoti_proposti.php",
+   "regvoti_medie.php",
+   "/sol/app/default/competenze_proposte.php",
+   "stampa_filtro_dialog.php",
+   "/sol/app/default/giudizio.php",
+   "/sol/app/default/tabellone_scrutinio_serale.php",
+   "/sol/app/default/scrutina_singolo_io.php",
+   "regvoti_prove_strutturate_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/pdp/app/default/regvoti_uda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/firma_scrutinio.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_prove_strutturate.php",
+    "params": [
+     "classe_id",
+     "cerca",
+     "iniziali",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/competenze_proposte.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "infra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "cerca",
+     "iniziali",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "gruppo_id",
+     "classe_id",
+     "materia_id",
+     "competenze",
+     "infra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/etichette_uda.php",
+    "params": [
+     "action",
+     "classe_ident"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/scrutinio_singolo_recuperi.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "proposti",
+     "infra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/dirigente_alunno.php",
+    "params": [
+     "studente_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/tools/app/default/stampacy.php",
+    "params": [
+     "pagina",
+     "mac",
+     "crypt",
+     "secure",
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6",
+     "rptfilename",
+     "materia_id",
+     "dal",
+     "al",
+     "altro1",
+     "altro4",
+     "altro3"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/regvoti_tassonomie.php",
+    "params": [
+     "gruppo_id",
+     "classe_id",
+     "materia_id",
+     "quad",
+     "contesto"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/coord_relazioni.php",
+  "title": "Il Giornale del Professore",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "materia",
+     "ope",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/richiami.php",
+  "title": "Richiami",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/richiami.php",
+    "method": "get",
+    "fields": [
+     "classe_id",
+     "classe_desc",
+     "gruppo_id",
+     "account_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/richiami.php",
+    "method": "get",
+    "fields": [
+     "richiami",
+     "check_studente[]"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "richiami.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/richiami_print.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "autore_id"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/xml_export.php",
+    "params": [
+     "tipo_export",
+     "classe_id",
+     "gruppo_id",
+     "autore_id"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regdidattica.php",
+    "params": [
+     "vista",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/alias.php",
+  "title": "",
+  "params": [
+   "studente_id",
+   "ckk"
+  ],
+  "forms": [],
+  "scripts": [],
+  "endpoints": [
+   "/home/app/default/login.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/login.php",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gestione_aule.php",
+  "title": "Gestione Aule",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/gestione_aule.php",
+    "method": "get",
+    "fields": [
+     "tutte_classi[]"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "gestione_aule.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "mode"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gestione_aule.php",
+    "params": [
+     "ope"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/pdp/app/default/regvoti_uda.php",
+  "title": "Situazione Uda",
+  "params": [
+   "classe_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/pdp/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "questionario_compilazione.php",
+   "regvoti_uda.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/regvoti_uda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "studente_id",
+     "mostra_tutto"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regvoti_competenze.php",
+  "title": "Situazione Competenze",
+  "params": [
+   "classe_id",
+   "gruppo_id",
+   "materia_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regvoti_proposti.php",
+   "regvoti_competenze.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_competenze.php",
+    "params": [
+     "ope",
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "cerca",
+     "iniziali",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regvoti_prove_strutturate.php",
+  "title": "",
+  "params": [
+   "classe_id",
+   "materia_id_cod",
+   "gruppo_id"
+  ],
+  "forms": [
+   {
+    "action": "/cvv/app/default/regvoti_compito.php",
+    "method": "post",
+    "fields": [
+     "classe_id",
+     "materia_id",
+     "materia_id_cod",
+     "data_start",
+     "prova_id",
+     "granular"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regvoti_prove_strutturate_io.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_prove_strutturate.php",
+    "params": [
+     "classe_id",
+     "materia_id_cod",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "cerca",
+     "iniziali",
+     "materia_id_cod",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "cerca",
+     "iniziali",
+     "materia_id_cod",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "cerca",
+     "iniziali"
+    ],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/scrutinio_singolo_recuperi.php",
+  "title": "Scrutini online",
+  "params": [
+   "quad",
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/sol/lib/js/scrutinio_singolo_recuperi.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/tabellone_recupero.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/scrutinio_singolo_recuperi.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "proposti",
+     "infra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/scrutinio_singolo_recuperi_docente.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/regvoti_dettaglio.php",
+  "title": "Situazione Valutazioni",
+  "params": [
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "regvoti_dettaglio.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_dettaglio.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/recuperi_docente.php",
+  "title": "",
+  "params": [
+   "quad",
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/recuperi_docente.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/recuperi_docente.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "offset"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/acc/app/default/documentazione1.php",
+  "title": "Crea ticket di assistenza",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/ngs_common/lib/js/common.js",
+   "/ngs_common/lib/js/vue/production.js",
+   "/acc/lib/js/crea_ticket.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/crea_ticket.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/home.php",
+  "title": "Bergantini - Home",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ber/app/default/indici.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/home.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/indici.php",
+    "params": [
+     "cerca",
+     "view",
+     "cercaagg"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/rivista.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/news.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/normativa.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/riviste/2026_16/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/indici.php",
+  "title": "Bergantini - Indici",
+  "params": [
+   "cerca",
+   "view",
+   "cercaagg"
+  ],
+  "forms": [
+   {
+    "action": "/ber/app/default/rivista.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/indici.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/indici.php",
+    "params": [
+     "cerca",
+     "view",
+     "cercaagg"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/riviste/2026_16/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/rivista.php",
+  "title": "Bergantini - Rivista",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ber/app/default/rivista.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/rivista.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/rivista.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/riviste/2026_16/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/indici.php",
+    "params": [
+     "view",
+     "cerca"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/ber/riviste/2026_15/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_14/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_13/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_12/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_11/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_10/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_09/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_08/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_07/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_06/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_S1/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_05/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_04/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_03/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_02/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/riviste/2026_01/index.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/news.php",
+  "title": "Bergantini - News",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ber/app/default/news.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/news.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/news.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/ber/app/default/normativa.php",
+  "title": "Bergantini - Normativa",
+  "params": [],
+  "forms": [
+   {
+    "action": "/ber/app/default/normativa.php",
+    "method": "get",
+    "fields": [
+     "cerca",
+     "view",
+     "page",
+     "anno",
+     "filtro[]",
+     "view2",
+     "cercaagg"
+    ]
+   }
+  ],
+  "scripts": [
+   "/ber/lib/js/common.js",
+   "/ber/lib/js/normativa.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/ber/app/default/home.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ber/app/default/normativa.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/informativa.php",
+    "params": [
+     "t",
+     "pt",
+     "v"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/privacy.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/canali_tematici/cookies.html",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gestione_assenze.php",
+  "title": "Ricerca Scuola - Gateway delle Identità",
+  "params": [
+   "classe_id"
+  ],
+  "forms": [
+   {
+    "action": "/iwis-eidgateway-ricercaaggregati-web/school/search/next",
+    "method": "post",
+    "fields": [
+     "request_id",
+     "client_id",
+     "redirect_uri",
+     "state",
+     "login_uri",
+     "school",
+     "saveForFutureVisits"
+    ]
+   }
+  ],
+  "scripts": [],
+  "endpoints": [],
+  "links": []
+ },
+ {
+  "path": "/cvv/app/default/programma_struttura.php",
+  "title": "Il Giornale del Professore",
+  "params": [
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/cvv/app/default/gioprof_relazioni_prec.php",
+  "title": "Il Giornale del Professore",
+  "params": [],
+  "forms": [
+   {
+    "action": "/cvv/app/default/gioprof_relazioni_prec.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni_prec.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   },
+   {
+    "action": "/cvv/app/default/gioprof_relazioni_prec.php",
+    "method": "post",
+    "fields": [
+     "user_file",
+     "ope",
+     "materia_id",
+     "classe_id",
+     "gruppo_id",
+     "posizione_id"
+    ]
+   }
+  ],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js"
+  ],
+  "endpoints": [
+   "gioprof_relazioni_prec.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni_prec.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/competenze_proposte.php",
+  "title": "Competenze Proposte",
+  "params": [
+   "classe_id",
+   "materia_id",
+   "gruppo_id",
+   "infra"
+  ],
+  "forms": [],
+  "scripts": [],
+  "endpoints": [
+   "competenze_proposte.php",
+   "/cvv/app/default/ck_sess_connect.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/competenze_proposte.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "infra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "materia_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_competenze.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/gioprof_scrutinionline.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/regvoti_tassonomie.php",
+  "title": "Scrutini online",
+  "params": [
+   "gruppo_id",
+   "classe_id",
+   "materia_id",
+   "quad",
+   "contesto"
+  ],
+  "forms": [],
+  "scripts": [
+   "/sol/lib/js/giudizi.js"
+  ],
+  "endpoints": [
+   "../../../sol/app/default/giudizio.php"
+  ],
+  "links": [
+   {
+    "path": "/home/app/default/menu_scrutinionline.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol/app/default/regvoti_tassonomie.php",
+    "params": [
+     "quad",
+     "mode",
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "scrutinionline"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [
+     "classe_id",
+     "infra",
+     "materia_id",
+     "gruppo_id",
+     "scrutinionline"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sol/app/default/gioprof_scrutinionline.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/tabellone_recupero.php",
+  "title": "Registri e didattica multimediale",
+  "params": [],
+  "forms": [],
+  "scripts": [
+   "/home/lib/js/utl.js",
+   "/sps/lib/js/socialconn.js",
+   "/home/lib/js/style_si.js",
+   "/home/lib/js/vimeo_api_player.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classevivadocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/me.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/xasapi.php",
+    "params": [
+     "a",
+     "bu",
+     "ru",
+     "fu"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/acc/app/default/agenda.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica_distanza.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ldt/app/default/libri_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_selezione.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_classi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/selezione_gruppi.php",
+    "params": [
+     "corsoextra"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_scrutinionlinedocente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/menu_verdi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/home/app/default/eligoauth.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ber/app/default/compilazione_modulo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/ngs/app/default/richieste_utente_new.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_competenze.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/f4s_web/learnin",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/menu_scuoladelfuturo.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/img/supremo.exe",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/tic",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/sol",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/lista_studenti_pfi.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cmp/app/default/statistiche.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/pdp/app/default/portfolio_studente.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/sdg/app/default/firma_anywhere.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_pew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_vew/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_com/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_mag/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_inv/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/ngs_rik/",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/privacy.html",
+    "params": [
+     "N.2"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/cookies.html",
+    "params": [
+     "N.0"
+    ],
+    "followed": false
+   },
+   {
+    "path": "/CUSTOM/policy/web/condizioni_generali.html",
+    "params": [
+     "N.3"
+    ],
+    "followed": false
+   }
+  ]
+ },
+ {
+  "path": "/sol/app/default/scrutinio_singolo_recuperi_docente.php",
+  "title": "",
+  "params": [
+   "quad",
+   "classe_id",
+   "materia_id",
+   "gruppo_id"
+  ],
+  "forms": [],
+  "scripts": [
+   "/cvv/lib/js/session-ck-alive.js",
+   "/cvv/lib/js/recuperi_docente.js"
+  ],
+  "endpoints": [],
+  "links": [
+   {
+    "path": "/home/app/default/menu_classeviva.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/acc/app/default/documentazione.php",
+    "params": [
+     "prodotto",
+     "ref"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sso/app/default/me.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/home/app/default/logout.php",
+    "params": [],
+    "followed": false
+   },
+   {
+    "path": "/cvv/app/default/regvoti_proposti.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regvoti.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/recuperi_docente.php",
+    "params": [
+     "quad",
+     "classe_id",
+     "materia_id",
+     "gruppo_id",
+     "offset"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regclasse.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/regassenze.php",
+    "params": [
+     "granular",
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_note.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "tipo",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof.php",
+    "params": [
+     "classe_id",
+     "ope",
+     "codocenza",
+     "gruppo_id",
+     "materia"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id",
+     "materia_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/agenda.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/didattica.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/gioprof_colloqui.php",
+    "params": [],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/coord_relazioni.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/cvv/app/default/richiami.php",
+    "params": [
+     "classe_id",
+     "gruppo_id"
+    ],
+    "followed": true
+   },
+   {
+    "path": "/sif/app/default/bacheca_personale.php",
+    "params": [],
+    "followed": true
+   }
+  ]
+ }
+]

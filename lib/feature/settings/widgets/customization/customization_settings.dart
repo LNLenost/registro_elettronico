@@ -8,7 +8,10 @@ import '../header_text.dart';
 import 'customization_theme_dialog.dart';
 
 class CustomizationSettings extends StatefulWidget {
-  CustomizationSettings({Key? key}) : super(key: key);
+  /// False for the teacher area, which has its own fixed home and tabs.
+  final bool showLayout;
+
+  CustomizationSettings({Key? key, this.showLayout = true}) : super(key: key);
 
   @override
   _CustomizationSettingsState createState() => _CustomizationSettingsState();
@@ -59,28 +62,30 @@ class _CustomizationSettingsState extends State<CustomizationSettings> {
             );
           },
         ),
-        ListTile(
-          title: Text(AppLocalizations.of(context)!
-              .translate('customize_home_title')!),
-          subtitle: Text(AppLocalizations.of(context)!
-              .translate('customize_home_subtitle')!),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => HomeSettingsPage(),
-            ));
-          },
-        ),
-        ListTile(
-          title: Text(AppLocalizations.of(context)!
-              .translate('customize_navigation_title')!),
-          subtitle: Text(AppLocalizations.of(context)!
-              .translate('customize_navigation_subtitle')!),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => NavigationSettingsPage(),
-            ));
-          },
-        ),
+        if (widget.showLayout) ...[
+          ListTile(
+            title: Text(AppLocalizations.of(context)!
+                .translate('customize_home_title')!),
+            subtitle: Text(AppLocalizations.of(context)!
+                .translate('customize_home_subtitle')!),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => HomeSettingsPage(),
+              ));
+            },
+          ),
+          ListTile(
+            title: Text(AppLocalizations.of(context)!
+                .translate('customize_navigation_title')!),
+            subtitle: Text(AppLocalizations.of(context)!
+                .translate('customize_navigation_subtitle')!),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => NavigationSettingsPage(),
+              ));
+            },
+          ),
+        ],
       ],
     );
   }
