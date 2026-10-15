@@ -9,6 +9,7 @@ import 'package:registro_elettronico/feature/agenda/domain/model/agenda_data_dom
 import 'package:registro_elettronico/feature/agenda/domain/model/agenda_event_domain_model.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/loaded/events_list.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/updater/agenda_updater_bloc.dart';
+import 'package:registro_elettronico/feature/homework/data/homework_remote_datasource.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:registro_elettronico/utils/date_utils.dart';
 import 'package:registro_elettronico/utils/update_manager.dart';
@@ -67,6 +68,9 @@ class _AgendaLoadedState extends State<AgendaLoaded> {
 
   @override
   Widget build(BuildContext context) {
+    final homeworkEvents = homeworkAgendaEvents(
+      sl<HomeworkRemoteDatasource>().getCachedHomeworks(),
+    );
     return Scaffold(
       appBar: _searchBar.build(context),
       floatingActionButton: _MultiActionsButton(
@@ -84,7 +88,7 @@ class _AgendaLoadedState extends State<AgendaLoaded> {
           child: _searchQuery.isNotEmpty && _searchQuery.length >= 2
               ? _AgendaResultsList(
                   query: _searchQuery,
-                  events: widget.data!.allEvents,
+                  events: [...widget.data!.allEvents, ...homeworkEvents],
                 )
               : ListView(
                   children: [
@@ -96,7 +100,8 @@ class _AgendaLoadedState extends State<AgendaLoaded> {
                         weekendDays: const [DateTime.sunday],
                         onDaySelected: (selectedDay, focusedDay) =>
                             _onDaySelected(selectedDay),
-                        eventLoader: (date) => _getEventsForDay(date),
+                        eventLoader: (date) =>
+                            _getEventsForDay(date, homeworkEvents),
                         focusedDay: _focusedDay,
                         selectedDayPredicate: (day) {
                           return isSameDay(_selectedDay, day);
@@ -192,8 +197,7 @@ class _AgendaLoadedState extends State<AgendaLoaded> {
                       height: 16,
                     ),
                     AgendaEventsList(
-                      events: widget
-                          .data!.eventsMapString[_convertDate(_selectedDay)],
+                      events: _getEventsForDay(_selectedDay, homeworkEvents),
                     ),
                     LessonsList(
                       lessons:
@@ -206,8 +210,16 @@ class _AgendaLoadedState extends State<AgendaLoaded> {
     );
   }
 
-  List<AgendaEventDomainModel> _getEventsForDay(DateTime day) {
-    return widget.data!.eventsMap[day] ?? [];
+  List<AgendaEventDomainModel> _getEventsForDay(
+    DateTime day,
+    List<AgendaEventDomainModel> homeworkEvents,
+  ) {
+    return agendaEventsForDay(
+      widget.data!.eventsMapString[_convertDate(day)] ??
+          const <AgendaEventDomainModel>[],
+      homeworkEvents,
+      day,
+    );
   }
 
   AppBar buildAppBar(BuildContext context) {
