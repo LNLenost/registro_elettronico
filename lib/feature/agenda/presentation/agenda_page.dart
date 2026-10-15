@@ -6,6 +6,7 @@ import 'package:registro_elettronico/core/infrastructure/localizations/app_local
 import 'package:registro_elettronico/core/presentation/widgets/cusotm_placeholder.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/loaded/agenda_loaded.dart';
 import 'package:registro_elettronico/feature/agenda/presentation/watcher/agenda_watcher_bloc.dart';
+import 'package:registro_elettronico/feature/homework/data/homework_remote_datasource.dart';
 import 'package:registro_elettronico/utils/update_manager.dart';
 
 class AgendaPage extends StatefulWidget {
@@ -39,8 +40,11 @@ class _AgendaPageState extends State<AgendaPage> {
             );
           }
           //return Text('Agend aloaded');
-          return AgendaLoaded(
-            data: state.agendaDataDomainModel,
+          return ValueListenableBuilder<int>(
+            valueListenable: HomeworkRemoteDatasource.changes,
+            builder: (_, __, ___) => AgendaLoaded(
+              data: state.agendaDataDomainModel,
+            ),
           );
         } else if (state is AgendaWatcherFailure) {
           return _AgendaFailure(failure: state.failure);

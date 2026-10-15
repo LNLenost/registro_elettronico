@@ -57,6 +57,15 @@ class EventCard extends StatelessWidget {
     this.additionalTitle = '',
   }) : super(key: key);
 
+  String _eventTitle(BuildContext context) {
+    if (event.code?.startsWith('HOMEWORK:') == true) {
+      return '${AppLocalizations.of(context)!.translate('homework')}: ${event.subjectName}';
+    }
+    return event.author!.isNotEmpty
+        ? StringUtils.titleCase(event.author!)
+        : AppLocalizations.of(context)!.translate('no_name_author')!;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (event.isLocal!) {
@@ -123,7 +132,7 @@ class EventCard extends StatelessWidget {
               },
               leading: _buildEventLeading(event: event, context: context),
               title: Text(
-                '$additionalTitle${event.author!.isNotEmpty ? StringUtils.titleCase(event.author!) : AppLocalizations.of(context)!.translate('no_name_author')}',
+                '$additionalTitle${_eventTitle(context)}',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
@@ -157,7 +166,7 @@ class EventCard extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
               child: Text(
-                '$additionalTitle${PresentationConstants.isForPresentation ? GlobalUtils.getMockupName() : event.author!.isNotEmpty ? StringUtils.titleCase(event.author!) : AppLocalizations.of(context)!.translate('no_name_author')}',
+                '$additionalTitle${PresentationConstants.isForPresentation ? GlobalUtils.getMockupName() : _eventTitle(context)}',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
@@ -185,22 +194,25 @@ class EventCard extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.delete),
-              title: Text(AppLocalizations.of(context)!.translate('delete')!),
-              onTap: () async {
-                final AgendaRepository agendaRepository = sl();
-                await agendaRepository.deleteEvent(event: event);
+            if (event.code?.startsWith('HOMEWORK:') != true)
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Text(AppLocalizations.of(context)!.translate('delete')!),
+                onTap: () async {
+                  final AgendaRepository agendaRepository = sl();
+                  await agendaRepository.deleteEvent(event: event);
 
-                FlutterLocalNotificationsPlugin
-                    flutterLocalNotificationsPlugin =
-                    FlutterLocalNotificationsPlugin();
+                  FlutterLocalNotificationsPlugin
+                      flutterLocalNotificationsPlugin =
+                      FlutterLocalNotificationsPlugin();
 
-                await flutterLocalNotificationsPlugin.cancel(event.id!);
+                  if (event.id != null) {
+                    await flutterLocalNotificationsPlugin.cancel(event.id!);
+                  }
 
-                Navigator.pop(context);
-              },
-            ),
+                  Navigator.pop(context);
+                },
+              ),
             if (event.isLocal!)
               ListTile(
                 leading: Icon(Icons.edit),

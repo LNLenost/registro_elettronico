@@ -196,6 +196,7 @@ class SRUpdateManager {
 
     final updates = [update1, update2];
     await _updateMultipleData(context: context, updates: updates);
+    await _syncHomeworks(notify: false);
     await updateNextEventWidget();
   }
 

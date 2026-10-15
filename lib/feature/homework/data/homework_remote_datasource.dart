@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:html/parser.dart' as html;
 import 'package:registro_elettronico/core/data/remote/web/web_spaggiari_client.dart';
+import 'package:registro_elettronico/feature/agenda/domain/model/agenda_event_domain_model.dart';
 import 'package:registro_elettronico/feature/authentication/domain/repository/authentication_repository.dart';
+import 'package:registro_elettronico/utils/date_utils.dart';
 import 'package:registro_elettronico/utils/constants/preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +31,12 @@ class Homework {
   DateTime? get deadline {
     final match = RegExp(r'Scadenza:\s*(\d{2})/(\d{2})/(\d{4})').firstMatch(period);
     if (match == null) return null;
-    return DateTime(int.parse(match.group(3)!), int.parse(match.group(2)!), int.parse(match.group(1)!));
+    final year = int.parse(match.group(3)!);
+    final month = int.parse(match.group(2)!);
+    final day = int.parse(match.group(1)!);
+    final date = DateTime(year, month, day);
+    if (date.year != year || date.month != month || date.day != day) return null;
+    return date;
   }
 
   Map<String, String> toJson() => {
@@ -135,6 +142,43 @@ List<Homework> parseHomeworks(String page) {
       period: cells.length > 3 ? _text(cells[3]) : '',
     );
   }).where((homework) => homework.id.isNotEmpty).toList();
+}
+
+List<AgendaEventDomainModel> homeworkAgendaEvents(
+    Iterable<Homework> homeworks) {
+  return homeworks
+      .map((homework) {
+        final deadline = homework.deadline;
+        if (deadline == null) return null;
+        return AgendaEventDomainModel(
+          code: 'HOMEWORK:${homework.id}',
+          begin: deadline,
+          end: deadline,
+          isFullDay: true,
+          notes: homework.instructions,
+          author: homework.teacher,
+          subjectId: -1,
+          subjectName: homework.subject,
+          isLocal: false,
+          labelColor: 0xFF1976D2.toString(),
+          title: homework.subject,
+        );
+      })
+      .whereType<AgendaEventDomainModel>()
+      .toList();
+}
+
+List<AgendaEventDomainModel> agendaEventsForDay(
+  Iterable<AgendaEventDomainModel> agendaEvents,
+  Iterable<AgendaEventDomainModel> homeworkEvents,
+  DateTime day,
+) {
+  return [
+    ...agendaEvents.where((event) =>
+        event.begin != null && SRDateUtils.areSameDay(event.begin!, day)),
+    ...homeworkEvents.where((event) =>
+        event.begin != null && SRDateUtils.areSameDay(event.begin!, day)),
+  ];
 }
 
 String _text(dynamic element) {

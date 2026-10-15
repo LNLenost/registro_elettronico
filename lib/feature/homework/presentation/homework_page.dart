@@ -23,7 +23,16 @@ class _HomeworkPageState extends State<HomeworkPage> {
     _homeworks = _load();
   }
 
-  Future<List<Homework>> _load() => sl<HomeworkRemoteDatasource>().getHomeworks();
+  Future<List<Homework>> _load() async {
+    final source = sl<HomeworkRemoteDatasource>();
+    try {
+      return await source.getHomeworks();
+    } catch (_) {
+      final cached = source.getCachedHomeworks();
+      if (cached.isNotEmpty) return cached;
+      rethrow;
+    }
+  }
 
   Future<void> _refresh() async {
     final request = _load();

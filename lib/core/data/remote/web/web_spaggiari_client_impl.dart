@@ -3,6 +3,10 @@ import 'package:fimber/fimber.dart';
 import 'package:registro_elettronico/core/data/remote/web/web_spaggiari_client.dart';
 import 'package:registro_elettronico/core/infrastructure/error/failures.dart';
 
+Dio createWebSpaggiariDio() => Dio(
+      BaseOptions(connectTimeout: 10000, receiveTimeout: 15000),
+    );
+
 class WebSpaggiariClientImpl implements WebSpaggiariClient {
   Dio _dio;
 
